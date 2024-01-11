@@ -1,0 +1,4 @@
+name: BedwarsKit
+version: '${project.version}'
+main: github.tsffish.bedwarskit.Main
+api-version: '1.20'
