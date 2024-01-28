@@ -1,0 +1,7 @@
+name: BedwarsKit
+version: 1.9.4
+main: github.tsffish.bedwarskit.Main
+commands:
+  bwk: # 指令的注释
+    description: Hello Command
+    usage: /bwk
