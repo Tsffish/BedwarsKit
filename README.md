@@ -5,7 +5,7 @@ A Simple Addon for BedwarsRel, let you keep your Kit in the game
 
 Depend: BedwarsRel
 
-#Functions:
+# Functions:
 - Ensure that there is a sword & Auto Clear wood Sword
 - Break bed title
 - Anti Bed Stuck
@@ -20,7 +20,7 @@ Depend: BedwarsRel
 - No EnderPearl Damage
 - Anti GlassPane Stuck
 
-##Usage:
+## Usage:
 1.Make sure your world name includes the "rushWorld" entry in config to make the plugin recognize it.
 On this basis, match "rushWorld2v2" and "rushWorld4v4" to distinguish between two different patterns
 Finally, make sure that your lobby name includes the items in "lobbyWorld"
