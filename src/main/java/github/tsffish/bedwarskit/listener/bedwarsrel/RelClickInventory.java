@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
 import github.tsffish.bedwarskit.config.MainConfigHandler;
-import github.tsffish.bedwarskit.util.RelShopLevelUp;
 import github.tsffish.bedwarskit.util.RelTeamEnchant;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
@@ -13,43 +12,89 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
+import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.MainConfigHandler.*;
-import static github.tsffish.bedwarskit.util.ColorString.t;
+import static github.tsffish.bedwarskit.listener.bedwarsrel.RelPlayerOpenShop.openShop;
+import static github.tsffish.bedwarskit.util.RelPlayerKit.playerKitList;
+import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelClickInventory implements Listener {
     @EventHandler
     public void on(InventoryClickEvent event) {
+        Inventory ci = event.getClickedInventory();
+        // Current Inventory
+
+        if (ci == null) return;
+        String cin = ci.getName();
+        // Current Inventory Name
+
+        if (cin == null) return;
+        ItemStack i = event.getCurrentItem();
+
+        if (i == null) return;
+        Material it = i.getType();
+
+        if (it == null) return;
 
         Player player = (Player) event.getWhoClicked();
-        if (event.getCurrentItem() != null) {
-            Material currentItemType = event.getCurrentItem().getType();
-            if (MainConfigHandler.antiDrop && currentItemType != null && currentItemType != Material.AIR && NoMoveList.contains(event.getCurrentItem().getType())) {
+        if (player == null) return;
+
+        if (ci.getName().contains("选择队伍 - ")){
+            Game game = BedwarsRel.getInstance().getGameManager().getGameOfPlayer(player);
+
+            if(it == Material.WOOL){
+                String itn = i.getItemMeta().getDisplayName();
+                if (itn.contains(t("&a绿之队"))){
+
+                    game.getTeam(relTeamName_Green).addPlayer(player);
+                    player.sendMessage(t("&a你加入了 " + "&a绿之队" + "&a!"));
+
+                } else if (itn.contains("relTeamName_Green")) {
+                    game.getTeam("relTeamName_Green").addPlayer(player);
+                }
+            }
+        }
+
+        if (MainConfigHandler.antiDrop) {
+            if (it != Material.AIR && NoMoveList.contains(it)){
                 event.setCancelled(true);
             }
         }
 
-        if (event.getCurrentItem() != null && event.getCurrentItem().getType() != null && event.getCurrentItem().getType() == MainConfigHandler.LevelupItem && event.getInventory().getName().contains(shopItem)) {
-            String worldName = event.getWhoClicked().getWorld().getName();
-            if (worldName.contains(MainConfigHandler.rushWorld)) {
-                if (worldName.contains(MainConfigHandler.rushWorld2v2)) {
-                    event.setCancelled(true);
-                    player.openInventory(RelShopLevelUp.i2);
-                } else if (worldName.contains(MainConfigHandler.rushWorld4v4)) {
-                    event.setCancelled(true);
-                    player.openInventory(RelShopLevelUp.i4);
-                }
+        if (ci.getName().contains(kitMenuTitle)){
+
+            event.setCancelled(true);
+            if (it == KitDefaultItemType){
+                playerKitList.put(player,"Default");
+                player.sendMessage(t(meanSelKitSucc));
+            } else if (it == KitNoneItemType) {
+                playerKitList.put(player,"None");
+                player.sendMessage(t(meanSelKitSucc));
+
+            }
+        }
+
+        if(ci.getName().contains(shopItem)){
+            event.setCancelled(true);
+        }
+
+        if (it == Material.BOOK_AND_QUILL && cin.contains(shopItem)) {
+            if(levelupShopDelayOpen){
+                openShop(player, 10L);
+            }else {
+                openShop(player, 1L);
             }
 
         }
 
-        if (player.getGameMode() == GameMode.CREATIVE){
+        if (it == LevelupItemType && player.getGameMode() == GameMode.CREATIVE){
             event.setCancelled(true);
         }
-
 
         if (player.getWorld().getName().contains(MainConfigHandler.rushWorld) && player.getGameMode() != GameMode.CREATIVE) {
 

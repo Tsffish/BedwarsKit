@@ -1,0 +1,375 @@
+#*********************#
+#BedwarsKit configuration file#
+#*********************#
+
+# Currently, for unknown reasons, the file needs to be reloaded twice to take effect
+
+config-version: "1.9.5"
+#Configuration file version
+#No changes required
+
+rushWorld: "rush"
+rushWorld2v2: "2v2rush"
+rushWorld4v4: "4v4rush"
+lobbyWorld: "lobby"
+#The most basic configuration for determining world names
+#The judgment method is whether the world name includes
+#RushWorld: Recognized as a game room
+#RushWorld2v2: Recognized as game room 2v2 mode
+#RushWorld4v4: Recognized as game room 4v4 mode
+#LobbyWorld: Recognized as a lobby
+
+relTeamName_Red: "Red Team"
+relTeamName_Blue: "Blue Team"
+relTeamName_Green: "Green Team"
+relTeamName_Yellow: "Yellow Team"
+relTeamName_Aqua: "Aqua Team"
+relTeamName_White: "White Team"
+relTeamName_Gray: "Gray Team"
+relTeamName_Pink: "Pink Team"
+#The most basic configuration of team names in the game
+#It's the team display name, not the color name
+
+customScoreboard: true
+#Is the custom scoreboard feature enabled
+
+meanTeamBedYes: "&a\u2714"
+meanTeamNone: "&c\u2718"
+meanTeamBedNo: "&c\u2718"
+meanYou: "{teamColor}\u2192 "
+meanNotYou: "{teamColor}  "
+mean2v2Mode: "Double Mode"
+mean4v4Mode: "4v4v4v4 Mode"
+serverIp: "&eMCBBS@the_starfish"
+meanBedwars: "Awakening War"
+#MeanTeamBedYes: TeamStat indicates the presence of beds in the team
+#MeanTeamNone: TeamStat indicates that the team has been eliminated
+#MeanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
+#MeanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
+#MeanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
+#Mean2v2Mode: indicates that this is a 2v2 mode
+#Mean4v4Mode: indicates that this is a 4v4 mode
+#ServerIP: can be used to fill in the server address or to add duplicate characters
+#MeanBedwards: can be used to fill in the wake-up war or to add duplicate characters
+
+ScoreBoard2v2Title: "&e&l{bw}"
+
+ScoreBoard2v2Line01: "&7{date} &8{mode}"
+ScoreBoard2v2Line02: "&a{timeleft-s}&fThe game ends in seconds"
+ScoreBoard2v2Line03: "&f"
+ScoreBoard2v2Line04: "{redTeamIsMe}&c{RedTeamName} {redTeamStat} &7(&f&l{redTeamPlayer}&7)"
+ScoreBoard2v2Line05: "{blueTeamIsMe}&9{BlueTeamName} {blueTeamStat} &7(&f&l{blueTeamPlayer}&7)"
+ScoreBoard2v2Line06: "{greenTeamIsMe}&a{GreenTeamName} {greenTeamStat} &7(&f&l{greenTeamPlayer}&7)"
+ScoreBoard2v2Line07: "{yellowTeamIsMe}&e{YellowTeamName} {yellowTeamStat} &7(&f&l{yellowTeamPlayer}&7)"
+ScoreBoard2v2Line08: "{pinkTeamIsMe}&d{PinkTeamName} {pinkTeamStat} &7(&f&l{pinkTeamPlayer}&7)"
+ScoreBoard2v2Line09: "{aquaTeamIsMe}&b{AquaTeamName} {aquaTeamStat} &7(&f&l{aquaTeamPlayer}&7)"
+ScoreBoard2v2Line10: "{grayTeamIsMe}&7{GrayTeamName} {grayTeamStat} &7(&f&l{grayTeamPlayer}&7)"
+ScoreBoard2v2Line11: "{whiteTeamIsMe}&f{WhiteTeamName} {whiteTeamStat} &7(&f&l{whiteTeamPlayer}&7)"
+ScoreBoard2v2Line12: "&f "
+ScoreBoard2v2Line13: "&e{ip}"
+ScoreBoard2v2Line14: ""
+ScoreBoard2v2Line15: ""
+ScoreBoard2v2Line16: ""
+#Customized Scoreboard Content in 2v2 Mode
+#Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+#Variable:
+# TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must be capitalized, such as RedTeamName, GrayTeamName
+# TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
+# TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+#{timeleft-s}: Game remaining time in seconds
+#{timeleft-m}: Game remaining time in minutes
+#{timeleft-h}: Game remaining time - hours
+#{timeleft-d}: Game remaining time in days
+#{timeline mo}: Game remaining time in months
+#{timeleft y}: Game remaining time in years
+#{date}: Today's date format is YYYY/M/D, such as 2080/3/27
+#{ip}: The value of serverIp in the configuration file
+#{bw}: The value of meanBedwards in the configuration file
+#{mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+#{kill}: The number of enemies killed in your current game
+#{fkill}: Your KD value in this game
+#{kd}: Your KD value in this game
+#{death}: The number of deaths in your current game
+#{bed}: The number of digging beds in your current game
+#{game}: The game name of this game
+#{region}: The region name of this bureau
+#{world}: The world name of this bureau
+
+ScoreBoard4v4Title: "&e&l{bw}"
+
+ScoreBoard4v4Line01: "&7{date} &8{mode}"
+ScoreBoard4v4Line02: "&a{timeleft-s}&fThe game ends in seconds"
+ScoreBoard4v4Line03: "&f"
+ScoreBoard4v4Line04: "{redTeamIsMe}&c{RedTeamName} {redTeamStat} &7(&f&l{redTeamPlayer}&7)"
+ScoreBoard4v4Line05: "{blueTeamIsMe}&9{BlueTeamName} {blueTeamStat} &7(&f&l{blueTeamPlayer}&7)"
+ScoreBoard4v4Line06: "{greenTeamIsMe}&a{GreenTeamName} {greenTeamStat} &7(&f&l{greenTeamPlayer}&7)"
+ScoreBoard4v4Line07: "{yellowTeamIsMe}&e{YellowTeamName} {yellowTeamStat} &7(&f&l{yellowTeamPlayer}&7)"
+ScoreBoard4v4Line08: "&f "
+ScoreBoard4v4Line09: "&f\u51fb\u6740\u6570: &a{kill}"
+ScoreBoard4v4Line10: "&f\u7834\u574f\u5e8a\u6570: &a{bed}"
+ScoreBoard4v4Line11: "&f\u6700\u7ec8\u51fb\u6740\u6570: &a{fkill}"
+ScoreBoard4v4Line12: "&f  "
+ScoreBoard4v4Line13: "&e{ip}"
+ScoreBoard4v4Line14: ""
+ScoreBoard4v4Line15: ""
+ScoreBoard4v4Line16: ""
+#Customized Scoreboard Content in 4v4 Mode
+#Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+#Variable:
+# TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must be capitalized, such as RedTeamName, GrayTeamName
+# TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
+# TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+#{timeleft-s}: Game remaining time in seconds
+#{timeleft-m}: Game remaining time in minutes
+#{timeleft-h}: Game remaining time - hours
+#{timeleft-d}: Game remaining time in days
+#{timeline mo}: Game remaining time in months
+#{timeleft y}: Game remaining time in years
+#{date}: Today's date format is YYYY/M/D, such as 2080/3/27
+#{ip}: The value of serverIp in the configuration file
+#{bw}: The value of meanBedwards in the configuration file
+#{mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+#{kill}: The number of enemies killed in your current game
+#{fkill}: Your KD value in this game
+#{kd}: Your KD value in this game
+#{death}: The number of deaths in your current game
+#{bed}: The number of digging beds in your current game
+#{game}: The game name of this game
+#{region}: The region name of this bureau
+#{world}: The world name of this bureau
+
+
+breakTitle: true
+#Whether to enable the destruction of bed information
+breakTitleAll: "{BreakTeamColor}{BreakTeamName}&cThe bed has been destroyed"
+breakSubTitleAll: "&7destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
+breakTitleBreakPlayer: "{BreakTeamColor}{BreakTeamName}"
+breakSubTitleBreakPlayer: "&aThe bed has been destroyed by you"
+breakTitleBreakTeam: "&cThe bed has been destroyed"
+breakSubTitleBreakTeam: "&7destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
+#All: Sent to all players
+#BreakPlayer: Sent to players who break the bed
+#BreakTeam: Sent to players whose beds have been destroyed
+#Variable:
+#{BreakTeamColor}: The team color of the team whose bed was damaged
+#{BreakTeamName}: The team name of the team whose bed was destroyed
+#{BreakPlayerTeamColor}: The team color of the player who destroys the bed
+#{BreakPlayerName}: The player name of the player who broke the bed
+#{breakPlayerTeamName}: The team name of the player who destroyed the bed
+
+
+deathGameMode: true
+respawnDelay: 5
+respawnTitle: "&e&l{timeleft}&a&lResurrect in seconds"
+respawnSubTitle: ""
+respawnSuccTitle: "&f"
+respawnSuccSubTitle: ""
+#DeathGameMode: Is the resurrection countdown enabled
+#RespawnDelay: The countdown time for resurrection (in seconds)
+#RespawnTitle: The title of the resurrection,
+#Variable: {timeleft}: Remaining time (in seconds)
+#RespawnSubtitle: Subtitle in Resurrection,
+#Variable: {timeleft}: Remaining time (in seconds)
+#RespawnSuccTitle: Resurrected Title
+#RespawnSuccSubtitle: Resurrected Subtitle
+
+breakBedCheck: true
+tpDis: 0.74
+#Is the anti jamming bed enabled
+#When standing above the bed and damaging it, teleport upwards to prevent players from getting stuck in the bed
+#TpDis: The distance transmitted upwards must be of type double
+
+noHunger: true
+maxFoodLevel: 20
+#NoHunger: Whether to enable no hunger
+#MaxFoodLevel: hunger level to be locked in
+
+noPearlDamage: true
+startKitCompass: false
+antiDrop: true
+grassPaneWalk: true
+cleanBottle: true
+kill_res: true
+NoItemBreak: true
+#NoPearlDamage: Whether to activate the damage of the Endless Pearl
+#StartKitCompass: Whether to enable automatic compass for players
+#AntiDrop: Whether to enable anti movement equipment
+#GrassPaneWalk: Is the anti jamming glass panel enabled
+#CleanBottle: Is automatic cleaning of empty bottles enabled
+#Kill_ Res: Whether to enable killing and plundering of resources
+#NoitemBreak: Is it enabled to prevent sword damage
+
+levelupShop: true
+levelupShopOpenMode: "click on item"
+levelupShopOpenModeEntityName: "Upgrade Store"
+LevelupItemType: "BOOK_AND_QUILL"
+levelupShopDelayOpen: true
+teamEnchItemName_Sharp1: "SharpI"
+teamEnchItemName_Prot1: "protectI"
+teamEnchItemName_Prot2: "protectII"
+teamEnchItemName_Prot3: "protectIII"
+teamEnchItemName_Prot4: "protectIV"
+meanDiamond: "&bDiamond"
+shopLevelup: "Upgrade Store"
+shopItem: "\u5546\u5e97"
+#LevelupShop: No, open upgrade store
+#LevelupShopOpenMode: Upgrade the way the store opens,
+#Supports the following modes
+#Click on item: Click on the item to open it
+#"Click on entity": Click on the villagers to open it
+#LevelupShopOpenModeEntityName: The name of the clicked villager that needs to be matched to open the menu
+#LevelupItem Type: The item type of the item opened in the store
+#LevelupShopDelayOpen: Whether to open the delayed opening menu: If the item in the opened menu is clicked, it will
+#Immediately open the other items section and add a slight delay to overwrite the opening of the upgrade menu
+#TeamEnchitemName_...: The name of the enchantment level in the menu
+#MeanDiamond: represents a diamond
+#ShopLevelup: The menu title for upgrading menus
+#ShopItem: When clicking on an item, if the name of the current menu matches this value, the upgrade menu will open. Generally, it is the store name of BedwarsRel (\ plugins \ BedwarsRel \ local \ zh_cN. json: ingame. shop. name)
+
+sharp1Cost2v2: 4
+prot1Cost2v2: 2
+prot2Cost2v2: 4
+prot3Cost2v2: 8
+prot4Cost2v2: 16
+sharp1Cost4v4: 8
+prot1Cost4v4: 5
+prot2Cost4v4: 10
+prot3Cost4v4: 20
+prot4Cost4v4: 30
+#The price of enchantment levels in 2v2 and 4v4
+#Sharp1: Sharp1
+#Prot11: Protection 1
+
+
+messLevelUpSharp1: "&6{player}&aPurchased team upgrade&6SharpI"
+messLevelUpProt1: "&6{player}&aPurchased team upgrade&6protectI"
+messLevelUpProt2: "&6{player}&aPurchased team upgrade&6protectII"
+messLevelUpProt3: "&6{player}&aPurchased team upgrade&6protectIII"
+messLevelUpProt4: "&6{player}&aPurchased team upgrade&6protectIV"
+messLevelUpFailed: "&cInsufficient resources or possessing higher-level enchantments!"
+
+
+damagefb_Title: true
+damagefb_attackTitle: ""
+damagefb_attackSubTitle: "&3\u4f24\u5bb3 &7- &c{damage}"
+damagefb_attackBlood: true
+damagefb_attackBloodMode: "box"
+#Damagefb_ Title: Is the damage feedback function enabled
+#Damagefb_ AttackTitle: The title displayed when attacking a player
+#Damagefb_ AttackSubtitle: The subtitle displayed when attacking a player
+#Damagefb_ AttackBlood: Attack the player's particle effect
+#Damagefb_ AttackBloodMode: The particle effect display mode for attacking players,
+#Supports the following modes:
+#{single}: Generate player's location
+#{player}: The entire player
+#{box}: The player's surroundings
+
+upToChainArmor: "CHAINMAIL_CHESTPLATE"
+upToIronArmor: "IRON_CHESTPLATE"
+upToDiamondArmor: "DIAMOND_CHESTPLATE"
+#Automatically upgrade your equipment when an item is detected
+#UpToChainArmor: Upgrade to Chain Equipment
+#UpToIronArmor: Upgrade to Iron equipment
+#UpToDiamondArmor: Upgrade to Diamond equipment
+
+chainPriceType: "IRON_INGOT"
+ironPriceType: "GOLD_INGOT"
+diamondPriceType: "DIAMOND"
+chainPrice: 35
+ironPrice: 12
+diamondPrice: 6
+#When it is detected that you have purchased too much equipment, the type of item and its price will be returned
+# PriceType: Item type
+# Price: Item price
+
+kitenable: true
+kitForce: false
+kitForceKit: "Default"
+#Kitenable: Whether to enable the occupation function
+#KitForce: Force players to set their profession, regardless of which profession they choose
+#KitForceKit: Compulsory career selection
+#Support the following professions:
+#Default: Default profession
+#None: No occupation
+
+kitMenuTitle: "Choose a career"
+kitMenurow: 6
+#KitMenu Title: The menu title for selecting a profession
+#KitMenu: The number of rows in the menu for selecting a profession, up to a maximum of 6 rows
+
+kitMenuItemGive: true
+kitMenuItemType: "IRON_SWORD"
+kitMenuItemAmount: 1
+kitMenuItemName: "\u9009\u62e9\u804c\u4e1a"
+meanSelKitSucc: "&a\u6210\u529f\u9009\u62e9\u804c\u4e1a!"
+#KitMenu Item Give: Do you want to enable the function of automatically giving items to open the selected profession menu
+#KitMenu Item Type: Open the item type of the item in the selected profession menu
+#KitMenu Item Amount: The number of items to open and select from the occupation menu
+#KitMenu Item Name: Open the item name of the item in the selected profession menu
+#MeanSelKitSucc: A prompt message for successfully selecting a profession is sent in the chat bar
+
+KitDefaultName: "Default occupation"
+KitDefaultDescription: "Default occupation"
+KitDefaultItemType: "GOLD_HELMET"
+KitDefaultItemAmount: 1
+KitDefaultItemSlot: 0
+KitDefaultItemName: "&fdefault"
+KitDefaultItemLore:
+  - "&f"
+  - "&aCareer Introduction"
+  - "&fDefault profession!"
+  - "&f"
+  - "&aProfessional content"
+  - "&fPermanent speed"
+  - "&fPermanent equipment"
+  - "&f"
+KitDefault_Boost_GiveSpeed_enable: true
+KitDefault_Boost_GiveSpeed_level: 1
+#Kit Name: Occupation The name of (currently not used)
+#Kit Description: Occupation Introduction to (currently not used)
+#Kit Item Type: Occupation Selecting item types in the career menu
+#Kit Item Amount: Occupation Select the number of items in the career menu
+#Kit Item Slot: Occupation Select the item location in the career menu
+#Kit Item Name: Occupation Selecting item names in the career menu
+#Kit Item Lore: Occupation Annotate items in the career menu
+#KitDefault_ Boost_ GiveSpeed_ Enable: Whether to enable the buff effect of this profession: permanent speed
+#KitDefault_ Boost_ GiveSpeed_ Level: The buff effect of this profession: the level of permanent speed
+
+KitNoneName: "No occupation"
+KitNoneDescription: "A profession without"
+KitNoneItemType: "BARRIER"
+KitNoneItemAmount: 1
+KitNoneItemSlot: 1
+KitNoneItemName: "&fnot have"
+KitNoneItemLore:
+  - "&f"
+  - "&aCareer Introduction"
+  - "&fNo profession!"
+  - "&f"
+  - "&aProfessional content"
+  - "&fnot have"
+  - "&f"
+
+#Kit Name: Occupation The name of (currently not used)
+#Kit Description: Occupation Introduction to (currently not used)
+#Kit Item Type: Occupation Selecting item types in the career menu
+#Kit Item Amount: Occupation Select the number of items in the career menu
+#Kit Item Slot: Occupation Select the item location in the career menu
+#Kit Item Name: Occupation Selecting item names in the career menu
+#Kit Item Lore: Occupation Annotate items in the career menu
+
+messreloadnow: "Reloading configuration file"
+messreloadsucc: "Successfully reloaded configuration file"
+#Messreloadnow: Prompt information in plugin overload
+#Messreloadsucc: Prompt message that the plugin has been overloaded
+
+startmess: false
+startmess_all_chat: ""
+startmess_all_title: ""
+startmess_all_subtitle: ""
+#Startness: Whether to start sending messages at the beginning of the game
+#Chat: Sent chat messages
+#Title: Sent Title
+#Subtitle: Subtitle sent

@@ -10,15 +10,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 
-import static github.tsffish.bedwarskit.util.ColorString.t;
 import static github.tsffish.bedwarskit.util.RelBreakTitle.bt;
+import static github.tsffish.bedwarskit.util.RelCurrentStat.ups;
+import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
-public class RelBreakBed implements Listener {
+public class RelBreakBed implements Listener
+{
     Plugin plugin = github.tsffish.bedwarskit.Main.getProvidingPlugin(github.tsffish.bedwarskit.Main.class);
 
     @EventHandler
-    public void on(BedwarsTargetBlockDestroyedEvent e) {
-        if (MainConfigHandler.breakTitle) {
+    public void on(BedwarsTargetBlockDestroyedEvent e)
+    {
+        if (MainConfigHandler.breakTitle)
+        {
 
             Player breakPlayer = e.getPlayer();
             String playerName = breakPlayer.getName();
@@ -36,23 +40,29 @@ public class RelBreakBed implements Listener {
             String breakTitleAllReal = bt(MainConfigHandler.breakTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
             String breakSubtitleAllReal = bt(MainConfigHandler.breakSubTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
 
-            new BukkitRunnable() {
+            new BukkitRunnable()
+            {
             @Override
-            public void run() {
+            public void run()
+            {
                     // 向被破坏床的队伍 sendtitle
                     e.getGame().getPlayers().forEach((player) -> {
                         String playerTeam = e.getGame().getPlayerTeam(player).getName();
                         // 向被所有的玩家 sendtitle
-                        if (playerName != breakPlayerName && playerTeam != breakTeamName) {
+                        if (!Objects.equals(playerName, breakPlayerName) && !Objects.equals(playerTeam, breakTeamName))
+                        {
                             player.sendTitle(t(breakTitleAllReal), t(breakSubtitleAllReal));
-                        } else if (playerTeam == breakTeamName) {
+                        } else if (Objects.equals(playerTeam, breakTeamName))
+                        {
                             // 向被破坏床的玩家 sendtitle
                             player.sendTitle(t(breakTitleBreakTeamReal), t(breakSubtitleBreakTeamReal));
                         }
-                    });
+                    }
+                    );
 
                 breakPlayer.sendTitle(t(breakTitleBreakPlayerReal), t(breakSubtitleBreakPlayerReal));
-                }
+                ups(breakPlayer, "b", 1);
+            }
             //End
         }.runTaskLater(plugin, 1L);
     }

@@ -19,20 +19,25 @@ import org.bukkit.scheduler.BukkitRunnable;
  * @author tsffish
  * @see RelBreakBed
  */
-public class RelBreakCorrect implements Listener {
+public class RelBreakCorrect implements Listener
+{
     Plugin plugin = github.tsffish.bedwarskit.Main.getProvidingPlugin(github.tsffish.bedwarskit.Main.class);
     @EventHandler
-    public void on(BlockBreakEvent e) {
+    public void on(BlockBreakEvent e)
+    {
         Player player = e.getPlayer();
         GameManager gm = BedwarsRel.getInstance().getGameManager();
-        if (gm.getGameOfPlayer(player) != null && gm.getGameOfPlayer(player).getState() != GameState.RUNNING){
+        if (gm.getGameOfPlayer(player) != null && gm.getGameOfPlayer(player).getState() != GameState.RUNNING)
+        {
             e.setCancelled(true);
         }
 
         if (MainConfigHandler.breakBedCheck) {
-            new BukkitRunnable() {
+            new BukkitRunnable()
+            {
                 @Override
-                public void run() {
+                public void run()
+                {
                     Player p = e.getPlayer();
                     Location loc = p.getLocation();
                     Location tele = p.getLocation().add(0.0, MainConfigHandler.tpDis, 0.0);
@@ -40,17 +45,21 @@ public class RelBreakCorrect implements Listener {
                     Material block = loc.getWorld().getBlockAt(loc).getType();
                     GameManager gm = BedwarsRel.getInstance().getGameManager();
                     Game game = gm.getGameOfPlayer(p);
-                    if (game != null && game.getPlayerTeam(p) != null) {
+                    if (game != null && game.getPlayerTeam(p) != null)
+                    {
                         Block playerTeamBlock = game.getPlayerTeam(p).getTargetHeadBlock().getBlock();
-                        if (playerTeamBlock != null) {
+                        if (playerTeamBlock != null)
+                        {
                             Material breakblock = e.getBlock().getType();
-                            if (block == Material.BED_BLOCK && breakblock == Material.BED_BLOCK && playerTeamBlock.getType() != Material.AIR) {
+                            if (block == Material.BED_BLOCK && breakblock == Material.BED_BLOCK && playerTeamBlock.getType() != Material.AIR)
+                            {
                                 p.teleport(tele);
                                 p.setFallDistance(0.0f);
                             }
                         }
                 }
-            }}.runTaskLater(plugin, 1L);
+            }
+            }.runTaskLater(plugin, 1L);
         }
     }
 }

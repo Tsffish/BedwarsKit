@@ -19,29 +19,29 @@ lobbyWorld: "lobby"
 # rushWorld4v4 : 识别为游戏房间4v4模式
 # lobbyWorld : 识别为大厅
 
-relTeamName_Red: "\u7ea2\u4e4b\u961f"
-relTeamName_Blue: "\u84dd\u4e4b\u961f"
-relTeamName_Green: "\u7eff\u4e4b\u961f"
-relTeamName_Yellow: "\u9ec4\u4e4b\u961f"
-relTeamName_Aqua: "\u9752\u4e4b\u961f"
-relTeamName_White: "\u767d\u4e4b\u961f"
-relTeamName_Gray: "\u7070\u4e4b\u961f"
-relTeamName_Pink: "\u7c89\u4e4b\u961f"
+relTeamName_Red: "红之队"
+relTeamName_Blue: "蓝之队"
+relTeamName_Green: "绿之队"
+relTeamName_Yellow: "黄之队"
+relTeamName_Aqua: "青之队"
+relTeamName_White: "白之队"
+relTeamName_Gray: "灰之队"
+relTeamName_Pink: "粉之队"
 # 游戏中队伍的名字 最基本的配置
 # 是队伍显示名字不是颜色名字
 
 customScoreboard: true
 #是否开启 自定义计分板 功能
 
-meanTeamBedYes: "&a\u2714"
-meanTeamNone: "&c\u2718"
-meanTeamBedNo: "&c\u2718"
-meanYou: "{teamColor}\u2192 "
+meanTeamBedYes: "&a✔"
+meanTeamNone: "&c✘"
+meanTeamBedNo: "&c✘"
+meanYou: "{teamColor}→ "
 meanNotYou: "{teamColor}  "
-mean2v2Mode: "\u53cc\u4eba\u6a21\u5f0f"
-mean4v4Mode: "4v4v4v4\u6a21\u5f0f"
+mean2v2Mode: "双人模式"
+mean4v4Mode: "4v4v4v4模式"
 serverIp: "&eMCBBS@the_starfish"
-meanBedwars: "\u8d77\u5e8a\u6218\u4e89"
+meanBedwars: "起床战争"
 # meanTeamBedYes : ...TeamStat 中 表示队伍存在床的情况
 # meanTeamNone : ...TeamStat 中 表示队伍已被淘汰
 # meanTeamBedNo : ...TeamStat 中 表示队伍没有床 但 队伍存在玩家的情况
@@ -55,7 +55,7 @@ meanBedwars: "\u8d77\u5e8a\u6218\u4e89"
 ScoreBoard2v2Title: "&e&l{bw}"
 
 ScoreBoard2v2Line01: "&7{date} &8{mode}"
-ScoreBoard2v2Line02: "&a{timeleft-s}&f\u79d2\u4e4b\u540e&b\u6e38\u620f\u7ed3\u675f"
+ScoreBoard2v2Line02: "&a{timeleft-s}&f秒之后&b游戏结束"
 ScoreBoard2v2Line03: "&f"
 ScoreBoard2v2Line04: "{redTeamIsMe}&c{RedTeamName} {redTeamStat} &7(&f&l{redTeamPlayer}&7)"
 ScoreBoard2v2Line05: "{blueTeamIsMe}&9{BlueTeamName} {blueTeamStat} &7(&f&l{blueTeamPlayer}&7)"
@@ -99,7 +99,7 @@ ScoreBoard2v2Line16: ""
 ScoreBoard4v4Title: "&e&l{bw}"
 
 ScoreBoard4v4Line01: "&7{date} &8{mode}"
-ScoreBoard4v4Line02: "&a{timeleft-s}&f\u79d2\u4e4b\u540e&b\u6e38\u620f\u7ed3\u675f"
+ScoreBoard4v4Line02: "&a{timeleft-s}&f秒之后&b游戏结束"
 ScoreBoard4v4Line03: "&f"
 ScoreBoard4v4Line04: "{redTeamIsMe}&c{RedTeamName} {redTeamStat} &7(&f&l{redTeamPlayer}&7)"
 ScoreBoard4v4Line05: "{blueTeamIsMe}&9{BlueTeamName} {blueTeamStat} &7(&f&l{blueTeamPlayer}&7)"
@@ -143,12 +143,12 @@ ScoreBoard4v4Line16: ""
 
 breakTitle: true
 #是否开启 破坏床信息
-breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c\u7684\u5e8a\u5df2\u88ab\u6467\u6bc1"
-breakSubTitleAll: "&7\u6467\u6bc1\u8005:{BreakPlayerTeamColor}{BreakPlayerName}"
+breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c的床已被摧毁"
+breakSubTitleAll: "&7摧毁者:{BreakPlayerTeamColor}{BreakPlayerName}"
 breakTitleBreakPlayer: "{BreakTeamColor}{BreakTeamName}"
-breakSubTitleBreakPlayer: "&a\u5e8a\u5df2\u88ab\u4f60\u6467\u6bc1"
-breakTitleBreakTeam: "&c\u5e8a\u5df2\u88ab\u6467\u6bc1"
-breakSubTitleBreakTeam: "&7\u6467\u6bc1\u8005:{BreakPlayerTeamColor}{BreakPlayerName}"
+breakSubTitleBreakPlayer: "&a床已被你摧毁"
+breakTitleBreakTeam: "&c床已被摧毁"
+breakSubTitleBreakTeam: "&7摧毁者:{BreakPlayerTeamColor}{BreakPlayerName}"
 # All : 向 所有的玩家 发送的
 # BreakPlayer : 向 破坏床的玩家 发送的
 # BreakTeam : 向 被破坏床的玩家 发送的
@@ -162,7 +162,7 @@ breakSubTitleBreakTeam: "&7\u6467\u6bc1\u8005:{BreakPlayerTeamColor}{BreakPlayer
 
 deathGameMode: true
 respawnDelay: 5
-respawnTitle: "&e&l{timeleft}&a&l\u79d2\u540e\u590d\u6d3b"
+respawnTitle: "&e&l{timeleft}&a&l秒后复活"
 respawnSubTitle: ""
 respawnSuccTitle: "&f"
 respawnSuccSubTitle: ""
@@ -203,14 +203,14 @@ NoItemBreak: true
 
 levelupShop: true
 levelupShopOpenMode: "click on item"
-levelupShopOpenModeEntityName: "\u5347\u7ea7\u5546\u5e97"
+levelupShopOpenModeEntityName: "升级商店"
 LevelupItemType: "BOOK_AND_QUILL"
 levelupShopDelayOpen: true
-teamEnchItemName_Sharp1: "\u950b\u5229I"
-teamEnchItemName_Prot1: "\u4fdd\u62a4I"
-teamEnchItemName_Prot2: "\u4fdd\u62a4II"
-teamEnchItemName_Prot3: "\u4fdd\u62a4III"
-teamEnchItemName_Prot4: "\u4fdd\u62a4IV"
+teamEnchItemName_Sharp1: "锋利I"
+teamEnchItemName_Prot1: "保护I"
+teamEnchItemName_Prot2: "保护II"
+teamEnchItemName_Prot3: "保护III"
+teamEnchItemName_Prot4: "保护IV"
 meanDiamond: "&b\u94bb\u77f3"
 shopLevelup: "\u5347\u7ea7\u5546\u5e97"
 shopItem: "\u5546\u5e97"
@@ -243,17 +243,17 @@ prot4Cost4v4: 30
 # prot11 : 保护1
 
 
-messLevelUpSharp1: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u950b\u5229I"
-messLevelUpProt1: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4I"
-messLevelUpProt2: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4II"
-messLevelUpProt3: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4III"
-messLevelUpProt4: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4IV"
-messLevelUpFailed: "&c\u8d44\u6e90\u4e0d\u591f\u6216\u5df2\u62e5\u6709\u66f4\u9ad8\u7ea7\u7684\u9644\u9b54!"
+messLevelUpSharp1: "&6{player}&a购买了团队升级&6锋利I"
+messLevelUpProt1: "&6{player}&a购买了团队升级&6保护I"
+messLevelUpProt2: "&6{player}&a购买了团队升级&6保护II"
+messLevelUpProt3: "&6{player}&a购买了团队升级&6保护III"
+messLevelUpProt4: "&6{player}&a购买了团队升级&6保护IV"
+messLevelUpFailed: "&c资源不够或已拥有更高级的附魔!"
 
 
 damagefb_Title: true
 damagefb_attackTitle: ""
-damagefb_attackSubTitle: "&3\u4f24\u5bb3 &7- &c{damage}"
+damagefb_attackSubTitle: "&3伤害 &7- &c{damage}"
 damagefb_attackBlood: true
 damagefb_attackBloodMode: "box"
 # damagefb_Title : 是否开启 伤害反馈 功能
@@ -293,7 +293,7 @@ kitForceKit: "Default"
 # Default : 默认职业
 # None : 无职业
 
-kitMenuTitle: "\u9009\u62e9\u804c\u4e1a"
+kitMenuTitle: "选择职业"
 kitMenurow: 6
 # kitMenuTitle : 选择职业的菜单 的 菜单标题
 # kitMenurow : 选择职业的菜单 的 行数 ,最多6行
@@ -309,20 +309,20 @@ meanSelKitSucc: "&a\u6210\u529f\u9009\u62e9\u804c\u4e1a!"
 # kitMenuItemName : 打开选择职业菜单的物品 的 物品名字
 # meanSelKitSucc : 成功选择职业 的 提示信息 发送在聊天栏
 
-KitDefaultName: "\u9ed8\u8ba4\u804c\u4e1a"
-KitDefaultDescription: "\u9ed8\u8ba4\u7684\u804c\u4e1a"
+KitDefaultName: "默认职业"
+KitDefaultDescription: "默认的职业"
 KitDefaultItemType: "GOLD_HELMET"
 KitDefaultItemAmount: 1
 KitDefaultItemSlot: 0
-KitDefaultItemName: "&f\u9ed8\u8ba4"
+KitDefaultItemName: "&f默认"
 KitDefaultItemLore:
   - "&f"
-  - "&a\u804c\u4e1a\u4ecb\u7ecd"
-  - "&f\u9ed8\u8ba4\u804c\u4e1a\uff01"
+  - "&a职业介绍"
+  - "&f默认职业！"
   - "&f"
-  - "&a\u804c\u4e1a\u5185\u5bb9"
-  - "&f\u6c38\u4e45\u7684\u901f\u5ea6"
-  - "&f\u6c38\u4e45\u7684\u88c5\u5907"
+  - "&a职业内容"
+  - "&f永久的速度"
+  - "&f永久的装备"
   - "&f"
 KitDefault_Boost_GiveSpeed_enable: true
 KitDefault_Boost_GiveSpeed_level: 1
@@ -336,19 +336,19 @@ KitDefault_Boost_GiveSpeed_level: 1
 # KitDefault_Boost_GiveSpeed_enable : 是否开启 该职业的增益效果 : 永久的速度
 # KitDefault_Boost_GiveSpeed_level : 该职业的增益效果 : 永久的速度 的等级
 
-KitNoneName: "\u65e0\u804c\u4e1a"
-KitNoneDescription: "\u65e0\u7684\u804c\u4e1a"
+KitNoneName: "无职业"
+KitNoneDescription: "无的职业"
 KitNoneItemType: "BARRIER"
 KitNoneItemAmount: 1
 KitNoneItemSlot: 1
-KitNoneItemName: "&f\u65e0"
+KitNoneItemName: "&f无"
 KitNoneItemLore:
   - "&f"
-  - "&a\u804c\u4e1a\u4ecb\u7ecd"
-  - "&f\u65e0\u804c\u4e1a\uff01"
+  - "&a职业介绍"
+  - "&f无职业！"
   - "&f"
-  - "&a\u804c\u4e1a\u5185\u5bb9"
-  - "&f\u65e0"
+  - "&a职业内容"
+  - "&f无"
   - "&f"
 
 # Kit...Name : 职业...的名字 (目前没用)
@@ -359,8 +359,8 @@ KitNoneItemLore:
 # Kit...ItemName : 职业...在选择职业菜单中的 物品名字
 # Kit...ItemLore : 职业...在选择职业菜单中的 物品注释
 
-messreloadnow: "\u6b63\u5728\u91cd\u65b0\u52a0\u8f7d\u914d\u7f6e\u6587\u4ef6"
-messreloadsucc: "\u6210\u529f\u91cd\u8f7d\u914d\u7f6e\u6587\u4ef6"
+messreloadnow: "正在重新加载配置文件"
+messreloadsucc: "成功重载配置文件"
 # messreloadnow : 插件重载中 的 提示信息
 # messreloadsucc : 插件已重载 的 提示信息
 
@@ -372,5 +372,3 @@ startmess_all_subtitle: ""
 # chat: 发送的 聊天信息
 # title: 发送的 标题
 # subtitle: 发送的 副标题
-
-auto_join: true

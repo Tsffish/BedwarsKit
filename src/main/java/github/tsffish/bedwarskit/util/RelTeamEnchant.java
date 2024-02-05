@@ -36,6 +36,7 @@ public class RelTeamEnchant {
                         teamEnchantListProt.put(mapName, new String[]{teamName, "0"});
                     }
                 }
+
             }
             // End
         }.runTaskLater(plugin, time);

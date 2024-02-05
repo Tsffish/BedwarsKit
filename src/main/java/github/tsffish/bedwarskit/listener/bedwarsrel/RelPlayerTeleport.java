@@ -12,6 +12,9 @@ public class RelPlayerTeleport implements Listener {
     @EventHandler
     public void on(PlayerTeleportEvent e) {
         Player p = e.getPlayer();
+
+        if (p == null || !p.isOnline()) return;
+
         String world = p.getWorld().getName();
         boolean isInRushWorld = world.contains(MainConfigHandler.rushWorld);
         // 禁用末影珍珠伤害
@@ -25,9 +28,12 @@ public class RelPlayerTeleport implements Listener {
     }
     @EventHandler
     public void on(PlayerChangedWorldEvent event){
-        if (event.getPlayer().getWorld().getName().contains(MainConfigHandler.lobbyWorld)){
-            if (event.getPlayer().getGameMode() != GameMode.SURVIVAL){
-            event.getPlayer().setGameMode(GameMode.SURVIVAL);
+        Player p = event.getPlayer();
+        if (p == null || !p.isOnline()) return;
+
+        if (p.getWorld().getName().contains(MainConfigHandler.lobbyWorld)){
+            if (p.getGameMode() != GameMode.SURVIVAL){
+            p.setGameMode(GameMode.SURVIVAL);
             }
         }
     }

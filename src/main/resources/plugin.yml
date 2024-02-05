@@ -1,7 +1,10 @@
 name: BedwarsKit
-version: 1.9.4
+version: 1.9.5
 main: github.tsffish.bedwarskit.Main
+author: tsffish
+depend:
+  - BedwarsRel
 commands:
-  bwk: # 指令的注释
+  bwk:
     description: Hello Command
     usage: /bwk

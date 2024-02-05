@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static github.tsffish.bedwarskit.config.MainConfigHandler.rushWorld;
-import static github.tsffish.bedwarskit.util.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelPlaceCorrect implements Listener {
     @EventHandler
