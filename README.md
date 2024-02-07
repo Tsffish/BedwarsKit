@@ -6,21 +6,26 @@ A Simple Addon for BedwarsRel, let you keep your Kit in the game
 Depend: BedwarsRel
 
 Functions:
-- Custom ScoreBoard
+- Custom Game ScoreBoard
+- Team Enchant
+- Seize resources on kill
+- Game Task (ResSpawner SpeedUp & Death Mode)
+- Respawn Delay & Respawn Title
+- No Death Gui
+- Auto Clean Bottle
+- No BlockPlace at TeamSpawn & ResSpawn
+  Prohibits map destruction outside of the game
 - Select Kit
+- Armor LevelUp & Keep Armor Level
+- Auto Clean hostile on start
 - Ensure that there is a sword & Auto Clear wood Sword
 - Break bed title
-- Anti Bed Stuck
+- Anti Bed Stuck & Anti GlassPane Stuck
 - No Armor Drop
-- Team Enchant
 - FoodLevel Lock
-- Game ScoreBoard
-- Seize resources on kill
 - No Swords break
-- Respawn Delay & Respawn Title
-- Armor LevelUp & Keep Armor Level
 - No EnderPearl Damage
-- Anti GlassPane Stuck
+- Start Message
 
 ## Usage:
 Usage:
