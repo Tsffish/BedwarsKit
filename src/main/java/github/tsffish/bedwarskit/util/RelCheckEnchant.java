@@ -23,9 +23,9 @@ public class RelCheckEnchant {
             String teamName = enchantData[0];
             String enchantLevel = enchantData[1];
 
-            // 根据enchantLevel给玩家附魔
+            
             if (game != null) {
-                List<Team> teams = new ArrayList<>(game.getPlayingTeams()); // 转换成ArrayList
+                List<Team> teams = new ArrayList<>(game.getPlayingTeams()); 
                 for (Team team : teams) {
                     for (Player player : team.getPlayers()) {
                         if (Objects.equals(game.getRegion().getName(), mapName) && Objects.equals(teamName, team.getName()) && game.getState() == GameState.RUNNING) {
@@ -61,16 +61,16 @@ public class RelCheckEnchant {
     }
 
     public static void checkEnchantSword(Game game) {
-        for (Map.Entry<String, String[]> entry : RelTeamEnchant.teamEnchantListSword .entrySet()) {
+        for (Map.Entry<String, String[]> entry : RelTeamEnchant.teamEnchantListSword.entrySet()) {
             String mapName = entry.getKey();
             String[] enchantData = entry.getValue();
 
             String teamName = enchantData[0];
             String enchantLevel = enchantData[1];
 
-            // 根据enchantLevel给玩家附魔
+            
             if (game != null) {
-                List<Team> teams = new ArrayList<>(game.getPlayingTeams()); // 转换成ArrayList
+                List<Team> teams = new ArrayList<>(game.getPlayingTeams()); 
                 for (Team team : teams) {
                     for (Player player : team.getPlayers()) {
                         if (Objects.equals(game.getRegion().getName(), mapName) && Objects.equals(teamName, team.getName()) && game.getState() == GameState.RUNNING) {

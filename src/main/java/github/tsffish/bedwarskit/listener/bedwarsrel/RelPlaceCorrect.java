@@ -1,20 +1,19 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
+import github.tsffish.bedwarskit.config.MainConfigHandler;
 import io.github.bedwarsrel.BedwarsRel;
-import io.github.bedwarsrel.game.GameManager;
-import io.github.bedwarsrel.game.GameState;
-import io.github.bedwarsrel.game.ResourceSpawner;
+import io.github.bedwarsrel.game.*;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import static github.tsffish.bedwarskit.config.MainConfigHandler.rushWorld;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class RelPlaceCorrect implements Listener {
     @EventHandler
@@ -22,35 +21,95 @@ public class RelPlaceCorrect implements Listener {
 
         Player player = e.getPlayer();
         boolean isRushWorld = player.getWorld().getName().contains(rushWorld);
+        Game game = null;
         if(isRushWorld) {
             GameManager gm = BedwarsRel.getInstance().getGameManager();
-            if (gm.getGameOfPlayer(player).getState() != GameState.RUNNING && !player.isOp()) {
-                e.setCancelled(true);
+            if (gm != null && gm.getGameOfPlayer(player) != null)
+               game = gm.getGameOfPlayer(player);
+            if (game != null && game.getState() != GameState.RUNNING) {
+                if (MainConfigHandler.placeCorrect_notInGame_OpBypass) {
+                    e.setCancelled(!player.isOp());
+                }
             }
 
-            if (gm.getGameOfPlayer(player).getState() == GameState.RUNNING) {
-                Location loc = e.getBlock().getLocation();
-                List<Object> proloc = new ArrayList<>();
+            if (game != null && game.getState() == GameState.RUNNING) {
 
-                for (ResourceSpawner rs : gm.getGameOfPlayer(player).getResourceSpawners()) {
-                    proloc.add(rs.getLocation().add(0.0, 1.0, 0.0));
-                }
+                Player p = e.getPlayer();
+                if (MainConfigHandler.placeCorrect_ResSpawner) {
+                    Location blockLocation = e.getBlock().getLocation();
 
-                boolean isResourceSpawnPoint = false;
-                for (Object obj : proloc) {
-                    Location ploc = (Location) obj;
-                    if (ploc.equals(loc)) {
-                        isResourceSpawnPoint = true;
-                        break;
+                    if (gm.getGameOfPlayer(player).getState() == GameState.RUNNING) {
+                        for (ResourceSpawner rs : gm.getGameOfPlayer(player).getResourceSpawners()) {
+                            Location spawnerLocation = rs.getLocation();
+                            double distance = spawnerLocation.distance(blockLocation);
+
+                            if (distance <= 3) {
+                                e.setCancelled(true);
+
+                                if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_chat, "")) {
+                                    p.sendMessage(t(MainConfigHandler.placeCorrect_ResSpawner_mess_chat));
+                                }
+                                if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_title, "")) {
+                                    String titleReal = t(MainConfigHandler.placeCorrect_ResSpawner_mess_title);
+                                    if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle, "")) {
+                                        String subtitleReal = t(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle);
+
+                                        p.sendTitle(titleReal, subtitleReal);
+                                    }
+                                } else if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle, "")) {
+                                    String titleReal = " ";
+                                    String subtitleReal = t(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle);
+
+                                    p.sendTitle(titleReal, subtitleReal);
+                                }
+                                if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_actionbar, "")) {
+                                    sendActionBar(p, t(MainConfigHandler.placeCorrect_ResSpawner_mess_actionbar));
+                                }
+
+
+                                return;
+                            }
+                        }
                     }
                 }
 
-                if (isResourceSpawnPoint) {
-                    e.setCancelled(true);
-                    player.sendMessage(t("&b起床战争 &7>> &c无法在此处放置方块!"));
-                }
-            }
 
+                Location blockLocation = e.getBlock().getLocation();
+                if (MainConfigHandler.placeCorrect_PlayerSpawnLoc) {
+                    if (gm.getGameOfPlayer(player).getState() == GameState.RUNNING) {
+                        for (Team team : gm.getGameOfPlayer(player).getPlayingTeams()) {
+                            Location teamspawnLocation = team.getSpawnLocation();
+                            double distance = teamspawnLocation.distance(blockLocation);
+
+                            if (distance <= 3) {
+                                e.setCancelled(true);
+
+                                if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_chat, "")) {
+                                    p.sendMessage(t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_chat));
+                                }
+                                if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_title, "")) {
+                                    String titleReal = t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_title);
+                                    if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle, "")) {
+                                        String subtitleReal = t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle);
+
+                                        p.sendTitle(titleReal, subtitleReal);
+                                    }
+                                } else if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle, "")) {
+                                    String titleReal = " ";
+                                    String subtitleReal = t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle);
+
+                                    p.sendTitle(titleReal, subtitleReal);
+                                }
+                                if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_actionbar, "")) {
+                                    sendActionBar(p, t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_actionbar));
+                                }
+                                return;
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

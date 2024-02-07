@@ -11,13 +11,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class RelEnchant implements Listener {
     @EventHandler
     public void on(BedwarsGameStartedEvent event) {
         Game game = event.getGame();
-        HashMap<String, Team> teams = game.getTeams();
+
+        if (game == null) return;
+        Map<String, Team> teams = game.getTeams();
 
         String mapName = game.getRegion().getName();
         for (Team team : teams.values()) {
@@ -41,6 +43,10 @@ public class RelEnchant implements Listener {
 
         }
     }
+
+
+
+
 
     public static void setSharp1(Team team) {
         Enchantment enchantment = Enchantment.DAMAGE_ALL;
@@ -111,6 +117,7 @@ public class RelEnchant implements Listener {
             boots.addEnchantment(enchantment, enchantmentLevel);
         }
     }
+
     public static void setProt4(Team team) {
         Enchantment enchantment = Enchantment.PROTECTION_ENVIRONMENTAL;
         int enchantmentLevel = 4;
@@ -128,4 +135,6 @@ public class RelEnchant implements Listener {
             boots.addEnchantment(enchantment, enchantmentLevel);
         }
     }
+
+
 }

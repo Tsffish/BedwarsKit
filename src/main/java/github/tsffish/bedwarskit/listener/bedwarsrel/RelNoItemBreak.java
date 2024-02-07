@@ -10,10 +10,10 @@ public class RelNoItemBreak implements Listener {
     @EventHandler
     public void on(PlayerItemDamageEvent event) {
         if (!MainConfigHandler.NoItemBreak) return;
-
+        if (MainConfigHandler.NoBreakList == null) return;
         ItemStack item = event.getItem();
         short currentDurability = item.getDurability();
-        if (item.getType().toString().contains("SWORD")) {
+        if (MainConfigHandler.NoBreakList.contains(item.getType())){
             if (currentDurability + event.getDamage() >= item.getType().getMaxDurability()){
                 event.setCancelled(true);
             item.setDurability((short) 0);

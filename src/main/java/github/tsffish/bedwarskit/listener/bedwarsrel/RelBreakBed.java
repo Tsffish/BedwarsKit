@@ -1,11 +1,13 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.MainConfigHandler;
 import io.github.bedwarsrel.events.BedwarsTargetBlockDestroyedEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
@@ -16,7 +18,7 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelBreakBed implements Listener
 {
-    Plugin plugin = github.tsffish.bedwarskit.Main.getProvidingPlugin(github.tsffish.bedwarskit.Main.class);
+    Plugin plugin = JavaPlugin.getProvidingPlugin(Main.class);
 
     @EventHandler
     public void on(BedwarsTargetBlockDestroyedEvent e)
@@ -45,16 +47,16 @@ public class RelBreakBed implements Listener
             @Override
             public void run()
             {
-                    // 向被破坏床的队伍 sendtitle
+                    
                     e.getGame().getPlayers().forEach((player) -> {
                         String playerTeam = e.getGame().getPlayerTeam(player).getName();
-                        // 向被所有的玩家 sendtitle
+                        
                         if (!Objects.equals(playerName, breakPlayerName) && !Objects.equals(playerTeam, breakTeamName))
                         {
                             player.sendTitle(t(breakTitleAllReal), t(breakSubtitleAllReal));
                         } else if (Objects.equals(playerTeam, breakTeamName))
                         {
-                            // 向被破坏床的玩家 sendtitle
+                            
                             player.sendTitle(t(breakTitleBreakTeamReal), t(breakSubtitleBreakTeamReal));
                         }
                     }
@@ -63,7 +65,7 @@ public class RelBreakBed implements Listener
                 breakPlayer.sendTitle(t(breakTitleBreakPlayerReal), t(breakSubtitleBreakPlayerReal));
                 ups(breakPlayer, "b", 1);
             }
-            //End
+            
         }.runTaskLater(plugin, 1L);
     }
     }

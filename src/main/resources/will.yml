@@ -1,0 +1,5 @@
+resSpawn_limit: true
+resSpawn_limit_iron: 128
+resSpawn_limit_gold: 20
+resSpawn_limit_diamond: 10
+resSpawn_limit_emerald: 6

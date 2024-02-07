@@ -21,7 +21,7 @@ public class RelPlayerLeave implements Listener {
             armorIron.remove(playerName);
             armorDiamond.remove(playerName);
         sdps(player);
-        playerIsWaiting.remove(player);
+        playerIsOut.remove(player);
 
 
     }
@@ -29,7 +29,7 @@ public class RelPlayerLeave implements Listener {
     @EventHandler
     public void on(PlayerQuitEvent event){
         Player player = event.getPlayer();
-        playerIsWaiting.remove(player);
+        playerIsOut.remove(player);
         rps(player);
     }
 

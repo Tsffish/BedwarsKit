@@ -1,6 +1,9 @@
 package github.tsffish.bedwarskit.util;
 
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.MainConfigHandler;
+import github.tsffish.bedwarskit.util.gametask.*;
+import github.tsffish.bedwarskit.util.misc.SecondToTime;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -17,21 +20,139 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
+import static github.tsffish.bedwarskit.Main.console;
 import static github.tsffish.bedwarskit.config.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelScoreBoard {
+
+
+    public static Map<Integer, String> taskMap;
+    public static String lastTaskName = "";
+    public static int lastTaskTimeLeft;
+    public static String LastTaskTimeLeftText;
+    public static int gameTimeLeft;
+    public static String formatTimeLeft;
     public static void updateScoreBoard(Player player) {
 
         GameManager gm = BedwarsRel.getInstance().getGameManager();
         Game game = gm.getGameOfPlayer(player);
         if (game != null && game.getState() == GameState.RUNNING) {
+            gameTimeLeft = game.getTimeLeft();
+            formatTimeLeft = SecondToTime.formatSecondsToTimeString(gameTimeLeft);
+            String gameName = game.getName();
+            int gameTimeLeft = game.getTimeLeft();
+            String formatTimeLeft = SecondToTime.formatSecondsToTimeString(gameTimeLeft);
+
+            if (taskMap == null) {
+                taskMap = new HashMap<>(18);
+
+
+            }else {
+                taskMap.clear();
+            }
+
+
+            if (gametask_spawntime_tasks_iron1 > 0) {
+                taskMap.put(TaskIron1.getTaskTimeLeft(gameName), gametask_name_iron1);
+            }
+            if (gametask_spawntime_tasks_iron2 > 0) {
+                taskMap.put(TaskIron2.getTaskTimeLeft(gameName), gametask_name_iron2);
+            }
+            if (gametask_spawntime_tasks_iron3 > 0) {
+                taskMap.put(TaskIron3.getTaskTimeLeft(gameName), gametask_name_iron3);
+            }
+            if (gametask_spawntime_tasks_iron4 > 0) {
+                taskMap.put(TaskIron4.getTaskTimeLeft(gameName), gametask_name_iron4);
+            }
+
+            if (gametask_spawntime_tasks_gold1 > 0) {
+                taskMap.put(TaskGold1.getTaskTimeLeft(gameName), gametask_name_gold1);
+            }
+            if (gametask_spawntime_tasks_gold2 > 0) {
+                taskMap.put(TaskGold2.getTaskTimeLeft(gameName), gametask_name_gold2);
+            }
+            if (gametask_spawntime_tasks_gold3 > 0) {
+                taskMap.put(TaskGold3.getTaskTimeLeft(gameName), gametask_name_gold3);
+            }
+            if (gametask_spawntime_tasks_gold4 > 0) {
+                taskMap.put(TaskGold4.getTaskTimeLeft(gameName), gametask_name_gold4);
+            }
+
+
+            if (gametask_spawntime_tasks_diamond1 > 0) {
+                taskMap.put(TaskDiamond1.getTaskTimeLeft(gameName), gametask_name_diamond1);
+            }
+            if (gametask_spawntime_tasks_diamond2 > 0) {
+                taskMap.put(TaskDiamond2.getTaskTimeLeft(gameName), gametask_name_diamond2);
+            }
+            if (gametask_spawntime_tasks_diamond3 > 0) {
+                taskMap.put(TaskDiamond3.getTaskTimeLeft(gameName), gametask_name_diamond3);
+            }
+            if (gametask_spawntime_tasks_diamond4 > 0) {
+                taskMap.put(TaskDiamond4.getTaskTimeLeft(gameName), gametask_name_diamond4);
+            }
+            if (gametask_spawntime_tasks_emerald1 > 0) {
+                taskMap.put(TaskEmerald1.getTaskTimeLeft(gameName), gametask_name_emerald1);
+            }
+            if (gametask_spawntime_tasks_emerald2 > 0) {
+                taskMap.put(TaskEmerald2.getTaskTimeLeft(gameName), gametask_name_emerald2);
+            }
+            if (gametask_spawntime_tasks_emerald3 > 0) {
+                taskMap.put(TaskEmerald3.getTaskTimeLeft(gameName), gametask_name_emerald3);
+            }
+            if (gametask_spawntime_tasks_emerald4 > 0) {
+                taskMap.put(TaskEmerald4.getTaskTimeLeft(gameName), gametask_name_emerald4);
+            }
+            if (gametask_finalbattle_time > 0) {
+                taskMap.put(TaskFinalBattle.getTaskTimeLeft(gameName), gametask_name_finalbattle);
+            }
+
+            if (!taskMap.isEmpty()) {
+                if (Main.isDebug) {
+                    for (String s : taskMap.values()) {
+                        console.sendMessage(s);
+                    }
+                }
+                int minVaule = 0;
+                String minTaskName = " ";
+                int maxValue = Integer.MAX_VALUE;
+                synchronized (taskMap) {
+                    Iterator<Map.Entry<Integer, String>> iterator = taskMap.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<Integer, String> entry = iterator.next();
+                        Integer key = entry.getKey();
+                        String taskName = entry.getValue();
+                        if (game.getState() != GameState.RUNNING) return;
+
+                        if (key < minVaule || key < maxValue) {
+                            minVaule = key;
+                            minTaskName = taskName;
+                            if (minTaskName.equals(meanGameEnd)){
+                                LastTaskTimeLeftText = t(formatTimeLeft);
+                            } else {
+                                LastTaskTimeLeftText = minVaule + t(meanSecond);
+                            }
+                            lastTaskName = t(minTaskName);
+                        }
+                        iterator.remove();
+                    }
+                }
+
+
+            } else {
+                int minVaule = 0;
+                LastTaskTimeLeftText = minVaule + t(meanSecond);
+                String minTaskName = t(meanGameEnd);
+                lastTaskName = t(minTaskName);
+            }
 
             LocalDate currentDate = LocalDate.now();
-            // 定义日期格式
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             String formattedDate = currentDate.format(formatter);
 
@@ -39,10 +160,10 @@ public class RelScoreBoard {
             if (worldname.contains(MainConfigHandler.rushWorld)) {
                 Material bed = Material.BED_BLOCK;
 
-                String RedTeamName = relTeamName_Red;
-                String YellowTeamName = relTeamName_Yellow;
-                String GreenTeamName = relTeamName_Green;
-                String BlueTeamName = relTeamName_Blue;
+                String redTeamName = relTeamName_Red;
+                String yellowTeamName = relTeamName_Yellow;
+                String greenTeamName = relTeamName_Green;
+                String blueTeamName = relTeamName_Blue;
 
                 String redName = RED_TEAM_COLOR_NAME;
                 String blueName = BLUE_TEAM_COLOR_NAME;
@@ -52,18 +173,12 @@ public class RelScoreBoard {
                 ScoreboardManager mgr = Bukkit.getScoreboardManager();
 
                 if (worldname.contains(MainConfigHandler.rushWorld2v2)) {
-                    // 2v2 ScoreBoard
-                    String pinkName = PINK_TEAM_COLOR_NAME;
-                    String aquaName = AQUA_TEAM_COLOR_NAME;
-                    String grayName = GRAY_TEAM_COLOR_NAME;
-                    String whiteName = WHITE_TEAM_COLOR_NAME;
+                    
 
-                    String PinkTeamName = relTeamName_Pink;
-                    String AquaTeamName = relTeamName_Aqua;
-                    String GrayTeamName = relTeamName_Gray;
-                    String WhiteTeamName = relTeamName_White;
-
-                    int gameTimeLeft = game.getTimeLeft();
+                    String pinkTeamName = relTeamName_Pink;
+                    String aquaTeamName = relTeamName_Aqua;
+                    String grayTeamName = relTeamName_Gray;
+                    String whiteTeamName = relTeamName_White;
 
                     String redTeamStat = "redTeamStat: ERROR";
                     String yellowTeamStat = "yellowTeamStat: ERROR";
@@ -85,15 +200,15 @@ public class RelScoreBoard {
                     String grayTeamIsMe;
                     String whiteTeamIsMe;
 
-                    Team red = game.getTeam(RedTeamName);
-                    Team blue = game.getTeam(BlueTeamName);
-                    Team green = game.getTeam(GreenTeamName);
-                    Team yellow = game.getTeam(YellowTeamName);
+                    Team red = game.getTeam(redTeamName);
+                    Team blue = game.getTeam(blueTeamName);
+                    Team green = game.getTeam(greenTeamName);
+                    Team yellow = game.getTeam(yellowTeamName);
 
-                    Team pink = game.getTeam(PinkTeamName);
-                    Team aqua = game.getTeam(AquaTeamName);
-                    Team gray = game.getTeam(GrayTeamName);
-                    Team white = game.getTeam(WhiteTeamName);
+                    Team pink = game.getTeam(pinkTeamName);
+                    Team aqua = game.getTeam(aquaTeamName);
+                    Team gray = game.getTeam(grayTeamName);
+                    Team white = game.getTeam(whiteTeamName);
 
                     Team playerTeam = game.getPlayerTeam(player);
 
@@ -104,7 +219,7 @@ public class RelScoreBoard {
                         Material blockType = green.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             greenTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", green.getPlayers().size() + "");
-                        } else if (green.getPlayers().size() >= 1) {
+                        } else if (green.getPlayers().size() > 0) {
                             greenTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", green.getPlayers().size() + "");
                         } else {
                             greenTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", green.getPlayers().size() + "");
@@ -115,7 +230,7 @@ public class RelScoreBoard {
                         Material blockType = red.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             redTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", red.getPlayers().size() + "");
-                        } else if (red.getPlayers().size() >= 1) {
+                        } else if (red.getPlayers().size() > 0) {
                             redTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", red.getPlayers().size() + "");
                         } else {
                             redTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", red.getPlayers().size() + "");
@@ -126,7 +241,7 @@ public class RelScoreBoard {
                         Material blockType = blue.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             blueTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", blue.getPlayers().size() + "");
-                        } else if (blue.getPlayers().size() >= 1) {
+                        } else if (blue.getPlayers().size() > 0) {
                             blueTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", blue.getPlayers().size() + "");
                         } else {
                             blueTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", blue.getPlayers().size() + "");
@@ -137,7 +252,7 @@ public class RelScoreBoard {
                         Material blockType = yellow.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             yellowTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", yellow.getPlayers().size() + "");
-                        } else if (yellow.getPlayers().size() >= 1) {
+                        } else if (yellow.getPlayers().size() > 0) {
                             yellowTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", yellow.getPlayers().size() + "");
                         } else {
                             yellowTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", yellow.getPlayers().size() + "");
@@ -149,7 +264,7 @@ public class RelScoreBoard {
                         Material blockType = pink.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             pinkTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", pink.getPlayers().size() + "");
-                        } else if (pink.getPlayers().size() >= 1) {
+                        } else if (pink.getPlayers().size() > 0) {
                             pinkTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", pink.getPlayers().size() + "");
                         } else {
                             pinkTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", pink.getPlayers().size() + "");
@@ -160,7 +275,7 @@ public class RelScoreBoard {
                         Material blockType = aqua.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             aquaTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", aqua.getPlayers().size() + "");
-                        } else if (aqua.getPlayers().size() >= 1) {
+                        } else if (aqua.getPlayers().size() > 0) {
                             aquaTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", aqua.getPlayers().size() + "");
                         } else {
                             aquaTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", aqua.getPlayers().size() + "");
@@ -171,7 +286,7 @@ public class RelScoreBoard {
                         Material blockType = gray.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             grayTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", gray.getPlayers().size() + "");
-                        } else if (gray.getPlayers().size() >= 1) {
+                        } else if (gray.getPlayers().size() > 0) {
                             grayTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", gray.getPlayers().size() + "");
                         } else {
                             grayTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", gray.getPlayers().size() + "");
@@ -182,7 +297,7 @@ public class RelScoreBoard {
                         Material blockType = white.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             whiteTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", white.getPlayers().size() + "");
-                        } else if (white.getPlayers().size() >= 1) {
+                        } else if (white.getPlayers().size() > 0) {
                             whiteTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", white.getPlayers().size() + "");
                         } else {
                             whiteTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", white.getPlayers().size() + "");
@@ -214,25 +329,25 @@ public class RelScoreBoard {
                         yellowTeamIsMe = meanNotYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     }
 
-                    if (pinkName.equals(playerTeam.getColor().name())) {
+                    if (PINK_TEAM_COLOR_NAME.equals(playerTeam.getColor().name())) {
                         pinkTeamIsMe = meanYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     } else {
                         pinkTeamIsMe = meanNotYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     }
 
-                    if (aquaName.equals(playerTeam.getColor().name())) {
+                    if (AQUA_TEAM_COLOR_NAME.equals(playerTeam.getColor().name())) {
                         aquaTeamIsMe = meanYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     } else {
                         aquaTeamIsMe = meanNotYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     }
 
-                    if (grayName.equals(playerTeam.getColor().name())) {
+                    if (GRAY_TEAM_COLOR_NAME.equals(playerTeam.getColor().name())) {
                         grayTeamIsMe = meanYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     } else {
                         grayTeamIsMe = meanNotYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     }
 
-                    if (whiteName.equals(playerTeam.getColor().name())) {
+                    if (WHITE_TEAM_COLOR_NAME.equals(playerTeam.getColor().name())) {
                         whiteTeamIsMe = meanYou.replace("{teamColor}", playerTeam.getChatColor().toString());
                     } else {
                         whiteTeamIsMe = meanNotYou.replace("{teamColor}", playerTeam.getChatColor().toString());
@@ -243,19 +358,19 @@ public class RelScoreBoard {
                     int greenTeamPlayer = 0;
                     int yellowTeamPlayer = 0;
 
-                    if (red.getPlayers() != null && red.getPlayers().size() >= 1){
+                    if (red.getPlayers() != null && red.getPlayers().size() > 0){
                         redTeamPlayer = red.getPlayers().size();
                     }
 
-                    if (blue.getPlayers() != null && blue.getPlayers().size() >= 1){
+                    if (blue.getPlayers() != null && blue.getPlayers().size() > 0){
                         blueTeamPlayer = blue.getPlayers().size();
                     }
 
-                    if (green.getPlayers() != null && green.getPlayers().size() >= 1){
+                    if (green.getPlayers() != null && green.getPlayers().size() > 0){
                         greenTeamPlayer = green.getPlayers().size();
                     }
 
-                    if (yellow.getPlayers() != null && yellow.getPlayers().size() >= 1){
+                    if (yellow.getPlayers() != null && yellow.getPlayers().size() > 0){
                         yellowTeamPlayer = yellow.getPlayers().size();
                     }
 
@@ -264,34 +379,34 @@ public class RelScoreBoard {
                     int grayTeamPlayer = 0;
                     int whiteTeamPlayer = 0;
 
-                    if (pink.getPlayers() != null && pink.getPlayers().size() >= 1){
+                    if (pink.getPlayers() != null && pink.getPlayers().size() > 0){
                         pinkTeamPlayer = pink.getPlayers().size();
                     }
 
-                    if (aqua.getPlayers() != null && aqua.getPlayers().size() >= 1){
+                    if (aqua.getPlayers() != null && aqua.getPlayers().size() > 0){
                         aquaTeamPlayer = aqua.getPlayers().size();
                     }
 
-                    if (gray.getPlayers() != null && gray.getPlayers().size() >= 1){
+                    if (gray.getPlayers() != null && gray.getPlayers().size() > 0){
                         grayTeamPlayer = gray.getPlayers().size();
                     }
 
 
-                    if (white.getPlayers() != null && white.getPlayers().size() >= 1){
+                    if (white.getPlayers() != null && white.getPlayers().size() > 0){
                         whiteTeamPlayer = white.getPlayers().size();
                     }
 
-                    Map<Integer, String> ScoreBoard2v2LineReal = new HashMap<>();
+                    Map<Integer, String> ScoreBoard2v2LineReal = new HashMap<>(17);
 
                     for (Map.Entry<Integer, String> entry : ScoreBoard2v2Line.entrySet()) {
                         int score = entry.getKey();
                         String string = entry.getValue();
 
                         String stringReal = string
-                                .replace("{PinkTeamName}", PinkTeamName)
-                                .replace("{AquaTeamName}", AquaTeamName)
-                                .replace("{GrayTeamName}", GrayTeamName)
-                                .replace("{WhiteTeamName}", WhiteTeamName)
+                                .replace("{pinkTeamName}", pinkTeamName)
+                                .replace("{aquaTeamName}", aquaTeamName)
+                                .replace("{grayTeamName}", grayTeamName)
+                                .replace("{whiteTeamName}", whiteTeamName)
 
                                 .replace("{pinkTeamStat}", pinkTeamStat)
                                 .replace("{aquaTeamStat}", aquaTeamStat)
@@ -308,10 +423,10 @@ public class RelScoreBoard {
                                 .replace("{grayTeamPlayer}",grayTeamPlayer + "")
                                 .replace("{whiteTeamPlayer}",whiteTeamPlayer + "")
 
-                                .replace("{RedTeamName}", RedTeamName)
-                                .replace("{BlueTeamName}", BlueTeamName)
-                                .replace("{GreenTeamName}", GreenTeamName)
-                                .replace("{YellowTeamName}", YellowTeamName)
+                                .replace("{redTeamName}", redTeamName)
+                                .replace("{blueTeamName}", blueTeamName)
+                                .replace("{greenTeamName}", greenTeamName)
+                                .replace("{yellowTeamName}", yellowTeamName)
 
                                 .replace("{redTeamStat}", redTeamStat)
                                 .replace("{blueTeamStat}", blueTeamStat)
@@ -346,6 +461,8 @@ public class RelScoreBoard {
                                 .replace("{game}",game.getName())
                                 .replace("{region}",game.getRegionName())
                                 .replace("{world}",game.getRegion().getWorld().getName())
+                                .replace("{LastTaskName}",lastTaskName)
+                                .replace("{LastTaskTimeLeft}", LastTaskTimeLeftText)
                                 ;
 
 
@@ -397,10 +514,8 @@ public class RelScoreBoard {
                     player.setScoreboard(scoreboard);
 
                 } else if (worldname.contains(MainConfigHandler.rushWorld4v4)) {
-                    // 4v4 ScoreBoard
+                    
 
-
-                    int gameTimeLeft = game.getTimeLeft();
                     String redTeamStat = "redTeamStat: ERROR";
                     String yellowTeamStat = "yellowTeamStat: ERROR";
                     String greenTeamStat = "greenTeamStat: ERROR";
@@ -411,10 +526,10 @@ public class RelScoreBoard {
                     String greenTeamIsMe;
                     String blueTeamIsMe;
 
-                    Team red = game.getTeam(RedTeamName);
-                    Team blue = game.getTeam(BlueTeamName);
-                    Team green = game.getTeam(GreenTeamName);
-                    Team yellow = game.getTeam(YellowTeamName);
+                    Team red = game.getTeam(redTeamName);
+                    Team blue = game.getTeam(blueTeamName);
+                    Team green = game.getTeam(greenTeamName);
+                    Team yellow = game.getTeam(yellowTeamName);
                     Team playerTeam = game.getPlayerTeam(player);
 
                     Scoreboard scoreboard = mgr.getNewScoreboard();
@@ -424,7 +539,7 @@ public class RelScoreBoard {
                         Material blockType = green.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             greenTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", green.getPlayers().size() + "");
-                        } else if (green.getPlayers().size() >= 1) {
+                        } else if (green.getPlayers().size() > 0) {
                             greenTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", green.getPlayers().size() + "");
                         } else {
                             greenTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", green.getPlayers().size() + "");
@@ -435,7 +550,7 @@ public class RelScoreBoard {
                         Material blockType = red.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             redTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", red.getPlayers().size() + "");
-                        } else if (red.getPlayers().size() >= 1) {
+                        } else if (red.getPlayers().size() > 0) {
                             redTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", red.getPlayers().size() + "");
                         } else {
                             redTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", red.getPlayers().size() + "");
@@ -446,7 +561,7 @@ public class RelScoreBoard {
                         Material blockType = blue.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             blueTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", blue.getPlayers().size() + "");
-                        } else if (blue.getPlayers().size() >= 1) {
+                        } else if (blue.getPlayers().size() > 0) {
                             blueTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", blue.getPlayers().size() + "");
                         } else {
                             blueTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", blue.getPlayers().size() + "");
@@ -457,7 +572,7 @@ public class RelScoreBoard {
                         Material blockType = yellow.getTargetHeadBlock().getBlock().getType();
                         if (blockType != null && blockType == bed) {
                             yellowTeamStat = MainConfigHandler.meanTeamBedYes.replace("{aliveCount}", yellow.getPlayers().size() + "");
-                        } else if (yellow.getPlayers().size() >= 1) {
+                        } else if (yellow.getPlayers().size() > 0) {
                             yellowTeamStat = MainConfigHandler.meanTeamBedNo.replace("{aliveCount}", yellow.getPlayers().size() + "");
                         } else {
                             yellowTeamStat = MainConfigHandler.meanTeamNone.replace("{aliveCount}", yellow.getPlayers().size() + "");
@@ -494,23 +609,23 @@ public class RelScoreBoard {
                     int greenTeamPlayer = 0;
                     int yellowTeamPlayer = 0;
 
-                    if (red.getPlayers() != null && red.getPlayers().size() >= 1){
+                    if (red.getPlayers() != null && red.getPlayers().size() > 0){
                         redTeamPlayer = red.getPlayers().size();
                     }
 
-                    if (blue.getPlayers() != null && blue.getPlayers().size() >= 1){
+                    if (blue.getPlayers() != null && blue.getPlayers().size() > 0){
                         blueTeamPlayer = blue.getPlayers().size();
                     }
 
-                    if (green.getPlayers() != null && green.getPlayers().size() >= 1){
+                    if (green.getPlayers() != null && green.getPlayers().size() > 0){
                         greenTeamPlayer = green.getPlayers().size();
                     }
 
-                    if (yellow.getPlayers() != null && yellow.getPlayers().size() >= 1){
+                    if (yellow.getPlayers() != null && yellow.getPlayers().size() > 0){
                         yellowTeamPlayer = yellow.getPlayers().size();
                     }
 
-                    Map<Integer, String> ScoreBoard4v4LineReal = new HashMap<>();
+                    Map<Integer, String> ScoreBoard4v4LineReal = new HashMap<>(17);
 
                     for (Map.Entry<Integer, String> entry : ScoreBoard4v4Line.entrySet()) {
                         int score = entry.getKey();
@@ -518,10 +633,10 @@ public class RelScoreBoard {
 
                         String stringReal = string
 
-                                .replace("{RedTeamName}", RedTeamName)
-                                .replace("{BlueTeamName}", BlueTeamName)
-                                .replace("{GreenTeamName}", GreenTeamName)
-                                .replace("{YellowTeamName}", YellowTeamName)
+                                .replace("{redTeamName}", redTeamName)
+                                .replace("{blueTeamName}", blueTeamName)
+                                .replace("{greenTeamName}", greenTeamName)
+                                .replace("{yellowTeamName}", yellowTeamName)
 
                                 .replace("{redTeamStat}", redTeamStat)
                                 .replace("{blueTeamStat}", blueTeamStat)
@@ -556,6 +671,8 @@ public class RelScoreBoard {
                                 .replace("{game}",game.getName())
                                 .replace("{region}",game.getRegionName())
                                 .replace("{world}",game.getRegion().getWorld().getName())
+                                .replace("{LastTaskName}",lastTaskName)
+                                .replace("{LastTaskTimeLeft}", LastTaskTimeLeftText)
                                 ;
                         ScoreBoard4v4LineReal.put(score, stringReal);
                     }

@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
 import github.tsffish.bedwarskit.config.MainConfigHandler;
-import github.tsffish.bedwarskit.util.RelTeamSeletorMenu;
 import io.github.bedwarsrel.events.BedwarsOpenTeamSelectionEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,16 +14,15 @@ public class RelTeamSeletor implements Listener {
     public void on(BedwarsOpenTeamSelectionEvent event){
         event.setCancelled(true);
         Player player = (Player)event.getPlayer();
-        if (player == null || player.isOnline()) return;
+        if (player == null || !player.isOnline()) return;
         String worldName = player.getWorld().getName();
             if (worldName.contains(MainConfigHandler.rushWorld)) {
                 if (worldName.contains(MainConfigHandler.rushWorld2v2)) {
                     event.setCancelled(true);
                     loadTeamSeletorMenu2v2(player);
                 } else if (worldName.contains(MainConfigHandler.rushWorld4v4)) {
-                    loadTeamSeletorMenu4v4(player);
                     event.setCancelled(true);
-                    player.openInventory(RelTeamSeletorMenu.TeamSeletorMenu4v4);
+                    loadTeamSeletorMenu4v4(player);
                 }
         }
     }

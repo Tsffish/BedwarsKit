@@ -2,26 +2,26 @@ package github.tsffish.bedwarskit.listener.bedwarsrel;
 
 import io.github.bedwarsrel.BedwarsRel;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RelItemShop extends JavaPlugin {
+import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+
+public class RelItemShop {
 
     public static Inventory ItemShop2v2Menu;
     public static FileConfiguration shopConfig = BedwarsRel.getInstance().getShopConfig();
     public static void openShop(Player player) {
         ItemShop2v2Menu = Bukkit.getServer().createInventory(null,6*9,"Shop");
         for (String category : shopConfig.getConfigurationSection("shop").getKeys(false)) {
-            // Skip categories with ignored properties
+            
             if (category.equalsIgnoreCase("schema-version") || category.equalsIgnoreCase("order")) {
                 continue;
             }
@@ -51,9 +51,9 @@ public class RelItemShop extends JavaPlugin {
         meta.setDisplayName(itemName);
 
         List<String> lore = shopConfig.getStringList(lorePath);
-        List<String> formattedLore = new ArrayList<>();
+        List<String> formattedLore = new ArrayList<>(10);
         for (String line : lore) {
-            formattedLore.add(ChatColor.translateAlternateColorCodes('&', line));
+            formattedLore.add(t(line));
         }
         meta.setLore(formattedLore);
 

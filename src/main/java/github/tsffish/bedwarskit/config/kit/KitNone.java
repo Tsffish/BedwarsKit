@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.config.kit;
 
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -12,15 +11,14 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class KitNone
 {
-    public static String kitName;
     public static String description;
-    public static ItemStack kitItemInMenu;
+    static ItemStack kitItemInMenu;
         public static void loadKit() {
         kitItemInMenu = new ItemStack(KitNoneItemType, KitNoneItemAmount);
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
-            List<String> lore = new ArrayList<>();
+            List<String> lore = new ArrayList<>(8);
 
-            for (String s : KitDefaultItemLore){
+            for (String s : KitNoneItemLore){
                 lore.add(t(s));
             }
 
@@ -30,10 +28,6 @@ public class KitNone
 
         kitItemInMenu.setItemMeta(kitItemMeta);
 
-        kitName = KitNoneName;
-        description = KitNoneDescription;
+            description = KitNoneDescription;
     }
-    public static void setKit(Player player)
-    {
     }
-}

@@ -22,7 +22,7 @@ public class RelCheckSword {
         Material ironSword = Material.IRON_SWORD;
         Material diamondSword = Material.DIAMOND_SWORD;
         ItemStack ws = new ItemStack(woodSword);
-if(!isCM && !isSP && !Objects.equals(playerKitList.get(player), "None")) {
+        if(!isCM && !isSP && !Objects.equals(playerKitList.get(player), "None")) {
 
     if (pi.contains(woodSword)) {
         if (pi.contains(stoneSword) || pi.contains(ironSword) || pi.contains(diamondSword)) {

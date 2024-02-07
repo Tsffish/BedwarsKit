@@ -19,11 +19,11 @@ public class RelShopLevelUp {
         loadLevelUpInv4v4();
     }
 
-    public static void loadLevelUpInv2v2(){
+    private static void loadLevelUpInv2v2(){
 
-         i2 = Bukkit.getServer().createInventory(null, 9, MainConfigHandler.shopLevelup + "");
+         i2 = Bukkit.getServer().createInventory(null, 9, MainConfigHandler.shopLevelup);
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = new ArrayList<>(6);
         lore.add("ERROR");
 
         ItemStack sharp1 = new ItemStack(MainConfigHandler.LevelupItemType, 1);
@@ -77,15 +77,15 @@ public class RelShopLevelUp {
         i2.addItem(prot4);
 
     }
-    public static void loadLevelUpInv4v4(){
+    private static void loadLevelUpInv4v4(){
 
-        i4 = Bukkit.getServer().createInventory(null, 9, MainConfigHandler.shopLevelup + "");
+        i4 = Bukkit.getServer().createInventory(null, 9, MainConfigHandler.shopLevelup);
 
         if (i4 == null){
             return;
         }
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = new ArrayList<>(6);
         lore.add("ERROR");
 
         ItemStack sharp1 = new ItemStack(MainConfigHandler.LevelupItemType, 1);

@@ -1,40 +1,61 @@
 package github.tsffish.bedwarskit.listener;
 
+import github.tsffish.bedwarskit.config.MainConfigHandler;
+import github.tsffish.bedwarskit.listener.bedwarsrel.RelPlayerDeath;
+import io.github.bedwarsrel.BedwarsRel;
+import io.github.bedwarsrel.game.Game;
+import io.github.bedwarsrel.game.GameManager;
+import io.github.bedwarsrel.game.GameState;
+import io.github.bedwarsrel.game.Team;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.util.Vector;
 
 import java.util.Objects;
 
 import static github.tsffish.bedwarskit.config.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class PlayerDamageHandler implements Listener {
 
     @EventHandler
     public void on(EntityDamageByEntityEvent e) {
+        GameManager gameManager = BedwarsRel.getInstance().getGameManager();
+
+
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
             Player damagedPlayer = (Player) e.getEntity();
             Player attackingPlayer = (Player) e.getDamager();
 
+            if (!attackingPlayer.getWorld().getName().contains(rushWorld)){
+                if (gameManager.getGameOfPlayer(attackingPlayer) == null || gameManager.getGameOfPlayer(attackingPlayer).getState() != GameState.RUNNING){
+                    e.setCancelled(true);
+                    return;
+                }
+            }
+
             if (damagefb_attackBlood){
+                int parttype = MainConfigHandler.damagefb_attackBloodType;
           switch (damagefb_attackBloodMode.toLowerCase()) {
                 case "single":
-                    damagedPlayer.getWorld().playEffect(damagedPlayer.getLocation(), Effect.STEP_SOUND, 152);
-            break;
+                    damagedPlayer.getWorld().playEffect(damagedPlayer.getLocation(), Effect.STEP_SOUND, parttype);
+                    break;
                case "player":
-                   damagedPlayer.getWorld().playEffect(damagedPlayer.getLocation(), Effect.STEP_SOUND, 152);
-                   damagedPlayer.getWorld().playEffect(damagedPlayer.getLocation().add(1, 0, 0), Effect.STEP_SOUND, 152);
+                   damagedPlayer.getWorld().playEffect(damagedPlayer.getLocation(), Effect.STEP_SOUND, parttype);
+                   damagedPlayer.getWorld().playEffect(damagedPlayer.getLocation().add(1, 0, 0), Effect.STEP_SOUND, parttype);
                    break;
                case "box":
                    for (int x = -1; x <= 1; x++) {
                        for (int y = -1; y <= 1; y++) {
                            for (int z = -1; z <= 1; z++) {
                                Location location = damagedPlayer.getLocation().add(x, y, z);
-                               damagedPlayer.getWorld().playEffect(location, Effect.STEP_SOUND, 152);
+                               damagedPlayer.getWorld().playEffect(location, Effect.STEP_SOUND, parttype);
                            }
                         }
                    }
@@ -44,18 +65,74 @@ public class PlayerDamageHandler implements Listener {
             }
             }
 
-            if (damagefb_Title){
-                String damagefb_attackTitleReal;
+            if (damagefb_attackmess){
                 double damage = e.getDamage();
-                if (Objects.equals(damagefb_attackTitle, "")) {
-                    damagefb_attackTitleReal = " ";
-                }else {
-                    damagefb_attackTitleReal = damagefb_attackTitle.replace("{damage}",damage + "");
+                if (!Objects.equals(damagefb_attackchat, "")) {
+                    damagedPlayer.sendMessage(t(MainConfigHandler.damagefb_attackchat).replace("{damage}",damage + ""));
                 }
-            String damagefb_attackSubTitleReal = damagefb_attackSubTitle.replace("{damage}",damage + "");
-            // 向攻击别人的玩家发送伤害值
-            attackingPlayer.sendTitle(t(damagefb_attackTitleReal) ,t(damagefb_attackSubTitleReal));
+                if (!Objects.equals(MainConfigHandler.damagefb_attackTitle, "")) {
+                    String titleReal = t(MainConfigHandler.damagefb_attackTitle).replace("{damage}",damage + "");
+                    if (!Objects.equals(MainConfigHandler.damagefb_attackSubTitle, "")) {
+                        String subtitleReal = t(MainConfigHandler.damagefb_attackSubTitle).replace("{damage}",damage + "");
+
+                        damagedPlayer.sendTitle(titleReal, subtitleReal);
+                    }
+                } else if (!Objects.equals(MainConfigHandler.damagefb_attackSubTitle, "")) {
+                    String titleReal = " ";
+                    String subtitleReal = t(damagefb_attackSubTitle).replace("{damage}",damage + "");
+
+                    damagedPlayer.sendTitle(titleReal, subtitleReal);
+                }
+                if (!Objects.equals(MainConfigHandler.damagefb_attackactionbar, "")) {
+                    sendActionBar(damagedPlayer, t(damagefb_attackactionbar).replace("{damage}",damage + ""));
+                }
+            }
+
+            if  (damagedPlayer.getHealth() - e.getFinalDamage() <= 0 ){
+                Game game = gameManager.getGameOfPlayer(damagedPlayer);
+                if (game == null)return;
+                Team team = game.getPlayerTeam(damagedPlayer);
+                if (preventloadworld) {
+                    damagedPlayer.setHealth(0.5);
+                    Location loc = team.getSpawnLocation();
+                    Vector v = damagedPlayer.getLocation().getDirection();
+                    loc.setDirection(v);
+                    damagedPlayer.teleport(loc);
+                    damagedPlayer.setFallDistance(0);
+                    RelPlayerDeath.deathplayer(damagedPlayer ,0L);
+                }
+
             }
         }
+    }
+
+
+    @EventHandler
+    public void on(EntityDamageEvent event){
+
+        GameManager gameManager = BedwarsRel.getInstance().getGameManager();
+        if (gameManager == null) return;
+
+        if (event.getEntity() instanceof Player){
+            Player player = (Player) event.getEntity();
+
+            Game game = gameManager.getGameOfPlayer(player);
+            if (game == null)return;
+            Team team = game.getPlayerTeam(player);
+            EntityDamageEvent.DamageCause cause = event.getCause();
+            if (cause == EntityDamageEvent.DamageCause.VOID) {
+                if (preventloadworld) {
+                    player.setHealth(0.5);
+                    Location loc = team.getSpawnLocation();
+                    Vector v = player.getLocation().getDirection();
+                    loc.setDirection(v);
+                    player.teleport(loc);
+                    player.setFallDistance(0);
+                    RelPlayerDeath.deathplayer(player ,0L);
+                }
+            }
+        }
+
+
     }
 }

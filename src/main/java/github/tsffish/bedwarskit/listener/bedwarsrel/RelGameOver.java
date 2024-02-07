@@ -4,11 +4,13 @@ import github.tsffish.bedwarskit.util.RelTeamEnchant;
 import io.github.bedwarsrel.events.BedwarsGameOverEvent;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.Team;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import static github.tsffish.bedwarskit.util.RelCurrentStat.sdps;
 
@@ -17,12 +19,22 @@ public class RelGameOver implements Listener {
     @EventHandler
     public void on(BedwarsGameOverEvent event) {
 
+
+
         for (Player p : event.getGame().getPlayers()){
+            if (p != null){
             sdps(p);
+            }
         }
 
         Game game = event.getGame();
-        HashMap<String, Team> teams = game.getTeams();
+
+        World world = game.getRegion().getWorld();
+        WorldBorder worldBorder = world.getWorldBorder();
+        worldBorder.setCenter(game.getLobby());
+        worldBorder.setSize(9999);
+
+        Map<String, Team> teams = game.getTeams();
 
         String mapName = game.getRegion().getName();
         for (Team team : teams.values()) {

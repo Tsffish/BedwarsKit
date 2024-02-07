@@ -15,16 +15,19 @@ import java.util.List;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelTeamSeletorMenu {
-    public static Inventory TeamSeletorMenu2v2;
-    public static Inventory TeamSeletorMenu4v4;
+    private static Inventory TeamSeletorMenu2v2;
+    private static Inventory TeamSeletorMenu4v4;
     public static void loadTeamSeletorMenu2v2(Player player){
 
         Game game = BedwarsRel.getInstance().getGameManager().getGameOfPlayer(player);
 
         String gameName = game.getName();
 
-        TeamSeletorMenu2v2 = Bukkit.createInventory(null,3 * 9,"选择队伍 - " + gameName);
-
+        if (TeamSeletorMenu2v2 == null) {
+            TeamSeletorMenu2v2 = Bukkit.createInventory(null, 3 * 9, "选择队伍 - " + gameName);
+        }else {
+            TeamSeletorMenu2v2.clear();
+        }
         List<String> lore = new ArrayList<>();
         lore.add("ERROR");
 

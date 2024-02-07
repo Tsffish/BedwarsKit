@@ -10,6 +10,10 @@ public class ErrorLogger {
     public static void le(String string){
         Logger logger = Bukkit.getLogger();
         logger.warning(pluginNameConsole + " " + string);
+    }
+    public static void le(Exception string){
+        Logger logger = Bukkit.getLogger();
+        logger.warning(pluginNameConsole + " " + string);
 
     }
 }

@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.config.kit;
 
-import github.tsffish.bedwarskit.config.KitConfigHandler;
 import github.tsffish.bedwarskit.util.RelArmorColor;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
@@ -15,37 +14,34 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class KitDefault {
-    public static String kitName;
+    private static final int EffectTime = 999999;
     public static String description;
-    public static Material helmetItemType;
-    public static Material chestItemType;
-    public static Material legItemType;
-    public static Material bootItemType;
-    public static int helmetItemAmount;
-    public static int chestItemAmount;
-    public static int legItemAmount;
-    public static int bootItemAmount;
-    public static boolean coloredleatherArmor;
-    public static Map<Material, Integer> invList = new HashMap<>();
-    public static ItemStack helmetItem;
-    public static ItemStack chestItem;
-    public static ItemStack legItem;
-    public static ItemStack bootItem;
-    public static ItemStack kitItemInMenu;
+    private static Material helmetItemType;
+    private static Material chestItemType;
+    private static Material legItemType;
+    private static Material bootItemType;
+    private static int helmetItemAmount;
+    private static int chestItemAmount;
+    private static int legItemAmount;
+    private static int bootItemAmount;
+    private static boolean coloredleatherArmor;
+    private static ItemStack helmetItem;
+    private static ItemStack chestItem;
+    private static ItemStack legItem;
+    private static ItemStack bootItem;
+    static ItemStack kitItemInMenu;
 
     public static void loadKit(boolean Colored) {
         kitItemInMenu = new ItemStack(KitDefaultItemType, KitDefaultItemAmount);
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = new ArrayList<>(8);
 
         for (String s : KitDefaultItemLore){
             lore.add(t(s));
@@ -57,7 +53,6 @@ public class KitDefault {
 
         kitItemInMenu.setItemMeta(kitItemMeta);
 
-        kitName = KitDefaultName;
         description = KitDefaultDescription;
 
         helmetItemAmount = 1;
@@ -88,12 +83,12 @@ public class KitDefault {
         applyKitBoost(player, Colored);
     }
 
-    public static void applyKitBoost(Player player, boolean Colored) {
+    private static void applyKitBoost(Player player, boolean Colored) {
         coloredleatherArmor = Colored;
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
         PlayerInventory playerInventory = player.getInventory();
         if (KitDefault_Boost_GiveSpeed_enable) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, KitDefault_Boost_GiveSpeed_level), true);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, EffectTime, KitDefault_Boost_GiveSpeed_level), true);
         }
         if (gameManager == null) return;
 

@@ -6,6 +6,7 @@ import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
 import io.github.bedwarsrel.game.Team;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -13,10 +14,10 @@ import java.util.Map;
 
 public class RelTeamEnchant {
 
-    public static Map<String, String[]> teamEnchantListSword = new HashMap<>();
-    public static Map<String, String[]> teamEnchantListProt = new HashMap<>();
+    public static Map<String, String[]> teamEnchantListSword = new HashMap<>(4);
+    public static Map<String, String[]> teamEnchantListProt = new HashMap<>(4);
     public static void loadMapTeam(long time) {
-        Plugin plugin = Main.getProvidingPlugin(Main.class);
+        Plugin plugin = JavaPlugin.getProvidingPlugin(Main.class);
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -38,7 +39,7 @@ public class RelTeamEnchant {
                 }
 
             }
-            // End
+            
         }.runTaskLater(plugin, time);
     }
 }

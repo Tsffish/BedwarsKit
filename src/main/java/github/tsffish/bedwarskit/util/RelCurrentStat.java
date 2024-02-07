@@ -10,15 +10,15 @@ import java.util.Map;
 import static github.tsffish.bedwarskit.util.misc.ErrorLogger.le;
 
 public class RelCurrentStat {
-    public static Map<Player, Integer> playerKill = new HashMap<>();
-    public static Map<Player, Integer> playerFKill = new HashMap<>();
-    public static Map<Player, Integer> playerDeath = new HashMap<>();
-    public static Map<Player, Integer> playerBreakBed = new HashMap<>();
-    public static Map<Player, Double> playerKD = new HashMap<>();
+    public static Map<Player, Integer> playerKill = new HashMap<>(24);
+    public static Map<Player, Integer> playerFKill = new HashMap<>(24);
+    public static Map<Player, Integer> playerDeath = new HashMap<>(24);
+    public static Map<Player, Integer> playerBreakBed = new HashMap<>(24);
+    public static Map<Player, Double> playerKD = new HashMap<>(24);
 
-    public static void ups(Player player, String pd, Integer value){
-        // Update Player Stat
-        if (player == null || pd == null || value == null){
+    public static void ups(Player player, String pd, int value){
+        
+        if (player == null || pd == null){
             return;
         }
 
@@ -44,7 +44,7 @@ public class RelCurrentStat {
                 break;
         }
 
-        // 计算KD
+        
         int kills = playerKill.getOrDefault(player, 0);
         int deaths = playerDeath.getOrDefault(player, 0);
         double kd = deaths != 0 ? kills / (double) deaths : kills;
@@ -52,7 +52,7 @@ public class RelCurrentStat {
     }
 
     public static void rps(Player player){
-        // Remove Player Stat
+        
         playerKill.remove(player);
         playerFKill.remove(player);
         playerDeath.remove(player);
@@ -61,7 +61,7 @@ public class RelCurrentStat {
     }
 
     public static void sdps(Player player){
-        // Set Default Player Stat
+        
         playerKill.put(player, 0);
         playerFKill.put(player, 0);
         playerDeath.put(player, 0);
@@ -70,9 +70,8 @@ public class RelCurrentStat {
     }
 
 
-    // GameIsStarted
 
-    public static List<Player> playerIsWaiting = new ArrayList<>();
+    public static List<Player> playerIsOut = new ArrayList<>(24);
 
 
 }

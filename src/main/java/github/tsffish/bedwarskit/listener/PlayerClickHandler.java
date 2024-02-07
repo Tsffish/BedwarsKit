@@ -1,8 +1,12 @@
-package github.tsffish.bedwarskit.listener.bedwarsrel;
+package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.config.MainConfigHandler;
 import github.tsffish.bedwarskit.config.kit.Menu;
 import github.tsffish.bedwarskit.config.kit.MenuItem;
+import io.github.bedwarsrel.BedwarsRel;
+import io.github.bedwarsrel.game.Game;
+import io.github.bedwarsrel.game.GameManager;
+import io.github.bedwarsrel.game.GameState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,13 +22,25 @@ import static github.tsffish.bedwarskit.config.MainConfigHandler.levelupShopOpen
 import static github.tsffish.bedwarskit.config.MainConfigHandler.levelupShopOpenModeEntityName;
 import static github.tsffish.bedwarskit.listener.bedwarsrel.RelItemShop.openShop;
 
-public class RelClickHandler implements Listener
+public class PlayerClickHandler implements Listener
 {
     @EventHandler
     public void on(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         if (player == null || !player.isOnline()) return;
+
+        GameManager gameManager = BedwarsRel.getInstance().getGameManager();
+        if (gameManager == null) {
+            return;
+        }
+        Game game = gameManager.getGameOfPlayer(player);
+        if (game == null) {
+            return;
+        }
+        if (game.getState() != GameState.WAITING){
+            return;
+        }
 
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
         {
@@ -38,6 +54,8 @@ public class RelClickHandler implements Listener
                 player.openInventory(Menu.kitMenu);
             }
     }
+
+
     }
 @EventHandler
         public void on(PlayerInteractEntityEvent event) {
@@ -57,5 +75,4 @@ public class RelClickHandler implements Listener
         }
     }
 }
-
 }

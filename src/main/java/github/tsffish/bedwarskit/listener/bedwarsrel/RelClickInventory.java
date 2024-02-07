@@ -16,9 +16,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.MainConfigHandler.*;
+import static github.tsffish.bedwarskit.listener.bedwarsrel.RelEnchant.*;
 import static github.tsffish.bedwarskit.listener.bedwarsrel.RelPlayerOpenShop.openShop;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.playerKitList;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
@@ -27,16 +29,16 @@ public class RelClickInventory implements Listener {
     @EventHandler
     public void on(InventoryClickEvent event) {
         Inventory ci = event.getClickedInventory();
-        // Current Inventory
+        
 
         if (ci == null) return;
         String cin = ci.getName();
-        // Current Inventory Name
+        
 
         if (cin == null) return;
         ItemStack i = event.getCurrentItem();
 
-        if (i == null) return;
+        if (i == null || i.getType() == Material.AIR) return;
         Material it = i.getType();
 
         if (it == null) return;
@@ -76,22 +78,37 @@ public class RelClickInventory implements Listener {
                 playerKitList.put(player,"None");
                 player.sendMessage(t(meanSelKitSucc));
 
+            } else if (it == KitDefaultlessItemType) {
+                playerKitList.put(player,"Defaultless");
+                player.sendMessage(t(meanSelKitSucc));
+
             }
         }
 
-        if(ci.getName().contains(shopItem)){
+        if(cin.equals(shopLevelup)){
             event.setCancelled(true);
         }
 
-        if (it == Material.BOOK_AND_QUILL && cin.contains(shopItem)) {
-            if(levelupShopDelayOpen){
-                openShop(player, 10L);
-            }else {
-                openShop(player, 1L);
+        if (Objects.equals(shopItem, "")) {
+                if (it == Material.BOOK_AND_QUILL) {
+                    if (levelupShopDelayOpen) {
+                        openShop(player, 8L);
+                    } else {
+                        openShop(player, 0L);
+                    }
+
+                }
+        }else {
+            if (cin.equals(shopItem))
+                if (it == Material.BOOK_AND_QUILL) {
+                if (levelupShopDelayOpen) {
+                    openShop(player, 8L);
+                } else {
+                    openShop(player, 0L);
+                }
+
             }
-
         }
-
         if (it == LevelupItemType && player.getGameMode() == GameMode.CREATIVE){
             event.setCancelled(true);
         }
@@ -114,34 +131,34 @@ public class RelClickInventory implements Listener {
 
                         if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot2) && player.getInventory().contains(Material.DIAMOND, prot2Cost2v2) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("2") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("3") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot2Cost2v2));
-                            RelEnchant.setProt2(team);
+                            setProt2(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "2"});
                             String mess = messLevelUpProt2.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot1) && player.getInventory().contains(Material.DIAMOND, prot1Cost2v2) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("1") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("2") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("3") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot1Cost2v2));
-                            RelEnchant.setProt1(team);
+                            setProt1(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "1"});
                             String mess = messLevelUpProt1.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot3) && player.getInventory().contains(Material.DIAMOND, prot3Cost2v2) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("3") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot3Cost2v2));
-                            RelEnchant.setProt3(team);
+                            setProt3(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "3"});
                             String mess = messLevelUpProt3.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot4) && player.getInventory().contains(Material.DIAMOND, prot4Cost2v2) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot4Cost2v2));
-                            RelEnchant.setProt4(team);
+                            setProt4(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "4"});
                             String mess = messLevelUpProt4.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Sharp1) && player.getInventory().contains(Material.DIAMOND, sharp1Cost2v2) && !Arrays.asList(RelTeamEnchant.teamEnchantListSword.get(mapName)).contains("1")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, sharp1Cost2v2));
-                            RelEnchant.setSharp1(team);
+                            setSharp1(team);
                             RelTeamEnchant.teamEnchantListSword.put(mapName, new String[]{teamName, "1"});
                             String mess = messLevelUpSharp1.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else{
                             String mess = messLevelUpFailed.replace("{player}",player.getName());
                             player.sendMessage(t(mess));
@@ -160,34 +177,34 @@ public class RelClickInventory implements Listener {
 
                         if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot2) && player.getInventory().contains(Material.DIAMOND, prot2Cost4v4) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("2") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("3") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot2Cost4v4));
-                            RelEnchant.setProt2(team);
+                            setProt2(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "2"});
                             String mess = messLevelUpProt2.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot1) && player.getInventory().contains(Material.DIAMOND, prot1Cost4v4) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("1") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("2") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("3") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot1Cost4v4));
-                            RelEnchant.setProt1(team);
+                            setProt1(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "1"});
                             String mess = messLevelUpProt1.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot3) && player.getInventory().contains(Material.DIAMOND, prot3Cost4v4) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("3") && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot3Cost4v4));
-                            RelEnchant.setProt3(team);
+                            setProt3(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "3"});
                             String mess = messLevelUpProt3.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(MainConfigHandler.teamEnchItemName_Prot4) && player.getInventory().contains(Material.DIAMOND, prot4Cost4v4) && !Arrays.asList(RelTeamEnchant.teamEnchantListProt.get(mapName)).contains("4") ) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, prot4Cost4v4));
-                            RelEnchant.setProt4(team);
+                            setProt4(team);
                             RelTeamEnchant.teamEnchantListProt.put(mapName, new String[]{teamName, "4"});
                             String mess = messLevelUpProt4.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else if (clickedItemName.equals(teamEnchItemName_Sharp1) && player.getInventory().contains(Material.DIAMOND, sharp1Cost4v4) && !Arrays.asList(RelTeamEnchant.teamEnchantListSword.get(mapName)).contains("1")) {
                             player.getInventory().removeItem(new ItemStack(Material.DIAMOND, sharp1Cost4v4));
-                            RelEnchant.setSharp1(team);
+                            setSharp1(team);
                             RelTeamEnchant.teamEnchantListSword.put(mapName, new String[]{teamName, "1"});
                             String mess = messLevelUpSharp1.replace("{player}",player.getName());
-                            player.sendMessage(t(mess)); // 替换为您的成功提示信息
+                            player.sendMessage(t(mess)); 
                         } else{
                             String mess = messLevelUpFailed.replace("{player}",player.getName());
                             player.sendMessage(t(mess));

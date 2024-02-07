@@ -1,10 +1,12 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.MainConfigHandler;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
 import io.github.bedwarsrel.game.GameState;
+import io.github.bedwarsrel.game.Team;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -13,24 +15,44 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-/**
- * @author tsffish
- * @see RelBreakBed
- */
 public class RelBreakCorrect implements Listener
 {
-    Plugin plugin = github.tsffish.bedwarskit.Main.getProvidingPlugin(github.tsffish.bedwarskit.Main.class);
+    Plugin plugin = JavaPlugin.getProvidingPlugin(Main.class);
     @EventHandler
     public void on(BlockBreakEvent e)
     {
-        Player player = e.getPlayer();
+        Block block = e.getBlock();
+        if (block == null) return;
         GameManager gm = BedwarsRel.getInstance().getGameManager();
-        if (gm.getGameOfPlayer(player) != null && gm.getGameOfPlayer(player).getState() != GameState.RUNNING)
-        {
-            e.setCancelled(true);
+        Player player = e.getPlayer();
+        if (player == null || !player.isOnline()) return;
+        Game game = gm.getGameOfPlayer(player);
+
+        if (MainConfigHandler.breakCorrect_notInGame) {
+            if (MainConfigHandler.breakCorrect_notInGame_OpBypass){
+            if (player.isOp()){ return;
+            }
+            }
+            String worldName = player.getWorld().getName();
+            for (Game list : gm.getGames()) {
+                if (list.getRegion().getWorld().getName().equals(worldName) && list.getState() != GameState.RUNNING) {
+                    e.setCancelled(true);
+                    break;
+                }
+            }
         }
+
+        if (block.getType().toString().contains("BED")){
+            if (game == null) return;
+
+        Team playerTeam = game.getPlayerTeam(player);
+        if (playerTeam == null) return;
+
+        Block playerTeamBlock = playerTeam.getTargetHeadBlock().getBlock();
+        if (playerTeamBlock == null) return;
 
         if (MainConfigHandler.breakBedCheck) {
             new BukkitRunnable()
@@ -61,5 +83,6 @@ public class RelBreakCorrect implements Listener
             }
             }.runTaskLater(plugin, 1L);
         }
+    }
     }
 }

@@ -1,6 +1,7 @@
 package github.tsffish.bedwarskit.config;
 
 import github.tsffish.bedwarskit.config.kit.KitDefault;
+import github.tsffish.bedwarskit.config.kit.KitDefaultless;
 import github.tsffish.bedwarskit.config.kit.KitNone;
 import org.bukkit.Material;
 
@@ -8,17 +9,17 @@ import static github.tsffish.bedwarskit.config.ErrorConfigHandler.er;
 import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.MainConfigHandler.c;
 import static github.tsffish.bedwarskit.config.kit.MenuItem.loadKitMenuItem;
+import static github.tsffish.bedwarskit.util.misc.ErrorLogger.le;
 import static github.tsffish.bedwarskit.util.misc.InfoLogger.l;
 
-public class KitConfigLoad
+class KitConfigLoad
 {
 
-    public static void loadKitConfig()
+    static void loadKitConfig()
     {
 
         if (c == null){
-            KitConfigDefault.loadKitConfigDefault();
-            l("unable to found config, loading default kit config");
+            le("unable to found kit config!");
             return;
         }
 
@@ -128,6 +129,85 @@ public class KitConfigLoad
         else
         {
             er("KitConfigLoad",KitConfigPath.path_KitDefaultDescription, "vaule is null");
+        }
+
+
+
+
+
+        if (c.getString(KitConfigPath.path_KitDefaultlessItemType) != null)
+        {
+            KitDefaultlessItemType = Material.getMaterial(c.getString(KitConfigPath.path_KitDefaultlessItemType).toUpperCase());
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessItemType, "vaule is null");
+        }
+        if (c.getString(KitConfigPath.path_KitDefaultlessItemAmount) != null)
+        {
+            KitDefaultlessItemAmount = c.getInt(KitConfigPath.path_KitDefaultlessItemAmount);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessItemAmount, "vaule is null");
+        }
+        if (c.getString(KitConfigPath.path_KitDefaultlessItemSlot) != null)
+        {
+            KitDefaultlessItemSlot = c.getInt(KitConfigPath.path_KitDefaultlessItemSlot);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessItemSlot, "vaule is null");
+        }
+        if (c.getString(KitConfigPath.path_KitDefaultlessItemName) != null)
+        {
+            KitDefaultlessItemName = c.getString(KitConfigPath.path_KitDefaultlessItemName);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessItemName, "vaule is null");
+        }
+        if (c.getStringList(KitConfigPath.path_KitDefaultlessItemLore) != null)
+        {
+            KitDefaultlessItemLore = c.getStringList(KitConfigPath.path_KitDefaultlessItemLore);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessItemLore, "vaule is null");
+        }
+
+        if (c.getString(KitConfigPath.path_KitDefaultlessName) != null)
+        {
+            KitDefaultlessName = c.getString(KitConfigPath.path_KitDefaultlessName);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessName, "vaule is null");
+        }
+        if (c.getString(KitConfigPath.path_KitDefaultlessDescription) != null)
+        {
+            KitDefaultlessDescription = c.getString(KitConfigPath.path_KitDefaultlessDescription);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultlessDescription, "vaule is null");
+        }
+
+        if (c.getString(KitConfigPath.path_KitDefaultless_Boost_GiveSpeed_enable) != null)
+        {
+            KitDefaultless_Boost_GiveSpeed_enable = c.getBoolean(KitConfigPath.path_KitDefaultless_Boost_GiveSpeed_enable);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultless_Boost_GiveSpeed_enable, "vaule is null");
+        }
+        if (c.getString(KitConfigPath.path_KitDefaultless_Boost_GiveSpeed_level) != null)
+        {
+            KitDefaultless_Boost_GiveSpeed_level = c.getInt(KitConfigPath.path_KitDefaultless_Boost_GiveSpeed_level);
+        }
+        else
+        {
+            er("KitConfigLoad",KitConfigPath.path_KitDefaultless_Boost_GiveSpeed_level, "vaule is null");
         }
 
 
@@ -265,10 +345,11 @@ public class KitConfigLoad
         loadKitMenuItem();
     }
 
-    public static void loadKits()
+    private static void loadKits()
     {
         KitDefault.loadKit(true);
         KitNone.loadKit();
+        KitDefaultless.loadKit(true);
     }
 
 }

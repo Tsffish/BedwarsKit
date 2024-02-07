@@ -8,31 +8,41 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-public class RelPlayerTeleport implements Listener {
+public class RelPlayerTeleport implements Listener
+{
     @EventHandler
-    public void on(PlayerTeleportEvent e) {
+    public void on(PlayerTeleportEvent e)
+    {
         Player p = e.getPlayer();
 
-        if (p == null || !p.isOnline()) return;
+        if (p == null || !p.isOnline())
+        {
+            return;
+        }
 
         String world = p.getWorld().getName();
         boolean isInRushWorld = world.contains(MainConfigHandler.rushWorld);
-        // 禁用末影珍珠伤害
         PlayerTeleportEvent.TeleportCause enderpearl = PlayerTeleportEvent.TeleportCause.ENDER_PEARL;
-        if (MainConfigHandler.noPearlDamage && isInRushWorld && e.getCause() == enderpearl) {
+        if (MainConfigHandler.noPearlDamage && isInRushWorld && e.getCause() == enderpearl)
+        {
             e.setCancelled(true);
             p.teleport(e.getTo());
-            // 如果不设置摔落距离会导致出现摔落伤害
             p.setFallDistance(0.0f);
         }
     }
     @EventHandler
-    public void on(PlayerChangedWorldEvent event){
+    public void on(PlayerChangedWorldEvent event)
+    {
         Player p = event.getPlayer();
-        if (p == null || !p.isOnline()) return;
+        if (p == null || !p.isOnline())
+        {
+            return;
+        }
 
-        if (p.getWorld().getName().contains(MainConfigHandler.lobbyWorld)){
-            if (p.getGameMode() != GameMode.SURVIVAL){
+        if (p.getWorld().getName().contains(MainConfigHandler.lobbyWorld))
+        {
+            if (p.getGameMode() != GameMode.SURVIVAL)
+            {
             p.setGameMode(GameMode.SURVIVAL);
             }
         }

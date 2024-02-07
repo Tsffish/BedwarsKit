@@ -1,190 +1,212 @@
-# ================= #
-# BedwarsKit 配置文件 #
-# ================= #
+#*********************#
+#BedwarsKit configuration file#
+#*********************#
+#########################################################################
+#####                                                               #####
+##### Warning: Most of the following content is machine translation #####
+#####                                                               #####
+#########################################################################
 
-# 目前出于未知原因，需要重载两次文件才能生效
+#The configuration file may need to be reloaded twice to take effect
 
-config-version: "1.9.5"
-# 配置文件版本
-# 无需更改
+config-version: "1.9.51"
+update_checker: true
+update_reportOp: true
+#Config version: Configuration file version
+#Do not modify, otherwise it will reset
+#Update_checker: Check for updates
+#Unless the update has a negative impact on you, it is recommended to keep the check update function turned on.
+#Update_reportOp reports updated information to the administrator
 
 rushWorld: "rush"
-rushWorld2v2: "2v2rush"
-rushWorld4v4: "4v4rush"
+rushWorld2v2: "2v2"
+rushWorld4v4: "4v4"
 lobbyWorld: "lobby"
-# 世界名的判断条件 最基本的配置
-# 判断方式是世界名是否包含
-# rushWorld : 识别为游戏房间
-# rushWorld2v2 : 识别为游戏房间2v2模式
-# rushWorld4v4 : 识别为游戏房间4v4模式
-# lobbyWorld : 识别为大厅
+#The most basic configuration for determining world names
+#The judgment method is whether the world name includes
+#RushWorld: Recognized as a game room
+#RushWorld2v2: Recognized as game room 2v2 mode
+#RushWorld4v4: Recognized as game room 4v4 mode
+#LobbyWorld: Recognized as a lobby
 
-relTeamName_Red: "\u7ea2\u4e4b\u961f"
-relTeamName_Blue: "\u84dd\u4e4b\u961f"
-relTeamName_Green: "\u7eff\u4e4b\u961f"
-relTeamName_Yellow: "\u9ec4\u4e4b\u961f"
-relTeamName_Aqua: "\u9752\u4e4b\u961f"
-relTeamName_White: "\u767d\u4e4b\u961f"
-relTeamName_Gray: "\u7070\u4e4b\u961f"
-relTeamName_Pink: "\u7c89\u4e4b\u961f"
-# 游戏中队伍的名字 最基本的配置
-# 是队伍显示名字不是颜色名字
+relTeamName_Red: "Red Team"
+relTeamName_Blue: "Blue Team"
+relTeamName_Green: "Green Team"
+relTeamName_Yellow: "Yellow Team"
+relTeamName_Aqua: "Aqua Team"
+relTeamName_White: "White Team"
+relTeamName_Gray: "Gray Team"
+relTeamName_Pink: "Pink Team"
+#The most basic configuration of team names in the game
+#It's the team display name, not the color name
 
 customScoreboard: true
-#是否开启 自定义计分板 功能
+#Is the custom scoreboard feature enabled
 
-meanTeamBedYes: "&a\u2714"
-meanTeamNone: "&c\u2718"
-meanTeamBedNo: "&c\u2718"
-meanYou: "{teamColor}\u2192 "
-meanNotYou: "{teamColor}  "
-mean2v2Mode: "\u53cc\u4eba\u6a21\u5f0f"
-mean4v4Mode: "4v4v4v4\u6a21\u5f0f"
+meanTeamBedYes: "&a&l\u2714"
+meanTeamNone: "&4&l\u2718"
+meanTeamBedNo: "&a&l{aliveCount}"
+meanYou: "{teamColor}\u2b60"
+meanNotYou: "{teamColor}"
+mean2v2Mode: "Double Mode"
+mean4v4Mode: "4v4v4v4Mode"
 serverIp: "&eMCBBS@the_starfish"
-meanBedwars: "\u8d77\u5e8a\u6218\u4e89"
-# meanTeamBedYes : ...TeamStat 中 表示队伍存在床的情况
-# meanTeamNone : ...TeamStat 中 表示队伍已被淘汰
-# meanTeamBedNo : ...TeamStat 中 表示队伍没有床 但 队伍存在玩家的情况
-# meanYou : ...TeamIsMe 中 表示你在该队伍中，{teamColor} : 玩家当前队伍 的 队伍颜色
-# meanNotYou : ...TeamIsMe 中 表示你不在该队伍中, {teamColor} : 玩家当前队伍 的 队伍颜色
-# mean2v2Mode : 表示这是2v2模式
-# mean4v4Mode : 表示这是4v4模式
-# serverIp : 可用于填写服务器地址 ，也可以用于添加重复的字符
-# meanBedwars : 可用于填写 表示起床战争 ，也可以用于添加重复的字符
+meanBedwars: "Awakening War"
+meanGameEnd: "Game Over"
+#MeanTeamBedYes: TeamStat indicates the presence of beds in the team
+#MeanTeamNone: TeamStat indicates that the team has been eliminated
+#MeanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
+# {aliveCount} : Team Alive Players
+#MeanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
+#MeanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
+#Mean2v2Mode: indicates that this is a 2v2 mode
+#Mean4v4Mode: indicates that this is a 4v4 mode
+#ServerIP: can be used to fill in the server address or to add duplicate characters
+#MeanBedwards: can be used to fill in the wake-up war or to add duplicate characters
+#MeanGameEnd: indicates the end of the game
 
 ScoreBoard2v2Title: "&e&l{bw}"
 
-ScoreBoard2v2Line01: "&7{date} &8{mode}"
-ScoreBoard2v2Line02: "&a{timeleft-s}&f\u79d2\u4e4b\u540e&b\u6e38\u620f\u7ed3\u675f"
-ScoreBoard2v2Line03: "&f"
-ScoreBoard2v2Line04: "{redTeamIsMe}&c{RedTeamName} {redTeamStat} &7(&f&l{redTeamPlayer}&7)"
-ScoreBoard2v2Line05: "{blueTeamIsMe}&9{BlueTeamName} {blueTeamStat} &7(&f&l{blueTeamPlayer}&7)"
-ScoreBoard2v2Line06: "{greenTeamIsMe}&a{GreenTeamName} {greenTeamStat} &7(&f&l{greenTeamPlayer}&7)"
-ScoreBoard2v2Line07: "{yellowTeamIsMe}&e{YellowTeamName} {yellowTeamStat} &7(&f&l{yellowTeamPlayer}&7)"
-ScoreBoard2v2Line08: "{pinkTeamIsMe}&d{PinkTeamName} {pinkTeamStat} &7(&f&l{pinkTeamPlayer}&7)"
-ScoreBoard2v2Line09: "{aquaTeamIsMe}&b{AquaTeamName} {aquaTeamStat} &7(&f&l{aquaTeamPlayer}&7)"
-ScoreBoard2v2Line10: "{grayTeamIsMe}&7{GrayTeamName} {grayTeamStat} &7(&f&l{grayTeamPlayer}&7)"
-ScoreBoard2v2Line11: "{whiteTeamIsMe}&f{WhiteTeamName} {whiteTeamStat} &7(&f&l{whiteTeamPlayer}&7)"
-ScoreBoard2v2Line12: "&f "
-ScoreBoard2v2Line13: "&e{ip}"
-ScoreBoard2v2Line14: ""
-ScoreBoard2v2Line15: ""
+ScoreBoard2v2Line01: "&7{date}"
+ScoreBoard2v2Line02: "&eTask Count Down:&a{LastTaskTimeLeft}"
+ScoreBoard2v2Line03: "&e\u27a5{LastTaskName}"
+ScoreBoard2v2Line04: "&f "
+ScoreBoard2v2Line05: "{redTeamStat} &c{redTeamName} {redTeamIsMe}"
+ScoreBoard2v2Line06: "{blueTeamStat} &9{blueTeamName} {blueTeamIsMe}"
+ScoreBoard2v2Line07: "{greenTeamStat} &a{greenTeamName} {greenTeamIsMe}"
+ScoreBoard2v2Line08: "{yellowTeamStat} &e{yellowTeamName} {yellowTeamIsMe}"
+ScoreBoard2v2Line09: "{pinkTeamStat} &d{pinkTeamName} {pinkTeamIsMe}"
+ScoreBoard2v2Line10: "{aquaTeamStat} &b{aquaTeamName} {aquaTeamIsMe}"
+ScoreBoard2v2Line11: "{grayTeamStat} &7{grayTeamName} {grayTeamIsMe}"
+ScoreBoard2v2Line12: "{whiteTeamStat} &f{whiteTeamName} {whiteTeamIsMe}"
+ScoreBoard2v2Line13: "&f  "
+ScoreBoard2v2Line14: "&fK:{kill} - D:{death} - B:{bed}"
+ScoreBoard2v2Line15: "&b{ip}"
 ScoreBoard2v2Line16: ""
-# 2v2模式下的 自定义计分板内容
-# 变量支持的队伍名 Red(红色),Blue(蓝色),Green(绿色),Yellow(黄色),Pink(粉色),White(白色),Gray(灰色),Aqua(青色)
-# 变量:
-# ...TeamName : 队伍的名字 ,详细请看 relTeamName_...的值，队伍颜色名必须首字母大写，比如RedTeamName,GrayTeamName
-# ...TeamStat : 队伍的状态，详细请看 meanTeam...的值 ,队伍颜色名必须首字母小写，比如greenTeamStat,grayTeamStat
-# ...TeamIsMe : 你在不在该队伍，详细请看 mean...的值 ,队伍颜色名必须首字母小写，比如blueTeamIsMe,grayTeamIsMe
-# ...TeamPlayer : 队伍的人数 ,队伍颜色名必须首字母小写，比如pinkTeamPlayer,grayTeamPlayer
-# {timeleft-s} : 游戏剩余时间 - 秒
-# {timeleft-m} : 游戏剩余时间 - 分钟
-# {timeleft-h} : 游戏剩余时间 - 小时
-# {timeleft-d} : 游戏剩余时间 - 日
-# {timeleft-mo} : 游戏剩余时间 - 月
-# {timeleft-y} : 游戏剩余时间 - 年
-# {date} : 今天的日期 格式YYYY/M/D 比如2080/3/27
-# {ip} : 配置文件里 serverIp 的值
-# {bw} : 配置文件里 meanBedwars 的值
-# {mode} : 配置文件里 mean...Mode 的值 如果是2v2就是 mean2v2Mode 的值，如果是4v4就是 mean4v4Mode 的值
-# {kill} : 你本局中的杀敌数
-# {fkill} : 你本局中的KD值
-# {kd} : 你本局中的KD值
-# {death} : 你本局中的死亡数
-# {bed} : 你本局中的挖床数
-# {game} : 本局的游戏名
-# {region} : 本局的区域名
-# {world} : 本局的世界名
+#Customized Scoreboard Content in 2v2 Mode
+#Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+#Note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
+#Variable:
+# ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
+# ...TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
+# ...TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+#{formatTimeLeft}: The remaining time of the formatted game
+#{timeleft-s}: Game remaining time in seconds
+#{timeleft-m}: Game remaining time in minutes
+#{timeleft-h}: Game remaining time - hours
+#{timeleft-d}: Game remaining time in days
+#{timeline mo}: Game remaining time in months
+#{timeleft y}: Game remaining time in years
+#{date}: Today's date format is YYYY/M/D, such as 2080/3/27
+#{ip}: The value of serverIp in the configuration file
+#{bw}: The value of meanBedwards in the configuration file
+#{mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+#{kill}: The number of enemies killed in your current game
+#{fkill}: Your KD value in this game
+#{kd}: Your KD value in this game
+#{death}: The number of deaths in your current game
+#{bed}: The number of digging beds in your current game
+#{game}: The game name of this game
+#{region}: The region of this bureau
 
 ScoreBoard4v4Title: "&e&l{bw}"
 
-ScoreBoard4v4Line01: "&7{date} &8{mode}"
-ScoreBoard4v4Line02: "&a{timeleft-s}&f\u79d2\u4e4b\u540e&b\u6e38\u620f\u7ed3\u675f"
-ScoreBoard4v4Line03: "&f"
-ScoreBoard4v4Line04: "{redTeamIsMe}&c{RedTeamName} {redTeamStat} &7(&f&l{redTeamPlayer}&7)"
-ScoreBoard4v4Line05: "{blueTeamIsMe}&9{BlueTeamName} {blueTeamStat} &7(&f&l{blueTeamPlayer}&7)"
-ScoreBoard4v4Line06: "{greenTeamIsMe}&a{GreenTeamName} {greenTeamStat} &7(&f&l{greenTeamPlayer}&7)"
-ScoreBoard4v4Line07: "{yellowTeamIsMe}&e{YellowTeamName} {yellowTeamStat} &7(&f&l{yellowTeamPlayer}&7)"
-ScoreBoard4v4Line08: "&f "
-ScoreBoard4v4Line09: "&f\u51fb\u6740\u6570: &a{kill}"
-ScoreBoard4v4Line10: "&f\u7834\u574f\u5e8a\u6570: &a{bed}"
-ScoreBoard4v4Line11: "&f\u6700\u7ec8\u51fb\u6740\u6570: &a{fkill}"
-ScoreBoard4v4Line12: "&f  "
-ScoreBoard4v4Line13: "&e{ip}"
+ScoreBoard4v4Line01: "&7{date}"
+ScoreBoard4v4Line02: "&eTask Count Down:&a{LastTaskTimeLeft}"
+ScoreBoard4v4Line03: "&e\u27a5{LastTaskName}"
+ScoreBoard4v4Line04: "&f "
+ScoreBoard4v4Line05: "{redTeamStat} &c{redTeamName} {redTeamIsMe}"
+ScoreBoard4v4Line06: "{blueTeamStat} &9{blueTeamName} {blueTeamIsMe}"
+ScoreBoard4v4Line07: "{greenTeamStat} &a{greenTeamName} {greenTeamIsMe}"
+ScoreBoard4v4Line08: "{yellowTeamStat} &e{yellowTeamName} {yellowTeamIsMe}"
+ScoreBoard4v4Line09: "&f  "
+ScoreBoard4v4Line10: "&fK:{kill} - D:{death} - B:{bed}"
+ScoreBoard4v4Line11: "&e{ip}"
+ScoreBoard4v4Line12: ""
+ScoreBoard4v4Line13: ""
 ScoreBoard4v4Line14: ""
 ScoreBoard4v4Line15: ""
 ScoreBoard4v4Line16: ""
-# 4v4模式下的 自定义计分板内容
-# 变量支持的队伍名 Red(红色),Blue(蓝色),Green(绿色),Yellow(黄色),Pink(粉色),White(白色),Gray(灰色),Aqua(青色)
-# 变量:
-# ...TeamName : 队伍的名字 ,详细请看 relTeamName_...的值，队伍颜色名必须首字母大写，比如RedTeamName,GrayTeamName
-# ...TeamStat : 队伍的状态，详细请看 meanTeam...的值 ,队伍颜色名必须首字母小写，比如greenTeamStat,grayTeamStat
-# ...TeamIsMe : 你在不在该队伍，详细请看 mean...的值 ,队伍颜色名必须首字母小写，比如blueTeamIsMe,grayTeamIsMe
-# ...TeamPlayer : 队伍的人数 ,队伍颜色名必须首字母小写，比如pinkTeamPlayer,grayTeamPlayer
-# {timeleft-s} : 游戏剩余时间 - 秒
-# {timeleft-m} : 游戏剩余时间 - 分钟
-# {timeleft-h} : 游戏剩余时间 - 小时
-# {timeleft-d} : 游戏剩余时间 - 日
-# {timeleft-mo} : 游戏剩余时间 - 月
-# {timeleft-y} : 游戏剩余时间 - 年
-# {date} : 今天的日期 格式YYYY/M/D 比如2080/3/27
-# {ip} : 配置文件里 serverIp 的值
-# {bw} : 配置文件里 meanBedwars 的值
-# {mode} : 配置文件里 mean...Mode 的值 如果是2v2就是 mean2v2Mode 的值，如果是4v4就是 mean4v4Mode 的值
-# {kill} : 你本局中的杀敌数
-# {fkill} : 你本局中的KD值
-# {kd} : 你本局中的KD值
-# {death} : 你本局中的死亡数
-# {bed} : 你本局中的挖床数
-# {game} : 本局的游戏名
-# {region} : 本局的区域名
-# {world} : 本局的世界名
+#Customized Scoreboard Content in 4v4 Mode
+#Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+#Note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
+#Variable:
+# ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
+# ...TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
+# ...TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+#{formatTimeLeft}: The remaining time of the formatted game
+#{timeleft-s}: Game remaining time in seconds
+#{timeleft-m}: Game remaining time in minutes
+#{timeleft-h}: Game remaining time - hours
+#{timeleft-d}: Game remaining time in days
+#{timeline mo}: Game remaining time in months
+#{timeleft y}: Game remaining time in years
+#{date}: Today's date format is YYYY/M/D, such as 2080/3/27
+#{ip}: The value of serverIp in the configuration file
+#{bw}: The value of meanBedwards in the configuration file
+#{mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+#{kill}: The number of enemies killed in your current game
+#{fkill}: Your KD value in this game
+#{kd}: Your KD value in this game
+#{death}: The number of deaths in your current game
+#{bed}: The number of digging beds in your current game
+#{game}: The game name of this game
+#{region}: The region of this bureau
 
 
 breakTitle: true
-#是否开启 破坏床信息
-breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c\u7684\u5e8a\u5df2\u88ab\u6467\u6bc1"
-breakSubTitleAll: "&7\u6467\u6bc1\u8005:{BreakPlayerTeamColor}{BreakPlayerName}"
+#Whether to enable the destruction of bed information
+breakTitleAll: "{BreakTeamColor}{BreakTeamName}&cThe bed has been destroyed"
+breakSubTitleAll: "&7destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
 breakTitleBreakPlayer: "{BreakTeamColor}{BreakTeamName}"
-breakSubTitleBreakPlayer: "&a\u5e8a\u5df2\u88ab\u4f60\u6467\u6bc1"
-breakTitleBreakTeam: "&c\u5e8a\u5df2\u88ab\u6467\u6bc1"
-breakSubTitleBreakTeam: "&7\u6467\u6bc1\u8005:{BreakPlayerTeamColor}{BreakPlayerName}"
-# All : 向 所有的玩家 发送的
-# BreakPlayer : 向 破坏床的玩家 发送的
-# BreakTeam : 向 被破坏床的玩家 发送的
-# 变量 :
-# {BreakTeamColor} : 被破坏床的队伍 的 队伍颜色
-# {BreakTeamName} : 被破坏床的队伍 的 队伍名字
-# {BreakPlayerTeamColor} : 破坏床的玩家 的 队伍颜色
-# {BreakPlayerName} : 破坏床的玩家 的 玩家名字
-# {breakPlayerTeamName} : 破坏床的玩家 的 队伍名字
+breakSubTitleBreakPlayer: "&aThe bed has been destroyed by you"
+breakTitleBreakTeam: "&cThe bed has been destroyed"
+breakSubTitleBreakTeam: "&7destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
+#All: Sent to all players
+#BreakPlayer: Sent to players who break the bed
+#BreakTeam: Sent to players whose beds have been destroyed
+#Variable:
+#{BreakTeamColor}: The team color of the team whose bed was damaged
+#{BreakTeamName}: The team name of the team whose bed was destroyed
+#{BreakPlayerTeamColor}: The team color of the player who destroys the bed
+#{BreakPlayerName}: The player name of the player who broke the bed
+#{breakPlayerTeamName}: The team name of the player who destroyed the bed
 
 
 deathGameMode: true
 respawnDelay: 5
-respawnTitle: "&e&l{timeleft}&a&l\u79d2\u540e\u590d\u6d3b"
+respawnTitle: "&e&l{timeleft}&a&lResurrect in seconds"
 respawnSubTitle: ""
+respawnChat: ""
+respawnActionBar: ""
 respawnSuccTitle: "&f"
 respawnSuccSubTitle: ""
-# deathGameMode : 是否开启 复活倒计时
-# respawnDelay : 复活倒计时 的 时间(秒)
-# respawnTitle : 复活中 的 标题，
-# 变量:{timeleft} : 剩余时间(秒)
-# respawnSubTitle : 复活中 的 副标题，
-# 变量:{timeleft} : 剩余时间(秒)
-# respawnSuccTitle : 已复活 的 标题
-# respawnSuccSubTitle : 已复活 的 副标题
+respawnSuccChat: ""
+respawnSuccActionBar: ""
+preventloadworld: true
+#DeathGameMode: Is the resurrection countdown enabled
+#RespawnDelay: The countdown time for resurrection (in seconds)
+#Respawn: Resurrecting
+#Title: Title
+#Subtitle: Subtitle
+#Chat: Chat bar information
+#Toolbar information
+#Variable: {timeleft}: Remaining resurrection countdown time (seconds)
+#Preventloadworld: Do you want to enable preventing the world from being reloaded afte
+# r death and also disable the die-on_void option in the BedwarsRel configuration file
 
 breakBedCheck: true
 tpDis: 0.74
-# 是否开启 防卡床
-# 站在床上方破坏床时向上传送，以防止玩家卡在床里
-# tpDis: 向上传送的距离，必须是double类型
+#Is the anti jamming bed enabled
+#When standing above the bed and damaging it, teleport upwards to prevent players from getting stuck in the bed
+#TpDis: The distance transmitted upwards must be of type double
 
 noHunger: true
 maxFoodLevel: 20
-# noHunger : 是否开启 无饥饿
-# maxFoodLevel : 要锁定的饥饿度
+#NoHunger: Whether to enable no hunger
+#MaxFoodLevel: hunger level to be locked in
 
 noPearlDamage: true
 startKitCompass: false
@@ -192,41 +214,56 @@ antiDrop: true
 grassPaneWalk: true
 cleanBottle: true
 kill_res: true
+kill_res_chat: ""
 NoItemBreak: true
-# noPearlDamage : 是否开启 无末影珍珠伤害
-# startKitCompass : 是否开启 自动给玩家指南针
-# antiDrop : 是否开启 防止移动装备
-# grassPaneWalk : 是否开启 防止卡玻璃板
-# cleanBottle : 是否开启 自动清理 空瓶子
-# kill_res :是否开启 击杀掠夺资源
-# NoItemBreak : 是否开启 禁止剑损坏
+CleanHostileOnStart: true
+#NoPearlDamage: Whether to activate the damage of the Endless Pearl
+#StartKitCompass: Whether to enable automatic compass for players
+#AntiDrop: Whether to enable anti movement equipment
+#GrassPaneWalk: Is the anti jamming glass panel enabled
+#CleanBottle: Is automatic cleaning of empty bottles enabled
+#Kild_res: Whether to enable killing and looting of resources
+#Kild_res_chat: Prompt information after killing, supports changing
+#Quantity {res}: Resource name, corresponding to mean Value of
+#{count}: The amount of resources obtained
+#NoitemBreak: Is it enabled to prevent sword damage
+#Does CleanHostileOnStart enable the deletion of all hostile creatures at the beginning of the game
 
 levelupShop: true
 levelupShopOpenMode: "click on item"
-levelupShopOpenModeEntityName: "\u5347\u7ea7\u5546\u5e97"
+levelupShopOpenModeEntityName: "Upgrade Store"
 LevelupItemType: "BOOK_AND_QUILL"
+LevelupItemName: "Upgrade Store"
 levelupShopDelayOpen: true
-teamEnchItemName_Sharp1: "\u950b\u5229I"
-teamEnchItemName_Prot1: "\u4fdd\u62a4I"
-teamEnchItemName_Prot2: "\u4fdd\u62a4II"
-teamEnchItemName_Prot3: "\u4fdd\u62a4III"
-teamEnchItemName_Prot4: "\u4fdd\u62a4IV"
-meanDiamond: "&b\u94bb\u77f3"
-shopLevelup: "\u5347\u7ea7\u5546\u5e97"
-shopItem: "\u5546\u5e97"
-# levelupShop :否开启 升级商店
-# levelupShopOpenMode : 升级商店的打开方式，
-# 支持以下模式
-# "click on item" : 点击物品打开
-# "click on entity" : 点击村民打开
-# levelupShopOpenModeEntityName : 点击的村民的名字，需要匹配才能打开菜单
-# LevelupItemType : 打开商店的 物品 的 物品类型
-# levelupShopDelayOpen : 是否打开 延迟打开菜单 : 如果打开菜单的物品点击后会
-# 马上打开其他物品栏，添加少许延迟以覆盖打开升级菜单
-# teamEnchItemName_... : 附魔等级在菜单中的名字
-# meanDiamond : 表示钻石
-# shopLevelup : 升级菜单 的 菜单标题
-# shopItem : 点击物品时如果当前所在菜单的名字与这个值匹配，就打开升级菜单，一般情况下是BedwarsRel的商店名(\plugins\BedwarsRel\locale\zh_CN.json : ingame.shop.name)
+teamEnchItemName_Sharp1: "sharpI"
+teamEnchItemName_Prot1: "ProtI"
+teamEnchItemName_Prot2: "ProtII"
+teamEnchItemName_Prot3: "ProtIII"
+teamEnchItemName_Prot4: "ProtIV"
+meanIron: "&fIron"
+meanGold: "&6Gold"
+meanDiamond: "&bDiamond"
+meanEmerlad: "&aEmerald"
+shopLevelup: "Upgrade Store"
+shopItem: ""
+#LevelupShop: No, open upgrade store
+#LevelupShopOpenMode: Upgrade the way the store opens,
+#Supports the following modes
+#Click on item: Click on the item to open it
+#"Click on entity": Click on the villagers to open it
+#LevelupShopOpenModeEntityName: The name of the clicked villager that needs to be matched to open the menu
+#LevelupItem Type: The item type of the item opened in the store
+#LevelupShopDelayOpen: Whether to open the delayed opening menu: If the item in the opened menu is clicked, it will
+#Immediately open the other items section and add a slight delay to overwrite the opening of the upgrade menu
+#TeamEnchitemName_...: The name of the enchantment level in the menu
+#MeanIron: represents an iron ingot
+#MeanGold: represents a gold ingot
+#MeanDiamond: represents a diamond
+#MeanEmerald: represents an emerald
+#ShopLevelup: The menu title for upgrading menus
+#ShopItem: When clicking on an item, if the name of the current menu matches this value, the upgrade menu will open. Generally, it is BedwarsRel's store
+#Name (\ plugins \ BedwarsRel \ local \ zh_cN. json: ingame. shop. name)
+#If this feature is not needed, please set it to ""
 
 sharp1Cost2v2: 4
 prot1Cost2v2: 2
@@ -238,139 +275,367 @@ prot1Cost4v4: 5
 prot2Cost4v4: 10
 prot3Cost4v4: 20
 prot4Cost4v4: 30
-#2v2 与 4v4中 附魔等级的价格
-# sharp1 : 锋利1
-# prot11 : 保护1
+#The price of enchantment levels in 2v2 and 4v4
+#Sharp1: Sharp1
+#Prot11: Protection 1
 
 
-messLevelUpSharp1: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u950b\u5229I"
-messLevelUpProt1: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4I"
-messLevelUpProt2: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4II"
-messLevelUpProt3: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4III"
-messLevelUpProt4: "&6{player}&a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7&6\u4fdd\u62a4IV"
-messLevelUpFailed: "&c\u8d44\u6e90\u4e0d\u591f\u6216\u5df2\u62e5\u6709\u66f4\u9ad8\u7ea7\u7684\u9644\u9b54!"
+messLevelUpSharp1: "&6{player}&aPurchased team upgrade &6sharp I"
+messLevelUpProt1: "&6{player}&aPurchased team upgrade &6protect I"
+messLevelUpProt2: "&6{player}&aPurchased team upgrade &6protec tII"
+messLevelUpProt3: "&6{player}&Purchased team upgrade &6protect III"
+messLevelUpProt4: "&6{player}&aPurchased team upgrade &6protect IV"
+messLevelUpFailed: "&cInsufficient resources or possessing higher-level enchantments!"
 
 
-damagefb_Title: true
+damagefb_attackmess: true
+damagefb_attackchat: ""
 damagefb_attackTitle: ""
-damagefb_attackSubTitle: "&3\u4f24\u5bb3 &7- &c{damage}"
+damagefb_attackSubTitle: "&3Damage &7- &c{damage}"
+damagefb_attackactionbar: ""
 damagefb_attackBlood: true
-damagefb_attackBloodMode: "box"
-# damagefb_Title : 是否开启 伤害反馈 功能
-# damagefb_attackTitle : 攻击玩家时显示的 标题
-# damagefb_attackSubTitle : 攻击玩家时显示的 副标题
-# damagefb_attackBlood : 攻击玩家的粒子效果
-# damagefb_attackBloodMode : 攻击玩家的粒子效果 显示模式,
-# 支持以下模式:
-# {single} : 玩家所在位置生成
-# {player} : 整个玩家
-# {box} : 玩家的周围
+damagefb_attackBloodMode: "player"
+damagefb_attackBloodType: 152
+#Damagefb-Title: Is the damage feedback function enabled
+#Damagefb.attackTitle: The title displayed when attacking a player
+#Damagefb.attackSubTitle: Subtitle displayed when attacking a player
+#Damagefb.attackBlood: Attack the player's particle effect
+#Damagefb-attackBloodMode: The particle effect display mode for attacking players,
+#Supports the following modes:
+#{single}: Generate player's location
+#{player}: The entire player
+#{box}: The player's surroundings
+#Damagefb-attackBloodType: The principle of particles is to play the square walking effect,
+#Different blocks can be set to achieve different effects, only supporting numerical IDs. The default is 152: Redstone
+
+killfb_sendmess: true
+killfb_sendmess_chat: ""
+killfb_sendmess_title: ""
+killfb_sendmess_subtitle: ""
+killfb_sendmess_actionbar: ""
+#Killfb_sendmes: Whether to enable the function of sending feedback messages for killing enemies
+#Supporting variables:
+#{dp}: Name of the killed player
+#{kp}: Name of the player who killed the enemy
+#{... p_health}: Fill in d or k, which represents the player's health value
+
+meanSecond: "Sec"
 
 upToChainArmor: "CHAINMAIL_CHESTPLATE"
 upToIronArmor: "IRON_CHESTPLATE"
 upToDiamondArmor: "DIAMOND_CHESTPLATE"
-# 检测到物品时自动升级你的装备
-# upToChainArmor : 升级到 锁链装备
-# upToIronArmor : 升级到 铁装备
-# upToDiamondArmor : 升级到 钻石装备
+#Automatically upgrade your equipment when an item is detected
+#UpToChainArmor: Upgrade to Chain Equipment
+#UpToIronArmor: Upgrade to Iron equipment
+#UpToDiamondArmor: Upgrade to Diamond equipment
 chainPriceType: "IRON_INGOT"
 ironPriceType: "GOLD_INGOT"
 diamondPriceType: "DIAMOND"
 chainPrice: 35
 ironPrice: 12
 diamondPrice: 6
-# 检测到你买多了装备时返还的价格 物品类型 以及 物品价格
-# ...PriceType : 物品类型
-# ...Price : 物品价格
+#When it is detected that you have purchased too much equipment, the type of item and its price will be returned
+# PriceType: Item type
+# Price: Item price
 
 kitenable: true
 kitForce: false
 kitForceKit: "Default"
-# kitenable : 是否开启 职业功能
-# kitForce : 强制设置玩家的职业，不管玩家选择了哪个职业
-# kitForceKit : 强制选择的职业
-# 支持以下职业:
-# Default : 默认职业
-# None : 无职业
+#Kitenable: Whether to enable the occupation function
+#KitForce: Force players to set their profession, regardless of which profession they choose
+#KitForceKit: Compulsory career selection
+#Support the following professions:
+#Default: Default profession
+#None: No occupation
 
-kitMenuTitle: "\u9009\u62e9\u804c\u4e1a"
+kitMenuTitle: "Choose a Kit"
 kitMenurow: 6
-# kitMenuTitle : 选择职业的菜单 的 菜单标题
-# kitMenurow : 选择职业的菜单 的 行数 ,最多6行
+#KitMenu Title: The menu title for selecting a profession
+#KitMenu: The number of rows in the menu for selecting a profession, up to a maximum of 6 rows
 
 kitMenuItemGive: true
 kitMenuItemType: "IRON_SWORD"
 kitMenuItemAmount: 1
-kitMenuItemName: "\u9009\u62e9\u804c\u4e1a"
-meanSelKitSucc: "&a\u6210\u529f\u9009\u62e9\u804c\u4e1a!"
-# kitMenuItemGive : 是否开启 自动给予 打开选择职业菜单的物品的功能
-# kitMenuItemType : 打开选择职业菜单的物品 的 物品类型
-# kitMenuItemAmount : 打开选择职业菜单的物品 的 物品数量
-# kitMenuItemName : 打开选择职业菜单的物品 的 物品名字
-# meanSelKitSucc : 成功选择职业 的 提示信息 发送在聊天栏
+kitMenuItemName: "Choose a kit"
+meanSelKitSucc: "&bAwakening War &7>> &aSuccessfully selected kit!"
+#KitMenu Item Give: Do you want to enable the function of automatically giving items to open the selected profession menu
+#KitMenu Item Type: Open the item type of the item in the selected profession menu
+#KitMenu Item Amount: The number of items to open and select from the occupation menu
+#KitMenu Item Name: Open the item name of the item in the selected profession menu
+#MeanSelKitSucc: A prompt message for successfully selecting a profession is sent in the chat bar
 
-KitDefaultName: "\u9ed8\u8ba4\u804c\u4e1a"
-KitDefaultDescription: "\u9ed8\u8ba4\u7684\u804c\u4e1a"
+KitDefaultName: "Default Kit"
+KitDefaultDescription: "Default Kit"
 KitDefaultItemType: "GOLD_HELMET"
 KitDefaultItemAmount: 1
 KitDefaultItemSlot: 0
-KitDefaultItemName: "&f\u9ed8\u8ba4"
+KitDefaultItemName: "&fDefault"
 KitDefaultItemLore:
   - "&f"
-  - "&a\u804c\u4e1a\u4ecb\u7ecd"
-  - "&f\u9ed8\u8ba4\u804c\u4e1a\uff01"
+  - "&a Career Introduction"
+  - "&f Default profession!"
   - "&f"
-  - "&a\u804c\u4e1a\u5185\u5bb9"
-  - "&f\u6c38\u4e45\u7684\u901f\u5ea6"
-  - "&f\u6c38\u4e45\u7684\u88c5\u5907"
+  - "&a Career Content"
+  - "&f Permanent Speed"
+  - "&f Permanent Equipment"
   - "&f"
 KitDefault_Boost_GiveSpeed_enable: true
 KitDefault_Boost_GiveSpeed_level: 1
-# Kit...Name : 职业...的名字 (目前没用)
-# Kit...Description : 职业...的简介 (目前没用)
-# Kit...ItemType : 职业...在选择职业菜单中的 物品类型
-# Kit...ItemAmount : 职业...在选择职业菜单中的 物品数量
-# Kit...ItemSlot : 职业...在选择职业菜单中的 物品位置
-# Kit...ItemName : 职业...在选择职业菜单中的 物品名字
-# Kit...ItemLore : 职业...在选择职业菜单中的 物品注释
-# KitDefault_Boost_GiveSpeed_enable : 是否开启 该职业的增益效果 : 永久的速度
-# KitDefault_Boost_GiveSpeed_level : 该职业的增益效果 : 永久的速度 的等级
+#Kit Name: Occupation The name of (currently not used)
+#Kit Description: Occupation Introduction to (currently not used)
+#Kit Item Type: Occupation Selecting item types in the career menu
+#Kit Item Amount: Occupation Select the number of items in the career menu
+#Kit Item Slot: Occupation Select the item location in the career menu
+#Kit Item Name: Occupation Selecting item names in the career menu
+#Kit Item Lore: Occupation Annotate items in the career menu
+#Boost_GiveSpeedenable: Whether to enable the buff effect of this profession: permanent speed
+#Boost_GiveSpeedlevel: The buff effect of this profession: the level of permanent speed
 
-KitNoneName: "\u65e0\u804c\u4e1a"
-KitNoneDescription: "\u65e0\u7684\u804c\u4e1a"
+KitNoneName: "None Kit"
+KitNoneDescription: "None Kit"
 KitNoneItemType: "BARRIER"
 KitNoneItemAmount: 1
 KitNoneItemSlot: 1
-KitNoneItemName: "&f\u65e0"
+KitNoneItemName: "&fNone"
 KitNoneItemLore:
   - "&f"
-  - "&a\u804c\u4e1a\u4ecb\u7ecd"
-  - "&f\u65e0\u804c\u4e1a\uff01"
+  - "&a Career Introduction"
+  - "&f no profession!"
   - "&f"
-  - "&a\u804c\u4e1a\u5185\u5bb9"
-  - "&f\u65e0"
+  - "&a Career Content"
+  - "&f None"
   - "&f"
 
-# Kit...Name : 职业...的名字 (目前没用)
-# Kit...Description : 职业...的简介 (目前没用)
-# Kit...ItemType : 职业...在选择职业菜单中的 物品类型
-# Kit...ItemAmount : 职业...在选择职业菜单中的 物品数量
-# Kit...ItemSlot : 职业...在选择职业菜单中的 物品位置
-# Kit...ItemName : 职业...在选择职业菜单中的 物品名字
-# Kit...ItemLore : 职业...在选择职业菜单中的 物品注释
+#Kit Name: Occupation The name of (currently not used)
+#Kit Description: Occupation Introduction to (currently not used)
+#Kit Item Type: Occupation Selecting item types in the career menu
+#Kit Item Amount: Occupation Select the number of items in the career menu
+#Kit Item Slot: Occupation Select the item location in the career menu
+#Kit Item Name: Occupation Selecting item names in the career menu
+#Kit Item Lore: Occupation Annotate items in the career menu
 
-messreloadnow: "\u6b63\u5728\u91cd\u65b0\u52a0\u8f7d\u914d\u7f6e\u6587\u4ef6"
-messreloadsucc: "\u6210\u529f\u91cd\u8f7d\u914d\u7f6e\u6587\u4ef6"
-# messreloadnow : 插件重载中 的 提示信息
-# messreloadsucc : 插件已重载 的 提示信息
+KitDefaultlessName: "Default Kit 2"
+KitDefaultlessDescription: "Default Kit 2"
+KitDefaultlessItemType: "LEATHER_HELMET"
+KitDefaultlessItemAmount: 1
+KitDefaultlessItemSlot: 2
+KitDefaultlessItemName: "&fDefault 2 "
+KitDefaultlessItemLore:
+  - "&f"
+  - "&a Career Introduction 2"
+  - "&f Default profession!"
+  - "&f"
+  - "&a Career Content"
+  - "&f Permanent Speed"
+  - "&f Permanent equipment (except for leg guards and boots)"
+  - "&f"
+KitDefaultless_Boost_GiveSpeed_enable: false
+KitDefaultless_Boost_GiveSpeed_level: 1
+#Kit Name: Occupation The name of (currently not used)
+#Kit Description: Occupation Introduction to (currently not used)
+#Kit Item Type: Occupation Selecting item types in the career menu
+#Kit Item Amount: Occupation Select the number of items in the career menu
+#Kit Item Slot: Occupation Select the item location in the career menu
+#Kit Item Name: Occupation Selecting item names in the career menu
+#Kit Item Lore: Occupation Annotate items in the career menu
+#Boost_GiveSpeedenable: Whether to enable the buff effect of this profession: permanent speed
+#Boost_GiveSpeedlevel: The buff effect of this profession: the level of permanent speed
+
+
+messreloadnow: "&bBedwarsKit &7>> &eReloading configuration file"
+messreloadsucc: "&bBedwarsKit &7>> &aSuccessfully reloaded configuration file"
+#Messreloadnow: Prompt information in plugin overload
+#Messreloadsucc: Prompt message that the plugin has been overloaded
 
 startmess: false
 startmess_all_chat: ""
 startmess_all_title: ""
 startmess_all_subtitle: ""
-# startmess : 是否开启 游戏开始时发送信息
-# chat: 发送的 聊天信息
-# title: 发送的 标题
-# subtitle: 发送的 副标题
+startmess_all_actionbar: ""
+#Startness: Whether to start sending messages at the beginning of the game
+#Chat: Sent chat messages
+#Title: Sent Title
+#Subtitle: Subtitle sent
+#Actionbar: Sent toolbar information
 
-auto_join: true
+gametask: true
+gametask_spawntime: true
+gametask_spawntime_iron_base: 1000
+gametask_spawntime_iron_1: 900
+gametask_spawntime_iron_2: 750
+gametask_spawntime_iron_3: 500
+gametask_spawntime_iron_4: 350
+gametask_spawntime_gold_base: 12000
+gametask_spawntime_gold_1: 10000
+gametask_spawntime_gold_2: 8000
+gametask_spawntime_gold_3: 6000
+gametask_spawntime_gold_4: 3000
+gametask_spawntime_diamond_base: 60000
+gametask_spawntime_diamond_1: 45000
+gametask_spawntime_diamond_2: 30000
+gametask_spawntime_diamond_3: 20000
+gametask_spawntime_diamond_4: 10000
+gametask_spawntime_emerald_base: 80000
+gametask_spawntime_emerald_1: 65000
+gametask_spawntime_emerald_2: 50000
+gametask_spawntime_emerald_3: 35000
+gametask_spawntime_emerald_4: 20000
+gametask_boundaries_size: 9999
+gametask_finalbattle: true
+gametask_finalbattle_boundaries_size: 32
+gametask_finalbattle_boundaries_time: 60
+gametask_finalbattle_boundaries_warnidis: 0
+gametask_finalbattle_boundaries_damagebuffer: 1
+gametask_finalbattle_boundaries_damage: 1
+#Gametask: Is the countdown task feature enabled
+#Gametask_splaytime: Enable resource point speed control task
+#Gametask_spaytime__ The speed of the speed control level for 1/2/3/4 of this resource, in milliseconds
+#Gametask_finalbattle: Whether to enable the kill mode task
+#Gametask_finalbattle_boundaries_size: The size of the world boundary in the kill mode
+#Gametask_finalbattle'boundaries_time: The time to shrink the world boundary in the kill mode
+#Gametask_finalbattle_boundaries_warnings: Edge warnings for world boundaries in kill mode
+#Gametask_finalbattle_boundaries_damagebuffer: Damage buffer for world boundaries in kill mode
+#Gametask_finalbattle'boundaries_damage: Damage at World Boundaries in Kill Mode
+
+gametask_spawntime_tasks_iron1: 0
+gametask_spawntime_tasks_iron2: 0
+gametask_spawntime_tasks_iron3: 0
+gametask_spawntime_tasks_iron4: 0
+gametask_spawntime_tasks_gold1: 0
+gametask_spawntime_tasks_gold2: 0
+gametask_spawntime_tasks_gold3: 0
+gametask_spawntime_tasks_gold4: 0
+gametask_spawntime_tasks_diamond1: 960
+gametask_spawntime_tasks_diamond2: 1440
+gametask_spawntime_tasks_diamond3: 2400
+gametask_spawntime_tasks_diamond4: 3360
+gametask_spawntime_tasks_emerald1: 960
+gametask_spawntime_tasks_emerald2: 1920
+gametask_spawntime_tasks_emerald3: 2880
+gametask_spawntime_tasks_emerald4: 3848
+gametask_finalbattle_time: 4328
+#How long will the task take to execute? The game starts counting in seconds
+#Gametask_spawntime_tasks_ 1/2/3/4: Resource tasks
+#Gametask_finalbattle_time: Kill Mode Mission
+
+gametask_name_iron1: " "
+gametask_name_iron2: " "
+gametask_name_iron3: " "
+gametask_name_iron4: " "
+gametask_name_gold1: " "
+gametask_name_gold2: " "
+gametask_name_gold3: " "
+gametask_name_gold4: " "
+gametask_name_diamond1: "Diamond generation speed up I"
+gametask_name_diamond2: "Diamond generation speed up II"
+gametask_name_diamond3: "Diamond generation speed up III"
+gametask_name_diamond4: "Diamond generation speed up IV"
+gametask_name_emerald1: "Emerald generation speed up I"
+gametask_name_emerald2: "Emerald generation speed up II"
+gametask_name_emerald3: "Emerald generation speed up III"
+gametask_name_emerald4: "Emerald generation speed up IV"
+gametask_name_finalbattle: "Kill mode"
+#This option is temporarily unavailable
+#Gametaskname: The name of the task on the scoreboard
+#Gametaskname_ 1/2/3/4 resource point speed regulation level
+#Gametaskname_finalbattle: Kill mode
+
+
+#Information sent after completing the task
+gametask_mess_iron1_chat: ""
+gametask_mess_iron1_title: ""
+gametask_mess_iron1_subtitle: ""
+gametask_mess_iron1_actionbar: ""
+gametask_mess_iron2_chat: ""
+gametask_mess_iron2_title: ""
+gametask_mess_iron2_subtitle: ""
+gametask_mess_iron2_actionbar: ""
+gametask_mess_iron3_chat: ""
+gametask_mess_iron3_title: ""
+gametask_mess_iron3_subtitle: ""
+gametask_mess_iron3_actionbar: ""
+gametask_mess_iron4_chat: ""
+gametask_mess_iron4_title: ""
+gametask_mess_iron4_subtitle: ""
+gametask_mess_iron4_actionbar: ""
+
+gametask_mess_gold1_chat: ""
+gametask_mess_gold1_title: ""
+gametask_mess_gold1_subtitle: ""
+gametask_mess_gold1_actionbar: ""
+gametask_mess_gold2_chat: ""
+gametask_mess_gold2_title: ""
+gametask_mess_gold2_subtitle: ""
+gametask_mess_gold2_actionbar: ""
+gametask_mess_gold3_chat: ""
+gametask_mess_gold3_title: ""
+gametask_mess_gold3_subtitle: ""
+gametask_mess_gold3_actionbar: ""
+gametask_mess_gold4_chat: ""
+gametask_mess_gold4_title: ""
+gametask_mess_gold4_subtitle: ""
+gametask_mess_gold4_actionbar: ""
+
+gametask_mess_diamond1_chat: ""
+gametask_mess_diamond1_title: ""
+gametask_mess_diamond1_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond1_actionbar: ""
+gametask_mess_diamond2_chat: ""
+gametask_mess_diamond2_title: ""
+gametask_mess_diamond2_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond2_actionbar: ""
+gametask_mess_diamond3_chat: ""
+gametask_mess_diamond3_title: ""
+gametask_mess_diamond3_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond3_actionbar: ""
+gametask_mess_diamond4_chat: ""
+gametask_mess_diamond4_title: ""
+gametask_mess_diamond4_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond4_actionbar: ""
+
+gametask_mess_emerald1_chat: ""
+gametask_mess_emerald1_title: ""
+gametask_mess_emerald1_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald1_actionbar: ""
+gametask_mess_emerald2_chat: ""
+gametask_mess_emerald2_title: ""
+gametask_mess_emerald2_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald2_actionbar: ""
+gametask_mess_emerald3_chat: ""
+gametask_mess_emerald3_title: ""
+gametask_mess_emerald3_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald3_actionbar: ""
+gametask_mess_emerald4_chat: ""
+gametask_mess_emerald4_title: ""
+gametask_mess_emerald4_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald4_actionbar: ""
+
+gametask_mess_finalbattle_chat: "The&f boundary is starting to shrink, go to the main island as soon as possible to avoid damage!"
+gametask_mess_finalbattle_title: "&4&l Kill Mode"
+gametask_mess_finalbattle_subtitle: "&fBoundary begins to shrink"
+gametask_mess_finalbattle_actionbar: ""
+
+placeCorrect_ResSpawner: true
+placeCorrect_ResSpawner_mess_chat: ""
+placeCorrect_ResSpawner_mess_title: ""
+placeCorrect_ResSpawner_mess_subtitle: ""
+placeCorrect_ResSpawner_mess_actionbar: ""
+#Do you want to enable the function of preventing blocks from being in resource points
+#_ Dis: No distance from the resource point is allowed
+
+placeCorrect_PlayerSpawnLoc: true
+placeCorrect_PlayerSpawnLoc_mess_chat: "&f出生点附近禁止防止方块!"
+placeCorrect_PlayerSpawnLoc_mess_title: ""
+placeCorrect_PlayerSpawnLoc_mess_subtitle: ""
+placeCorrect_PlayerSpawnLoc_mess_actionbar: ""
+#Do you want to enable the function of preventing blocks from appearing at the team birth point
+#_ Dis: No distance from the team's birth point is allowed
+
+placeCorrect_notInGame: true
+placeCorrect_notInGame_OpBypass: true
+breakCorrect_notInGame: true
+breakCorrect_notInGame_OpBypass: true
+#Is it allowed to place/destroy blocks outside the game
+#Place: Place
+#Break: break
+#_ OpBypass: Does Op ignore this restriction
