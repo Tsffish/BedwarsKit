@@ -33,13 +33,14 @@ Depend: BedwarsRel
 - (Most functions can be customized)
 
 ## Installation:
-1. Stop your server
-2. Place the plugin jar file in the plugins folder of the root directory
-3. Start the server, enter the plugins/BedwarsKit folder, and modify the content under "Basic Config"
-4. The plugin is enabled, and you can use/bwk to view command help
+- 1. Stop your server
+- 2. Place the plugin jar file in the plugins folder of the root directory
+- 3. Start the server, enter the plugins/BedwarsKit folder, and modify the content under "Basic Config"
+- 4. The plugin is enabled, and you can use/bwk to view command help
 
 ## Usage:
-1.Make sure your world name includes the "rushWorld" entry in config to make the plugin recognize it.
-On this basis, match "rushWorld2v2" and "rushWorld4v4" to distinguish between two different patterns
-Finally, make sure that your lobby name includes the items in "lobbyWorld" (The criterion for determining a world name is to include rather than equal to)
-2.Ensure relTeamColorName_ Xxx Eight teams correspond to your BedwarsRel team name (displayed name not color name)
+- 1.Make sure your world name includes the "rushWorld" entry in config to make the plugin recognize it.
+- On this basis, match "rushWorld2v2" and "rushWorld4v4" to distinguish between two different patterns
+- Finally, make sure that your lobby name includes the items in "lobbyWorld" (The criterion for determining a world name is to include rather than equal to)
+
+- 2.Ensure relTeamColorName_ Xxx Eight teams correspond to your BedwarsRel team name (displayed name not color name)
