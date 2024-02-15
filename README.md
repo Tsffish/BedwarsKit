@@ -33,10 +33,10 @@ Depend: BedwarsRel
 - (Most functions can be customized)
 
 ## Installation:
-- 1. Stop your server
-- 2. Place the plugin jar file in the plugins folder of the root directory
-- 3. Start the server, enter the plugins/BedwarsKit folder, and modify the content under "Basic Config"
-- 4. The plugin is enabled, and you can use/bwk to view command help
+- 1.Stop your server
+- 2.Place the plugin jar file in the plugins folder of the root directory
+- 3.Start the server, enter the plugins/BedwarsKit folder, and modify the content under "Basic Config"
+- 4.The plugin is enabled, and you can use/bwk to view command help
 
 ## Usage:
 - 1.Make sure your world name includes the "rushWorld" entry in config to make the plugin recognize it.
