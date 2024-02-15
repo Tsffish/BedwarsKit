@@ -41,6 +41,6 @@ Depend: BedwarsRel
 ## Usage:
 - 1.Make sure your world name includes the "rushWorld" entry in config to make the plugin recognize it.
 - On this basis, match "rushWorld2v2" and "rushWorld4v4" to distinguish between two different patterns
-- Finally, make sure that your lobby name includes the items in "lobbyWorld" (The criterion for determining a world name is to include rather than equal to)
+- Finally, make sure that your lobby name includes the items in "lobbyWorld" (The standard for determining a world name is to include but not equal to (except for the lobby))
 
 - 2.Ensure relTeamColorName_ Xxx Eight teams correspond to your BedwarsRel team name (displayed name not color name)
