@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.util.RelTeamEnchant;
+import github.tsffish.bedwarskit.util.RelCurrentStat;
 import io.github.bedwarsrel.events.BedwarsGameOverEvent;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.Team;
@@ -12,20 +12,25 @@ import org.bukkit.event.Listener;
 
 import java.util.Map;
 
-import static github.tsffish.bedwarskit.util.RelCurrentStat.sdps;
+import static github.tsffish.bedwarskit.util.teamshop.RelTeamEffect.setDefaultTeamEff;
+import static github.tsffish.bedwarskit.util.teamshop.RelTeamEnchant.setDefaultTeamEnch;
 
 public class RelGameOver implements Listener {
+
+
 
     @EventHandler
     public void on(BedwarsGameOverEvent event) {
 
+        for (Player player : event.getGame().getPlayers()){
+            if (player != null){
 
+                String playerName = player.getName();
+                RelCurrentStat.setDefaultPlayerStat(playerName);
 
-        for (Player p : event.getGame().getPlayers()){
-            if (p != null){
-            sdps(p);
             }
         }
+
 
         Game game = event.getGame();
 
@@ -40,22 +45,8 @@ public class RelGameOver implements Listener {
         for (Team team : teams.values()) {
 
             String teamName = team.getName();
-            String[] values = RelTeamEnchant.teamEnchantListSword.get(mapName);
-            if (values == null) {
-                values = new String[2];
-            }
-            values[0] = teamName;
-            values[1] = "0";
-            RelTeamEnchant.teamEnchantListSword.put(mapName, values);
-
-            String[] values1 = RelTeamEnchant.teamEnchantListProt.get(mapName);
-            if (values1 == null) {
-                values1 = new String[2];
-            }
-            values1[0] = teamName;
-            values1[1] = "0";
-            RelTeamEnchant.teamEnchantListProt.put(mapName, values1);
-
+            setDefaultTeamEnch(mapName,teamName);
+            setDefaultTeamEff(mapName,teamName);
         }
 
     }

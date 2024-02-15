@@ -1,0 +1,23 @@
+# ====================== #
+# BedwarsKit Lang Config #
+# ====================== #
+
+update_tip:
+  - "&e ================================"
+  - "&f "
+  - "&f BedwarsKit &aFound a new version!"
+  - "&f "
+  - "&f You can download here: https://www.spigotmc.org/resources/bedwarskit.105616/"
+  - "&f If you do not want to check for updates, please set the update_checker in config.yml to false"
+  - "&f "
+  - "&e ================================"
+command_help:
+  - "&a ================================"
+  - "&f "
+  - "&f BedwarsKit &bCommands:"
+  - "&f "
+  - "&f /bwk &eDisplay this help information."
+  - "&f /bwk reload &eReload configuration file."
+  - "&f /bwk debug &eToggle debug mode."
+  - "&f "
+  - "&a ================================"

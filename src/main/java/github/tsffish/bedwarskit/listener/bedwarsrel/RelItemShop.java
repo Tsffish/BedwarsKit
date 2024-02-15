@@ -15,7 +15,6 @@ import java.util.List;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelItemShop {
-
     public static Inventory ItemShop2v2Menu;
     public static FileConfiguration shopConfig = BedwarsRel.getInstance().getShopConfig();
     public static void openShop(Player player) {

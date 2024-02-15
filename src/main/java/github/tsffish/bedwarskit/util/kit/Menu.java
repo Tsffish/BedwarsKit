@@ -1,10 +1,10 @@
-package github.tsffish.bedwarskit.config.kit;
+package github.tsffish.bedwarskit.util.kit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
+import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 
 public class Menu
 {

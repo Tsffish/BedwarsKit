@@ -1,10 +1,12 @@
 name: BedwarsKit
-version: 1.9.51
+version: 1.9.52
 main: github.tsffish.bedwarskit.Main
 author: tsffish
-depend:
-  - BedwarsRel
+api-version: 1.13
 commands:
   bwk:
     description: Hello Command
     usage: /bwk
+  bwk reload:
+    description: Reload Command
+    usage: /bwk reload

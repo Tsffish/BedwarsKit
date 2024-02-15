@@ -1,33 +1,22 @@
-#*********************#
-#BedwarsKit configuration file#
-#*********************#
-#########################################################################
-#####                                                               #####
-##### Warning: Most of the following content is machine translation #####
-#####                                                               #####
-#########################################################################
+# ====================== #
+# BedwarsKit Main Config #
+# ====================== #
 
-#The configuration file may need to be reloaded twice to take effect
+# The configuration file may need to be reloaded twice to take effect
 
-config-version: "1.9.51"
-update_checker: true
-update_reportOp: true
-#Config version: Configuration file version
-#Do not modify, otherwise it will reset
-#Update_checker: Check for updates
-#Unless the update has a negative impact on you, it is recommended to keep the check update function turned on.
-#Update_reportOp reports updated information to the administrator
-
+# ================= #
+# Basic Setting     #
+# ================= #
 rushWorld: "rush"
-rushWorld2v2: "2v2"
-rushWorld4v4: "4v4"
+rushWorld2v2: "rush2v2"
+rushWorld4v4: "rush4v4"
 lobbyWorld: "lobby"
-#The most basic configuration for determining world names
-#The judgment method is whether the world name includes
-#RushWorld: Recognized as a game room
-#RushWorld2v2: Recognized as game room 2v2 mode
-#RushWorld4v4: Recognized as game room 4v4 mode
-#LobbyWorld: Recognized as a lobby
+# The most basic configuration for determining world names
+# The judgment method is whether the world name includes
+# RushWorld: Recognized as a game room
+# RushWorld2v2: Recognized as game room 2v2 mode
+# RushWorld4v4: Recognized as game room 4v4 mode
+# LobbyWorld: Recognized as a lobby (the identification method for the lobby includes)
 
 relTeamName_Red: "Red Team"
 relTeamName_Blue: "Blue Team"
@@ -37,39 +26,40 @@ relTeamName_Aqua: "Aqua Team"
 relTeamName_White: "White Team"
 relTeamName_Gray: "Gray Team"
 relTeamName_Pink: "Pink Team"
-#The most basic configuration of team names in the game
-#It's the team display name, not the color name
+# The most basic configuration of team names in the game
+# It's the team display name, not the color name
 
+# ================= #
+# Other Setting     #
+# ================= #
 customScoreboard: true
-#Is the custom scoreboard feature enabled
-
-meanTeamBedYes: "&a&l\u2714"
-meanTeamNone: "&4&l\u2718"
-meanTeamBedNo: "&a&l{aliveCount}"
+meanTeamBedYes: "&a\u2714"
+meanTeamNone: "&4\u2718"
+meanTeamBedNo: "&a{aliveCount}"
 meanYou: "{teamColor}\u2b60"
 meanNotYou: "{teamColor}"
 mean2v2Mode: "Double Mode"
-mean4v4Mode: "4v4v4v4Mode"
-serverIp: "&eMCBBS@the_starfish"
-meanBedwars: "Awakening War"
-meanGameEnd: "Game Over"
-#MeanTeamBedYes: TeamStat indicates the presence of beds in the team
-#MeanTeamNone: TeamStat indicates that the team has been eliminated
-#MeanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
-# {aliveCount} : Team Alive Players
-#MeanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
-#MeanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
-#Mean2v2Mode: indicates that this is a 2v2 mode
-#Mean4v4Mode: indicates that this is a 4v4 mode
-#ServerIP: can be used to fill in the server address or to add duplicate characters
-#MeanBedwards: can be used to fill in the wake-up war or to add duplicate characters
-#MeanGameEnd: indicates the end of the game
+mean4v4Mode: "4v4v4v4 Mode"
+serverIp: "&eGithub@Tsffish"
+meanBedwars: "Bedwars"
+meanGameEnd: "Game End"
+# customScoreboard: Is the custom scoreboard feature enabled
+# MeanTeamBedYes: TeamStat indicates the presence of beds in the team
+# MeanTeamNone: TeamStat indicates that the team has been eliminated
+# MeanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
+# {aliveCount}: The remaining players in the team
+# MeanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
+# MeanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
+# Mean2v2Mode: indicates that this is a 2v2 mode
+# Mean4v4Mode: indicates that this is a 4v4 mode
+# ServerIP: can be used to fill in the server address or to add duplicate characters
+# MeanBedwards: can be used to fill in the wake-up war or to add duplicate characters
+# MeanGameEnd: indicates the end of the game
 
-ScoreBoard2v2Title: "&e&l{bw}"
-
+ScoreBoard2v2Title: "     &e&l{game} &f- {formatTimeLeft}"
 ScoreBoard2v2Line01: "&7{date}"
-ScoreBoard2v2Line02: "&eTask Count Down:&a{LastTaskTimeLeft}"
-ScoreBoard2v2Line03: "&e\u27a5{LastTaskName}"
+ScoreBoard2v2Line02: "&eEvent Countdown: &a{LastTaskTimeLeft}"
+ScoreBoard2v2Line03: "&e\u27a5 {LastTaskName}"
 ScoreBoard2v2Line04: "&f "
 ScoreBoard2v2Line05: "{redTeamStat} &c{redTeamName} {redTeamIsMe}"
 ScoreBoard2v2Line06: "{blueTeamStat} &9{blueTeamName} {blueTeamIsMe}"
@@ -84,37 +74,37 @@ ScoreBoard2v2Line14: "&fK:{kill} - D:{death} - B:{bed}"
 ScoreBoard2v2Line15: "&b{ip}"
 ScoreBoard2v2Line16: ""
 #Customized Scoreboard Content in 2v2 Mode
-#Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
-#Note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
-#Variable:
+# Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+# Note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
+# Variable:
 # ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
 # ...TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
 # ...TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# ...TeamNameShort: The first character of the team name. Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, redTeamIsMe
 # TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
-#{formatTimeLeft}: The remaining time of the formatted game
-#{timeleft-s}: Game remaining time in seconds
-#{timeleft-m}: Game remaining time in minutes
-#{timeleft-h}: Game remaining time - hours
-#{timeleft-d}: Game remaining time in days
-#{timeline mo}: Game remaining time in months
-#{timeleft y}: Game remaining time in years
-#{date}: Today's date format is YYYY/M/D, such as 2080/3/27
-#{ip}: The value of serverIp in the configuration file
-#{bw}: The value of meanBedwards in the configuration file
-#{mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
-#{kill}: The number of enemies killed in your current game
-#{fkill}: Your KD value in this game
-#{kd}: Your KD value in this game
-#{death}: The number of deaths in your current game
-#{bed}: The number of digging beds in your current game
-#{game}: The game name of this game
-#{region}: The region of this bureau
+# {formatTimeLeft}: The remaining time of the formatted game
+# {timeleft-s}: Game remaining time in seconds
+# {timeleft-m}: Game remaining time in minutes
+# {timeleft-h}: Game remaining time - hours
+# {timeleft-d}: Game remaining time in days
+# {timeline mo}: Game remaining time in months
+# {timeleft y}: Game remaining time in years
+# {date}: Today's date format is YYYY/M/D, such as 2080/3/27
+# {ip}: The value of serverIp in the configuration file
+# {bw}: The value of meanBedwards in the configuration file
+# {mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+# {kill}: The number of enemies killed in your current game
+# {fkill}: Your KD value in this game
+# {kd}: Your KD value in this game
+# {death}: The number of deaths in your current game
+# {bed}: The number of digging beds in your current game
+# {game}: The game name of this game
+# {region}: The region of this bureau
 
-ScoreBoard4v4Title: "&e&l{bw}"
-
+ScoreBoard4v4Title: "     &e&l{game} &f- {formatTimeLeft}"
 ScoreBoard4v4Line01: "&7{date}"
-ScoreBoard4v4Line02: "&eTask Count Down:&a{LastTaskTimeLeft}"
-ScoreBoard4v4Line03: "&e\u27a5{LastTaskName}"
+ScoreBoard4v4Line02: "&eEvent Countdown: &a{LastTaskTimeLeft}"
+ScoreBoard4v4Line03: "&e\u27a5 {LastTaskName}"
 ScoreBoard4v4Line04: "&f "
 ScoreBoard4v4Line05: "{redTeamStat} &c{redTeamName} {redTeamIsMe}"
 ScoreBoard4v4Line06: "{blueTeamStat} &9{blueTeamName} {blueTeamIsMe}"
@@ -129,86 +119,85 @@ ScoreBoard4v4Line14: ""
 ScoreBoard4v4Line15: ""
 ScoreBoard4v4Line16: ""
 #Customized Scoreboard Content in 4v4 Mode
-#Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
-#Note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
-#Variable:
+# Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+# Note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
+# Variable:
 # ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
 # ...TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
 # ...TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
-# TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
-#{formatTimeLeft}: The remaining time of the formatted game
-#{timeleft-s}: Game remaining time in seconds
-#{timeleft-m}: Game remaining time in minutes
-#{timeleft-h}: Game remaining time - hours
-#{timeleft-d}: Game remaining time in days
-#{timeline mo}: Game remaining time in months
-#{timeleft y}: Game remaining time in years
-#{date}: Today's date format is YYYY/M/D, such as 2080/3/27
-#{ip}: The value of serverIp in the configuration file
-#{bw}: The value of meanBedwards in the configuration file
-#{mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
-#{kill}: The number of enemies killed in your current game
-#{fkill}: Your KD value in this game
-#{kd}: Your KD value in this game
-#{death}: The number of deaths in your current game
-#{bed}: The number of digging beds in your current game
-#{game}: The game name of this game
-#{region}: The region of this bureau
-
+# ...TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+# ...TeamNameShort: The first character of the team name. Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, redTeamIsMe
+# {formatTimeLeft}: The remaining time of the formatted game
+# {timeleft-s}: Game remaining time in seconds
+# {timeleft-m}: Game remaining time in minutes
+# {timeleft-h}: Game remaining time - hours
+# {timeleft-d}: Game remaining time in days
+# {timeline mo}: Game remaining time in months
+# {timeleft y}: Game remaining time in years
+# {date}: Today's date format is YYYY/M/D, such as 2080/3/27
+# {ip}: The value of serverIp in the configuration file
+# {bw}: The value of meanBedwards in the configuration file
+# {mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+# {kill}: The number of enemies killed in your current game
+# {fkill}: Your KD value in this game
+# {kd}: Your KD value in this game
+# {death}: The number of deaths in your current game
+# {bed}: The number of digging beds in your current game
+# {game}: The game name of this game
+# {region}: The region of this bureau
 
 breakTitle: true
-#Whether to enable the destruction of bed information
-breakTitleAll: "{BreakTeamColor}{BreakTeamName}&cThe bed has been destroyed"
-breakSubTitleAll: "&7destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
+breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c bed has been destory"
+breakSubTitleAll: "&7Destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
 breakTitleBreakPlayer: "{BreakTeamColor}{BreakTeamName}"
-breakSubTitleBreakPlayer: "&aThe bed has been destroyed by you"
-breakTitleBreakTeam: "&cThe bed has been destroyed"
-breakSubTitleBreakTeam: "&7destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
-#All: Sent to all players
-#BreakPlayer: Sent to players who break the bed
-#BreakTeam: Sent to players whose beds have been destroyed
-#Variable:
-#{BreakTeamColor}: The team color of the team whose bed was damaged
-#{BreakTeamName}: The team name of the team whose bed was destroyed
-#{BreakPlayerTeamColor}: The team color of the player who destroys the bed
-#{BreakPlayerName}: The player name of the player who broke the bed
-#{breakPlayerTeamName}: The team name of the player who destroyed the bed
-
+breakSubTitleBreakPlayer: "&aBed destory by you"
+breakTitleBreakTeam: "&cBed destroyed"
+breakSubTitleBreakTeam: "&7Destroyer:{BreakPlayerTeamColor}{BreakPlayerName}"
+# BreakTitle: Whether to enable the destruction bed title
+# All: Sent to all players
+# BreakPlayer: Sent to players who break the bed
+# BreakTeam: Sent to players whose beds have been destroyed
+# Variable:
+# {BreakTeamColor}: The team color of the team whose bed was damaged
+# {BreakTeamName}: The team name of the team whose bed was destroyed
+# {BreakPlayerTeamColor}: The team color of the player who destroys the bed
+# {BreakPlayerName}: The player name of the player who broke the bed
+# {breakPlayerTeamName}: The team name of the player who destroyed the bed
 
 deathGameMode: true
 respawnDelay: 5
-respawnTitle: "&e&l{timeleft}&a&lResurrect in seconds"
-respawnSubTitle: ""
+respawnTitle: "&a&lRespawn In &e&l{timeleft} &a&lSec"
+respawnSubTitle: " "
 respawnChat: ""
 respawnActionBar: ""
 respawnSuccTitle: "&f"
-respawnSuccSubTitle: ""
-respawnSuccChat: ""
-respawnSuccActionBar: ""
+respawnSuccSubTitle: " "
+respawnSuccChat: " "
+respawnSuccActionBar: " "
 preventloadworld: true
-#DeathGameMode: Is the resurrection countdown enabled
-#RespawnDelay: The countdown time for resurrection (in seconds)
-#Respawn: Resurrecting
-#Title: Title
-#Subtitle: Subtitle
-#Chat: Chat bar information
-#Toolbar information
-#Variable: {timeleft}: Remaining resurrection countdown time (seconds)
-#Preventloadworld: Do you want to enable preventing the world from being reloaded afte
-# r death and also disable the die-on_void option in the BedwarsRel configuration file
+# DeathGameMode: Is the resurrection countdown enabled
+# RespawnDelay: The countdown time for resurrection (in seconds)
+# Respawn: Resurrecting
+# Title: Title
+# Subtitle: Subtitle
+# Chat: Chat bar information
+# ActionBar: Toolbar information
+# Variable: {timeleft}: Remaining resurrection countdown time (seconds)
+# Preventloadworld: Do you want to enable preventing the world from being reloaded after death and also disable the die-on_void option in the BedwarsRel configuration file
 
 breakBedCheck: true
 tpDis: 0.74
-#Is the anti jamming bed enabled
-#When standing above the bed and damaging it, teleport upwards to prevent players from getting stuck in the bed
-#TpDis: The distance transmitted upwards must be of type double
+# Is the anti stuck bed enabled
+# When standing above the bed and damaging it, teleport upwards to prevent players from getting stuck in the bed
+# TpDis: The distance transmitted upwards must be of type double
 
 noHunger: true
 maxFoodLevel: 20
-#NoHunger: Whether to enable no hunger
-#MaxFoodLevel: hunger level to be locked in
+# NoHunger: Whether to enable no hunger
+# MaxFoodLevel: hunger level to be locked in
 
 noPearlDamage: true
+noPearlDamage_TPSound: true
 startKitCompass: false
 antiDrop: true
 grassPaneWalk: true
@@ -217,246 +206,273 @@ kill_res: true
 kill_res_chat: ""
 NoItemBreak: true
 CleanHostileOnStart: true
-#NoPearlDamage: Whether to activate the damage of the Endless Pearl
-#StartKitCompass: Whether to enable automatic compass for players
-#AntiDrop: Whether to enable anti movement equipment
-#GrassPaneWalk: Is the anti jamming glass panel enabled
-#CleanBottle: Is automatic cleaning of empty bottles enabled
-#Kild_res: Whether to enable killing and looting of resources
-#Kild_res_chat: Prompt information after killing, supports changing
-#Quantity {res}: Resource name, corresponding to mean Value of
-#{count}: The amount of resources obtained
-#NoitemBreak: Is it enabled to prevent sword damage
-#Does CleanHostileOnStart enable the deletion of all hostile creatures at the beginning of the game
+cleanBed: true
+creativeGameModeFix: true
+# NoPearlDamage: Whether to activate the damage of the Endless Pearl
+# noPearlDamage_TPSound: Whether to activate the teleport sound of the Endless Pearl
+# StartKitCompass: Whether to enable automatic compass for players
+# AntiDrop: Whether to enable anti movement equipment
+# GrassPaneWalk: Is the anti jamming glass panel enabled
+# CleanBottle: Is automatic cleaning of empty bottles enabled
+# Kild_res: Whether to enable killing and looting of resources
+# Kild_res_chat: Prompt information after killing, supports changing
+# Quantity {res}: Resource name, corresponding to mean Value of
+# {count}: The amount of resources obtained
+# NoitemBreak: Is it enabled to prevent sword damage
+# Does CleanHostileOnStart enable the deletion of all hostile creatures at the beginning of the game
+# CleanBed: Automatic cleaning of bed items
+# creativeGameModeFix: Fix the issue of BedwarsRel plugin unable to fly when switching to creation
 
 levelupShop: true
 levelupShopOpenMode: "click on item"
-levelupShopOpenModeEntityName: "Upgrade Store"
+levelupShopOpenModeEntityName: "LevelUp Shop"
 LevelupItemType: "BOOK_AND_QUILL"
-LevelupItemName: "Upgrade Store"
+LevelupItemName: "Level Up"
 levelupShopDelayOpen: true
-teamEnchItemName_Sharp1: "sharpI"
-teamEnchItemName_Prot1: "ProtI"
-teamEnchItemName_Prot2: "ProtII"
-teamEnchItemName_Prot3: "ProtIII"
-teamEnchItemName_Prot4: "ProtIV"
 meanIron: "&fIron"
 meanGold: "&6Gold"
 meanDiamond: "&bDiamond"
-meanEmerlad: "&aEmerald"
-shopLevelup: "Upgrade Store"
+meanEmerlad: "&aEmerlad"
+shopLevelup: "LevelUp"
 shopItem: ""
-#LevelupShop: No, open upgrade store
-#LevelupShopOpenMode: Upgrade the way the store opens,
-#Supports the following modes
-#Click on item: Click on the item to open it
-#"Click on entity": Click on the villagers to open it
-#LevelupShopOpenModeEntityName: The name of the clicked villager that needs to be matched to open the menu
-#LevelupItem Type: The item type of the item opened in the store
-#LevelupShopDelayOpen: Whether to open the delayed opening menu: If the item in the opened menu is clicked, it will
-#Immediately open the other items section and add a slight delay to overwrite the opening of the upgrade menu
-#TeamEnchitemName_...: The name of the enchantment level in the menu
-#MeanIron: represents an iron ingot
-#MeanGold: represents a gold ingot
-#MeanDiamond: represents a diamond
-#MeanEmerald: represents an emerald
-#ShopLevelup: The menu title for upgrading menus
-#ShopItem: When clicking on an item, if the name of the current menu matches this value, the upgrade menu will open. Generally, it is BedwarsRel's store
-#Name (\ plugins \ BedwarsRel \ local \ zh_cN. json: ingame. shop. name)
-#If this feature is not needed, please set it to ""
+teamEnchInvRow: 6
+# LevelupShop: No, open upgrade store
+# LevelupShopOpenMode: Upgrade the way the store opens,
+# Supports the following modes
+# "click on item": Click on the item to open it
+# "click on entity": Click on the villagers to open it
+# LevelupShopOpenModeEntityName: The name of the clicked villager that needs to be matched to open the menu
+# LevelupItem Type: The item type of the item opened in the store
+# LevelupShopDelayOpen: Whether to open the delayed opening menu: If the item in the opened menu is clicked, it will
+# Immediately open the other items section and add a slight delay to overwrite the opening of the upgrade menu
+# TeamEnchitemName_...: The name of the enchantment level in the menu
+# MeanIron: represents an iron ingot
+# MeanGold: represents a gold ingot
+# MeanDiamond: represents a diamond
+# MeanEmerald: represents an emerald
+# ShopLevelup: The menu title for upgrading menus
+# ShopItem: When clicking on an item, if the name of the current menu matches this value, the upgrade menu will open. Generally, it is BedwarsRel's store
+# Name (\ plugins \ BedwarsRel \ local \ zh_cN. json: ingame. shop. name)
+# If this feature is not needed, please set it to ""
+# TeamEnchInvRow: Upgrade the number of rows in the store, up to 6 rows
+# TeamEnchitemSlot_...: The location of the enchantment level item
+
+levelupsharpItemType: "IRON_SWORD"
+levelupsharpItemSlot: 10
+teamEnchItemName_Sharp1: "Sharpness I"
+teamEnchItemName_Sharp2: "Sharpness II"
+teamEnchItemName_Sharp3: "Sharpness III"
+teamEnchItemName_Sharp4: "Sharpness IV"
+teamEnchItemName_sharpMax: "Sharpness (Maxed)"
+
+levelupprotItemType: "IRON_CHESTPLATE"
+levelupprotItemSlot: 11
+teamEnchItemName_Prot1: "Protection I"
+teamEnchItemName_Prot2: "Protection II"
+teamEnchItemName_Prot3: "Protection III"
+teamEnchItemName_Prot4: "Protection IV"
+teamEnchItemName_protMax: "Protection (Maxed)"
+
+leveluphasteItemType: "GOLD_PICKAXE"
+leveluphasteItemSlot: 12
+teamEffItemName_haste1: "Haste I"
+teamEffItemName_haste2: "Haste II"
+teamEffItemName_hasteMax: "Haste (MAX)"
+
+leveluphealItemType: "BEACON"
+leveluphealItemSlot: 20
+teamEffItemName_heal1: "Heal I"
+teamEffItemName_healMax: "Heal (MAX)"
+teamEff_Heal_dis: 15
 
 sharp1Cost2v2: 4
+sharp2Cost2v2: 8
+sharp3Cost2v2: 16
+sharp4Cost2v2: 32
 prot1Cost2v2: 2
 prot2Cost2v2: 4
 prot3Cost2v2: 8
 prot4Cost2v2: 16
+haste1Cost2v2: 2
+haste2Cost2v2: 4
+heal1Cost2v2: 1
+
 sharp1Cost4v4: 8
+sharp2Cost4v4: 16
+sharp3Cost4v4: 26
+sharp4Cost4v4: 36
 prot1Cost4v4: 5
 prot2Cost4v4: 10
 prot3Cost4v4: 20
 prot4Cost4v4: 30
-#The price of enchantment levels in 2v2 and 4v4
-#Sharp1: Sharp1
-#Prot11: Protection 1
+haste1Cost4v4: 4
+haste2Cost4v4: 6
+heal1Cost4v4: 3
+
+TeamEnchantMaxCost: "Maxed"
+
+messLevelUpSharp1: "&6{player} &aPurchased team upgrade &6Sharpness I"
+messLevelUpSharp2: "&6{player} &aPurchased team upgrade &6Sharpness II"
+messLevelUpSharp3: "&6{player} &aPurchased team upgrade &6Sharpness III"
+messLevelUpSharp4: "&6{player} &aPurchased team upgrade &6Sharpness IV"
+
+messLevelUpProt1: "&6{player} &aPurchased team upgrade &6Protection I"
+messLevelUpProt2: "&6{player} &aPurchased team upgrade &6Protection II"
+messLevelUpProt3: "&6{player} &aPurchased team upgrade &6Protection III"
+messLevelUpProt4: "&6{player} &aPurchased team upgrade &6Protection IV"
+
+messLevelUpHaste1: "&6{player} &aPurchased team upgrade &6HASTE I"
+messLevelUpHaste2: "&6{player} &aPurchased team upgrade &6HASTE II"
+messLevelUpHeal1: "&6{player} &aPurchased team upgrade &6HEAL I"
+
+messLevelUpFailed: "&cInsufficient resources or having a higher level of enchantment!"
+
+dieOutGameItem_playAgain: true
+dieOutGameItem_playAgain_ItemName: "Play Again"
+dieOutGameItem_playAgain_ItemType: "PAPER"
+dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
 
 
-messLevelUpSharp1: "&6{player}&aPurchased team upgrade &6sharp I"
-messLevelUpProt1: "&6{player}&aPurchased team upgrade &6protect I"
-messLevelUpProt2: "&6{player}&aPurchased team upgrade &6protec tII"
-messLevelUpProt3: "&6{player}&Purchased team upgrade &6protect III"
-messLevelUpProt4: "&6{player}&aPurchased team upgrade &6protect IV"
-messLevelUpFailed: "&cInsufficient resources or possessing higher-level enchantments!"
-
-
-damagefb_attackmess: true
-damagefb_attackchat: ""
-damagefb_attackTitle: ""
-damagefb_attackSubTitle: "&3Damage &7- &c{damage}"
-damagefb_attackactionbar: ""
-damagefb_attackBlood: true
-damagefb_attackBloodMode: "player"
-damagefb_attackBloodType: 152
-#Damagefb-Title: Is the damage feedback function enabled
-#Damagefb.attackTitle: The title displayed when attacking a player
-#Damagefb.attackSubTitle: Subtitle displayed when attacking a player
-#Damagefb.attackBlood: Attack the player's particle effect
-#Damagefb-attackBloodMode: The particle effect display mode for attacking players,
-#Supports the following modes:
-#{single}: Generate player's location
-#{player}: The entire player
-#{box}: The player's surroundings
-#Damagefb-attackBloodType: The principle of particles is to play the square walking effect,
-#Different blocks can be set to achieve different effects, only supporting numerical IDs. The default is 152: Redstone
-
-killfb_sendmess: true
-killfb_sendmess_chat: ""
-killfb_sendmess_title: ""
-killfb_sendmess_subtitle: ""
-killfb_sendmess_actionbar: ""
-#Killfb_sendmes: Whether to enable the function of sending feedback messages for killing enemies
-#Supporting variables:
-#{dp}: Name of the killed player
-#{kp}: Name of the player who killed the enemy
-#{... p_health}: Fill in d or k, which represents the player's health value
-
-meanSecond: "Sec"
-
-upToChainArmor: "CHAINMAIL_CHESTPLATE"
-upToIronArmor: "IRON_CHESTPLATE"
-upToDiamondArmor: "DIAMOND_CHESTPLATE"
-#Automatically upgrade your equipment when an item is detected
-#UpToChainArmor: Upgrade to Chain Equipment
-#UpToIronArmor: Upgrade to Iron equipment
-#UpToDiamondArmor: Upgrade to Diamond equipment
-chainPriceType: "IRON_INGOT"
-ironPriceType: "GOLD_INGOT"
-diamondPriceType: "DIAMOND"
-chainPrice: 35
-ironPrice: 12
-diamondPrice: 6
-#When it is detected that you have purchased too much equipment, the type of item and its price will be returned
-# PriceType: Item type
-# Price: Item price
+# ===================== #
+# BedwarsKit Kit Config #
+# ===================== #
 
 kitenable: true
+kitDefault: "defaultless"
 kitForce: false
 kitForceKit: "Default"
-#Kitenable: Whether to enable the occupation function
-#KitForce: Force players to set their profession, regardless of which profession they choose
-#KitForceKit: Compulsory career selection
-#Support the following professions:
-#Default: Default profession
-#None: No occupation
 
-kitMenuTitle: "Choose a Kit"
+kitMenuTitle: "Select a Kit"
 kitMenurow: 6
-#KitMenu Title: The menu title for selecting a profession
-#KitMenu: The number of rows in the menu for selecting a profession, up to a maximum of 6 rows
 
 kitMenuItemGive: true
 kitMenuItemType: "IRON_SWORD"
 kitMenuItemAmount: 1
-kitMenuItemName: "Choose a kit"
-meanSelKitSucc: "&bAwakening War &7>> &aSuccessfully selected kit!"
-#KitMenu Item Give: Do you want to enable the function of automatically giving items to open the selected profession menu
-#KitMenu Item Type: Open the item type of the item in the selected profession menu
-#KitMenu Item Amount: The number of items to open and select from the occupation menu
-#KitMenu Item Name: Open the item name of the item in the selected profession menu
-#MeanSelKitSucc: A prompt message for successfully selecting a profession is sent in the chat bar
+kitMenuItemName: "Selet Kit"
+meanSelKitSucc: "&bBedwars &7>> &aSuccessfully selected kit!"
 
-KitDefaultName: "Default Kit"
-KitDefaultDescription: "Default Kit"
+KitDefaultName: "Default"
+KitDefaultDescription: "default kit."
 KitDefaultItemType: "GOLD_HELMET"
 KitDefaultItemAmount: 1
 KitDefaultItemSlot: 0
 KitDefaultItemName: "&fDefault"
 KitDefaultItemLore:
   - "&f"
-  - "&a Career Introduction"
-  - "&f Default profession!"
+  - "&aKit Introduction"
+  - "&fdefault kit"
   - "&f"
-  - "&a Career Content"
-  - "&f Permanent Speed"
-  - "&f Permanent Equipment"
+  - "&aKit content"
+  - "&fPermanent armor"
+  - "&fPermanent speed effect"
   - "&f"
 KitDefault_Boost_GiveSpeed_enable: true
 KitDefault_Boost_GiveSpeed_level: 1
-#Kit Name: Occupation The name of (currently not used)
-#Kit Description: Occupation Introduction to (currently not used)
-#Kit Item Type: Occupation Selecting item types in the career menu
-#Kit Item Amount: Occupation Select the number of items in the career menu
-#Kit Item Slot: Occupation Select the item location in the career menu
-#Kit Item Name: Occupation Selecting item names in the career menu
-#Kit Item Lore: Occupation Annotate items in the career menu
-#Boost_GiveSpeedenable: Whether to enable the buff effect of this profession: permanent speed
-#Boost_GiveSpeedlevel: The buff effect of this profession: the level of permanent speed
 
-KitNoneName: "None Kit"
-KitNoneDescription: "None Kit"
+KitNoneName: "None"
+KitNoneDescription: "None kit"
 KitNoneItemType: "BARRIER"
 KitNoneItemAmount: 1
 KitNoneItemSlot: 1
 KitNoneItemName: "&fNone"
 KitNoneItemLore:
   - "&f"
-  - "&a Career Introduction"
-  - "&f no profession!"
-  - "&f"
-  - "&a Career Content"
-  - "&f None"
-  - "&f"
+  - "&aKit Introduction"
+  - "&fnone kit"
 
-#Kit Name: Occupation The name of (currently not used)
-#Kit Description: Occupation Introduction to (currently not used)
-#Kit Item Type: Occupation Selecting item types in the career menu
-#Kit Item Amount: Occupation Select the number of items in the career menu
-#Kit Item Slot: Occupation Select the item location in the career menu
-#Kit Item Name: Occupation Selecting item names in the career menu
-#Kit Item Lore: Occupation Annotate items in the career menu
-
-KitDefaultlessName: "Default Kit 2"
-KitDefaultlessDescription: "Default Kit 2"
+KitDefaultlessName: "DefaultLess"
+KitDefaultlessDescription: "default less kit."
 KitDefaultlessItemType: "LEATHER_HELMET"
 KitDefaultlessItemAmount: 1
 KitDefaultlessItemSlot: 2
-KitDefaultlessItemName: "&fDefault 2 "
+KitDefaultlessItemName: "&fDefaultLess "
 KitDefaultlessItemLore:
   - "&f"
-  - "&a Career Introduction 2"
-  - "&f Default profession!"
+  - "&aKit Introduction"
+  - "&fdefault kit"
   - "&f"
-  - "&a Career Content"
-  - "&f Permanent Speed"
-  - "&f Permanent equipment (except for leg guards and boots)"
+  - "&aKit content"
+  - "&fPermanent armor (Except for leg guards and boots)"
   - "&f"
+  -
 KitDefaultless_Boost_GiveSpeed_enable: false
 KitDefaultless_Boost_GiveSpeed_level: 1
-#Kit Name: Occupation The name of (currently not used)
-#Kit Description: Occupation Introduction to (currently not used)
-#Kit Item Type: Occupation Selecting item types in the career menu
-#Kit Item Amount: Occupation Select the number of items in the career menu
-#Kit Item Slot: Occupation Select the item location in the career menu
-#Kit Item Name: Occupation Selecting item names in the career menu
-#Kit Item Lore: Occupation Annotate items in the career menu
-#Boost_GiveSpeedenable: Whether to enable the buff effect of this profession: permanent speed
-#Boost_GiveSpeedlevel: The buff effect of this profession: the level of permanent speed
 
+damagefb_attackmess: true
+damagefb_attackchat: ""
+damagefb_attackTitle: ""
+damagefb_attackSubTitle: "&fDamage &7- &3{damage}"
+damagefb_attackactionbar: ""
+damagefb_attackBlood: true
+damagefb_attackBloodMode: "player"
+damagefb_attackBloodType: 152
+# Damagefb-Title: Is the damage feedback function enabled
+# Damagefb.attackTitle: The title displayed when attacking a player
+# Damagefb.attackSubTitle: Subtitle displayed when attacking a player
+# Damagefb.attackBlood: Attack the player's particle effect
+# Damagefb-attackBloodMode: The particle effect display mode for attacking players,
+# Supports the following modes:
+# {single}: Generate player's location
+# {player}: The entire player
+# {box}: The player's surroundings
+# Damagefb-attackBloodType: The principle of particles is to play the square walking effect,
+# Different blocks can be set to achieve different effects, only supporting numerical IDs. The default is 152: Redstone
+
+killfb_sendmess: true
+killfb_sendmess_chat: ""
+killfb_sendmess_title: "{ohk} KILL"
+killfb_sendmess_subtitle: ""
+killfb_sendmess_actionbar: ""
+killfb_oneHealthKill: true
+killfb_oneHealthKill_itemType: "NETHER_STAR"
+killfb_oneHealthKill_itemName: "&c&lSoul"
+# Killfb_sendmes: Whether to enable the function of sending feedback messages for killing enemies
+# Supporting variables:
+# {dp}: Name of the killed player
+# {kp}: Name of the player who killed the enemy
+# {... p_health}: Fill in d or k, which represents the player's health value
+# killfb_oneHealthKill : Whether to enable one life kill feedback information
+# It is necessary to change the configuration file of BedwarsRel at the same time
+# change : keep-inventory-on-death to true
+
+meanSecond: "Second"
+
+tab: true
+tab_is_multiLine: false
+tab_head: "MC.MCSERVER.ORG"
+tab_foot: "MC.MCSERVER.ORG"
+tab_headList:
+  - "MC.MCSERVER.ORG"
+  - " "
+tab_footList:
+  - " "
+  - "MC.MCSERVER.ORG"
+
+upToChainArmor: "CHAINMAIL_CHESTPLATE"
+upToIronArmor: "IRON_CHESTPLATE"
+upToDiamondArmor: "DIAMOND_CHESTPLATE"
+# Automatically upgrade your equipment when an item is detected
+# UpToChainArmor: Upgrade to Chain Equipment
+# UpToIronArmor: Upgrade to Iron equipment
+# UpToDiamondArmor: Upgrade to Diamond equipment
+chainPriceType: "IRON_INGOT"
+ironPriceType: "GOLD_INGOT"
+diamondPriceType: "EMERALD"
+chainPrice: 40
+ironPrice: 12
+diamondPrice: 6
+# When it is detected that you have purchased too much equipment, the type of item and its price will be returned
+# PriceType: Item type
+# Price: Item price
 
 messreloadnow: "&bBedwarsKit &7>> &eReloading configuration file"
 messreloadsucc: "&bBedwarsKit &7>> &aSuccessfully reloaded configuration file"
-#Messreloadnow: Prompt information in plugin overload
-#Messreloadsucc: Prompt message that the plugin has been overloaded
 
 startmess: false
 startmess_all_chat: ""
 startmess_all_title: ""
 startmess_all_subtitle: ""
 startmess_all_actionbar: ""
-#Startness: Whether to start sending messages at the beginning of the game
-#Chat: Sent chat messages
-#Title: Sent Title
-#Subtitle: Subtitle sent
-#Actionbar: Sent toolbar information
 
 gametask: true
 gametask_spawntime: true
@@ -480,162 +496,200 @@ gametask_spawntime_emerald_1: 65000
 gametask_spawntime_emerald_2: 50000
 gametask_spawntime_emerald_3: 35000
 gametask_spawntime_emerald_4: 20000
-gametask_boundaries_size: 9999
+gametask_boundaries_size: 256
 gametask_finalbattle: true
 gametask_finalbattle_boundaries_size: 32
 gametask_finalbattle_boundaries_time: 60
 gametask_finalbattle_boundaries_warnidis: 0
 gametask_finalbattle_boundaries_damagebuffer: 1
 gametask_finalbattle_boundaries_damage: 1
-#Gametask: Is the countdown task feature enabled
-#Gametask_splaytime: Enable resource point speed control task
-#Gametask_spaytime__ The speed of the speed control level for 1/2/3/4 of this resource, in milliseconds
-#Gametask_finalbattle: Whether to enable the kill mode task
-#Gametask_finalbattle_boundaries_size: The size of the world boundary in the kill mode
-#Gametask_finalbattle'boundaries_time: The time to shrink the world boundary in the kill mode
-#Gametask_finalbattle_boundaries_warnings: Edge warnings for world boundaries in kill mode
-#Gametask_finalbattle_boundaries_damagebuffer: Damage buffer for world boundaries in kill mode
-#Gametask_finalbattle'boundaries_damage: Damage at World Boundaries in Kill Mode
-
-gametask_spawntime_tasks_iron1: 0
-gametask_spawntime_tasks_iron2: 0
-gametask_spawntime_tasks_iron3: 0
-gametask_spawntime_tasks_iron4: 0
-gametask_spawntime_tasks_gold1: 0
-gametask_spawntime_tasks_gold2: 0
-gametask_spawntime_tasks_gold3: 0
-gametask_spawntime_tasks_gold4: 0
-gametask_spawntime_tasks_diamond1: 960
-gametask_spawntime_tasks_diamond2: 1440
-gametask_spawntime_tasks_diamond3: 2400
-gametask_spawntime_tasks_diamond4: 3360
-gametask_spawntime_tasks_emerald1: 960
-gametask_spawntime_tasks_emerald2: 1920
-gametask_spawntime_tasks_emerald3: 2880
-gametask_spawntime_tasks_emerald4: 3848
-gametask_finalbattle_time: 4328
-#How long will the task take to execute? The game starts counting in seconds
-#Gametask_spawntime_tasks_ 1/2/3/4: Resource tasks
-#Gametask_finalbattle_time: Kill Mode Mission
-
-gametask_name_iron1: " "
-gametask_name_iron2: " "
-gametask_name_iron3: " "
-gametask_name_iron4: " "
-gametask_name_gold1: " "
-gametask_name_gold2: " "
-gametask_name_gold3: " "
-gametask_name_gold4: " "
-gametask_name_diamond1: "Diamond generation speed up I"
-gametask_name_diamond2: "Diamond generation speed up II"
-gametask_name_diamond3: "Diamond generation speed up III"
-gametask_name_diamond4: "Diamond generation speed up IV"
-gametask_name_emerald1: "Emerald generation speed up I"
-gametask_name_emerald2: "Emerald generation speed up II"
-gametask_name_emerald3: "Emerald generation speed up III"
-gametask_name_emerald4: "Emerald generation speed up IV"
-gametask_name_finalbattle: "Kill mode"
-#This option is temporarily unavailable
-#Gametaskname: The name of the task on the scoreboard
-#Gametaskname_ 1/2/3/4 resource point speed regulation level
-#Gametaskname_finalbattle: Kill mode
+# Gametask: Is the countdown task feature enabled
+# Gametask_splaytime: Enable resource point speed control task
+# Gametask_spaytime__ The speed of the speed control level for 1/2/3/4 of this resource, in milliseconds
+# Gametask_finalbattle: Whether to enable the kill mode task
+# Gametask_finalbattle_boundaries_size: The size of the world boundary in the kill mode
+# Gametask_finalbattle'boundaries_time: The time to shrink the world boundary in the kill mode
+# Gametask_finalbattle_boundaries_warnings: Edge warnings for world boundaries in kill mode
+# Gametask_finalbattle_boundaries_damagebuffer: Damage buffer for world boundaries in kill mode
+# Gametask_finalbattle'boundaries_damage: Damage at World Boundaries in Kill Mode
 
 
-#Information sent after completing the task
+gametask_spawntime_tasks_iron1: 200
+gametask_spawntime_tasks_iron2: 400
+gametask_spawntime_tasks_iron3: 600
+gametask_spawntime_tasks_iron4: 800
+gametask_spawntime_tasks_gold1: 1000
+gametask_spawntime_tasks_gold2: 1200
+gametask_spawntime_tasks_gold3: 1400
+gametask_spawntime_tasks_gold4: 1600
+gametask_spawntime_tasks_diamond1: 1800
+gametask_spawntime_tasks_diamond2: 2000
+gametask_spawntime_tasks_diamond3: 2200
+gametask_spawntime_tasks_diamond4: 2400
+gametask_spawntime_tasks_emerald1: 2600
+gametask_spawntime_tasks_emerald2: 2800
+gametask_spawntime_tasks_emerald3: 3000
+gametask_spawntime_tasks_emerald4: 3200
+gametask_finalbattle_time: 3400
+# How long will the task take to execute? The game starts counting in seconds
+# Gametask_spawntime_tasks_ 1/2/3/4: Resource tasks
+# Gametask_finalbattle_time: Kill Mode Mission
+
+gametask_name_iron1: "Iron I"
+gametask_name_iron2: "Iron II"
+gametask_name_iron3: "Iron III"
+gametask_name_iron4: "Iron IV"
+gametask_name_gold1: "Gold I"
+gametask_name_gold2: "Gold II"
+gametask_name_gold3: "Gold III"
+gametask_name_gold4: "Gold IV"
+gametask_name_diamond1: "Diamond I"
+gametask_name_diamond2: "Diamond II"
+gametask_name_diamond3: "Diamond III"
+gametask_name_diamond4: "Diamond IV"
+gametask_name_emerald1: "Emerald I"
+gametask_name_emerald2: "Emerald II"
+gametask_name_emerald3: "Emerald III"
+gametask_name_emerald4: "Emerald IV"
+gametask_name_finalbattle: "Death Mode"
+# This option is temporarily unavailable
+# Gametaskname: The name of the task on the scoreboard
+# Gametaskname_ 1/2/3/4 resource point speed regulation level
+# Gametaskname_finalbattle: Kill mode
+
+
+# Information sent after completing the task
 gametask_mess_iron1_chat: ""
 gametask_mess_iron1_title: ""
-gametask_mess_iron1_subtitle: ""
+gametask_mess_iron1_subtitle: "&4&lThe speed of iron resources has increased"
 gametask_mess_iron1_actionbar: ""
 gametask_mess_iron2_chat: ""
 gametask_mess_iron2_title: ""
-gametask_mess_iron2_subtitle: ""
+gametask_mess_iron2_subtitle: "&4&lThe speed of iron resources has increased"
 gametask_mess_iron2_actionbar: ""
 gametask_mess_iron3_chat: ""
 gametask_mess_iron3_title: ""
-gametask_mess_iron3_subtitle: ""
+gametask_mess_iron3_subtitle: "&4&lThe speed of iron resources has increased"
 gametask_mess_iron3_actionbar: ""
 gametask_mess_iron4_chat: ""
 gametask_mess_iron4_title: ""
-gametask_mess_iron4_subtitle: ""
+gametask_mess_iron4_subtitle: "&4&lThe speed of iron resources has increased"
 gametask_mess_iron4_actionbar: ""
 
 gametask_mess_gold1_chat: ""
 gametask_mess_gold1_title: ""
-gametask_mess_gold1_subtitle: ""
+gametask_mess_gold1_subtitle: "&4&lThe speed of gold resources has increased"
 gametask_mess_gold1_actionbar: ""
 gametask_mess_gold2_chat: ""
 gametask_mess_gold2_title: ""
-gametask_mess_gold2_subtitle: ""
+gametask_mess_gold2_subtitle: "&4&lThe speed of gold resources has increased"
 gametask_mess_gold2_actionbar: ""
 gametask_mess_gold3_chat: ""
 gametask_mess_gold3_title: ""
-gametask_mess_gold3_subtitle: ""
+gametask_mess_gold3_subtitle: "&4&lThe speed of gold resources has increased"
 gametask_mess_gold3_actionbar: ""
 gametask_mess_gold4_chat: ""
 gametask_mess_gold4_title: ""
-gametask_mess_gold4_subtitle: ""
+gametask_mess_gold4_subtitle: "&4&lThe speed of gold resources has increased"
 gametask_mess_gold4_actionbar: ""
 
 gametask_mess_diamond1_chat: ""
 gametask_mess_diamond1_title: ""
-gametask_mess_diamond1_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond1_subtitle: "&4&lThe speed of diamond resources has increased"
 gametask_mess_diamond1_actionbar: ""
 gametask_mess_diamond2_chat: ""
 gametask_mess_diamond2_title: ""
-gametask_mess_diamond2_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond2_subtitle: "&4&lThe speed of diamond resources has increased"
 gametask_mess_diamond2_actionbar: ""
 gametask_mess_diamond3_chat: ""
 gametask_mess_diamond3_title: ""
-gametask_mess_diamond3_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond3_subtitle: "&4&lThe speed of diamond resources has increased"
 gametask_mess_diamond3_actionbar: ""
 gametask_mess_diamond4_chat: ""
 gametask_mess_diamond4_title: ""
-gametask_mess_diamond4_subtitle: "&4&lDiamond Resource Point Speed Up!"
+gametask_mess_diamond4_subtitle: "&4&lThe speed of diamond resources has increased"
 gametask_mess_diamond4_actionbar: ""
 
 gametask_mess_emerald1_chat: ""
 gametask_mess_emerald1_title: ""
-gametask_mess_emerald1_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald1_subtitle: "&4&lThe speed of emerald resources has increased"
 gametask_mess_emerald1_actionbar: ""
 gametask_mess_emerald2_chat: ""
 gametask_mess_emerald2_title: ""
-gametask_mess_emerald2_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald2_subtitle: "&4&lThe speed of emerald resources has increased"
 gametask_mess_emerald2_actionbar: ""
 gametask_mess_emerald3_chat: ""
 gametask_mess_emerald3_title: ""
-gametask_mess_emerald3_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald3_subtitle: "&4&lThe speed of emerald resources has increased"
 gametask_mess_emerald3_actionbar: ""
 gametask_mess_emerald4_chat: ""
 gametask_mess_emerald4_title: ""
-gametask_mess_emerald4_subtitle: "&4&lEmerald Resource Point Speed Up!"
+gametask_mess_emerald4_subtitle: "&4&lThe speed of emerald resources has increased"
 gametask_mess_emerald4_actionbar: ""
 
-gametask_mess_finalbattle_chat: "The&f boundary is starting to shrink, go to the main island as soon as possible to avoid damage!"
-gametask_mess_finalbattle_title: "&4&l Kill Mode"
-gametask_mess_finalbattle_subtitle: "&fBoundary begins to shrink"
+gametask_mess_finalbattle_chat: "&fThe border is starting to shrink, go to the main island as soon as possible to avoid damage!"
+gametask_mess_finalbattle_title: "&4&lDeath Mode"
+gametask_mess_finalbattle_subtitle: "&fThe boundary begins to shrink"
 gametask_mess_finalbattle_actionbar: ""
 
 placeCorrect_ResSpawner: true
 placeCorrect_ResSpawner_mess_chat: ""
 placeCorrect_ResSpawner_mess_title: ""
 placeCorrect_ResSpawner_mess_subtitle: ""
-placeCorrect_ResSpawner_mess_actionbar: ""
-#Do you want to enable the function of preventing blocks from being in resource points
-#_ Dis: No distance from the resource point is allowed
+placeCorrect_ResSpawner_mess_actionbar: "&cYou cannot place blocks here!"
+placeCorrect_ResSpawner_dis: 3
 
 placeCorrect_PlayerSpawnLoc: true
-placeCorrect_PlayerSpawnLoc_mess_chat: "&f出生点附近禁止防止方块!"
+placeCorrect_PlayerSpawnLoc_mess_chat: ""
 placeCorrect_PlayerSpawnLoc_mess_title: ""
 placeCorrect_PlayerSpawnLoc_mess_subtitle: ""
-placeCorrect_PlayerSpawnLoc_mess_actionbar: ""
-#Do you want to enable the function of preventing blocks from appearing at the team birth point
-#_ Dis: No distance from the team's birth point is allowed
+placeCorrect_PlayerSpawnLoc_mess_actionbar: "&cYou cannot place blocks here!"
+placeCorrect_PlayerSpawnLoc_dis: 3
 
 placeCorrect_notInGame: true
 placeCorrect_notInGame_OpBypass: true
 breakCorrect_notInGame: true
 breakCorrect_notInGame_OpBypass: true
-#Is it allowed to place/destroy blocks outside the game
-#Place: Place
-#Break: break
-#_ OpBypass: Does Op ignore this restriction
+
+nobreakList:
+  - "WOOD_SWORD"
+  - "WOOD_PICKAXE"
+  - "WOOD_AXE"
+  - "STONE_SWORD"
+  - "IRON_SWORD"
+  - "DIAMOND_SWORD"
+  - "GOLD_SWORD"
+  - "GOLD_PICKAXE"
+  - "GOLD_AXE"
+noMoveList:
+  - "HELMET"
+  - "CHESTP"
+  - "LEG"
+  - "BOOT"
+giveSharpEnchList:
+  - "WOOD_SWORD"
+  - "STONE_SWORD"
+  - "IRON_SWORD"
+  - "DIAMOND_SWORD"
+  - "GOLD_SWORD"
+giveProtEnchList:
+  - "LEATHER_LEGGINGS"
+  - "LEATHER_BOOTS"
+  - "CHAINMAIL_LEGGINGS"
+  - "CHAINMAIL_BOOTS"
+  - "IRON_LEGGINGS"
+  - "IRON_BOOTS"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
+
+
+# ================= #
+# Update Config     #
+# ================= #
+config-version: "1.9.52"
+update_checker: true
+update_reportOp: true
+# Config version: Configuration file version
+# Do not modify, otherwise it will reset
+# Update_checker: Check for updates
+# Update_reportOp reports updated information to the admin

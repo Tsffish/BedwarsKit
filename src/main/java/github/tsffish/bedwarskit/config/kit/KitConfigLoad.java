@@ -1,27 +1,34 @@
-package github.tsffish.bedwarskit.config;
+package github.tsffish.bedwarskit.config.kit;
 
-import github.tsffish.bedwarskit.config.kit.KitDefault;
-import github.tsffish.bedwarskit.config.kit.KitDefaultless;
-import github.tsffish.bedwarskit.config.kit.KitNone;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import github.tsffish.bedwarskit.util.kit.KitDefault;
+import github.tsffish.bedwarskit.util.kit.KitDefaultless;
+import github.tsffish.bedwarskit.util.kit.KitNone;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 
-import static github.tsffish.bedwarskit.config.ErrorConfigHandler.er;
-import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
-import static github.tsffish.bedwarskit.config.MainConfigHandler.c;
-import static github.tsffish.bedwarskit.config.kit.MenuItem.loadKitMenuItem;
-import static github.tsffish.bedwarskit.util.misc.ErrorLogger.le;
-import static github.tsffish.bedwarskit.util.misc.InfoLogger.l;
 
-class KitConfigLoad
-{
+import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
+import static github.tsffish.bedwarskit.util.kit.MenuItem.loadKitMenuItem;
+import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
-    static void loadKitConfig()
-    {
+public class KitConfigLoad {
 
+    public static void loadKitConfig() {
+        FileConfiguration c = MainConfigHandler.c;
         if (c == null){
-            le("unable to found kit config!");
+            le("KitConfigLoad","unable to found kit config");
             return;
         }
+
+        if (c.getString(KitConfigPath.path_kitDefault) != null) {
+            KitConfigHandler.kitDefault = c.getString(KitConfigPath.path_kitDefault);
+        } else {
+            sendError(KitConfigPath.path_kitDefault);
+        }
+
 
         if (c.getString(KitConfigPath.path_kitenable) != null)
         {
@@ -32,14 +39,13 @@ class KitConfigLoad
             er("KitConfigLoad",KitConfigPath.path_kitenable, "vaule is null");
         }
 
-        if (c.getString(KitConfigPath.path_kitMenuTitle) != null)
-        {
+        if (c.getString(KitConfigPath.path_kitMenuTitle) != null) {
             kitMenuTitle = c.getString(KitConfigPath.path_kitMenuTitle);
-        }
-        else
-        {
+        } else {
             er("KitConfigLoad",KitConfigPath.path_kitMenuTitle, "vaule is null");
         }
+
+
         if (c.getString(KitConfigPath.path_kitMenuItemName) != null)
         {
             kitMenuItemName = c.getString(KitConfigPath.path_kitMenuItemName);
@@ -344,7 +350,11 @@ class KitConfigLoad
         loadKits();
         loadKitMenuItem();
     }
-
+    private static final String name = "KitConfigLoad";
+    private static final String reason = "vaule is null";
+    private static void sendError(String path){
+        er(name, path, reason);
+    }
     private static void loadKits()
     {
         KitDefault.loadKit(true);

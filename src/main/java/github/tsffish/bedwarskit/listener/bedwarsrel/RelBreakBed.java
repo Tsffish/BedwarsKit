@@ -1,30 +1,24 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.Main;
-import github.tsffish.bedwarskit.config.MainConfigHandler;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import github.tsffish.bedwarskit.util.RelCurrentStat;
 import io.github.bedwarsrel.events.BedwarsTargetBlockDestroyedEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 
 import static github.tsffish.bedwarskit.util.RelBreakTitle.bt;
-import static github.tsffish.bedwarskit.util.RelCurrentStat.ups;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
-public class RelBreakBed implements Listener
-{
-    Plugin plugin = JavaPlugin.getProvidingPlugin(Main.class);
-
+public class RelBreakBed implements Listener {
+    private static Plugin plugin = github.tsffish.bedwarskit.Main.getPlugin(github.tsffish.bedwarskit.Main.class);
     @EventHandler
-    public void on(BedwarsTargetBlockDestroyedEvent e)
-    {
-        if (MainConfigHandler.breakTitle)
-        {
+    public void on(BedwarsTargetBlockDestroyedEvent e) {
+        if (MainConfigHandler.breakTitle) {
 
             Player breakPlayer = e.getPlayer();
             String playerName = breakPlayer.getName();
@@ -63,10 +57,12 @@ public class RelBreakBed implements Listener
                     );
 
                 breakPlayer.sendTitle(t(breakTitleBreakPlayerReal), t(breakSubtitleBreakPlayerReal));
-                ups(breakPlayer, "b", 1);
+
+                String breakPlayerName = breakPlayer.getName();
+                RelCurrentStat.updatePlayerStat(breakPlayerName, "b", 1);
             }
             
-        }.runTaskLater(plugin, 1L);
+        }.runTaskLater(plugin, 0L);
     }
     }
 }

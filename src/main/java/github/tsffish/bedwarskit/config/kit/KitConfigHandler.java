@@ -1,4 +1,4 @@
-package github.tsffish.bedwarskit.config;
+package github.tsffish.bedwarskit.config.kit;
 
 import org.bukkit.Material;
 
@@ -8,6 +8,7 @@ import java.util.List;
 public class KitConfigHandler
 {
     public static boolean kitenable;
+    public static String kitDefault;
     public static boolean kitForce;
     public static String kitForceKit;
     public static String kitMenuTitle;

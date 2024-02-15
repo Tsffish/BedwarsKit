@@ -12,4 +12,5 @@ public class RelArmorColor {
     public static Color pink = Color.fromRGB(255, 105, 180);
     public static Color white = Color.fromRGB(255, 255, 255);
 
+    public static Color orange = Color.fromRGB(255,165,0);
 }

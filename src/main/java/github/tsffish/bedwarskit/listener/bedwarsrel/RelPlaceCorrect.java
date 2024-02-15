@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.config.MainConfigHandler;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.*;
 import org.bukkit.Location;
@@ -11,7 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import java.util.Objects;
 
-import static github.tsffish.bedwarskit.config.MainConfigHandler.rushWorld;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.rushWorld;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
@@ -21,25 +21,32 @@ public class RelPlaceCorrect implements Listener {
 
         Player player = e.getPlayer();
         boolean isRushWorld = player.getWorld().getName().contains(rushWorld);
-        Game game = null;
-        if(isRushWorld) {
-            GameManager gm = BedwarsRel.getInstance().getGameManager();
-            if (gm != null && gm.getGameOfPlayer(player) != null)
-               game = gm.getGameOfPlayer(player);
-            if (game != null && game.getState() != GameState.RUNNING) {
-                if (MainConfigHandler.placeCorrect_notInGame_OpBypass) {
-                    e.setCancelled(!player.isOp());
+        GameManager gameManager = BedwarsRel.getInstance().getGameManager();
+
+        if (MainConfigHandler.placeCorrect_notInGame) {
+            if (MainConfigHandler.placeCorrect_notInGame_OpBypass) {
+                if (!player.isOp()) {
+                    String worldName = player.getWorld().getName();
+                    for (Game list : gameManager.getGames()) {
+                        if (list.getRegion().getWorld().getName().equals(worldName) && list.getState() != GameState.RUNNING) {
+                            e.setCancelled(true);
+                            break;
+                        }
+                    }
                 }
             }
+        }
+        if(isRushWorld) {
 
+            Game game = gameManager.getGameOfPlayer(player);
             if (game != null && game.getState() == GameState.RUNNING) {
 
                 Player p = e.getPlayer();
+                Location blockLocation = e.getBlock().getLocation();
                 if (MainConfigHandler.placeCorrect_ResSpawner) {
-                    Location blockLocation = e.getBlock().getLocation();
 
-                    if (gm.getGameOfPlayer(player).getState() == GameState.RUNNING) {
-                        for (ResourceSpawner rs : gm.getGameOfPlayer(player).getResourceSpawners()) {
+                    if (gameManager.getGameOfPlayer(player).getState() == GameState.RUNNING) {
+                        for (ResourceSpawner rs : gameManager.getGameOfPlayer(player).getResourceSpawners()) {
                             Location spawnerLocation = rs.getLocation();
                             double distance = spawnerLocation.distance(blockLocation);
 
@@ -73,11 +80,9 @@ public class RelPlaceCorrect implements Listener {
                     }
                 }
 
-
-                Location blockLocation = e.getBlock().getLocation();
                 if (MainConfigHandler.placeCorrect_PlayerSpawnLoc) {
-                    if (gm.getGameOfPlayer(player).getState() == GameState.RUNNING) {
-                        for (Team team : gm.getGameOfPlayer(player).getPlayingTeams()) {
+                    if (gameManager.getGameOfPlayer(player).getState() == GameState.RUNNING) {
+                        for (Team team : gameManager.getGameOfPlayer(player).getPlayingTeams()) {
                             Location teamspawnLocation = team.getSpawnLocation();
                             double distance = teamspawnLocation.distance(blockLocation);
 

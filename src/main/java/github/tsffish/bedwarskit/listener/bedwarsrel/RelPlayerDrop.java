@@ -22,20 +22,9 @@ public class RelPlayerDrop implements Listener {
 
                 ItemStack droppedItem = event.getItemDrop().getItemStack();
 
-                if (droppedItem.getType() == Material.WOOD_SWORD) { 
-                    boolean hasOtherSword = false; 
-                    ItemStack[] inventory = player.getInventory().getContents(); 
+                if (droppedItem.getType() == Material.WOOD_SWORD) {
+                    event.setCancelled(true);
 
-                    for (ItemStack item : inventory) {
-                        if (item != null && item.getType().name().endsWith("_SWORD") && item != droppedItem) {
-                            
-                            hasOtherSword = true;
-                        }
-                    }
-
-                    if (!hasOtherSword) {
-                        event.setCancelled(true); 
-                    }
                 }
             }
             }

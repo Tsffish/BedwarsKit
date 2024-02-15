@@ -1,7 +1,7 @@
 package github.tsffish.bedwarskit.util.gametask;
 
 import github.tsffish.bedwarskit.Main;
-import github.tsffish.bedwarskit.config.MainConfigHandler;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameState;
 import io.github.bedwarsrel.game.ResourceSpawner;
@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static github.tsffish.bedwarskit.config.MainConfigHandler.gametask_name_finalbattle;
-import static github.tsffish.bedwarskit.util.RelScoreBoard.taskMap;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.gametask_name_emerald3;
+import static github.tsffish.bedwarskit.util.RelScoreBoard.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
@@ -29,7 +29,7 @@ public class TaskEmerald3 {
     public static String gameName;
     public static int x;
     public static int gameTaskTime;
-    public static Map<String, Integer> taskTimeLeftMap = new HashMap<>(4);
+    static Map<String, Integer> taskTimeLeftMap = new HashMap<>(4);
     public static void setTaskTimeLeft(String gameName, int timeLeft) {
         taskTimeLeftMap.put(gameName, timeLeft);
     }
@@ -57,9 +57,10 @@ public class TaskEmerald3 {
 
                 if (x <= 0){
 
-                    for (Map.Entry<Integer, String> entry : taskMap.entrySet()) {
-                        if (entry.getValue().equals(gametask_name_finalbattle)) {
-                            taskMap.remove(entry.getKey());
+                    for (Map.Entry<Integer, String> entry : getAllTask().entrySet()) {
+                        if (entry.getValue().equals(gametask_name_emerald3)) {
+                            removeTask(entry.getKey());
+                            taskTimeLeftMap.remove(entry.getValue());
                         }
                     }
 
@@ -106,6 +107,12 @@ public class TaskEmerald3 {
                 }
 
                 if (game.getState() == null || game.getState() != GameState.RUNNING){
+                    for (Map.Entry<Integer, String> entry : getAllTask().entrySet()) {
+                        if (entry.getValue().equals(gametask_name_emerald3)) {
+                            removeTask(entry.getKey());
+                            taskTimeLeftMap.remove(entry.getValue());
+                        }
+                    }
                     cancel();
                 }
 

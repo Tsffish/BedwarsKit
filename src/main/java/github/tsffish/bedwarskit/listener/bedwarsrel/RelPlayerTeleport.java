@@ -1,49 +1,54 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.config.MainConfigHandler;
-import org.bukkit.GameMode;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noPearlDamage_TPSound;
+
 public class RelPlayerTeleport implements Listener
 {
     @EventHandler
-    public void on(PlayerTeleportEvent e)
-    {
-        Player p = e.getPlayer();
+    public void on(PlayerTeleportEvent e) {
+        Player player = e.getPlayer();
 
-        if (p == null || !p.isOnline())
+        if (player == null || !player.isOnline())
         {
             return;
         }
 
-        String world = p.getWorld().getName();
-        boolean isInRushWorld = world.contains(MainConfigHandler.rushWorld);
+        World world = e.getPlayer().getWorld();
+        String worldName = world.getName();
+        boolean isInRushWorld = worldName.contains(MainConfigHandler.rushWorld);
         PlayerTeleportEvent.TeleportCause enderpearl = PlayerTeleportEvent.TeleportCause.ENDER_PEARL;
-        if (MainConfigHandler.noPearlDamage && isInRushWorld && e.getCause() == enderpearl)
-        {
+
+        Location goTo = e.getTo();
+        if (MainConfigHandler.noPearlDamage && isInRushWorld && e.getCause() == enderpearl) {
+            if (noPearlDamage_TPSound){
+            world.playSound(goTo, Sound.ENDERMAN_TELEPORT,1,1);
+            }
             e.setCancelled(true);
-            p.teleport(e.getTo());
-            p.setFallDistance(0.0f);
+            player.setFallDistance(0.0f);
+            player.teleport(e.getTo());
         }
     }
     @EventHandler
-    public void on(PlayerChangedWorldEvent event)
-    {
-        Player p = event.getPlayer();
-        if (p == null || !p.isOnline())
+    public void on(PlayerChangedWorldEvent event) {
+        Player player = event.getPlayer();
+        if (player == null || !player.isOnline())
         {
             return;
         }
 
-        if (p.getWorld().getName().contains(MainConfigHandler.lobbyWorld))
+        if (player.getWorld().getName().contains(MainConfigHandler.lobbyWorld))
         {
-            if (p.getGameMode() != GameMode.SURVIVAL)
+            if (player.getGameMode() != GameMode.SURVIVAL)
             {
-            p.setGameMode(GameMode.SURVIVAL);
+                player.setGameMode(GameMode.SURVIVAL);
             }
         }
     }

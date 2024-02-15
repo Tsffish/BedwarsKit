@@ -1,5 +1,6 @@
-package github.tsffish.bedwarskit.util;
+package github.tsffish.bedwarskit.util.teamshop;
 
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameState;
 import io.github.bedwarsrel.game.Team;
@@ -16,16 +17,15 @@ import java.util.Objects;
 public class RelCheckEnchant {
 
     public static void checkEnchantArmor(Game game) {
-        for (Map.Entry<String, String[]> entry : RelTeamEnchant.teamEnchantListProt.entrySet()) {
+        for (Map.Entry<String, String[]> entry : RelTeamEnchant.getTeamEnchantListprot().entrySet()) {
             String mapName = entry.getKey();
             String[] enchantData = entry.getValue();
 
             String teamName = enchantData[0];
             String enchantLevel = enchantData[1];
 
-            
             if (game != null) {
-                List<Team> teams = new ArrayList<>(game.getPlayingTeams()); 
+                List<Team> teams = new ArrayList<>(game.getPlayingTeams());
                 for (Team team : teams) {
                     for (Player player : team.getPlayers()) {
                         if (Objects.equals(game.getRegion().getName(), mapName) && Objects.equals(teamName, team.getName()) && game.getState() == GameState.RUNNING) {
@@ -33,6 +33,8 @@ public class RelCheckEnchant {
                             for (ItemStack item : armor) {
                                 ItemMeta itemMeta = item.getItemMeta();
                                 if (itemMeta != null) {
+                                String itemTypeText = item.getType().toString().toUpperCase();
+                                if (MainConfigHandler.giveProtEnchList.contains(itemTypeText)){
                                     switch (enchantLevel) {
                                         case "1":
                                             itemMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
@@ -50,6 +52,7 @@ public class RelCheckEnchant {
                                             break;
                                     }
                                     item.setItemMeta(itemMeta);
+                                    }
                                 }
                             }
                             player.getInventory().setArmorContents(armor);
@@ -61,21 +64,20 @@ public class RelCheckEnchant {
     }
 
     public static void checkEnchantSword(Game game) {
-        for (Map.Entry<String, String[]> entry : RelTeamEnchant.teamEnchantListSword.entrySet()) {
+        for (Map.Entry<String, String[]> entry : RelTeamEnchant.getTeamEnchantListsharp().entrySet()) {
             String mapName = entry.getKey();
             String[] enchantData = entry.getValue();
 
             String teamName = enchantData[0];
             String enchantLevel = enchantData[1];
 
-            
             if (game != null) {
-                List<Team> teams = new ArrayList<>(game.getPlayingTeams()); 
+                List<Team> teams = new ArrayList<>(game.getPlayingTeams());
                 for (Team team : teams) {
                     for (Player player : team.getPlayers()) {
                         if (Objects.equals(game.getRegion().getName(), mapName) && Objects.equals(teamName, team.getName()) && game.getState() == GameState.RUNNING) {
                             ItemStack item = player.getInventory().getItemInHand();
-                            if (item != null && item.getType().toString().contains("SWORD")) {
+                            if (item != null && MainConfigHandler.giveSharpEnchList.contains(item.getType().toString().toUpperCase())) {
                                 ItemMeta itemMeta = item.getItemMeta();
                                 if (itemMeta != null) {
                                     switch (enchantLevel) {
@@ -103,4 +105,5 @@ public class RelCheckEnchant {
             }
         }
     }
+
 }

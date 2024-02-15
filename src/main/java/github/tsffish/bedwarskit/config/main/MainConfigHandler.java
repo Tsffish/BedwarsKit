@@ -1,4 +1,4 @@
-package github.tsffish.bedwarskit.config;
+package github.tsffish.bedwarskit.config.main;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,6 +11,7 @@ public class MainConfigHandler {
     public static boolean breakTitle;
     public static boolean noHunger;
     public static boolean noPearlDamage;
+    public static boolean noPearlDamage_TPSound;
     public static boolean breakBedCheck;
     public static boolean deathGameMode;
     public static boolean startKitCompass;
@@ -18,26 +19,43 @@ public class MainConfigHandler {
     public static boolean antiDrop;
     public static boolean grassPaneWalk;
     public static boolean cleanBottle;
+    public static boolean cleanBed;
     public static boolean levelupShopDelayOpen;
     public static boolean kill_res;
     public static boolean NoItemBreak;
     public static boolean levelupShop;
+    public static boolean damagefb_attackBlood;
+    public static boolean startmess;
+
+
     public static int chainPrice;
     public static int ironPrice;
     public static int diamondPrice;
     public static int sharp1Cost2v2;
+    public static int sharp2Cost2v2;
+    public static int sharp3Cost2v2;
+    public static int sharp4Cost2v2;
     public static int prot1Cost2v2;
     public static int prot2Cost2v2;
     public static int prot3Cost2v2;
     public static int prot4Cost2v2;
+
+
     public static int sharp1Cost4v4;
+    public static int sharp2Cost4v4;
+    public static int sharp3Cost4v4;
+    public static int sharp4Cost4v4;
     public static int prot1Cost4v4;
     public static int prot2Cost4v4;
     public static int prot3Cost4v4;
     public static int prot4Cost4v4;
     public static int maxFoodLevel;
     public static int respawnDelay;
+
     public static double tpDis;
+
+
+
     public static String breakTitleAll;
     public static String breakSubTitleAll;
     public static String breakTitleBreakPlayer;
@@ -72,11 +90,11 @@ public class MainConfigHandler {
     public static String relTeamName_White;
     public static String relTeamName_Gray;
     public static String relTeamName_Pink;
-    public static String teamEnchItemName_Sharp1;
-    public static String teamEnchItemName_Prot1;
-    public static String teamEnchItemName_Prot2;
-    public static String teamEnchItemName_Prot3;
-    public static String teamEnchItemName_Prot4;
+    public static String teamEnchItemName_sharp1;
+    public static String teamEnchItemName_prot1;
+    public static String teamEnchItemName_prot2;
+    public static String teamEnchItemName_prot3;
+    public static String teamEnchItemName_prot4;
     public static String shopLevelup;
 
     public static String LevelupItemName;
@@ -84,11 +102,14 @@ public class MainConfigHandler {
     public static String meanGold;
     public static String meanDiamond;
     public static String meanEmerlad;
-    public static String messLevelUpSharp1;
-    public static String messLevelUpProt1;
-    public static String messLevelUpProt2;
-    public static String messLevelUpProt3;
-    public static String messLevelUpProt4;
+    public static String messLevelUpsharp1;
+    public static String messLevelUpsharp2;
+    public static String messLevelUpsharp3;
+    public static String messLevelUpsharp4;
+    public static String messLevelUpprot1;
+    public static String messLevelUpprot2;
+    public static String messLevelUpprot3;
+    public static String messLevelUpprot4;
     public static String messLevelUpFailed;
     public static String messreloadnow;
     public static String messreloadsucc;
@@ -143,13 +164,11 @@ public class MainConfigHandler {
     public static Material upToChainArmor;
     public static Material upToIronArmor;
     public static Material upToDiamondArmor;
-    public static List<Material> NoMoveList;
-    public static List<Material> NoBreakList;
+    public static List<String> noMoveList;
+    public static List<String> nobreakList;
+    public static List<String> giveSharpEnchList;
+    public static List<String> giveProtEnchList;
 
-
-
-
-    public static boolean damagefb_attackBlood;
     public static String damagefb_attackBloodMode;
     public static boolean damagefb_attackmess;
     public static String damagefb_attackchat;
@@ -160,7 +179,6 @@ public class MainConfigHandler {
 
 
 
-    public static boolean startmess;
     public static String startmess_all_chat;
     public static String startmess_all_title;
     public static String startmess_all_subtitle;
@@ -197,7 +215,11 @@ public class MainConfigHandler {
 
     public static boolean gametask_finalbattle;
 
-
+    public static int gametask_finalbattle_boundaries_warnidis;
+    public static double gametask_finalbattle_boundaries_damagebuffer;
+    public static double gametask_finalbattle_boundaries_damage;
+    public static String shopItem;
+    public static boolean update_reportOp;
 
 
     public static int gametask_spawntime_tasks_iron1;
@@ -218,8 +240,6 @@ public class MainConfigHandler {
     public static int gametask_spawntime_tasks_emerald4;
 
     public static int gametask_finalbattle_time;
-
-
 
     public static boolean preventloadworld;
 
@@ -278,7 +298,6 @@ public class MainConfigHandler {
     public static String gametask_name_emerald3;
     public static String gametask_name_emerald4;
 
-
     public static String gametask_mess_iron1_chat;
     public static String gametask_mess_iron1_title;
     public static String gametask_mess_iron1_subtitle;
@@ -291,15 +310,10 @@ public class MainConfigHandler {
     public static String gametask_mess_diamond1_title;
     public static String gametask_mess_diamond1_subtitle;
     public static String gametask_mess_diamond1_actionbar;
-
     public static String gametask_mess_emerald1_chat;
     public static String gametask_mess_emerald1_title;
     public static String gametask_mess_emerald1_subtitle;
     public static String gametask_mess_emerald1_actionbar;
-
-
-
-
 
     public static String gametask_mess_iron2_chat;
     public static String gametask_mess_iron2_title;
@@ -330,12 +344,10 @@ public class MainConfigHandler {
     public static String gametask_mess_diamond3_title;
     public static String gametask_mess_diamond3_subtitle;
     public static String gametask_mess_diamond3_actionbar;
-
     public static String gametask_mess_emerald3_chat;
     public static String gametask_mess_emerald3_title;
     public static String gametask_mess_emerald3_subtitle;
     public static String gametask_mess_emerald3_actionbar;
-
 
     public static String gametask_mess_iron4_chat;
     public static String gametask_mess_iron4_title;
@@ -349,24 +361,83 @@ public class MainConfigHandler {
     public static String gametask_mess_diamond4_title;
     public static String gametask_mess_diamond4_subtitle;
     public static String gametask_mess_diamond4_actionbar;
-
     public static String gametask_mess_emerald4_chat;
     public static String gametask_mess_emerald4_title;
     public static String gametask_mess_emerald4_subtitle;
     public static String gametask_mess_emerald4_actionbar;
-
-
-
 
     public static String gametask_mess_finalbattle_chat;
     public static String gametask_mess_finalbattle_title;
     public static String gametask_mess_finalbattle_subtitle;
     public static String gametask_mess_finalbattle_actionbar;
 
-    public static int gametask_finalbattle_boundaries_warnidis;
-    public static double gametask_finalbattle_boundaries_damagebuffer;
-    public static double gametask_finalbattle_boundaries_damage;
-    public static String shopItem;
-    public static boolean isLastestVersion;
-    public static boolean update_reportOp;
+
+    public static int teamEnchInvRow;
+
+
+
+    public static boolean tab;
+
+
+    public static boolean tab_is_multiLine;
+    public static String tab_head;
+    public static List<String> tab_headList;
+    public static String tab_foot;
+    public static List<String> tab_footList;
+
+
+    public static Material levelupsharpItemType;
+    public static int levelupsharpItemSlot;
+    public static Material levelupprotItemType;
+    public static int levelupprotItemSlot;
+    public static String teamEnchItemName_sharp2;
+    public static String teamEnchItemName_sharp3;
+    public static String teamEnchItemName_sharp4;
+    public static String TeamEnchantMaxCost;
+
+    public static String teamEnchItemName_sharpMax;
+    public static String teamEnchItemName_protMax;
+
+
+
+    public static Material leveluphasteItemType;
+    public static int leveluphasteItemSlot;
+    public static String teamEffItemName_haste1;
+    public static String teamEffItemName_haste2;
+    public static String teamEffItemName_hasteMax;
+    public static Material leveluphealItemType;
+    public static int leveluphealItemSlot;
+    public static String teamEffItemName_heal1;
+    public static String teamEffItemName_healMax;
+    public static int haste1Cost2v2;
+    public static int haste2Cost2v2;
+    public static int heal1Cost2v2;
+
+    public static int haste1Cost4v4;
+    public static int haste2Cost4v4;
+    public static int heal1Cost4v4;
+
+    public static String messLevelUphaste1;
+    public static String messLevelUphaste2;
+    public static String messLevelUpheal1;
+
+
+    public static String teamEffItemName_Haste1;
+    public static String teamEffItemName_Haste2;
+    public static String teamEffItemName_Heal1;
+
+    //public static boolean lobbyleaveTeam;
+    //public static String lobbyleaveTeamItemName;
+    //public static String lobbyleaveTeamMess;
+
+    public static int teamEff_Heal_dis;
+    public static boolean dieOutGameItem_playAgain;
+    public static String dieOutGameItem_playAgain_ItemName;
+    public static Material dieOutGameItem_playAgain_ItemType;
+    public static String dieOutGameItem_playAgain_ClickSendCommand;
+    public static boolean killfb_oneHealthKill;
+    public static Material killfb_oneHealthKill_itemType;
+    public static String killfb_oneHealthKill_itemName;
+    public static boolean creativeGameModeFix;
+
 }

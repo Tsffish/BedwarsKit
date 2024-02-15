@@ -1,4 +1,6 @@
-package github.tsffish.bedwarskit.config;
+package github.tsffish.bedwarskit.config.main;
+
+import org.bukkit.Material;
 
 public class MainConfigPath {
     static String path_breakTitle = "breakTitle";
@@ -11,6 +13,7 @@ public class MainConfigPath {
     static String path_noHunger = "noHunger";
     static String path_maxFoodLevel = "maxFoodLevel";
     static String path_noPearlDamage = "noPearlDamage";
+    static String path_noPearlDamage_TPSound = "noPearlDamage_TPSound";
     static String path_breakBedCheck = "breakBedCheck";
     static String path_tpDis = "tpDis";
     static String path_deathGameMode = "deathGameMode";
@@ -44,6 +47,7 @@ public class MainConfigPath {
     static String path_relTeamName_White = "relTeamName_White";
     static String path_relTeamName_Gray = "relTeamName_Gray";
     static String path_relTeamName_Pink = "relTeamName_Pink";
+    static String path_relTeamName_Orange = "relTeamName_Orange";
     static String path_kill_res = "kill_res";
     static String path_teamEnchItemName_Sharp1 = "teamEnchItemName_Sharp1";
     static String path_teamEnchItemName_Prot1 = "teamEnchItemName_Prot1";
@@ -63,11 +67,17 @@ public class MainConfigPath {
     static String path_messLevelUpProt4 = "messLevelUpProt4";
     static String path_messLevelUpFailed = "messLevelUpFailed";
     static String path_sharp1Cost2v2 = "sharp1Cost2v2";
+    static String path_sharp2Cost2v2 = "sharp2Cost2v2";
+    static String path_sharp3Cost2v2 = "sharp3Cost2v2";
+    static String path_sharp4Cost2v2 = "sharp4Cost2v2";
     static String path_prot1Cost2v2 = "prot1Cost2v2";
     static String path_prot2Cost2v2 = "prot2Cost2v2";
     static String path_prot3Cost2v2 = "prot3Cost2v2";
     static String path_prot4Cost2v2 = "prot4Cost2v2";
     static String path_sharp1Cost4v4 = "sharp1Cost4v4";
+    static String path_sharp2Cost4v4 = "sharp2Cost4v4";
+    static String path_sharp3Cost4v4 = "sharp3Cost4v4";
+    static String path_sharp4Cost4v4 = "sharp4Cost4v4";
     static String path_prot1Cost4v4 = "prot1Cost4v4";
     static String path_prot2Cost4v4 = "prot2Cost4v4";
     static String path_prot3Cost4v4 = "prot3Cost4v4";
@@ -119,7 +129,7 @@ public class MainConfigPath {
     static String path_grassPaneWalk = "grassPaneWalk";
     static String path_meanSelKitSucc = "meanSelKitSucc";
     static String path_cleanBottle = "cleanBottle";
-
+    static String path_cleanBed = "cleanBed";
     static String path_chainPrice = "chainPrice";
     static String path_ironPrice = "ironPrice";
     static String path_diamondPrice = "diamondPrice";
@@ -332,4 +342,79 @@ public class MainConfigPath {
     static String path_gametask_finalbattle_boundaries_damagebuffer = "gametask_finalbattle_boundaries_damagebuffer";
     static String path_gametask_finalbattle_boundaries_damage = "gametask_finalbattle_boundaries_damage";
     static String path_shopItem = "shopItem";
+    static String path_teamEnchInvRow = "teamEnchInvRow";
+    static String path_tab = "tab";
+    static String path_tab_is_multiLine = "tab_is_multiLine";
+    static String path_tab_head = "tab_head";
+    static String path_tab_foot = "tab_foot";
+    static String path_tab_headList = "tab_headList";
+    static String path_tab_footList = "tab_footList";
+
+
+    public static String path_levelupsharpItemType = "levelupsharpItemType";
+    public static String path_levelupsharpItemSlot = "levelupsharpItemSlot";
+    public static String path_levelupprotItemType = "levelupprotItemType";
+    public static String path_levelupprotItemSlot = "levelupprotItemSlot";
+    public static String path_teamEnchItemName_sharp2 = "teamEnchItemName_Sharp2";
+    public static String path_teamEnchItemName_sharp3 = "teamEnchItemName_Sharp3";
+    public static String path_teamEnchItemName_sharp4 = "teamEnchItemName_Sharp4";
+    public static String path_TeamEnchantMaxCost = "TeamEnchantMaxCost";
+
+    public static String path_teamEnchItemName_sharpMax = "teamEnchItemName_sharpMax";
+    public static String path_teamEnchItemName_protMax = "teamEnchItemName_protMax";
+
+
+
+
+
+
+    public static String path_leveluphasteItemType = "leveluphasteItemType";
+    public static String path_leveluphasteItemSlot = "leveluphasteItemSlot";
+    public static String path_teamEffItemName_haste1 = "teamEffItemName_haste1";
+    public static String path_teamEffItemName_haste2 = "teamEffItemName_haste2";
+    public static String path_teamEffItemName_hasteMax = "teamEffItemName_hasteMax";
+    public static String path_leveluphealItemType = "leveluphealItemType";
+    public static String path_leveluphealItemSlot = "leveluphealItemSlot";
+    public static String path_teamEffItemName_heal1 = "teamEffItemName_heal1";
+    public static String path_teamEffItemName_healMax = "teamEffItemName_healMax";
+
+    public static String path_haste1Cost2v2 = "haste1Cost2v2";
+    public static String path_haste2Cost2v2 = "haste2Cost2v2";
+    public static String path_heal1Cost2v2 = "heal1Cost2v2";
+
+    public static String path_haste1Cost4v4 = "haste1Cost4v4";
+    public static String path_haste2Cost4v4 = "haste2Cost4v4";
+    public static String path_heal1Cost4v4 = "heal1Cost4v4";
+
+
+    public static String path_messLevelUpHaste1 = "messLevelUpHaste1";
+    public static String path_messLevelUpHaste2 = "messLevelUpHaste2";
+    public static String path_messLevelUpHeal1 = "messLevelUpHeal1";
+    public static String path_teamEffItemName_Haste1 = "teamEffItemName_haste1";
+    public static String path_teamEffItemName_Haste2 = "teamEffItemName_haste2";
+    public static String path_teamEffItemName_Heal1 = "teamEffItemName_heal1";
+
+
+   // public static String path_lobbyleaveTeam = "lobbyleaveTeam";
+  //  public static String path_lobbyleaveTeamItemName = "lobbyleaveTeamItemName";
+  // public static String path_lobbyleaveTeamMess = "lobbyleaveTeamMess";
+    public static String path_teamEff_Heal_dis = "teamEff_Heal_dis";
+    public static String path_messLevelUpSharp2 = "messLevelUpSharp2";
+    public static String path_messLevelUpSharp3 = "messLevelUpSharp3";
+    public static String path_messLevelUpSharp4 = "messLevelUpSharp4";
+    public static String path_dieOutGameItem_playAgain = "dieOutGameItem_playAgain";
+    public static String path_dieOutGameItem_playAgain_ItemName = "dieOutGameItem_playAgain_ItemName";
+    public static String path_dieOutGameItem_playAgain_ItemType = "dieOutGameItem_playAgain_ItemType";
+    public static String path_dieOutGameItem_playAgain_ClickSendCommand = "dieOutGameItem_playAgain_ClickSendCommand";
+
+    public static String path_noMoveList = "noMoveList";
+    public static String path_nobreakList = "nobreakList";
+    public static String path_giveSharpEnchList = "giveSharpEnchList";
+    public static String path_giveProtEnchList = "giveProtEnchList";
+
+    public static String path_killfb_oneHealthKill = "killfb_oneHealthKill";
+    public static String path_killfb_oneHealthKill_itemType = "killfb_oneHealthKill_itemType";
+    public static String path_killfb_oneHealthKill_itemName = "killfb_oneHealthKill_itemName";
+    public static String path_creativeGameModeFix = "creativeGameModeFix";
+    public static String path_relTeamName_orange = "relTeamName_Orange";
 }

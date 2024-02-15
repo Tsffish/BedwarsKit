@@ -1,8 +1,9 @@
-package github.tsffish.bedwarskit.config;
+package github.tsffish.bedwarskit.config.kit;
 
 class KitConfigPath
 {
     static String path_kitenable = "kitenable";
+    public static String path_kitDefault = "kitDefault";
     static String path_kitForce = "kitForce";
     static String path_kitForceKit = "kitForceKit";
     static String path_kitMenuTitle = "kitMenuTitle";

@@ -1,4 +1,4 @@
-package github.tsffish.bedwarskit.config.kit;
+package github.tsffish.bedwarskit.util.kit;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -6,7 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-import static github.tsffish.bedwarskit.config.KitConfigHandler.*;
+import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class KitNone

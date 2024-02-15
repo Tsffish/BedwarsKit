@@ -1,19 +1,24 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.config.MainConfigHandler;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import github.tsffish.bedwarskit.util.RelCurrentStat;
 import io.github.bedwarsrel.events.BedwarsPlayerKilledEvent;
 import io.github.bedwarsrel.game.Game;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static github.tsffish.bedwarskit.util.RelCurrentStat.ups;
+
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
+import static github.tsffish.bedwarskit.util.RelCurrentStat.updatePlayerStat;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
@@ -24,7 +29,7 @@ public class RelKillPlayer implements Listener {
     public void on(BedwarsPlayerKilledEvent e) {
 
         if (e.getKiller() != null && e.getPlayer() != null){
-
+        if (e.getKiller().isOnline()){
         Game game = e.getGame();
 
         if (MainConfigHandler.kill_res && e.getKiller() != null && e.getKiller() != e.getPlayer()) {
@@ -32,17 +37,32 @@ public class RelKillPlayer implements Listener {
             String kName = k.getName();
             String kHealth = k.getHealth() + "";
             PlayerInventory kpi = k.getInventory();
-            ups(k, "k", 1);
+            updatePlayerStat(kName, "k", 1);
 
             Player d = e.getPlayer();
             String dName = d.getName();
             String dHealth = d.getHealth() + "";
             PlayerInventory dpi = d.getInventory();
-            ups(d, "d", 1);
+            updatePlayerStat(dName, "d", 1);
 
 
             if (game.getPlayerTeam(d).getHeadTarget() == null || game.getPlayerTeam(d).getHeadTarget().getType() != Material.BED) {
-                ups(k, "f", 1);
+                updatePlayerStat(kName, "f", 1);
+            }
+
+
+            if (killfb_oneHealthKill){
+
+                updatePlayerStat(kName,"ohk", 1);
+
+                if (RelCurrentStat.getPlayerOHKill(kName) > 1){
+                PlayerInventory pi = k.getInventory();
+                ItemStack fbItem = new ItemStack(killfb_oneHealthKill_itemType);
+                ItemMeta fbItemMeta = fbItem.getItemMeta();
+                fbItemMeta.setDisplayName(t(killfb_oneHealthKill_itemName));
+                fbItem.setItemMeta(fbItemMeta);
+                pi.addItem(fbItem);
+                }
             }
 
             int ironCount = 0;
@@ -83,9 +103,9 @@ public class RelKillPlayer implements Listener {
                     }
                 }
 
-                if (list == null){
+                if (list == null) {
                     list = new EnumMap<>(Material.class);
-                }else {
+                } else {
                     list.clear();
                 }
                 list.put(Material.IRON_INGOT, ironCount);
@@ -101,6 +121,7 @@ public class RelKillPlayer implements Listener {
                                 .replace("{dp}", dName)
                                 .replace("{k_health}", kHealth)
                                 .replace("{d_health}", dHealth)
+                                .replace("{ohk}",RelCurrentStat.getPlayerOHKill(kName) + "")
                         );
                     }
                     if (!Objects.equals(MainConfigHandler.killfb_sendmess_title, "")) {
@@ -109,6 +130,7 @@ public class RelKillPlayer implements Listener {
                                 .replace("{dp}", dName)
                                 .replace("{k_health}", kHealth)
                                 .replace("{d_health}", dHealth)
+                                .replace("{ohk}",RelCurrentStat.getPlayerOHKill(kName) + "")
                         );
                         if (!Objects.equals(MainConfigHandler.killfb_sendmess_subtitle, "")) {
                             String subtitleReal = t(MainConfigHandler.killfb_sendmess_subtitle
@@ -116,6 +138,7 @@ public class RelKillPlayer implements Listener {
                                     .replace("{dp}", dName)
                                     .replace("{k_health}", kHealth)
                                     .replace("{d_health}", dHealth)
+                                    .replace("{ohk}",RelCurrentStat.getPlayerOHKill(kName) + "")
                             );
 
                             k.sendTitle(titleReal, subtitleReal);
@@ -127,6 +150,7 @@ public class RelKillPlayer implements Listener {
                                 .replace("{dp}", dName)
                                 .replace("{k_health}", kHealth)
                                 .replace("{d_health}", dHealth)
+                                .replace("{ohk}",RelCurrentStat.getPlayerOHKill(kName) + "")
                         );
 
                         k.sendTitle(titleReal, subtitleReal);
@@ -137,6 +161,7 @@ public class RelKillPlayer implements Listener {
                                 .replace("{dp}", dName)
                                 .replace("{k_health}", kHealth)
                                 .replace("{d_health}", dHealth)
+                                .replace("{ohk}",RelCurrentStat.getPlayerOHKill(kName) + "")
                         ));
                     }
 
@@ -144,47 +169,45 @@ public class RelKillPlayer implements Listener {
                 }
 
 
-                if (!Objects.equals(MainConfigHandler.kill_res_chat, "")){
-                        if (ironCount > 0){
-                            k.sendMessage(MainConfigHandler.kill_res_chat
-                                    .replace("{res}",MainConfigHandler.meanIron)
-                                    .replace("{count}",ironCount + "")
-                            );
-                        }
+                if (!Objects.equals(MainConfigHandler.kill_res_chat, "")) {
+                    if (ironCount > 0) {
+                        k.sendMessage(MainConfigHandler.kill_res_chat
+                                .replace("{res}", MainConfigHandler.meanIron)
+                                .replace("{count}", ironCount + "")
+                        );
+                    }
 
-                        if (goldCount > 0){
-                            k.sendMessage(MainConfigHandler.kill_res_chat
-                                    .replace("{res}",MainConfigHandler.meanGold)
-                                    .replace("{count}",goldCount + "")
-                            );
-
-
-                        }
-                        if (diamondCount > 0){
-
-                            k.sendMessage(MainConfigHandler.kill_res_chat
-                                    .replace("{res}",MainConfigHandler.meanDiamond)
-                                    .replace("{count}",diamondCount + "")
-                            );
+                    if (goldCount > 0) {
+                        k.sendMessage(MainConfigHandler.kill_res_chat
+                                .replace("{res}", MainConfigHandler.meanGold)
+                                .replace("{count}", goldCount + "")
+                        );
 
 
+                    }
+                    if (diamondCount > 0) {
 
-                        }
-
-                        if (emeraldCount > 0){
-
-                            k.sendMessage(MainConfigHandler.kill_res_chat
-                                    .replace("{res}",MainConfigHandler.meanEmerlad)
-                                    .replace("{count}",emeraldCount + "")
-                            );
+                        k.sendMessage(MainConfigHandler.kill_res_chat
+                                .replace("{res}", MainConfigHandler.meanDiamond)
+                                .replace("{count}", diamondCount + "")
+                        );
 
 
+                    }
 
-                        }
+                    if (emeraldCount > 0) {
+
+                        k.sendMessage(MainConfigHandler.kill_res_chat
+                                .replace("{res}", MainConfigHandler.meanEmerlad)
+                                .replace("{count}", emeraldCount + "")
+                        );
+
+
                     }
                 }
+            }
 
-
+        }
             }
         }
             }
