@@ -3,23 +3,23 @@ package github.tsffish.bedwarskit;
 import github.tsffish.bedwarskit.command.CommandInfo;
 import github.tsffish.bedwarskit.config.main.MainConfigLoad;
 import github.tsffish.bedwarskit.util.update.UpdateChecker;
-import io.github.bedwarsrel.BedwarsRel;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Locale;
+
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-
 
 public class Main extends JavaPlugin {
     private static final String pluginName = "BedwarsKit";
     public static String pluginName(){
         return pluginName;
     }
-    private static final String pluginVersion = "1.9.52";
+    private static final String pluginVersion = "1.9.53";
     public static String pluginVersion(){
         return pluginVersion;
     }
@@ -52,8 +52,12 @@ public class Main extends JavaPlugin {
         return bstatId;
     }
     private static final String msgline = "================================";
+    public static String language;
     public void onEnable()
     {
+        Locale currentLocale = Locale.getDefault();
+        language = currentLocale.getLanguage();
+
         if (pluginManager.getPlugin("BedwarsRel") != null)
         {
             sendPluginStartUpInfo(ChatColor.GREEN);

@@ -36,7 +36,9 @@ public class MainConfigLoad{
     private static final String reason = "vaule is null";
     private static final Plugin plugin = JavaPlugin.getPlugin(Main.class);
     public static void loadMainConfig(CommandSender executer, boolean firstload) {
+
         plugin.saveDefaultConfig();
+
         c = plugin.getConfig();
         if (c == null) {
             le("MainConfigLoad","Unable to find configuration file");

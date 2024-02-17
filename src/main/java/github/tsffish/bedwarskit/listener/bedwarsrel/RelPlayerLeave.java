@@ -13,7 +13,7 @@ import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 public class RelPlayerLeave implements Listener {
     private static Plugin plugin = github.tsffish.bedwarskit.Main.getPlugin(github.tsffish.bedwarskit.Main.class);
     @EventHandler
-    public void on(BedwarsPlayerLeaveEvent event) {
+    public void on(final BedwarsPlayerLeaveEvent event) {
 
         Player player = event.getPlayer();
 

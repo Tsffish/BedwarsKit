@@ -8,8 +8,8 @@
 # Basic Setting     #
 # ================= #
 rushWorld: "rush"
-rushWorld2v2: "rush2v2"
-rushWorld4v4: "rush4v4"
+rushWorld2v2: "2v2"
+rushWorld4v4: "4v4"
 lobbyWorld: "lobby"
 # The most basic configuration for determining world names
 # The judgment method is whether the world name includes
@@ -425,7 +425,7 @@ killfb_sendmess_subtitle: ""
 killfb_sendmess_actionbar: ""
 killfb_oneHealthKill: true
 killfb_oneHealthKill_itemType: "NETHER_STAR"
-killfb_oneHealthKill_itemName: "&c&lSoul"
+killfb_oneHealthKill_itemName: "&4&lSoul"
 # Killfb_sendmes: Whether to enable the function of sending feedback messages for killing enemies
 # Supporting variables:
 # {dp}: Name of the killed player

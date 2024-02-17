@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 
 public class RelPlayerMove implements Listener {
     @EventHandler
-    public void on(PlayerMoveEvent event) {
+    public void on(final PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if (MainConfigHandler.grassPaneWalk && player != null && player.isOnline() && player.getGameMode() != GameMode.SPECTATOR) {
             Location to = event.getTo();

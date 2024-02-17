@@ -2,9 +2,6 @@ package github.tsffish.bedwarskit.util;
 
 import github.tsffish.bedwarskit.config.kit.KitConfigHandler;
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
-import io.github.bedwarsrel.BedwarsRel;
-import io.github.bedwarsrel.game.Game;
-import io.github.bedwarsrel.game.GameManager;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -32,17 +29,10 @@ public class RelPlayerRespawn implements Listener {
         RelCheckSword.checkInvHasSword(player);
         String playerName = player.getName();
         removePlayerRespawn(playerName);
-        GameManager gm = BedwarsRel.getInstance().getGameManager();
-        Game game =gm.getGameOfPlayer(player);
-        if (MainConfigHandler.deathGameMode) {
-            boolean isInRushWorld = player.getWorld().getName().contains(MainConfigHandler.rushWorld);
-            if (isInRushWorld) {
 
-                if (game != null && game.getPlayerTeam(player).getHeadTarget().getType().toString().contains("BED")){
-                    new BukkitRunnable() {
+        new BukkitRunnable() {
                         @Override
                         public void run() {
-
                             PlayerInventory pi = player.getInventory();
                             if (KitConfigHandler.kitenable){
                                 if (KitConfigHandler.kitForce){
@@ -67,7 +57,7 @@ public class RelPlayerRespawn implements Listener {
                             }
 
                             if (hasArmorIron(playerName)) {
-                                if (!hasArmorIron(playerName)) {
+                                if (!hasArmorChain(playerName)) {
                                     pi.setLeggings(iron1);
                                     pi.setBoots(iron2);
                                 }
@@ -80,12 +70,7 @@ public class RelPlayerRespawn implements Listener {
                             player.setGameMode(GameMode.SURVIVAL);
                             player.setHealth(player.getMaxHealth());
 
-                            cancel();
-
                         }
                     }.runTaskLater(plugin, delay);
                 }
-            }
-        }
-    }
 }

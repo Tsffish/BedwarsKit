@@ -84,155 +84,114 @@ public class RelPlayerJoin implements Listener {
             new BukkitRunnable() {
                 public void run() {
                     joinCheckList(worldName);
-                        if (tab) {
-                            sendTab(player);
-                        }
-                        if (customScoreboard) {
-                            updateScoreBoard();
-                        }
-                        if (game.getState() == GameState.WAITING) {
-                            if (KitConfigHandler.kitenable) {
-                                if (KitConfigHandler.kitMenuItemGive) {
-
-                                    for (Player player : game.getPlayers()) {
-                                        //checkLobbyItem(player);
-                                        PlayerInventory inventory = player.getInventory();
-                                        if (!inventory.contains(kitMenuItem)) {
-                                            inventory.addItem(kitMenuItem);
-                                        }
-                                    }
-                                }
-                            }
-                        } else if (game.getState() == GameState.RUNNING) {
-                            for (Player player : game.getPlayers()) {
-                                if (player != null && player.isOnline()) {
-                                    String playerName = player.getPlayer().getName();
-
-                                    PlayerInventory pi = player.getInventory();
-
-                                    if (PlayerisOut(playerName)) {
-                                        if (dieOutGameItem_playAgain) {
-
-                                            if (!pi.contains(playAgainItem)) {
-                                                pi.addItem(playAgainItem);
-                                            }
-                                        }
-                                    } else {
-
-                                        if (player.getHealth() >= 0) {
-
-                                            checkInvHasSword(player);
-
-                                            checkTeamLevelUp(game);
-
-                                            if (cleanBottle) {
-                                                if (pi.contains(bot)) {
-                                                    pi.remove(bot);
-                                                }
-                                            }
-
-                                            if (cleanBed) {
-                                                if (pi.contains(bed)) {
-                                                    pi.remove(bed);
-                                                }
-                                            }
-
-
-                                            ItemStack chain = new ItemStack(chainPriceType, chainPrice);
-                                            ItemStack iron = new ItemStack(ironPriceType, ironPrice);
-                                            ItemStack diamond = new ItemStack(diamondPriceType, diamondPrice);
-
-                                            if (pi.contains(upToChainArmor))
-                                            {
-                                                if (hasArmorChain(playerName)
-                                                        || hasArmorIron(playerName)
-                                                        || hasArmorDiamond(playerName)) {
-                                                    int count = 0;
-                                                    for (ItemStack item : pi.getContents()){
-                                                        if (item.getType() == upToChainArmor) {
-                                                            pi.remove(item);
-                                                            count ++;
-                                                        }
-                                                    }
-                                                    ItemStack finallyItem = new ItemStack(chainPriceType, chainPrice * count);
-                                                    pi.addItem(finallyItem);
-                                                }else {
-                                                    for (ItemStack item : pi.getContents()) {
-                                                        if (item.getType() == upToChainArmor) {
-                                                            pi.remove(item);
-                                                            addArmorChain(playerName);
-                                                            pi.setLeggings(chain1);
-                                                            pi.setBoots(chain2);
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            if (pi.contains(upToIronArmor))
-                                            {
-                                                if (hasArmorChain(playerName)
-                                                        || hasArmorIron(playerName)
-                                                        || hasArmorDiamond(playerName)) {
-                                                    int count = 0;
-                                                    for (ItemStack item : pi.getContents()){
-                                                        if (item.getType() == upToIronArmor) {
-                                                            pi.remove(item);
-                                                            count ++;
-                                                        }
-                                                    }
-                                                    ItemStack finallyItem = new ItemStack(ironPriceType, ironPrice * count);
-                                                    pi.addItem(finallyItem);
-                                                }else{
-
-                                                    for (ItemStack item : pi.getContents()){
-                                                        if (item.getType() == upToIronArmor) {
-                                                            pi.remove(item);
-                                                            addArmorIron(playerName);
-                                                            pi.setLeggings(iron1);
-                                                            pi.setBoots(iron2);
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            if (pi.contains(upToDiamondArmor))
-                                            {
-                                                    if (hasArmorChain(playerName)
-                                                            || hasArmorIron(playerName)
-                                                            || hasArmorDiamond(playerName)) {
-                                                        int count = 0;
-                                                        for (ItemStack item : pi.getContents()){
-                                                            if (item.getType() == upToDiamondArmor) {
-                                                                pi.remove(item);
-                                                                count ++;
-                                                            }
-                                                        }
-                                                        ItemStack finallyItem = new ItemStack(diamondPriceType, diamondPrice * count);
-                                                        pi.addItem(finallyItem);
-                                                    }else{
-
-                                                        for (ItemStack item : pi.getContents()){
-                                                            if (item.getType() == upToDiamondArmor) {
-                                                                pi.remove(item);
-                                                                addArmorDiamond(playerName);
-                                                                pi.setLeggings(dm1);
-                                                                pi.setBoots(dm2);
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    if (tab) {
+                        sendTab(player);
                     }
-            }.runTaskTimer(plugin, 0L, 19L);
+                    if (customScoreboard) {
+                        updateScoreBoard(player);
+                    }
+                    if (game.getState() == GameState.WAITING) {
+                        if (KitConfigHandler.kitenable) {
+                            if (KitConfigHandler.kitMenuItemGive) {
+
+                                for (Player player : game.getPlayers()) {
+                                    //checkLobbyItem(player);
+                                    PlayerInventory inventory = player.getInventory();
+                                    if (!inventory.contains(kitMenuItem)) {
+                                        inventory.addItem(kitMenuItem);
+                                    }
+                                }
+                            }
+                        }
+                    } else if (game.getState() == GameState.RUNNING) {
+                        for (Player player : game.getPlayers()) {
+                            if (player != null && player.isOnline()) {
+                                String playerName = player.getPlayer().getName();
+
+                                PlayerInventory pi = player.getInventory();
+
+                                ItemStack chain = new ItemStack(chainPriceType, chainPrice);
+                                ItemStack iron = new ItemStack(ironPriceType, ironPrice);
+                                ItemStack diamond = new ItemStack(diamondPriceType, diamondPrice);
+
+                                if (PlayerisOut(playerName)) {
+                                    if (dieOutGameItem_playAgain) {
+
+                                        if (!pi.contains(playAgainItem)) {
+                                            pi.addItem(playAgainItem);
+                                        }
+                                    }
+                                } else {
+
+                                    if (player.getHealth() >= 0) {
+
+                                        checkInvHasSword(player);
+
+                                        checkTeamLevelUp(game);
+
+                                        if (cleanBottle) {
+                                            if (pi.contains(bot)) {
+                                                pi.remove(bot);
+                                            }
+                                        }
+
+                                        if (cleanBed) {
+                                            if (pi.contains(bed)) {
+                                                pi.remove(bed);
+                                            }
+                                        }
+
+                                        if (pi.contains(upToChainArmor)) {
+                                            if (armorChain.contains(playerName) || armorIron.contains(playerName) || armorDiamond.contains(playerName)) {
+                                                pi.remove(upToChainArmor);
+                                                pi.addItem(chain);
+                                                return;
+                                            }
+
+                                            armorChain.add(playerName);
+                                            pi.remove(upToChainArmor);
+                                            player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+                                            player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+                                        }
+
+                                        if (pi.contains(upToIronArmor)) {
+                                            if (armorIron.contains(playerName) || armorDiamond.contains(playerName)) {
+                                                pi.remove(upToIronArmor);
+                                                pi.addItem(iron);
+                                                return;
+                                            }
+
+                                            armorIron.add(playerName);
+                                            armorChain.remove(playerName);
+                                            armorDiamond.remove(playerName);
+                                            pi.remove(upToIronArmor);
+                                            player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+                                            player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+                                        }
+
+                                        if (pi.contains(upToDiamondArmor)) {
+                                            if (armorDiamond.contains(playerName)) {
+                                                pi.remove(upToDiamondArmor);
+                                                pi.addItem(diamond);
+                                                return;
+                                            }
+
+                                            armorDiamond.add(playerName);
+                                            armorIron.remove(playerName);
+                                            armorChain.remove(playerName);
+                                            pi.remove(upToDiamondArmor);
+                                            player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
+                                            player.getInventory().setBoots(new ItemStack(Material.DIAMOND_BOOTS));
+                                        }
+                                    }
+                                }
+                            }
+                            }
+                    }
+                }
+                        }.runTaskTimer(plugin, 0L, 19L);
         }
     }
-
     @EventHandler
     public void on(PlayerJoinEvent event) {
         Player player = event.getPlayer();

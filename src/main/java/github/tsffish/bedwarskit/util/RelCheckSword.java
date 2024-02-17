@@ -24,7 +24,7 @@ public class RelCheckSword {
         if (pi.contains(stoneSword) || pi.contains(ironSword) || pi.contains(diamondSword)) {
             pi.remove(woodSword);
         }
-    } else if (!pi.contains(stoneSword) && !pi.contains(ironSword) && !pi.contains(diamondSword)) {
+    } else if (!pi.contains(woodSword) && !pi.contains(stoneSword) && !pi.contains(ironSword) && !pi.contains(diamondSword)) {
         pi.addItem(ws);
     }
 }

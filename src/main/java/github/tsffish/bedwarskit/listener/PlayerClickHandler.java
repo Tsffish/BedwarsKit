@@ -26,7 +26,7 @@ import static github.tsffish.bedwarskit.util.misc.MessSender.consoleSendCommand;
 
 public class PlayerClickHandler implements Listener {
     @EventHandler
-    public void on(PlayerInteractEvent event)
+    public void on(final PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
         if (player == null || !player.isOnline()) {
@@ -85,7 +85,7 @@ public class PlayerClickHandler implements Listener {
 
     }
 @EventHandler
-        public void on(PlayerInteractEntityEvent event) {
+        public void on(final PlayerInteractEntityEvent event) {
         Player p = event.getPlayer();
         if (p == null || !p.isOnline())
     if(MainConfigHandler.levelupShop)

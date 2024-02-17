@@ -13,7 +13,7 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noPearlDam
 public class RelPlayerTeleport implements Listener
 {
     @EventHandler
-    public void on(PlayerTeleportEvent e) {
+    public void on(final PlayerTeleportEvent e) {
         Player player = e.getPlayer();
 
         if (player == null || !player.isOnline())

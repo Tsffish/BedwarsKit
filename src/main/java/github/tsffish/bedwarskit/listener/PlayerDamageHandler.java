@@ -26,9 +26,8 @@ import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 public class PlayerDamageHandler implements Listener {
 
     @EventHandler
-    public void on(EntityDamageByEntityEvent e) {
+    public void on(final EntityDamageByEntityEvent e) {
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
-
 
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
             Player damagedPlayer = (Player) e.getEntity();
@@ -95,13 +94,11 @@ public class PlayerDamageHandler implements Listener {
                 if (game == null)return;
                 Team team = game.getPlayerTeam(damagedPlayer);
                 if (preventloadworld) {
-                    damagedPlayer.setHealth(0.5);
                     Location loc = team.getSpawnLocation();
                     Vector v = damagedPlayer.getLocation().getDirection();
                     loc.setDirection(v);
-                    damagedPlayer.teleport(loc);
                     damagedPlayer.setFallDistance(0);
-                    damagedPlayer.setHealth(0.5);
+                    damagedPlayer.teleport(loc);
                     if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)){
                         RelPlayerIsRespawn.addPlayerRespawn(playerName);
                         RelPlayerDeath.deathplayer(damagedPlayer ,0L);
@@ -128,13 +125,11 @@ public class PlayerDamageHandler implements Listener {
             EntityDamageEvent.DamageCause cause = event.getCause();
             if (cause == EntityDamageEvent.DamageCause.VOID) {
                 if (preventloadworld) {
-                    player.setHealth(0.5);
                     Location loc = team.getSpawnLocation();
                     Vector v = player.getLocation().getDirection();
                     loc.setDirection(v);
-                    player.teleport(loc);
                     player.setFallDistance(0);
-                    player.setHealth(0.5);
+                    player.teleport(loc);
                     if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)){
                         RelPlayerIsRespawn.addPlayerRespawn(playerName);
                     RelPlayerDeath.deathplayer(player ,0L);

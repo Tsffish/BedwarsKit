@@ -17,7 +17,7 @@ public class RelPlayerOpenShop implements Listener {
     private static Plugin plugin = github.tsffish.bedwarskit.Main.getPlugin(github.tsffish.bedwarskit.Main.class);
     private static final String clickOnEntityName = "click on entity";
     @EventHandler
-    public void on(BedwarsOpenShopEvent event)
+    public void on(final BedwarsOpenShopEvent event)
     {
         if(MainConfigHandler.levelupShop) {
 

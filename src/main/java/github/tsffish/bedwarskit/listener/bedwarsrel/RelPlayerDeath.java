@@ -43,9 +43,12 @@ public class RelPlayerDeath implements Listener {
             return;
         }
 
+        if (MainConfigHandler.preventloadworld){
+            p.setHealth(0.5);
+        }
+
         if (!PlayerisOut(playerName)){
             if (MainConfigHandler.deathGameMode) {
-                    p.setHealth(0.5);
                 if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)){
                     RelPlayerIsRespawn.addPlayerRespawn(playerName);
                     deathplayer(p, 20L);

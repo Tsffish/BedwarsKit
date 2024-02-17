@@ -1,5 +1,6 @@
 package github.tsffish.bedwarskit.util;
 
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import github.tsffish.bedwarskit.util.gametask.*;
 import github.tsffish.bedwarskit.util.misc.SecondToTime;
@@ -43,17 +44,17 @@ public class RelScoreBoard {
         return taskMap;
     }
 
-    public static void updateScoreBoard() {
+    public static void updateScoreBoard(Player p) {
 
         GameManager gm = BedwarsRel.getInstance().getGameManager();
-        if (gm == null) {
-            return;
+        if (Main.isDebug()){
+            l("updateing scoreboad");
         }
-
         for (Game game : gm.getGames()) {
             for (Player player : game.getPlayers()) {
                 String playerName = player.getName();
                 if (game.getState() == GameState.RUNNING) {
+
                     String worldname = game.getRegion().getWorld().getName();
                     String gameName = game.getName();
                     int gameTimeLeft = game.getTimeLeft();
@@ -121,9 +122,6 @@ public class RelScoreBoard {
                     }
 
                     if (!taskMap.isEmpty()) {
-                        if (isDebug()) {
-                            l(taskMap.entrySet() + ": " + taskMap.keySet());
-                        }
                         int minValue = Integer.MAX_VALUE;
                         String minTaskName = null;
 
@@ -166,7 +164,8 @@ public class RelScoreBoard {
 
                         ScoreboardManager mgr = Bukkit.getScoreboardManager();
 
-                        if (worldname.contains(MainConfigHandler.rushWorld2v2)) {
+                        if (worldname.contains(MainConfigHandler.rushWorld2v2))
+                        {
                             Team red = game.getTeam(redTeamName);
                             Team blue = game.getTeam(blueTeamName);
                             Team green = game.getTeam(greenTeamName);
@@ -207,7 +206,7 @@ public class RelScoreBoard {
 
 
                             Scoreboard scoreboard = mgr.getNewScoreboard();
-                            Objective objective = scoreboard.registerNewObjective("2v2", "dummy");
+                            Objective objective = scoreboard.registerNewObjective("2v2-", "dummy");
 
                             if (green.getTargetHeadBlock() != null && green.getTargetHeadBlock().getBlock() != null) {
                                 Material blockType = green.getTargetHeadBlock().getBlock().getType();
@@ -409,15 +408,15 @@ public class RelScoreBoard {
                                 String stringReal = string
                                         .replace("{pinkTeamNameShort}", pinkTeamNameShort)
                                         .replace("{whiteTeamNameShort}", whiteTeamNameShort)
-                                        .replace("{pinkTeamNameShort}", pinkTeamNameShort)
-                                        .replace("{pinkTeamNameShort}", pinkTeamNameShort)
+                                        .replace("{aquaTeamNameShort}", aquaTeamNameShort)
+                                        .replace("{grayTeamNameShort}", grayTeamNameShort)
 
-                                        .replace("{pinkTeamNameShort}", pinkTeamNameShort)
-                                        .replace("{pinkTeamNameShort}", pinkTeamNameShort)
-                                        .replace("{pinkTeamNameShort}", pinkTeamNameShort)
-                                        .replace("{pinkTeamNameShort}", pinkTeamNameShort)
+                                        .replace("{blueTeamNameShort}", blueTeamNameShort)
+                                        .replace("{redTeamNameShort}", redTeamNameShort)
+                                        .replace("{yellowTeamNameShort}", yellowTeamNameShort)
+                                        .replace("{greenTeamNameShort}", greenTeamNameShort)
 
-
+                                        .replace("{pinkTeamName}", aquaTeamName)
                                         .replace("{aquaTeamName}", aquaTeamName)
                                         .replace("{grayTeamName}", grayTeamName)
                                         .replace("{whiteTeamName}", whiteTeamName)
@@ -542,9 +541,7 @@ public class RelScoreBoard {
 
                             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
                             player.setScoreboard(scoreboard);
-
                         } else if (worldname.contains(MainConfigHandler.rushWorld4v4)) {
-
                             Team red = game.getTeam(redTeamName);
                             Team blue = game.getTeam(blueTeamName);
                             Team green = game.getTeam(greenTeamName);
@@ -655,13 +652,27 @@ public class RelScoreBoard {
                                 yellowTeamPlayer = yellow.getPlayers().size();
                             }
 
+
+                            String blueTeamNameShort = String.valueOf(blueTeamName.charAt(0));
+                            String redTeamNameShort = String.valueOf(redTeamName.charAt(0));
+                            String greenTeamNameShort = String.valueOf(greenTeamName.charAt(0));
+                            String yellowTeamNameShort = String.valueOf(yellowTeamName.charAt(0));
+
+
                             Map<Integer, String> ScoreBoard4v4LineReal = new HashMap<>(17);
+
+
 
                             for (Map.Entry<Integer, String> entry : ScoreBoard4v4Line.entrySet()) {
                                 int score = entry.getKey();
                                 String string = entry.getValue();
 
                                 String stringReal = string
+
+                                        .replace("{blueTeamNameShort}", blueTeamNameShort)
+                                        .replace("{redTeamNameShort}", redTeamNameShort)
+                                        .replace("{yellowTeamNameShort}", yellowTeamNameShort)
+                                        .replace("{greenTeamNameShort}", greenTeamNameShort)
 
                                         .replace("{redTeamName}", redTeamName)
                                         .replace("{blueTeamName}", blueTeamName)
