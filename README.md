@@ -1,5 +1,5 @@
 # BedwarsKit
-The old version source code is in https://github.com/lxhdukuai/bedwarskit, and I have forgotten the recovery password for this account, so I cannot access it again.
+The old version source code is in https://github.com/lxhdukuai/bedwarskit
 
 A Addon for BedwarsRel, let you keep your Kit in the game
 
