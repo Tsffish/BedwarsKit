@@ -24,9 +24,8 @@ import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class RelKillPlayer implements Listener {
     static Map<Material, Integer> list;
-
     @EventHandler
-    public void on(BedwarsPlayerKilledEvent e) {
+    public void on(final BedwarsPlayerKilledEvent e) {
 
         if (e.getKiller() != null && e.getPlayer() != null){
         if (e.getKiller().isOnline()){

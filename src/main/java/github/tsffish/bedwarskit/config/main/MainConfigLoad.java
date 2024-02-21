@@ -7,9 +7,6 @@ import github.tsffish.bedwarskit.listener.PlayerClickHandler;
 import github.tsffish.bedwarskit.listener.PlayerDamageHandler;
 import github.tsffish.bedwarskit.listener.PlayerGameModeHandler;
 import github.tsffish.bedwarskit.listener.bedwarsrel.*;
-import github.tsffish.bedwarskit.util.teamshop.RelTeamEffect;
-import github.tsffish.bedwarskit.util.teamshop.RelTeamEnchant;
-import io.github.bedwarsrel.BedwarsRel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -26,14 +23,14 @@ import static github.tsffish.bedwarskit.Main.spigotId;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.ConfigVersionCheck.ccv;
+import static github.tsffish.bedwarskit.util.misc.ErrorCause.vauleIsNull;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.teamshop.RelShopLevelUp.loadLevelUpInv;
 
 public class MainConfigLoad{
     private static final String name = "MainConfigLoad";
-    private static final String reason = "vaule is null";
+    private static final String reason = vauleIsNull() + " ";
     private static final Plugin plugin = JavaPlugin.getPlugin(Main.class);
     public static void loadMainConfig(CommandSender executer, boolean firstload) {
 
@@ -41,9 +38,8 @@ public class MainConfigLoad{
 
         c = plugin.getConfig();
         if (c == null) {
-            le("MainConfigLoad","Unable to find configuration file");
-            if (executer != null)
-            {
+            le("MainConfigLoad", "Unable to find configuration file");
+            if (executer != null) {
                 executer.sendMessage("Unable to find configuration file");
             }
         } else {
@@ -51,7 +47,7 @@ public class MainConfigLoad{
 
             plugin.reloadConfig();
 
-            ccv(Main.pluginVersion());
+            //ccv(Main.pluginVersion());
 
             if (c.getString(MainConfigPath.path_messreloadnow) != null) {
                 messreloadnow = c.getString(MainConfigPath.path_messreloadnow);
@@ -73,14 +69,14 @@ public class MainConfigLoad{
                 }
             }
 
-            if (firstload){
+            if (firstload) {
                 if (c.getString(MainConfigPath.path_update_checker) != null) {
                     boolean update_checker = c.getBoolean(MainConfigPath.path_update_checker);
                     if (update_checker) {
                         checkUpdate(Main.spigotId());
                     }
                 } else {
-                    sendError( MainConfigPath.path_update_checker);
+                    sendError(MainConfigPath.path_update_checker);
                     checkUpdate(spigotId());
                 }
             }
@@ -88,50 +84,45 @@ public class MainConfigLoad{
             if (c.getString(MainConfigPath.path_update_reportOp) != null) {
                 update_reportOp = c.getBoolean(MainConfigPath.path_update_reportOp);
             } else {
-                sendError( MainConfigPath.path_update_reportOp);
+                sendError(MainConfigPath.path_update_reportOp);
             }
 
             if (c.getString(MainConfigPath.path_grassPaneWalk) != null) {
                 grassPaneWalk = c.getBoolean(MainConfigPath.path_grassPaneWalk);
             } else {
-                sendError( MainConfigPath.path_grassPaneWalk);
+                sendError(MainConfigPath.path_grassPaneWalk);
             }
 
             if (c.getString(MainConfigPath.path_noHunger) != null) {
                 noHunger = c.getBoolean(MainConfigPath.path_noHunger);
             } else {
-                sendError( MainConfigPath.path_noHunger);
+                sendError(MainConfigPath.path_noHunger);
             }
 
             if (c.getString(MainConfigPath.path_noPearlDamage) != null) {
                 noPearlDamage = c.getBoolean(MainConfigPath.path_noPearlDamage);
             } else {
-                sendError( MainConfigPath.path_noPearlDamage);
+                sendError(MainConfigPath.path_noPearlDamage);
             }
 
             if (c.getString(MainConfigPath.path_killfb_oneHealthKill) != null) {
                 killfb_oneHealthKill = c.getBoolean(MainConfigPath.path_killfb_oneHealthKill);
+
+
             } else {
-                sendError( MainConfigPath.path_killfb_oneHealthKill);
+                sendError(MainConfigPath.path_killfb_oneHealthKill);
             }
             if (c.getString(MainConfigPath.path_killfb_oneHealthKill_itemType) != null) {
                 killfb_oneHealthKill_itemType = Material.getMaterial(
                         c.getString(MainConfigPath.path_killfb_oneHealthKill_itemType));
             } else {
-                sendError( MainConfigPath.path_killfb_oneHealthKill_itemType);
+                sendError(MainConfigPath.path_killfb_oneHealthKill_itemType);
             }
             if (c.getString(MainConfigPath.path_killfb_oneHealthKill_itemName) != null) {
                 killfb_oneHealthKill_itemName = c.getString(MainConfigPath.path_killfb_oneHealthKill_itemName);
             } else {
-                sendError( MainConfigPath.path_killfb_oneHealthKill_itemName);
+                sendError(MainConfigPath.path_killfb_oneHealthKill_itemName);
             }
-
-
-
-
-
-
-
 
 
             if (c.getString(MainConfigPath.path_noPearlDamage_TPSound) != null) {
@@ -2287,9 +2278,44 @@ public class MainConfigLoad{
             }
 
 
+            if (c.getString(MainConfigPath.path_lobbyjoinTeamMess_chat) != null) {
+                lobbyjoinTeamMess_chat = c.getString(MainConfigPath.path_lobbyjoinTeamMess_chat);
+            } else {
+                sendError(MainConfigPath.path_lobbyjoinTeamMess_chat);
+            }
+            if (c.getString(MainConfigPath.path_lobbyjoinTeamMess_title) != null) {
+                lobbyjoinTeamMess_title = c.getString(MainConfigPath.path_lobbyjoinTeamMess_title);
+            } else {
+                sendError(MainConfigPath.path_lobbyjoinTeamMess_title);
+            }
+            if (c.getString(MainConfigPath.path_lobbyjoinTeamMess_subtitle) != null) {
+                lobbyjoinTeamMess_subtitle = c.getString(MainConfigPath.path_lobbyjoinTeamMess_subtitle);
+            } else {
+                sendError(MainConfigPath.path_lobbyjoinTeamMess_subtitle);
+            }
+            if (c.getString(MainConfigPath.path_lobbyjoinTeamMess_actionbar) != null) {
+                lobbyjoinTeamMess_actionbar = c.getString(MainConfigPath.path_lobbyjoinTeamMess_actionbar);
+            } else {
+                sendError(MainConfigPath.path_lobbyjoinTeamMess_actionbar);
+            }
 
 
 
+
+
+
+
+            if (c.getString(MainConfigPath.path_lobbyleaveTeam) != null) {
+                lobbyleaveTeam = c.getBoolean(MainConfigPath.path_lobbyleaveTeam);
+            } else {
+                sendError( MainConfigPath.path_lobbyleaveTeam);
+            }
+
+            if (c.getString(MainConfigPath.path_lobbyleaveTeamMess) != null) {
+                lobbyleaveTeamMess = c.getString(MainConfigPath.path_lobbyleaveTeamMess);
+            } else {
+                sendError( MainConfigPath.path_lobbyleaveTeamMess);
+            }
 
             if (c.getString(MainConfigPath.path_creativeGameModeFix) != null) {
                 creativeGameModeFix = c.getBoolean(MainConfigPath.path_creativeGameModeFix);
@@ -2323,7 +2349,6 @@ public class MainConfigLoad{
 
                 pm.registerEvents(new RelGameStarted(), plugin);
 
-                //pm.registerEvents(new RelItemShop(), plugin);
                 pm.registerEvents(new RelKillPlayer(),plugin);
                 pm.registerEvents(new RelNoItemBreak(), plugin);
 
@@ -2344,15 +2369,6 @@ public class MainConfigLoad{
                 pm.registerEvents(new PlayerClickHandler(), plugin);
                 pm.registerEvents(new PlayerDamageHandler(), plugin);
                 pm.registerEvents(new PlayerGameModeHandler(), plugin);
-
-
-                if (BedwarsRel.getInstance() != null){
-                    RelTeamEnchant.loadMapTeam(1L);
-                    RelTeamEffect.loadMapTeam(1L);
-                }else {
-                    RelTeamEnchant.loadMapTeam(100L);
-                    RelTeamEffect.loadMapTeam(100L);
-                }
 
 
                 l(ChatColor.GREEN + "BedwarsRel found, related support enable");

@@ -329,7 +329,6 @@ dieOutGameItem_playAgain_ItemName: "\u518d\u6765\u4e00\u5c40"
 dieOutGameItem_playAgain_ItemType: "PAPER"
 dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
 
-
 # ===================== #
 # BedwarsKit 职业配置   #
 # ===================== #
@@ -371,7 +370,7 @@ KitNoneDescription: "\u65e0"
 KitNoneItemType: "BARRIER"
 KitNoneItemAmount: 1
 KitNoneItemSlot: 1
-KitNoneItemName: "&fNone"
+KitNoneItemName: "&f\u65e0"
 KitNoneItemLore:
   - "&f"
   - "&a\u804c\u4e1a\u4ecb\u7ecd\u003a"
@@ -466,11 +465,11 @@ diamondPrice: 6
 messreloadnow: "&bBedwarsKit &7>> &e\u6b63\u5728\u91cd\u8f7d\u914d\u7f6e\u6587\u4ef6"
 messreloadsucc: "&bBedwarsKit &7>> &a\u6210\u529f\u91cd\u8f7d\u914d\u7f6e\u6587\u4ef6"
 
-startmess: false
+startmess: true
 startmess_all_chat: ""
-startmess_all_title: ""
-startmess_all_subtitle: ""
-startmess_all_actionbar: ""
+startmess_all_title: " "
+startmess_all_subtitle: " "
+startmess_all_actionbar: " "
 
 gametask: true
 gametask_spawntime: true
@@ -658,6 +657,22 @@ nobreakList:
   - "GOLD_SWORD"
   - "GOLD_PICKAXE"
   - "GOLD_AXE"
+  - "LEATHER_HELMET"
+  - "LEATHER_CHESTPLATE"
+  - "LEATHER_LEGGINGS"
+  - "LEATHER_BOOTS"
+  - "CHAINMAIL_HELMET"
+  - "CHAINMAIL_CHESTPLATE"
+  - "CHAINMAIL_LEGGINGS"
+  - "CHAINMAIL_BOOTS"
+  - "IRON_HELMET"
+  - "IRON_CHESTPLATE"
+  - "IRON_LEGGINGS"
+  - "IRON_BOOTS"
+  - "DIAMOND_HELMET"
+  - "DIAMOND_CHESTPLATE"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
 noMoveList:
   - "HELMET"
   - "CHESTP"
@@ -679,11 +694,17 @@ giveProtEnchList:
   - "DIAMOND_LEGGINGS"
   - "DIAMOND_BOOTS"
 
+lobbyleaveTeam: true
+lobbyleaveTeamMess: "&b\u8d77\u5e8a\u6218\u4e89 &7>> &a\u4f60\u79bb\u5f00\u4e86 {teamColor}{teamName}"
+lobbyjoinTeamMess_chat: " "
+lobbyjoinTeamMess_title: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}"
+lobbyjoinTeamMess_subtitle: "&e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
+lobbyjoinTeamMess_actionbar: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}, &e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
 
 # ======== #
 # 更新设置 #
 # ======== #
-config-version: "1.9.52"
+config-version: "1.9.54"
 update_checker: true
 update_reportOp: true
 # 配置版本：配置文件版本

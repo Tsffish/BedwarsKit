@@ -372,6 +372,12 @@ public class MainConfigHandler {
     public static String gametask_mess_finalbattle_actionbar;
 
 
+    public static String lobbyjoinTeamMess_chat;
+    public static String lobbyjoinTeamMess_title;
+    public static String lobbyjoinTeamMess_subtitle;
+    public static String lobbyjoinTeamMess_actionbar;
+
+
     public static int teamEnchInvRow;
 
 
@@ -426,9 +432,8 @@ public class MainConfigHandler {
     public static String teamEffItemName_Haste2;
     public static String teamEffItemName_Heal1;
 
-    //public static boolean lobbyleaveTeam;
-    //public static String lobbyleaveTeamItemName;
-    //public static String lobbyleaveTeamMess;
+    public static boolean lobbyleaveTeam;
+    public static String lobbyleaveTeamMess;
 
     public static int teamEff_Heal_dis;
     public static boolean dieOutGameItem_playAgain;

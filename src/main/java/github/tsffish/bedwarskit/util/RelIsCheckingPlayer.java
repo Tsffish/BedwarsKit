@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RelIsCheckingPlayer {
-    private static List<String> isCheckingPlayer = new ArrayList<>(100);
+    static List<String> isCheckingPlayer = new ArrayList<>(100);
     public static void joinCheckList(String worldName){
         isCheckingPlayer.add(worldName);
     }

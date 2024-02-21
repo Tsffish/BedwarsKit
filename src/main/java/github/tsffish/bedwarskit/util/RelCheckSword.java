@@ -25,7 +25,10 @@ public class RelCheckSword {
             pi.remove(woodSword);
         }
     } else if (!pi.contains(woodSword) && !pi.contains(stoneSword) && !pi.contains(ironSword) && !pi.contains(diamondSword)) {
+        if (player.getItemOnCursor().getType() != ws.getType()){
+
         pi.addItem(ws);
+        }
     }
 }
     }

@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.config.kit;
 
-class KitConfigPath
-{
+class KitConfigPath {
     static String path_kitenable = "kitenable";
     public static String path_kitDefault = "kitDefault";
     static String path_kitForce = "kitForce";

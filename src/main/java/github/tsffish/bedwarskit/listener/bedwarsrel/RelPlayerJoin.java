@@ -1,9 +1,21 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.kit.KitConfigHandler;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import github.tsffish.bedwarskit.util.RelCurrentStat;
+import github.tsffish.bedwarskit.util.teamshop.check.EffectHaste;
+import github.tsffish.bedwarskit.util.teamshop.check.EffectHeal;
+import github.tsffish.bedwarskit.util.teamshop.check.EnchatProt;
+import github.tsffish.bedwarskit.util.teamshop.check.EnchatSharp;
+import io.github.bedwarsrel.BedwarsRel;
+import io.github.bedwarsrel.events.BedwarsPlayerJoinTeamEvent;
 import io.github.bedwarsrel.events.BedwarsPlayerJoinedEvent;
 import io.github.bedwarsrel.game.Game;
+import io.github.bedwarsrel.game.GameManager;
 import io.github.bedwarsrel.game.GameState;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -13,9 +25,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static github.tsffish.bedwarskit.Main.isDebug;
 import static github.tsffish.bedwarskit.Main.isLastestVersion;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.kitDefault;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
@@ -23,21 +39,19 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.RelCheckSword.checkInvHasSword;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
-import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.isInCheckList;
-import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.joinCheckList;
+import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.*;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.getPlayerKit;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.setPlayerKit;
 import static github.tsffish.bedwarskit.util.RelPlayerTab.sendTab;
 import static github.tsffish.bedwarskit.util.RelScoreBoard.updateScoreBoard;
 import static github.tsffish.bedwarskit.util.kit.MenuItem.kitMenuItem;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.teamshop.RelCheckEffect.checkEffectHaste;
-import static github.tsffish.bedwarskit.util.teamshop.RelCheckEffect.checkEffectHeal;
-import static github.tsffish.bedwarskit.util.teamshop.RelCheckEnchant.checkEnchantArmor;
-import static github.tsffish.bedwarskit.util.teamshop.RelCheckEnchant.checkEnchantSword;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
+import static org.bukkit.Sound.ITEM_PICKUP;
 
 public class RelPlayerJoin implements Listener {
-    private static Plugin plugin = github.tsffish.bedwarskit.Main.getPlugin(github.tsffish.bedwarskit.Main.class);
+    private static final Main plugin = Main.getInstance();
     static ItemStack playAgainItem;
     static final ItemStack bot = new ItemStack(Material.GLASS_BOTTLE);
     static final ItemStack bed = new ItemStack(Material.BED);
@@ -50,9 +64,13 @@ public class RelPlayerJoin implements Listener {
 
     @EventHandler
     public void on(final BedwarsPlayerJoinedEvent event) {
+        if (event.getGame() == null) return;
         Game game = event.getGame();
+        if (event.getPlayer() == null) {
+            return;
+        }
         Player player = event.getPlayer();
-        if (game == null || player == null || !player.isOnline()) {
+        if (!player.isOnline()) {
             return;
         }
         String playerName = player.getName();
@@ -80,22 +98,37 @@ public class RelPlayerJoin implements Listener {
 
         World world = player.getWorld();
         String worldName = world.getName();
+
         if (!isInCheckList(worldName)) {
+            joinCheckList(worldName);
+            if (isDebug()){
+                l("joinCheckList: " + worldName);
+            }
             new BukkitRunnable() {
                 public void run() {
-                    joinCheckList(worldName);
+                    if (world.getPlayers().isEmpty()){
+                        leaveCheckList(worldName);
+                        if (isDebug()){
+                            l("leaveCheckList: " + worldName);
+                        }
+                        cancel();
+                    }
+
                     if (tab) {
                         sendTab(player);
+                        if (isDebug()){
+                            l("sendTab: " + playerName);
+                        }
                     }
                     if (customScoreboard) {
-                        updateScoreBoard(player);
+                        updateScoreBoard(game);
                     }
                     if (game.getState() == GameState.WAITING) {
+
                         if (KitConfigHandler.kitenable) {
                             if (KitConfigHandler.kitMenuItemGive) {
 
                                 for (Player player : game.getPlayers()) {
-                                    //checkLobbyItem(player);
                                     PlayerInventory inventory = player.getInventory();
                                     if (!inventory.contains(kitMenuItem)) {
                                         inventory.addItem(kitMenuItem);
@@ -103,6 +136,45 @@ public class RelPlayerJoin implements Listener {
                                 }
                             }
                         }
+
+                        if (player.getGameMode() == GameMode.SPECTATOR){
+                            player.setGameMode(GameMode.SURVIVAL);
+                        }
+
+
+                        if (game.getRegion().getWorld().getPlayers().size() != game.getPlayers().size()) {
+
+                            if (isDebug()) {
+                                l("game " + game.getName()  + " not match player count, trying to synchronize");
+                            }
+
+                            if (Bukkit.getWorld(lobbyWorld) != null) {
+
+                                List<Player> playerList = new ArrayList<>(game.getMaxPlayers() + 1);
+                                for (Player list : game.getRegion().getWorld().getPlayers()) {
+                                    if (list != null && list.isOnline()) {
+                                        playerList.add(list);
+                                    }
+                                }
+
+                                World lobby = Bukkit.getWorld(lobbyWorld);
+                                GameManager gameManager = BedwarsRel.getInstance().getGameManager();
+                                for (Player list : playerList) {
+                                    if (gameManager.getGameOfPlayer(list) != null){
+                                        game.playerLeave(list, false);
+                                        game.playerJoins(list);
+                                    }else {
+                                        if (isDebug()){
+                                        l(list.getName() + " joined world with no game,kicked.");
+                                        }
+                                        list.teleport(lobby.getSpawnLocation());
+                                    }
+
+                                }
+
+                            }
+                        }
+
                     } else if (game.getState() == GameState.RUNNING) {
                         for (Player player : game.getPlayers()) {
                             if (player != null && player.isOnline()) {
@@ -115,15 +187,20 @@ public class RelPlayerJoin implements Listener {
                                 ItemStack diamond = new ItemStack(diamondPriceType, diamondPrice);
 
                                 if (PlayerisOut(playerName)) {
-                                    if (dieOutGameItem_playAgain) {
+                                    if (player.isOnline()
+                                            && !player.isDead()
+                                            && player.getGameMode() != GameMode.SURVIVAL) {
+                                        if (dieOutGameItem_playAgain) {
 
-                                        if (!pi.contains(playAgainItem)) {
-                                            pi.addItem(playAgainItem);
+                                            if (!pi.contains(playAgainItem)) {
+                                                pi.addItem(playAgainItem);
+                                            }
                                         }
+
                                     }
                                 } else {
 
-                                    if (player.getHealth() >= 0) {
+                                    if (player.getHealth() >= 0 && !player.isDead()) {
 
                                         checkInvHasSword(player);
 
@@ -141,8 +218,24 @@ public class RelPlayerJoin implements Listener {
                                             }
                                         }
 
+
+
+
+                                        if (isDebug()) {
+
+                                            if (RelCurrentStat.PlayerisOut(playerName)) {
+                                                sendActionBar(player, "You are in PlayerisOut");
+                                            } else {
+                                                sendActionBar(player, "You are Not in PlayerisOut");
+                                            }
+                                        }
+
+
+
                                         if (pi.contains(upToChainArmor)) {
-                                            if (armorChain.contains(playerName) || armorIron.contains(playerName) || armorDiamond.contains(playerName)) {
+                                            if (armorChain.contains(playerName)
+                                                    || armorIron.contains(playerName)
+                                                    || armorDiamond.contains(playerName)) {
                                                 pi.remove(upToChainArmor);
                                                 pi.addItem(chain);
                                                 return;
@@ -150,12 +243,13 @@ public class RelPlayerJoin implements Listener {
 
                                             armorChain.add(playerName);
                                             pi.remove(upToChainArmor);
-                                            player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
-                                            player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+                                            pi.setLeggings(chain1);
+                                            pi.setBoots(chain2);
                                         }
 
                                         if (pi.contains(upToIronArmor)) {
-                                            if (armorIron.contains(playerName) || armorDiamond.contains(playerName)) {
+                                            if (armorIron.contains(playerName)
+                                                    || armorDiamond.contains(playerName)) {
                                                 pi.remove(upToIronArmor);
                                                 pi.addItem(iron);
                                                 return;
@@ -165,8 +259,8 @@ public class RelPlayerJoin implements Listener {
                                             armorChain.remove(playerName);
                                             armorDiamond.remove(playerName);
                                             pi.remove(upToIronArmor);
-                                            player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-                                            player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+                                            pi.setLeggings(iron1);
+                                            pi.setBoots(iron2);
                                         }
 
                                         if (pi.contains(upToDiamondArmor)) {
@@ -180,8 +274,8 @@ public class RelPlayerJoin implements Listener {
                                             armorIron.remove(playerName);
                                             armorChain.remove(playerName);
                                             pi.remove(upToDiamondArmor);
-                                            player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
-                                            player.getInventory().setBoots(new ItemStack(Material.DIAMOND_BOOTS));
+                                            pi.setLeggings(dm1);
+                                            pi.setBoots(dm2);
                                         }
                                     }
                                 }
@@ -193,7 +287,7 @@ public class RelPlayerJoin implements Listener {
         }
     }
     @EventHandler
-    public void on(PlayerJoinEvent event) {
+    public void on(final PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (player == null || !player.isOnline()) {
             return;
@@ -201,7 +295,7 @@ public class RelPlayerJoin implements Listener {
         if (player.isOp()) {
             if (!isLastestVersion()) {
                 if (update_reportOp) {
-                    if (update_tip != null) {
+                    if (update_tip != null && !update_tip.isEmpty()) {
                         for (String list : update_tip) {
                             player.sendMessage(t(list));
                         }
@@ -211,11 +305,60 @@ public class RelPlayerJoin implements Listener {
         }
 
     }
-                void checkTeamLevelUp(Game game) {
-                    checkEffectHaste(game);
-                    checkEffectHeal(game);
-
-                    checkEnchantArmor(game);
-                    checkEnchantSword(game);
+               void checkTeamLevelUp(Game game) {
+                    EffectHaste.checkEffect(game);
+                    EffectHeal.checkEffect(game);
+                    EnchatSharp.checkEnchant(game);
+                    EnchatProt.checkEnchant(game);
                 }
+
+
+
+
+
+    private static void playerSoundSucc(Player player){
+        player.playSound(player.getLocation(),ITEM_PICKUP,1,1);
+    }
+    @EventHandler
+    public void on(BedwarsPlayerJoinTeamEvent event){
+        Player player = event.getPlayer();
+        if (player == null || !player.isOnline()) return;
+        if (BedwarsRel.getInstance() == null) return;
+
+        String teamColor = event.getTeam().getChatColor().toString();
+        String teamName = event.getTeam().getName();
+
+        playerSoundSucc(player);
+        if (!MainConfigHandler.lobbyjoinTeamMess_chat.isEmpty()) {
+            player.sendMessage(MainConfigHandler.lobbyjoinTeamMess_chat
+                    .replace("{teamColor}",teamColor)
+                    .replace("{teamName}",teamName));
+        }
+        if (!Objects.equals(MainConfigHandler.lobbyjoinTeamMess_title, "")) {
+            String titleReal = t(MainConfigHandler.lobbyjoinTeamMess_title
+                    .replace("{teamColor}",teamColor)
+                    .replace("{teamName}",teamName));
+            if (!Objects.equals(MainConfigHandler.lobbyjoinTeamMess_subtitle, "")) {
+                String subtitleReal = t(MainConfigHandler.lobbyjoinTeamMess_subtitle
+                        .replace("{teamColor}",teamColor)
+                        .replace("{teamName}",teamName));
+
+                player.sendTitle(titleReal, subtitleReal);
             }
+        } else if (!Objects.equals(MainConfigHandler.lobbyjoinTeamMess_subtitle, "")) {
+            String titleReal = " ";
+            String subtitleReal = t(MainConfigHandler.lobbyjoinTeamMess_subtitle
+                    .replace("{teamColor}",teamColor)
+                    .replace("{teamName}",teamName));
+
+            player.sendTitle(titleReal, subtitleReal);
+        }
+        if (!Objects.equals(MainConfigHandler.lobbyjoinTeamMess_actionbar, "")) {
+            sendActionBar(player, t(MainConfigHandler.lobbyjoinTeamMess_actionbar
+                    .replace("{teamColor}",teamColor)
+                    .replace("{teamName}",teamName)));
+        }
+
+
+    }
+}

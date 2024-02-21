@@ -1,24 +1,24 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.util.RelCurrentStat;
 import io.github.bedwarsrel.events.BedwarsTargetBlockDestroyedEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelBreakTitle.bt;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelBreakBed implements Listener {
-    private static Plugin plugin = github.tsffish.bedwarskit.Main.getPlugin(github.tsffish.bedwarskit.Main.class);
+    private static final Main plugin = Main.getInstance();
     @EventHandler
-    public void on(BedwarsTargetBlockDestroyedEvent e) {
-        if (MainConfigHandler.breakTitle) {
+    public void on(final BedwarsTargetBlockDestroyedEvent e) {
+        if (breakTitle) {
 
             Player breakPlayer = e.getPlayer();
             String playerName = breakPlayer.getName();
@@ -29,12 +29,12 @@ public class RelBreakBed implements Listener {
             String breakTeamColor = e.getTeam().getChatColor().toString();
             String breakPlayerTeamColor = e.getGame().getPlayerTeam(breakPlayer).getChatColor().toString();
 
-            String breakTitleBreakTeamReal = bt(MainConfigHandler.breakTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakSubtitleBreakTeamReal = bt(MainConfigHandler.breakSubTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakTitleBreakPlayerReal = bt(MainConfigHandler.breakTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakSubtitleBreakPlayerReal = bt(MainConfigHandler.breakSubTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakTitleAllReal = bt(MainConfigHandler.breakTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakSubtitleAllReal = bt(MainConfigHandler.breakSubTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+            String breakTitleBreakTeamReal = bt(breakTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+            String breakSubtitleBreakTeamReal = bt(breakSubTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+            String breakTitleBreakPlayerReal = bt(breakTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+            String breakSubtitleBreakPlayerReal = bt(breakSubTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+            String breakTitleAllReal = bt(breakTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+            String breakSubtitleAllReal = bt(breakSubTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
 
             new BukkitRunnable()
             {

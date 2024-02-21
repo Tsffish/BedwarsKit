@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RelPlayerIsRespawn {
-    private static List<String> playerRespawn = new ArrayList<>();
+    static List<String> playerRespawn = new ArrayList<>(100);
     public static boolean getPlayerRespawn(String playerName){
         return playerRespawn.contains(playerName);
     }

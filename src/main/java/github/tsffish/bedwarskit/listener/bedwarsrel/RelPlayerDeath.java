@@ -9,28 +9,31 @@ import io.github.bedwarsrel.game.GameManager;
 import io.github.bedwarsrel.game.GameState;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.Objects;
 
+import static github.tsffish.bedwarskit.Main.isDebug;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.deathGameMode;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.preventloadworld;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.RelPlayerRespawn.playerrespawn;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class RelPlayerDeath implements Listener {
-    private static final Plugin plugin = JavaPlugin.getPlugin(Main.class);
+    private static final Main plugin = Main.getInstance();
     @EventHandler
-    public void on(PlayerDeathEvent event) {
+    public void on(final PlayerDeathEvent event) {
         Player p = event.getEntity().getPlayer();
         if (p == null || !p.isOnline()) return;
         String playerName = p.getName();
@@ -38,30 +41,37 @@ public class RelPlayerDeath implements Listener {
         if (gm == null) return;
         Game game = gm.getGameOfPlayer(p);
         if (game == null) return;
-        if (game.getPlayerTeam(p).getHeadTarget() == null || !game.getPlayerTeam(p).getHeadTarget().getType().toString().contains("BED")){
+        if (game.getPlayerTeam(p).getHeadTarget() == null
+                || game.getPlayerTeam(p).getHeadTarget().getType() == Material.AIR) {
             addPlayerIsOut(playerName);
+            if (isDebug()) {
+                l("add " + playerName + " is out");
+            }
+            game.isSpectator(p);
             return;
         }
 
-        if (MainConfigHandler.preventloadworld){
-            p.setHealth(0.5);
-        }
 
-        if (!PlayerisOut(playerName)){
-            if (MainConfigHandler.deathGameMode) {
-                if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)){
+        if (!PlayerisOut(playerName)) {
+
+            if (deathGameMode) {
+                if (preventloadworld) {
+                    p.setHealth(0.5);
+                }
+                if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)) {
                     RelPlayerIsRespawn.addPlayerRespawn(playerName);
-                    deathplayer(p, 20L);
+
+                    deathplayer(p, 1L);
+
                 }
             }
         }
-
-
     }
+
+
+
     public static void deathplayer(Player p,long dealy)
     {
-
-        p.setHealth(0.5);
 
         String playerName = p.getName();
         GameManager gm = BedwarsRel.getInstance().getGameManager();
@@ -71,10 +81,8 @@ public class RelPlayerDeath implements Listener {
         PlayerInventory inventory = p.getInventory();
 
         for (ItemStack list : inventory.getContents()){
-            if (list != null && list.getType() == MainConfigHandler.killfb_oneHealthKill_itemType
-            && list.getItemMeta().getDisplayName().equals(MainConfigHandler.killfb_oneHealthKill_itemName)){
-
-            }else {
+            if (list != null && list.getType() != MainConfigHandler.killfb_oneHealthKill_itemType
+            ){
                 inventory.remove(list);
             }
         }
@@ -102,7 +110,7 @@ public class RelPlayerDeath implements Listener {
                     --x;
                     i = Integer.toString(x);
 
-                    if (!Objects.equals(MainConfigHandler.respawnChat, "")) {
+                    if (!MainConfigHandler.respawnChat.isEmpty()) {
                         p.sendMessage(MainConfigHandler.respawnChat.replace("{timeleft}",i));
                     }
                     if (!Objects.equals(MainConfigHandler.respawnTitle, "")) {
@@ -147,16 +155,19 @@ public class RelPlayerDeath implements Listener {
                         sendActionBar(p, t(MainConfigHandler.respawnSuccActionBar.replace("{timeleft}",i)));
                     }
 
+                    if (!PlayerisOut(playerName)) {
 
-                    playerrespawn(p, 1L);
-                    Vector playerDirection = p.getLocation().getDirection();
-                    Location spawnLocationNew = spawnLocation.setDirection(playerDirection);
-                    p.teleport(spawnLocationNew);
+                        playerrespawn(p, 1L);
+                        Vector playerDirection = p.getLocation().getDirection();
+                        Location spawnLocationNew = spawnLocation.setDirection(playerDirection);
+                        p.teleport(spawnLocationNew);
+                    }
                     cancel();
                 }
 
                 if (p.isOnline()) {
                     if (game.getTimeLeft() == game.getLength() || game.getState() == GameState.WAITING) {
+
                         p.setGameMode(GameMode.SURVIVAL);
                         cancel();
                     }

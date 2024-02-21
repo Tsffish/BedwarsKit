@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -9,11 +8,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.grassPaneWalk;
+
 public class RelPlayerMove implements Listener {
     @EventHandler
     public void on(final PlayerMoveEvent event) {
+        if (event.getPlayer() == null) {
+            return;
+        }
         Player player = event.getPlayer();
-        if (MainConfigHandler.grassPaneWalk && player != null && player.isOnline() && player.getGameMode() != GameMode.SPECTATOR) {
+        if (!player.isOnline()) {
+            return;
+        }
+        if (player.getGameMode() != GameMode.SPECTATOR) {
+            return;
+        }
+        if (grassPaneWalk) {
             Location to = event.getTo();
             Location from = event.getFrom();
 
@@ -22,15 +32,11 @@ public class RelPlayerMove implements Listener {
                 player.setFallDistance(0.0f);
                 player.teleport(newLocation);
 
-                // 计算玩家的方向向量
                 Vector direction = to.toVector().subtract(from.toVector()).normalize();
 
-                // 设置玩家的击退速度
                 player.setVelocity(direction.multiply(0.2));
             }
         }
     }
-
-
 }
 

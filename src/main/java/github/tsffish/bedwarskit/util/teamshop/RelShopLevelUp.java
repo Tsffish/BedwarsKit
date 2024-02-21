@@ -1,6 +1,10 @@
 package github.tsffish.bedwarskit.util.teamshop;
 
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
+import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
+import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
+import github.tsffish.bedwarskit.util.teamshop.list.ListProt;
+import github.tsffish.bedwarskit.util.teamshop.list.ListSharp;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.Team;
 import org.bukkit.Bukkit;
@@ -14,499 +18,544 @@ import java.util.List;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class RelShopLevelUp {
-    private static Inventory i2;
-    private static Inventory i4;
-    private static ItemStack sharp1;
-    private static ItemStack sharp2;
-    private static ItemStack sharp3;
-    private static ItemStack sharp4;
-    private static ItemStack sharpMax;
-    private static ItemStack prot1;
-    private static ItemStack prot2;
-    private static ItemStack prot3;
-    private static ItemStack prot4;
-    private static ItemStack protMax;
-    private static ItemStack haste1;
-    private static ItemStack haste2;
-    private static ItemStack hasteMax;
-    private static ItemStack heal1;
-    private static ItemStack healMax;
+    private static ItemStack sharp12v2;
+    private static ItemStack sharp22v2;
+    private static ItemStack sharp32v2;
+    private static ItemStack sharp42v2;
+    private static ItemStack sharpMax2v2;
+    private static ItemStack prot12v2;
+    private static ItemStack prot22v2;
+    private static ItemStack prot32v2;
+    private static ItemStack prot42v2;
+    private static ItemStack protMax2v2;
+    private static ItemStack haste12v2;
+    private static ItemStack haste22v2;
+    private static ItemStack hasteMax2v2;
+    private static ItemStack heal12v2;
+    private static ItemStack healMax2v2;
+    private static ItemStack sharp14v4;
+    private static ItemStack sharp24v4;
+    private static ItemStack sharp34v4;
+    private static ItemStack sharp44v4;
+    private static ItemStack sharpMax4v4;
+    private static ItemStack prot14v4;
+    private static ItemStack prot24v4;
+    private static ItemStack prot34v4;
+    private static ItemStack prot44v4;
+    private static ItemStack protMax4v4;
+    private static ItemStack haste14v4;
+    private static ItemStack haste24v4;
+    private static ItemStack hasteMax4v4;
+    private static ItemStack heal14v4;
+    private static ItemStack healMax4v4;
     public static void loadLevelUpInv(){
         loadLevelUpInv2v2();
         loadLevelUpInv4v4();
     }
     private static void loadLevelUpInv2v2(){
 
-        i2 = Bukkit.getServer().createInventory(null, teamEnchInvRow * 9, MainConfigHandler.shopLevelup);
-
         List<String> lore = new ArrayList<>(6);
         lore.add("ERROR");
-        sharp1 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp1Real = sharp1.getItemMeta();
+        sharp12v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp1Real = sharp12v2.getItemMeta();
         sharp1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp1Cost2v2 + " " + MainConfigHandler.meanDiamond));
         sharp1Real.setLore(lore);
-        sharp1.setItemMeta(sharp1Real);
+        sharp12v2.setItemMeta(sharp1Real);
 
-        sharp2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp2Real = sharp2.getItemMeta();
+        sharp22v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp2Real = sharp22v2.getItemMeta();
         sharp2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp2));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp2Cost2v2 + " " + MainConfigHandler.meanDiamond));
         sharp2Real.setLore(lore);
-        sharp2.setItemMeta(sharp2Real);
+        sharp22v2.setItemMeta(sharp2Real);
 
 
-        sharp3 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp3Real = sharp3.getItemMeta();
+        sharp32v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp3Real = sharp32v2.getItemMeta();
         sharp3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp3));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp3Cost2v2 + " " + MainConfigHandler.meanDiamond));
         sharp3Real.setLore(lore);
-        sharp3.setItemMeta(sharp3Real);
+        sharp32v2.setItemMeta(sharp3Real);
 
-        sharp4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp4Real = sharp4.getItemMeta();
+        sharp42v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp4Real = sharp42v2.getItemMeta();
         sharp4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp4));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp4Cost2v2 + " " + MainConfigHandler.meanDiamond));
         sharp4Real.setLore(lore);
-        sharp4.setItemMeta(sharp4Real);
+        sharp42v2.setItemMeta(sharp4Real);
 
-        sharpMax = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharpMaxReal = sharpMax.getItemMeta();
+        sharpMax2v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharpMaxReal = sharpMax2v2.getItemMeta();
         sharpMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharpMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         sharpMaxReal.setLore(lore);
-        sharpMax.setItemMeta(sharpMaxReal);
+        sharpMax2v2.setItemMeta(sharpMaxReal);
 
-        prot1 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot1Real = prot1.getItemMeta();
+        prot12v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot1Real = prot12v2.getItemMeta();
         prot1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot1Cost2v2 + " " + MainConfigHandler.meanDiamond));
         prot1Real.setLore(lore);
-        prot1.setItemMeta(prot1Real);
+        prot12v2.setItemMeta(prot1Real);
 
-        prot2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot2Real = prot2.getItemMeta();
+        prot22v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot2Real = prot22v2.getItemMeta();
         prot2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot2));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot2Cost2v2 + " " + MainConfigHandler.meanDiamond));
         prot2Real.setLore(lore);
-        prot2.setItemMeta(prot2Real);
+        prot22v2.setItemMeta(prot2Real);
 
 
-        prot3 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot3Real = prot3.getItemMeta();
+        prot32v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot3Real = prot32v2.getItemMeta();
         prot3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot3));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot3Cost2v2 + " " + MainConfigHandler.meanDiamond));
         prot3Real.setLore(lore);
-        prot3.setItemMeta(prot3Real);
+        prot32v2.setItemMeta(prot3Real);
 
-        prot4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot4Real = prot4.getItemMeta();
+        prot42v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot4Real = prot42v2.getItemMeta();
         prot4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot4));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot4Cost2v2 + " " + MainConfigHandler.meanDiamond));
         prot4Real.setLore(lore);
-        prot4.setItemMeta(prot4Real);
+        prot42v2.setItemMeta(prot4Real);
 
-        protMax = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta protMaxReal = protMax.getItemMeta();
+        protMax2v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta protMaxReal = protMax2v2.getItemMeta();
         protMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_protMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         protMaxReal.setLore(lore);
-        protMax.setItemMeta(protMaxReal);
+        protMax2v2.setItemMeta(protMaxReal);
 
-        haste1 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
-        ItemMeta haste1Real = haste1.getItemMeta();
+        haste12v2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        ItemMeta haste1Real = haste12v2.getItemMeta();
         haste1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.haste1Cost2v2 + " " + MainConfigHandler.meanDiamond));
         haste1Real.setLore(lore);
-        haste1.setItemMeta(haste1Real);
+        haste12v2.setItemMeta(haste1Real);
 
-        haste2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
-        ItemMeta haste2Real = haste2.getItemMeta();
+        haste22v2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        ItemMeta haste2Real = haste22v2.getItemMeta();
         haste2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste2));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.haste2Cost2v2 + " " + MainConfigHandler.meanDiamond));
         haste2Real.setLore(lore);
-        haste2.setItemMeta(haste2Real);
+        haste22v2.setItemMeta(haste2Real);
 
-        hasteMax = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
-        ItemMeta hasteMaxReal = hasteMax.getItemMeta();
+        hasteMax2v2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        ItemMeta hasteMaxReal = hasteMax2v2.getItemMeta();
         hasteMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_hasteMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         hasteMaxReal.setLore(lore);
-        hasteMax.setItemMeta(hasteMaxReal);
+        hasteMax2v2.setItemMeta(hasteMaxReal);
 
-        heal1 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
-        ItemMeta heal1Real = heal1.getItemMeta();
+        heal12v2 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        ItemMeta heal1Real = heal12v2.getItemMeta();
         heal1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_heal1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
         heal1Real.setLore(lore);
-        heal1.setItemMeta(heal1Real);
+        heal12v2.setItemMeta(heal1Real);
 
-        healMax = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
-        ItemMeta healMaxReal = healMax.getItemMeta();
+        healMax2v2 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        ItemMeta healMaxReal = healMax2v2.getItemMeta();
         healMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_healMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         healMaxReal.setLore(lore);
-        healMax.setItemMeta(healMaxReal);
+        healMax2v2.setItemMeta(healMaxReal);
 
     }
     private static void loadLevelUpInv4v4(){
 
-        i2 = Bukkit.getServer().createInventory(null, teamEnchInvRow * 9, MainConfigHandler.shopLevelup);
-
         List<String> lore = new ArrayList<>(6);
         lore.add("ERROR");
-        sharp1 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp1Real = sharp1.getItemMeta();
+        sharp14v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp1Real = sharp14v4.getItemMeta();
         sharp1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp1Cost4v4 + " " + MainConfigHandler.meanDiamond));
         sharp1Real.setLore(lore);
-        sharp1.setItemMeta(sharp1Real);
+        sharp14v4.setItemMeta(sharp1Real);
 
-        sharp2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp2Real = sharp2.getItemMeta();
+        sharp24v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp2Real = sharp24v4.getItemMeta();
         sharp2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp2));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp2Cost4v4 + " " + MainConfigHandler.meanDiamond));
         sharp2Real.setLore(lore);
-        sharp2.setItemMeta(sharp2Real);
+        sharp24v4.setItemMeta(sharp2Real);
 
 
-        sharp3 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp3Real = sharp3.getItemMeta();
+        sharp34v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp3Real = sharp34v4.getItemMeta();
         sharp3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp3));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp3Cost4v4 + " " + MainConfigHandler.meanDiamond));
         sharp3Real.setLore(lore);
-        sharp3.setItemMeta(sharp3Real);
+        sharp34v4.setItemMeta(sharp3Real);
 
-        sharp4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharp4Real = sharp4.getItemMeta();
+        sharp44v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharp4Real = sharp44v4.getItemMeta();
         sharp4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp4));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.sharp4Cost4v4 + " " + MainConfigHandler.meanDiamond));
         sharp4Real.setLore(lore);
-        sharp4.setItemMeta(sharp4Real);
+        sharp44v4.setItemMeta(sharp4Real);
 
-        sharpMax = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
-        ItemMeta sharpMaxReal = sharpMax.getItemMeta();
+        sharpMax4v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        ItemMeta sharpMaxReal = sharpMax4v4.getItemMeta();
         sharpMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharpMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         sharpMaxReal.setLore(lore);
-        sharpMax.setItemMeta(sharpMaxReal);
+        sharpMax4v4.setItemMeta(sharpMaxReal);
 
-        prot1 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot1Real = prot1.getItemMeta();
+        prot14v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot1Real = prot14v4.getItemMeta();
         prot1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot1Cost4v4 + " " + MainConfigHandler.meanDiamond));
         prot1Real.setLore(lore);
-        prot1.setItemMeta(prot1Real);
+        prot14v4.setItemMeta(prot1Real);
 
-        prot2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot2Real = prot2.getItemMeta();
+        prot24v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot2Real = prot24v4.getItemMeta();
         prot2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot2));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot2Cost4v4 + " " + MainConfigHandler.meanDiamond));
         prot2Real.setLore(lore);
-        prot2.setItemMeta(prot2Real);
+        prot24v4.setItemMeta(prot2Real);
 
 
-        prot3 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot3Real = prot3.getItemMeta();
+        prot34v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot3Real = prot34v4.getItemMeta();
         prot3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot3));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot3Cost4v4 + " " + MainConfigHandler.meanDiamond));
         prot3Real.setLore(lore);
-        prot3.setItemMeta(prot3Real);
+        prot34v4.setItemMeta(prot3Real);
 
-        prot4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta prot4Real = prot4.getItemMeta();
+        prot44v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta prot4Real = prot44v4.getItemMeta();
         prot4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot4));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.prot4Cost4v4 + " " + MainConfigHandler.meanDiamond));
         prot4Real.setLore(lore);
-        prot4.setItemMeta(prot4Real);
+        prot44v4.setItemMeta(prot4Real);
 
-        protMax = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
-        ItemMeta protMaxReal = protMax.getItemMeta();
+        protMax4v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        ItemMeta protMaxReal = protMax4v4.getItemMeta();
         protMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_protMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         protMaxReal.setLore(lore);
-        protMax.setItemMeta(protMaxReal);
+        protMax4v4.setItemMeta(protMaxReal);
 
-        haste1 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
-        ItemMeta haste1Real = haste1.getItemMeta();
+        haste14v4 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        ItemMeta haste1Real = haste14v4.getItemMeta();
         haste1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.haste1Cost4v4 + " " + MainConfigHandler.meanDiamond));
         haste1Real.setLore(lore);
-        haste1.setItemMeta(haste1Real);
+        haste14v4.setItemMeta(haste1Real);
 
-        haste2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
-        ItemMeta haste2Real = haste2.getItemMeta();
+        haste24v4 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        ItemMeta haste2Real = haste24v4.getItemMeta();
         haste2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste2));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.haste2Cost4v4 + " " + MainConfigHandler.meanDiamond));
         haste2Real.setLore(lore);
-        haste2.setItemMeta(haste2Real);
+        haste24v4.setItemMeta(haste2Real);
 
-        hasteMax = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
-        ItemMeta hasteMaxReal = hasteMax.getItemMeta();
+        hasteMax4v4 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        ItemMeta hasteMaxReal = hasteMax4v4.getItemMeta();
         hasteMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_hasteMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         hasteMaxReal.setLore(lore);
-        hasteMax.setItemMeta(hasteMaxReal);
+        hasteMax4v4.setItemMeta(hasteMaxReal);
 
-        heal1 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
-        ItemMeta heal1Real = heal1.getItemMeta();
+        heal14v4 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        ItemMeta heal1Real = heal14v4.getItemMeta();
         heal1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_heal1));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.heal1Cost4v4 + " " + MainConfigHandler.meanDiamond));
         heal1Real.setLore(lore);
-        heal1.setItemMeta(heal1Real);
+        heal14v4.setItemMeta(heal1Real);
 
-        healMax = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
-        ItemMeta healMaxReal = healMax.getItemMeta();
+        healMax4v4 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        ItemMeta healMaxReal = healMax4v4.getItemMeta();
         healMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_healMax));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
         healMaxReal.setLore(lore);
-        healMax.setItemMeta(healMaxReal);
+        healMax4v4.setItemMeta(healMaxReal);
 
     }
 
-
-    public static void openForPlayer2v2(Player player, Game game){
-
-        Inventory inventory = Bukkit.getServer().createInventory(null, teamEnchInvRow * 9, MainConfigHandler.shopLevelup);
-
-        Team playerTeam = game.getPlayerTeam(player);
-        String mapName = game.getRegion().getName();
-        // 检查prot
-        String[] protEnchantData = RelTeamEnchant.getMapEnchantprot(mapName);
-
-        if (protEnchantData != null) {
-            String enchantLevel = protEnchantData[1];
-            switch (enchantLevel) {
-                case "0":
-                    inventory.setItem(levelupprotItemSlot, prot1);
-                    break;
-                case "1":
-                    inventory.setItem(levelupprotItemSlot, prot2);
-                    break;
-                case "2":
-                    inventory.setItem(levelupprotItemSlot, prot3);
-                    break;
-                case "3":
-                    inventory.setItem(levelupprotItemSlot, prot4);
-                    break;
-                case "4":
-                    inventory.setItem(levelupprotItemSlot, protMax);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        String[] sharpEnchantData = RelTeamEnchant.getMapEnchantsharp(mapName);
-        if (sharpEnchantData != null) {
-            String enchantLevel = sharpEnchantData[1];
-            switch (enchantLevel) {
-                case "0":
-                    inventory.setItem(levelupsharpItemSlot, sharp1);
-                    break;
-                case "1":
-                    inventory.setItem(levelupsharpItemSlot, sharp2);
-                    break;
-                case "2":
-                    inventory.setItem(levelupsharpItemSlot, sharp3);
-                    break;
-                case "3":
-                    inventory.setItem(levelupsharpItemSlot, sharp4);
-                    break;
-                case "4":
-                    inventory.setItem(levelupsharpItemSlot, sharpMax);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-        String[] hasteEffectData = RelTeamEffect.getMapEffecthaste(mapName);
-        if (hasteEffectData != null) {
-            String effectLevel = hasteEffectData[1];
-            switch (effectLevel) {
-                case "0":
-                    inventory.setItem(leveluphasteItemSlot, haste1);
-                    break;
-                case "1":
-                    inventory.setItem(leveluphasteItemSlot, haste2);
-                    break;
-                case "2":
-                    inventory.setItem(leveluphasteItemSlot, hasteMax);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        String[] healEffectData = RelTeamEffect.getMapEffectheal(mapName);
-        if (healEffectData != null) {
-            String effectLevel = healEffectData[1];
-            switch (effectLevel) {
-                case "0":
-                    inventory.setItem(leveluphealItemSlot, heal1);
-                    break;
-                case "1":
-                    inventory.setItem(leveluphealItemSlot, healMax);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-            player.openInventory(inventory);
-    }
-
-    public static void openForPlayer4v4(Player player, Game game){
+    public static void openForPlayer2v2(Player player, Game game) {
 
         Inventory inventory = Bukkit.getServer().createInventory(null, teamEnchInvRow * 9, MainConfigHandler.shopLevelup);
 
-        Team playerTeam = game.getPlayerTeam(player);
-        String mapName = game.getRegion().getName();
-        // 检查prot
-        String[] protEnchantData = RelTeamEnchant.getMapEnchantprot(mapName);
+        Team team = game.getPlayerTeam(player);
 
-        if (protEnchantData != null) {
-            String enchantLevel = protEnchantData[1];
-            switch (enchantLevel) {
-                case "0":
-                    inventory.setItem(levelupprotItemSlot, prot1);
-                    break;
-                case "1":
-                    inventory.setItem(levelupprotItemSlot, prot2);
-                    break;
-                case "2":
-                    inventory.setItem(levelupprotItemSlot, prot3);
-                    break;
-                case "3":
-                    inventory.setItem(levelupprotItemSlot, prot4);
-                    break;
-                case "4":
-                    inventory.setItem(levelupprotItemSlot, protMax);
-                    break;
-                default:
-                    break;
+        String teamName = team.getName();
+        String gameName = game.getName();
+
+        if (levelupShop) {
+
+            List<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(leveluphealItemSlot, haste12v2);
+                            break;
+                        case "1":
+                            inventory.setItem(leveluphealItemSlot, haste22v2);
+                            break;
+                        case "2":
+                            inventory.setItem(leveluphealItemSlot, hasteMax2v2);
+                            break;
+                        default:
+                            le("RelShopLevelUp","set haste item error:" +
+                                    "level is a wrong value: " + level);
+                            break;
+                    }
+                }
             }
+
         }
 
-        String[] sharpEnchantData = RelTeamEnchant.getMapEnchantsharp(mapName);
-        if (sharpEnchantData != null) {
-            String enchantLevel = sharpEnchantData[1];
-            switch (enchantLevel) {
-                case "0":
-                    inventory.setItem(levelupsharpItemSlot, sharp1);
-                    break;
-                case "1":
-                    inventory.setItem(levelupsharpItemSlot, sharp2);
-                    break;
-                case "2":
-                    inventory.setItem(levelupsharpItemSlot, sharp3);
-                    break;
-                case "3":
-                    inventory.setItem(levelupsharpItemSlot, sharp4);
-                    break;
-                case "4":
-                    inventory.setItem(levelupsharpItemSlot, sharpMax);
-                    break;
-                default:
-                    break;
+        if (levelupShop) {
+
+            List<String[]> teamDatas = ListHeal.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(leveluphealItemSlot, heal12v2);
+                            break;
+                        case "1":
+                            inventory.setItem(leveluphealItemSlot, healMax2v2);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+
         }
 
+        if (levelupShop) {
 
-        String[] hasteEffectData = RelTeamEffect.getMapEffecthaste(mapName);
-        if (hasteEffectData != null) {
-            String effectLevel = hasteEffectData[1];
-            switch (effectLevel) {
-                case "0":
-                    inventory.setItem(leveluphasteItemSlot, haste1);
-                    break;
-                case "1":
-                    inventory.setItem(leveluphasteItemSlot, haste2);
-                    break;
-                case "2":
-                    inventory.setItem(leveluphasteItemSlot, hasteMax);
-                    break;
-                default:
-                    break;
+            List<String[]> teamDatas = ListSharp.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(levelupsharpItemSlot, sharp12v2);
+                            break;
+                        case "1":
+                            inventory.setItem(levelupsharpItemSlot, sharp22v2);
+                            break;
+                        case "2":
+                            inventory.setItem(levelupsharpItemSlot, sharp32v2);
+                            break;
+                        case "3":
+                            inventory.setItem(levelupsharpItemSlot, sharp42v2);
+                            break;
+                        case "4":
+                            inventory.setItem(levelupsharpItemSlot, sharpMax2v2);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+
         }
 
-        String[] healEffectData = RelTeamEffect.getMapEffectheal(mapName);
-        if (healEffectData != null) {
-            String effectLevel = healEffectData[1];
-            switch (effectLevel) {
-                case "0":
-                    inventory.setItem(leveluphealItemSlot, heal1);
-                    break;
-                case "1":
-                    inventory.setItem(leveluphealItemSlot, healMax);
-                    break;
-                default:
-                    break;
+        if (levelupShop) {
+
+            List<String[]> teamDatas = ListProt.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(levelupprotItemSlot, prot12v2);
+                            break;
+                        case "1":
+                            inventory.setItem(levelupprotItemSlot, prot22v2);
+                            break;
+                        case "2":
+                            inventory.setItem(levelupprotItemSlot, prot32v2);
+                            break;
+                        case "3":
+                            inventory.setItem(levelupprotItemSlot, prot42v2);
+                            break;
+                        case "4":
+                            inventory.setItem(levelupprotItemSlot, protMax2v2);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+
         }
-
-
-
-
-
-
-
-
-
 
         player.openInventory(inventory);
+
     }
+    public static void openForPlayer4v4(Player player, Game game) {
 
+        Inventory inventory = Bukkit.getServer().createInventory(null, teamEnchInvRow * 9, MainConfigHandler.shopLevelup);
 
+        Team team = game.getPlayerTeam(player);
 
+        String teamName = team.getName();
+        String gameName = game.getName();
 
+        if (levelupShop) {
 
+            List<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
 
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(leveluphealItemSlot, haste14v4);
+                            break;
+                        case "1":
+                            inventory.setItem(leveluphealItemSlot, haste24v4);
+                            break;
+                        case "2":
+                            inventory.setItem(leveluphealItemSlot, hasteMax4v4);
+                            break;
+                        default:
+                            le("RelShopLevelUp","set haste item error:" +
+                                    "level is a wrong value: " + level);
+                            break;
+                    }
+                }
+            }
 
+        }
 
+        if (levelupShop) {
+
+            List<String[]> teamDatas = ListHeal.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(leveluphealItemSlot, heal14v4);
+                            break;
+                        case "1":
+                            inventory.setItem(leveluphealItemSlot, healMax4v4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+        }
+
+        if (levelupShop) {
+
+            List<String[]> teamDatas = ListSharp.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(levelupsharpItemSlot, sharp14v4);
+                            break;
+                        case "1":
+                            inventory.setItem(levelupsharpItemSlot, sharp24v4);
+                            break;
+                        case "2":
+                            inventory.setItem(levelupsharpItemSlot, sharp34v4);
+                            break;
+                        case "3":
+                            inventory.setItem(levelupsharpItemSlot, sharp44v4);
+                            break;
+                        case "4":
+                            inventory.setItem(levelupsharpItemSlot, sharpMax4v4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+        }
+
+        if (levelupShop) {
+
+            List<String[]> teamDatas = ListProt.getTeamDatas(gameName);
+
+            for (String[] strings : teamDatas) {
+                if (strings[0].equals(teamName)) {
+                    String level = strings[1];
+                    switch (level) {
+                        case "0":
+                            inventory.setItem(levelupprotItemSlot, prot14v4);
+                            break;
+                        case "1":
+                            inventory.setItem(levelupprotItemSlot, prot24v4);
+                            break;
+                        case "2":
+                            inventory.setItem(levelupprotItemSlot, prot34v4);
+                            break;
+                        case "3":
+                            inventory.setItem(levelupprotItemSlot, prot44v4);
+                            break;
+                        case "4":
+                            inventory.setItem(levelupprotItemSlot, protMax4v4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+        }
+
+        player.openInventory(inventory);
+
+    }
 
 }

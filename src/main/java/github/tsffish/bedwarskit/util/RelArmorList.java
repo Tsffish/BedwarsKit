@@ -7,7 +7,6 @@ public class RelArmorList {
     public static List<String> armorChain = new ArrayList<>(100);
     public static List<String> armorIron = new ArrayList<>(100);
     public static List<String> armorDiamond = new ArrayList<>(100);
-
     public static void addArmorChain(String playerName){
         armorChain.add(playerName);
     }

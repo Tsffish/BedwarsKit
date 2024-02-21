@@ -3,14 +3,14 @@
 # ====================== #
 
 update_tip:
-  - "&e ================================"
+  - "&a ================================"
   - "&f "
-  - "&f BedwarsKit &aFound a new version!"
+  - "&f BedwarsKit &bFound a new version!"
   - "&f "
   - "&f You can download here: https://www.spigotmc.org/resources/bedwarskit.105616/"
   - "&f If you do not want to check for updates, please set the update_checker in config.yml to false"
   - "&f "
-  - "&e ================================"
+  - "&a ================================"
 command_help:
   - "&a ================================"
   - "&f "

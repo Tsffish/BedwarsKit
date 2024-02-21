@@ -9,5 +9,4 @@ public class RelTeamColorName {
     public static final String WHITE_TEAM_COLOR_NAME = "WHITE";
     public static final String GRAY_TEAM_COLOR_NAME = "GRAY";
     public static final String PINK_TEAM_COLOR_NAME = "LIGHT_PURPLE";
-    public static final String ORANGE_TEAM_COLOR_NAME = "GOLD";
 }

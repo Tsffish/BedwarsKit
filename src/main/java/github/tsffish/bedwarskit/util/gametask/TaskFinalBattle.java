@@ -5,52 +5,48 @@ import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameState;
 import io.github.bedwarsrel.game.Team;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.Main.isDebug;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
-import static github.tsffish.bedwarskit.util.RelScoreBoard.*;
+import static github.tsffish.bedwarskit.util.RelScoreBoard.getAllTask;
+import static github.tsffish.bedwarskit.util.RelScoreBoard.removeTask;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class TaskFinalBattle {
-    static Plugin plugin = JavaPlugin.getPlugin(Main.class);
+    private static final Main plugin = Main.getInstance();
     public static int taskTimeLeft;
     public static String  taskName;
     public static String gameName;
     public static int x;
     public static int gameTaskTime;
 
-    static Map<String, Integer> taskTimeLeftMap = new HashMap<>(4);
+    static ConcurrentHashMap<String, Integer> taskTimeLeftMap = new ConcurrentHashMap<>(16);
     public static void setTaskTimeLeft(String gameName, int timeLeft) {
         if (isDebug()){
-        Bukkit.getLogger().info( "taskTimeLeftMap : " + gameName + " :" + timeLeft);
+        l( "taskTimeLeftMap : " + gameName + " :" + timeLeft);
         }
         taskTimeLeftMap.put(gameName, timeLeft);
     }
     public static int getTaskTimeLeft(String gameName) {
         if (isDebug()){
-        Bukkit.getLogger().info("getTaskTimeLeft" + " :" + gameName);
+        l("getTaskTimeLeft" + " :" + gameName);
         }
         return taskTimeLeftMap.getOrDefault(gameName, 0);
     }
     public static void runTask(Game game){
         gameName = game.getName();
         gameTaskTime = gametask_finalbattle_time;
-
-        long startTime = System.currentTimeMillis();
-        taskTimeLeft = gameTaskTime - (int) ((System.currentTimeMillis() - startTime) / 1000);
 
         x = gameTaskTime;
 
@@ -109,13 +105,13 @@ public class TaskFinalBattle {
                     for (Team team :  game.getPlayingTeams()){
                         if (team.getHeadTarget() != null){
                         if (team.getHeadTarget().getType().toString().contains("BED")){
-                            world.getBlockAt(team.getTargetHeadBlock()).setType(Material.AIR);
+                            world.getBlockAt(team.getTargetHeadBlock()).setType(Material.AIR, true);
                         }
                     }
 
                         if (team.getFeetTarget() != null){
                             if (team.getFeetTarget().getType().toString().contains("BED")){
-                                world.getBlockAt(team.getTargetFeetBlock()).setType(Material.AIR);
+                                world.getBlockAt(team.getTargetFeetBlock()).setType(Material.AIR, true);
                             }
                         }
 

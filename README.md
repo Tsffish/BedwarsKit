@@ -1,5 +1,4 @@
 # BedwarsKit
-The old version source code is in https://github.com/lxhdukuai/bedwarskit
 
 A Addon for BedwarsRel, let you keep your Kit in the game
 
@@ -9,12 +8,13 @@ Depend: BedwarsRel
 - Fix issues related to BedwarslRel
 - Custom Game ScoreBoard
 - Seize resources on kill
-- No Death Gui
-- Auto Clean Bottle
 - Select Kit & ForceKit
-- Start Message
-- Break bed title
+- Leave Team on waiting
+- Auto Clean Bottle
 - Kill Information
+- Break bed title
+- No Death Gui
+- Start Message
 - No Armor Drop
 - FoodLevel Lock
 - No Swords break

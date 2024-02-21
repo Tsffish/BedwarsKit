@@ -1,13 +1,11 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
-import github.tsffish.bedwarskit.listener.bedwarsrel.RelPlayerDeath;
 import github.tsffish.bedwarskit.util.RelPlayerIsRespawn;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
 import io.github.bedwarsrel.game.GameState;
-import io.github.bedwarsrel.game.Team;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -15,7 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.util.Vector;
 
 import java.util.Objects;
 
@@ -32,15 +29,17 @@ public class PlayerDamageHandler implements Listener {
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
             Player damagedPlayer = (Player) e.getEntity();
             Player attackingPlayer = (Player) e.getDamager();
-
-            if (!attackingPlayer.getWorld().getName().contains(rushWorld)){
-                if (gameManager.getGameOfPlayer(attackingPlayer) == null || gameManager.getGameOfPlayer(attackingPlayer).getState() != GameState.RUNNING){
+            if (gameManager.getGameOfPlayer(damagedPlayer) == null) {
+                return;
+            }
+            if (!attackingPlayer.getWorld().getName().contains(rushWorld)) {
+                if (gameManager.getGameOfPlayer(attackingPlayer) == null || gameManager.getGameOfPlayer(attackingPlayer).getState() != GameState.RUNNING) {
                     e.setCancelled(true);
                     return;
                 }
             }
 
-            if (damagefb_attackBlood){
+            if (damagefb_attackBlood) {
                 int parttype = MainConfigHandler.damagefb_attackBloodType;
                 switch (damagefb_attackBloodMode.toLowerCase()) {
                     case "single":
@@ -65,79 +64,68 @@ public class PlayerDamageHandler implements Listener {
                 }
             }
 
-            if (damagefb_attackmess){
+            if (damagefb_attackmess) {
                 double damage = e.getDamage();
                 if (!Objects.equals(damagefb_attackchat, "")) {
-                    attackingPlayer.sendMessage(t(MainConfigHandler.damagefb_attackchat).replace("{damage}",damage + ""));
+                    attackingPlayer.sendMessage(t(MainConfigHandler.damagefb_attackchat).replace("{damage}", damage + ""));
                 }
                 if (!Objects.equals(MainConfigHandler.damagefb_attackTitle, "")) {
-                    String titleReal = t(MainConfigHandler.damagefb_attackTitle).replace("{damage}",damage + "");
+                    String titleReal = t(MainConfigHandler.damagefb_attackTitle).replace("{damage}", damage + "");
                     if (!Objects.equals(MainConfigHandler.damagefb_attackSubTitle, "")) {
-                        String subtitleReal = t(MainConfigHandler.damagefb_attackSubTitle).replace("{damage}",damage + "");
+                        String subtitleReal = t(MainConfigHandler.damagefb_attackSubTitle).replace("{damage}", damage + "");
 
                         attackingPlayer.sendTitle(titleReal, subtitleReal);
                     }
                 } else if (!Objects.equals(MainConfigHandler.damagefb_attackSubTitle, "")) {
                     String titleReal = " ";
-                    String subtitleReal = t(damagefb_attackSubTitle).replace("{damage}",damage + "");
+                    String subtitleReal = t(damagefb_attackSubTitle).replace("{damage}", damage + "");
 
                     attackingPlayer.sendTitle(titleReal, subtitleReal);
                 }
                 if (!Objects.equals(MainConfigHandler.damagefb_attackactionbar, "")) {
-                    sendActionBar(attackingPlayer, t(damagefb_attackactionbar).replace("{damage}",damage + ""));
+                    sendActionBar(attackingPlayer, t(damagefb_attackactionbar).replace("{damage}", damage + ""));
                 }
             }
 
             String playerName = damagedPlayer.getName();
-            if  (damagedPlayer.getHealth() - e.getFinalDamage() <= 0 ){
+            if (damagedPlayer.getHealth() - e.getFinalDamage() <= 0) {
                 Game game = gameManager.getGameOfPlayer(damagedPlayer);
-                if (game == null)return;
-                Team team = game.getPlayerTeam(damagedPlayer);
+                if (game == null) return;
                 if (preventloadworld) {
-                    Location loc = team.getSpawnLocation();
-                    Vector v = damagedPlayer.getLocation().getDirection();
-                    loc.setDirection(v);
-                    damagedPlayer.setFallDistance(0);
-                    damagedPlayer.teleport(loc);
-                    if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)){
+                    if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)) {
                         RelPlayerIsRespawn.addPlayerRespawn(playerName);
-                        RelPlayerDeath.deathplayer(damagedPlayer ,0L);
                     }
                 }
-
             }
         }
     }
 
 
     @EventHandler
-    public void on(EntityDamageEvent event){
+    public void on(final EntityDamageEvent event) {
 
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
         if (gameManager == null) return;
 
-        if (event.getEntity() instanceof Player){
+        if (event.getEntity() instanceof Player) {
+
             Player player = (Player) event.getEntity();
-            String playerName = player.getName();
-            Game game = gameManager.getGameOfPlayer(player);
-            if (game == null)return;
-            Team team = game.getPlayerTeam(player);
-            EntityDamageEvent.DamageCause cause = event.getCause();
-            if (cause == EntityDamageEvent.DamageCause.VOID) {
-                if (preventloadworld) {
-                    Location loc = team.getSpawnLocation();
-                    Vector v = player.getLocation().getDirection();
-                    loc.setDirection(v);
-                    player.setFallDistance(0);
-                    player.teleport(loc);
-                    if (!RelPlayerIsRespawn.getPlayerRespawn(playerName)){
-                        RelPlayerIsRespawn.addPlayerRespawn(playerName);
-                    RelPlayerDeath.deathplayer(player ,0L);
+
+            if (preventloadworld) {
+            if (gameManager.getGameOfPlayer(player) == null) return;
+                if (gameManager.getGameOfPlayer(player).getState() == GameState.RUNNING) {
+                    if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
+                        if (RelPlayerIsRespawn.getPlayerRespawn(player.getName())) {
+                            event.setCancelled(true);
+                        }
+                        event.setDamage(player.getHealth());
+                    }
+                } else if (gameManager.getGameOfPlayer(player).getState() == GameState.WAITING) {
+                    if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
+                        event.setCancelled(true);
                     }
                 }
             }
         }
-
-
     }
 }

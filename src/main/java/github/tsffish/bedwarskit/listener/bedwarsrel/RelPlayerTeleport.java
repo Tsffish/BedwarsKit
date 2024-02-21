@@ -37,7 +37,7 @@ public class RelPlayerTeleport implements Listener
         }
     }
     @EventHandler
-    public void on(PlayerChangedWorldEvent event) {
+    public void on(final PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
         if (player == null || !player.isOnline())
         {

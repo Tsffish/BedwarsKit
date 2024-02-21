@@ -1,11 +1,14 @@
 package github.tsffish.bedwarskit;
-
 import github.tsffish.bedwarskit.command.CommandInfo;
 import github.tsffish.bedwarskit.config.main.MainConfigLoad;
 import github.tsffish.bedwarskit.util.update.UpdateChecker;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,13 +16,14 @@ import java.util.Locale;
 
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements Listener {
     private static final String pluginName = "BedwarsKit";
     public static String pluginName(){
         return pluginName;
     }
-    private static final String pluginVersion = "1.9.53";
+    private static final String pluginVersion = "1.9.54";
     public static String pluginVersion(){
         return pluginVersion;
     }
@@ -42,43 +46,71 @@ public class Main extends JavaPlugin {
     public static boolean isLastestVersion(){
         return isLastestVersion;
     }
-    private static PluginManager pluginManager = Bukkit.getPluginManager();
+    static PluginManager pluginManager = Bukkit.getPluginManager();
     private static final int spigotId = 105616;
     public static int spigotId(){
         return spigotId;
     }
-    private static final int bstatId = 20914;
-    static int bstatId(){
-        return bstatId;
-    }
-    private static final String msgline = "================================";
+    public static final String msgline = "================================";
     public static String language;
-    public void onEnable()
-    {
+    private static Main instance;
+    public static Main getInstance() {
+        return instance;
+    }
+    static boolean isBungeeMode;
+    public void onEnable() {
+
         Locale currentLocale = Locale.getDefault();
         language = currentLocale.getLanguage();
 
-        if (pluginManager.getPlugin("BedwarsRel") != null)
-        {
+        instance = this;
+        if (pluginManager.getPlugin("BedwarsRel") != null) {
+
             sendPluginStartUpInfo(ChatColor.GREEN);
 
             MainConfigLoad.loadMainConfig(null, true);
 
             getCommand("bwk").setExecutor(new CommandInfo());
             getCommand("bwk reload").setExecutor(new CommandInfo());
+            handlerHub();
 
             l("Command registered");
 
-            Metrics metrics = new Metrics(this, bstatId);
-            metrics.addCustomChart(new Metrics.SimplePie("chart_id", () -> "My value"));
-        }
-        else
+
+            try {
+                Metrics metrics = new Metrics(this, 20914);
+
+                metrics.addCustomChart(new Metrics.SimplePie("server_version", () -> getServer().getVersion()));
+                metrics.addCustomChart(new Metrics.SimplePie("server_language", () -> language));
+                metrics.addCustomChart(new Metrics.SimplePie("server_auth_mode", () -> String.valueOf(getServer().getOnlineMode())));
+                metrics.addCustomChart(new Metrics.SimplePie("bungeecord_enabled", () -> String.valueOf(isBungeeMode)));
+                metrics.addCustomChart(new Metrics.SimplePie("plugin_version", () -> pluginVersion));
+                metrics.addCustomChart(new Metrics.SimplePie("core_count", () -> String.valueOf(Runtime.getRuntime().availableProcessors())));
+                metrics.addCustomChart(new Metrics.SimplePie("memory_size", () -> String.valueOf(Runtime.getRuntime().maxMemory() / 1024 / 1024)));
+                metrics.addCustomChart(new Metrics.SimplePie("os_name", () -> System.getProperty("os.name")));
+                metrics.addCustomChart(new Metrics.SimplePie("java_version", () -> System.getProperty("java.version")));
+
+            }catch (RuntimeException e){
+                le("Main", "Bstat error:" + e);
+            }
+
+        } else
             {
             sendPluginStartUpInfo(red);
             }
     }
      void handlerHub(){
-       getCommand("hub").setExecutor(new CommandInfo());
+         FileConfiguration config = Bukkit.spigot().getConfig();
+         isBungeeMode = config.getBoolean("settings.bungeecord", false);
+         if (isBungeeMode) {
+             if (isDebug){
+             System.out.println("using BungeeCord");
+             }
+         } else {
+             if (isDebug){
+             System.out.println("not using BungeeCord");
+             }
+         }
     }
         public void onDisable ()
         {
@@ -105,7 +137,7 @@ public class Main extends JavaPlugin {
             {
                 isLastestVersion = pluginVersion.equals(version);
                 if (!isLastestVersion){
-                    if (update_tip != null){
+                    if (update_tip != null && !update_tip.isEmpty()){
                         for (String list : update_tip){
                             l(list);
                         }
@@ -116,4 +148,11 @@ public class Main extends JavaPlugin {
             }
             );
         }
+        public static boolean pluginIsDisabling = false;
+    @EventHandler
+    public void on(final PluginDisableEvent event){
+        if (event.getPlugin() == this) {
+            pluginIsDisabling = true;
+        }
+    }
 }

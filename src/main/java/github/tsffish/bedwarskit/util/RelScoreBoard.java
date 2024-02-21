@@ -4,9 +4,7 @@ import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import github.tsffish.bedwarskit.util.gametask.*;
 import github.tsffish.bedwarskit.util.misc.SecondToTime;
-import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
-import io.github.bedwarsrel.game.GameManager;
 import io.github.bedwarsrel.game.GameState;
 import io.github.bedwarsrel.game.Team;
 import org.bukkit.Bukkit;
@@ -23,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.Main.isDebug;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
@@ -31,8 +28,8 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 
 public class RelScoreBoard {
-    private static final Material bed = Material.BED_BLOCK;
-    private static ConcurrentHashMap<Integer, String> taskMap;
+    static final Material bed = Material.BED_BLOCK;
+    static ConcurrentHashMap<Integer, String> taskMap;
     private static String lastTaskName = "";
     private static String LastTaskTimeLeftText;
 
@@ -40,17 +37,14 @@ public class RelScoreBoard {
         taskMap.remove(key);
     }
 
-    public static Map<Integer, String> getAllTask() {
+    public static ConcurrentHashMap<Integer, String> getAllTask() {
         return taskMap;
     }
 
-    public static void updateScoreBoard(Player p) {
-
-        GameManager gm = BedwarsRel.getInstance().getGameManager();
+    public static void updateScoreBoard(Game game) {
         if (Main.isDebug()){
-            l("updateing scoreboad");
+            l("updateing scoreboad for game: " + game.getName());
         }
-        for (Game game : gm.getGames()) {
             for (Player player : game.getPlayers()) {
                 String playerName = player.getName();
                 if (game.getState() == GameState.RUNNING) {
@@ -787,6 +781,5 @@ public class RelScoreBoard {
                     player.setScoreboard(scoreboard);
                 }
             }
-        }
     }
 }

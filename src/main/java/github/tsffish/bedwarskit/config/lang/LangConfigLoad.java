@@ -8,6 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
+import static github.tsffish.bedwarskit.Main.language;
+import static github.tsffish.bedwarskit.Main.msgline;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.*;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
@@ -38,9 +40,6 @@ public class LangConfigLoad{
         } else {
             sendError(LangConfigPath.path_command_help);
         }
-
-
-
 
 
         l("<LangConfigLoad> Finish Load Config");

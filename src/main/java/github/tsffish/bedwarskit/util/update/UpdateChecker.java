@@ -10,12 +10,12 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+
 
 public class UpdateChecker {
-
     private final JavaPlugin plugin;
     private final int resourceId;
-
     public UpdateChecker(JavaPlugin plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
@@ -28,9 +28,9 @@ public class UpdateChecker {
                     consumer.accept(scann.next());
                 }
             } catch (MalformedURLException e) {
-                plugin.getLogger().info("Unable to check for updates: MalformedURLException:" + e.getMessage());
+                l("Unable to check for updates: MalformedURLException:" + e.getMessage());
             } catch (IOException e) {
-                plugin.getLogger().info("Unable to check for updates: IOException:" + e.getMessage());
+                l("Unable to check for updates: IOException:" + e.getMessage());
             }
         });
     }

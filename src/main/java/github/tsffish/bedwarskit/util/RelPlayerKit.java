@@ -1,21 +1,20 @@
 package github.tsffish.bedwarskit.util;
 
-import github.tsffish.bedwarskit.config.kit.KitConfigHandler;
 import github.tsffish.bedwarskit.util.kit.KitDefault;
 import github.tsffish.bedwarskit.util.kit.KitDefaultless;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.kitenable;
 import static github.tsffish.bedwarskit.util.misc.ErrorCause.vauleIsWrong;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class RelPlayerKit {
-    private static Map<String, String> playerKitList = new HashMap<>(100);
+    static ConcurrentHashMap<String, String> playerKitList = new ConcurrentHashMap<>(100);
     public static void applykit(Player player){
         String playerName = player.getName();
-        if (KitConfigHandler.kitenable){
+        if (kitenable){
         String kit = playerKitList.get(playerName);
             if (kit != null) {
                 switch (kit.toLowerCase()) {
@@ -28,7 +27,7 @@ public class RelPlayerKit {
                     case "none":
                         break;
                     default:
-                        sendError("setkit",kit);
+                        sendError("applykit",kit);
                         break;
                 }
             }
@@ -46,7 +45,7 @@ public static void applykitforce(Player player, String kit){
             case "none":
                 break;
             default:
-                sendError("setforcekit", kit);
+                sendError("applykitforce", kit);
                 break;
         }
 }
@@ -59,7 +58,7 @@ public static void applykitforce(Player player, String kit){
 }
 
 
-    private static void sendError(String method,String kit){
+    static void sendError(String method, String kit){
         le("RelPlayerKit",method + " error: " + "kit" + vauleIsWrong() + ": " + kit);
     }
 

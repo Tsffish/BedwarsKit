@@ -1,19 +1,18 @@
 package github.tsffish.bedwarskit.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class RelCurrentStat {
-    private static Map<String, Integer> playerKill = new HashMap<>(100);
-    private static Map<String, Integer> playerFKill = new HashMap<>(100);
-    private static Map<String, Integer> playerDeath = new HashMap<>(100);
-    private static Map<String, Integer> playerBreakBed = new HashMap<>(100);
-    private static Map<String, Double> playerKD = new HashMap<>(100);
-    private static Map<String, Integer> playerOHKill = new HashMap<>(100);
+    static ConcurrentHashMap<String, Integer> playerKill = new ConcurrentHashMap<>(100);
+    static ConcurrentHashMap<String, Integer> playerFKill = new ConcurrentHashMap<>(100);
+    static ConcurrentHashMap<String, Integer> playerDeath = new ConcurrentHashMap<>(100);
+    static ConcurrentHashMap<String, Integer> playerBreakBed = new ConcurrentHashMap<>(100);
+    static ConcurrentHashMap<String, Double> playerKD = new ConcurrentHashMap<>(100);
+    static ConcurrentHashMap<String, Integer> playerOHKill = new ConcurrentHashMap<>(100);
 
 
     public static int getPlayerOHKill(String playerName){
@@ -102,7 +101,7 @@ public class RelCurrentStat {
 
 
 
-    private static List<String> playerIsOut = new ArrayList<>(100);
+    static List<String> playerIsOut = new ArrayList<>(100);
     public static boolean PlayerisOut(String playerName){
         return playerIsOut.contains(playerName);
     }

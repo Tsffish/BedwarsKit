@@ -11,24 +11,25 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import java.util.Objects;
 
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.rushWorld;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class RelPlaceCorrect implements Listener {
     @EventHandler
-    public void on(BlockPlaceEvent e) {
+    public void on(final BlockPlaceEvent e) {
 
         Player player = e.getPlayer();
         boolean isRushWorld = player.getWorld().getName().contains(rushWorld);
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
 
-        if (MainConfigHandler.placeCorrect_notInGame) {
-            if (MainConfigHandler.placeCorrect_notInGame_OpBypass) {
+        if (placeCorrect_notInGame) {
+            if (placeCorrect_notInGame_OpBypass) {
                 if (!player.isOp()) {
                     String worldName = player.getWorld().getName();
                     for (Game list : gameManager.getGames()) {
-                        if (list.getRegion().getWorld().getName().equals(worldName) && list.getState() != GameState.RUNNING) {
+                        if (list.getRegion().getWorld().getName().equals(worldName)
+                                && list.getState() != GameState.RUNNING) {
                             e.setCancelled(true);
                             break;
                         }
@@ -46,7 +47,8 @@ public class RelPlaceCorrect implements Listener {
                 if (MainConfigHandler.placeCorrect_ResSpawner) {
 
                     if (gameManager.getGameOfPlayer(player).getState() == GameState.RUNNING) {
-                        for (ResourceSpawner rs : gameManager.getGameOfPlayer(player).getResourceSpawners()) {
+                        for (ResourceSpawner rs :
+                                gameManager.getGameOfPlayer(player).getResourceSpawners()) {
                             Location spawnerLocation = rs.getLocation();
                             double distance = spawnerLocation.distance(blockLocation);
 

@@ -56,22 +56,22 @@ meanGameEnd: "Game End"
 # MeanBedwards: can be used to fill in the wake-up war or to add duplicate characters
 # MeanGameEnd: indicates the end of the game
 
-ScoreBoard2v2Title: "     &e&l{game} &f- {formatTimeLeft}"
-ScoreBoard2v2Line01: "&7{date}"
-ScoreBoard2v2Line02: "&eEvent Countdown: &a{LastTaskTimeLeft}"
-ScoreBoard2v2Line03: "&e\u27a5 {LastTaskName}"
-ScoreBoard2v2Line04: "&f "
-ScoreBoard2v2Line05: "{redTeamStat} &c{redTeamName} {redTeamIsMe}"
-ScoreBoard2v2Line06: "{blueTeamStat} &9{blueTeamName} {blueTeamIsMe}"
-ScoreBoard2v2Line07: "{greenTeamStat} &a{greenTeamName} {greenTeamIsMe}"
-ScoreBoard2v2Line08: "{yellowTeamStat} &e{yellowTeamName} {yellowTeamIsMe}"
-ScoreBoard2v2Line09: "{pinkTeamStat} &d{pinkTeamName} {pinkTeamIsMe}"
-ScoreBoard2v2Line10: "{aquaTeamStat} &b{aquaTeamName} {aquaTeamIsMe}"
-ScoreBoard2v2Line11: "{grayTeamStat} &7{grayTeamName} {grayTeamIsMe}"
-ScoreBoard2v2Line12: "{whiteTeamStat} &f{whiteTeamName} {whiteTeamIsMe}"
-ScoreBoard2v2Line13: "&f  "
-ScoreBoard2v2Line14: "&fK:{kill} - D:{death} - B:{bed}"
-ScoreBoard2v2Line15: "&b{ip}"
+ScoreBoard2v2Title: "&e&l{bw}"
+ScoreBoard2v2Line01: "&7{date} &8{mode}"
+ScoreBoard2v2Line02: "&a{LastTaskName} in &f{LastTaskTimeLeft}"
+ScoreBoard2v2Line03: "&f "
+ScoreBoard2v2Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard2v2Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard2v2Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard2v2Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard2v2Line08: "&f{whiteTeamNameShort} &f{whiteTeamName} {whiteTeamStat} &7{whiteTeamIsMe}"
+ScoreBoard2v2Line09: "&7{grayTeamNameShort} &f{grayTeamName} {grayTeamStat} &7{grayTeamIsMe}"
+ScoreBoard2v2Line10: "&b{aquaTeamNameShort} &f{aquaTeamName} {aquaTeamStat} &7{aquaTeamIsMe}"
+ScoreBoard2v2Line11: "&d{pinkTeamNameShort} &f{pinkTeamName} {pinkTeamStat} &7{pinkTeamIsMe}"
+ScoreBoard2v2Line12: "&f  "
+ScoreBoard2v2Line13: "&e{ip}"
+ScoreBoard2v2Line14: ""
+ScoreBoard2v2Line15: ""
 ScoreBoard2v2Line16: ""
 #Customized Scoreboard Content in 2v2 Mode
 # Variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
@@ -101,20 +101,20 @@ ScoreBoard2v2Line16: ""
 # {game}: The game name of this game
 # {region}: The region of this bureau
 
-ScoreBoard4v4Title: "     &e&l{game} &f- {formatTimeLeft}"
-ScoreBoard4v4Line01: "&7{date}"
-ScoreBoard4v4Line02: "&eEvent Countdown: &a{LastTaskTimeLeft}"
-ScoreBoard4v4Line03: "&e\u27a5 {LastTaskName}"
-ScoreBoard4v4Line04: "&f "
-ScoreBoard4v4Line05: "{redTeamStat} &c{redTeamName} {redTeamIsMe}"
-ScoreBoard4v4Line06: "{blueTeamStat} &9{blueTeamName} {blueTeamIsMe}"
-ScoreBoard4v4Line07: "{greenTeamStat} &a{greenTeamName} {greenTeamIsMe}"
-ScoreBoard4v4Line08: "{yellowTeamStat} &e{yellowTeamName} {yellowTeamIsMe}"
-ScoreBoard4v4Line09: "&f  "
-ScoreBoard4v4Line10: "&fK:{kill} - D:{death} - B:{bed}"
-ScoreBoard4v4Line11: "&e{ip}"
-ScoreBoard4v4Line12: ""
-ScoreBoard4v4Line13: ""
+ScoreBoard4v4Title: "&e&l{bw}"
+ScoreBoard4v4Line01: "&7{date} &8{mode}"
+ScoreBoard4v4Line02: "&a{LastTaskName} in &f{LastTaskTimeLeft}"
+ScoreBoard4v4Line03: "&f "
+ScoreBoard4v4Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard4v4Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard4v4Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard4v4Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard4v4Line08: "&f  "
+ScoreBoard4v4Line09: "&fKills: {kill}"
+ScoreBoard4v4Line10: "&fBreak Beds: &a{bed}"
+ScoreBoard4v4Line11: "&fFinal Kills: &a{fkill}"
+ScoreBoard4v4Line12: "&f      "
+ScoreBoard4v4Line13: "&e{ip}"
 ScoreBoard4v4Line14: ""
 ScoreBoard4v4Line15: ""
 ScoreBoard4v4Line16: ""
@@ -338,7 +338,7 @@ dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
 # ===================== #
 
 kitenable: true
-kitDefault: "defaultless"
+kitDefault: "default"
 kitForce: false
 kitForceKit: "Default"
 
@@ -661,6 +661,22 @@ nobreakList:
   - "GOLD_SWORD"
   - "GOLD_PICKAXE"
   - "GOLD_AXE"
+  - "LEATHER_HELMET"
+  - "LEATHER_CHESTPLATE"
+  - "LEATHER_LEGGINGS"
+  - "LEATHER_BOOTS"
+  - "CHAINMAIL_HELMET"
+  - "CHAINMAIL_CHESTPLATE"
+  - "CHAINMAIL_LEGGINGS"
+  - "CHAINMAIL_BOOTS"
+  - "IRON_HELMET"
+  - "IRON_CHESTPLATE"
+  - "IRON_LEGGINGS"
+  - "IRON_BOOTS"
+  - "DIAMOND_HELMET"
+  - "DIAMOND_CHESTPLATE"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
 noMoveList:
   - "HELMET"
   - "CHESTP"
@@ -681,12 +697,17 @@ giveProtEnchList:
   - "IRON_BOOTS"
   - "DIAMOND_LEGGINGS"
   - "DIAMOND_BOOTS"
-
-
+  -
+lobbyleaveTeam: true
+lobbyleaveTeamMess: "&bBedwars &7>> &aYou Leave {teamColor}{teamName}"
+lobbyjoinTeamMess_chat: " "
+lobbyjoinTeamMess_title: "&aYou Joined {teamColor}{teamName}"
+lobbyjoinTeamMess_subtitle: "&eHold team clothes and right-click to leave"
+lobbyjoinTeamMess_actionbar: "&aYou Joined {teamColor}{teamName}, &eHold team clothes and right-click to leave"
 # ================= #
 # Update Config     #
 # ================= #
-config-version: "1.9.52"
+config-version: "1.9.54"
 update_checker: true
 update_reportOp: true
 # Config version: Configuration file version

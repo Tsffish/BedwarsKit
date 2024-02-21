@@ -12,13 +12,16 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class RelPlayerDrop implements Listener {
-
         @EventHandler
-        public void on(PlayerDropItemEvent event) {
+        public void on(final PlayerDropItemEvent event) {
             Player player = event.getPlayer();
             Game game = BedwarsRel.getInstance().getGameManager().getGameOfPlayer(player);
             
-            if (game != null && player != null && player.isOnline() && game.getState() == GameState.RUNNING && player.getGameMode() == GameMode.SURVIVAL) {
+            if (game != null
+                    && player != null
+                    && player.isOnline()
+                    && game.getState() == GameState.RUNNING
+                    && player.getGameMode() == GameMode.SURVIVAL) {
 
                 ItemStack droppedItem = event.getItemDrop().getItemStack();
 

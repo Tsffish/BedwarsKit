@@ -1,5 +1,6 @@
 package github.tsffish.bedwarskit.listener.bedwarsrel;
 
+import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.events.BedwarsOpenShopEvent;
@@ -7,14 +8,14 @@ import io.github.bedwarsrel.game.Game;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.levelupShopOpenMode;
-import static github.tsffish.bedwarskit.util.teamshop.RelShopLevelUp.*;
+import static github.tsffish.bedwarskit.util.teamshop.RelShopLevelUp.openForPlayer2v2;
+import static github.tsffish.bedwarskit.util.teamshop.RelShopLevelUp.openForPlayer4v4;
 
 public class RelPlayerOpenShop implements Listener {
-    private static Plugin plugin = github.tsffish.bedwarskit.Main.getPlugin(github.tsffish.bedwarskit.Main.class);
+    private static final Main plugin = Main.getInstance();
     private static final String clickOnEntityName = "click on entity";
     @EventHandler
     public void on(final BedwarsOpenShopEvent event)

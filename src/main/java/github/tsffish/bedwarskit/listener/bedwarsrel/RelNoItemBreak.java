@@ -12,7 +12,7 @@ import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class RelNoItemBreak implements Listener {
     @EventHandler
-    public void on(PlayerItemDamageEvent event) {
+    public void on(final PlayerItemDamageEvent event) {
         if (!MainConfigHandler.NoItemBreak) {
             return;
         }

@@ -5,8 +5,7 @@ import org.bukkit.Material;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KitConfigHandler
-{
+public class KitConfigHandler {
     public static boolean kitenable;
     public static String kitDefault;
     public static boolean kitForce;
@@ -19,7 +18,7 @@ public class KitConfigHandler
     public static String KitDefaultItemName;
     public static String KitDefaultName;
     public static String KitDefaultDescription;
-    public static List<String> KitDefaultItemLore = new ArrayList<>(8);
+    public static List<String> KitDefaultItemLore = new ArrayList<>(10);
     public static boolean KitDefault_Boost_GiveSpeed_enable;
     public static int KitDefault_Boost_GiveSpeed_level;
 
@@ -33,7 +32,7 @@ public class KitConfigHandler
     public static String KitNoneItemName;
     public static String KitNoneName;
     public static String KitNoneDescription;
-    public static List<String> KitNoneItemLore = new ArrayList<>(8);
+    public static List<String> KitNoneItemLore = new ArrayList<>(10);
     public static boolean kitMenuItemGive;
 
 
@@ -43,7 +42,7 @@ public class KitConfigHandler
     public static String KitDefaultlessItemName;
     public static String KitDefaultlessName;
     public static String KitDefaultlessDescription;
-    public static List<String> KitDefaultlessItemLore = new ArrayList<>(8);
+    public static List<String> KitDefaultlessItemLore = new ArrayList<>(10);
     public static boolean KitDefaultless_Boost_GiveSpeed_enable;
     public static int KitDefaultless_Boost_GiveSpeed_level;
 

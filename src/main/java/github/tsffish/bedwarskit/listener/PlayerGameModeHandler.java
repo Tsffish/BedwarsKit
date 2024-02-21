@@ -11,7 +11,7 @@ public class PlayerGameModeHandler implements Listener {
     @EventHandler
     public void on(final PlayerToggleFlightEvent event){
         if (!creativeGameModeFix) return;
-        Player p = event.getPlayer();
-        p.setFlying(!p.isFlying());
+        Player player = event.getPlayer();
+        player.setFlying(!player.isFlying());
     }
 }
