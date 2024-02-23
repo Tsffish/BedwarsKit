@@ -1,0 +1,519 @@
+# ================= #
+# BedwarsKit 主配置 #
+# ================= #
+
+# 配置文件可能需要重新加载两次才能生效
+
+# ====================== #
+# 基本设置 (必须正确配置)#
+# ====================== #
+bungeeMode: "2v2"
+# 如果是蹦极模式，不会再判断世界名。要将游戏视为什么模式？
+# 只支持 "2v2" 和 "4v4"
+
+rushWorld: "rush"
+rushWorld2v2: "2v2"
+rushWorld4v4: "4v4"
+lobbyWorld: "lobby"
+# 确定世界名称的最基本配置 (Bungee模式下此内容无效)
+# 判断方法是世界名称是否包括
+# rushWorld：被识别为游戏房间
+# rushWorld2v2：被识别为2v2模式
+# rushWorld4v4：被识别为4v4模式
+# lobbyWorld：被识别为大厅（识别方式是相同而不是包括）
+
+relTeamName_Red: "\u7ea2\u4e4b\u961f"
+relTeamName_Blue: "\u84dd\u4e4b\u961f"
+relTeamName_Green: "\u7eff\u4e4b\u961f"
+relTeamName_Yellow: "\u9ec4\u4e4b\u961f"
+relTeamName_Aqua: "\u9752\u4e4b\u961f"
+relTeamName_White: "\u767d\u4e4b\u961f"
+relTeamName_Gray: "\u7070\u4e4b\u961f"
+relTeamName_Pink: "\u7c89\u4e4b\u961f"
+# 游戏中最基本的队名配置
+# 填写队伍的显示名称，而不是颜色名
+
+# ======== #
+# 其他设置 #
+# ======== #
+customScoreboard: true
+meanTeamBedYes: "&a\u2714"
+meanTeamNone: "&4\u2718"
+meanTeamBedNo: "&a{aliveCount}"
+meanYou: "\u0028\u4f60\u0029"
+meanNotYou: " "
+mean2v2Mode: "\u53cc\u4eba\u6a21\u5f0f"
+mean4v4Mode: "4v4v4v4\u6a21\u5f0f"
+serverIp: "&eGithub@Tsffish"
+meanBedwars: "\u8d77\u5e8a\u6218\u4e89"
+meanGameEnd: "\u6e38\u620f\u7ed3\u675f"
+# customScoreboard：是否启用自定义记分板功能
+# meanTeamBedYes：TeamStat表示团队中有床位
+# meanTeamNone:TeamStat表示该队已被淘汰
+# meanTeamBedNo：在TeamStat中，表示该队伍没有床，但仍然有玩家
+#{aliveCount}：团队中剩余的玩家
+# meanYou:TeamIsMe表示你在团队中，{teamColor}：玩家当前团队的团队颜色
+# meanNotYou:TeamIsMe表示您不在队伍中， {teamColor}：玩家当前队伍的队伍颜色
+# mean2v2Mode：表示这是2v2模式
+# mean4v4Mode：表示这是4v4模式
+# serverIP：可用于填写服务器地址或重复字符
+# meanBedwars：可用于填充起床战争或重复字符
+# meanGameEnd：表示游戏结束
+
+ScoreBoard2v2Title: "&e&l{bw}"
+ScoreBoard2v2Line01: "&7{date} &8{mode}"
+ScoreBoard2v2Line02: "&f{LastTaskTimeLeft}\u540e &a{LastTaskName}"
+ScoreBoard2v2Line03: "&f "
+ScoreBoard2v2Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard2v2Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard2v2Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard2v2Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard2v2Line08: "&f{whiteTeamNameShort} &f{whiteTeamName} {whiteTeamStat} &7{whiteTeamIsMe}"
+ScoreBoard2v2Line09: "&7{grayTeamNameShort} &f{grayTeamName} {grayTeamStat} &7{grayTeamIsMe}"
+ScoreBoard2v2Line10: "&b{aquaTeamNameShort} &f{aquaTeamName} {aquaTeamStat} &7{aquaTeamIsMe}"
+ScoreBoard2v2Line11: "&d{pinkTeamNameShort} &f{pinkTeamName} {pinkTeamStat} &7{pinkTeamIsMe}"
+ScoreBoard2v2Line12: "&f  "
+ScoreBoard2v2Line13: "&e{ip}"
+ScoreBoard2v2Line14: ""
+ScoreBoard2v2Line15: ""
+ScoreBoard2v2Line16: ""
+#2v2模式下的自定义记分板内容
+# 支持的可变团队名称红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
+# 注意：相同的内容将被折叠到同一行中。例如，如果需要两个空行，则第一行需要是一个空格，第二行需要是两个空格
+# 变量:
+# ...TeamName：团队名称，请参阅relTeamName_了解详细信息。团队颜色名称的值必须以小写字母开头，如redTeamName、grayTeamName
+# ...TeamStat：团队的状态，详细信息请参阅meanTeam。团队颜色名称的值必须以小写字母开头，如greenTeamStat、grayTeamStat
+# ...TeamIsMe：你是否在团队中？mean...You的值。团队颜色名称的值必须以小写字母开头，如blueTeamIsMe、grayTeamIsMe
+# ...TeamNameShort：队伍名称的第一个字符。团队颜色名称的值必须以小写字母开头，如blueTeamNameShort、grayTeamNameShort
+# {formatTimeLeft}：格式化游戏的剩余时间
+# {timeleft-s}：游戏剩余时间（秒）
+# {timeleft-m}：游戏剩余时间（分钟）
+# {timeleft-h}：游戏剩余时间（小时）
+# {timeleft-d}：游戏剩余时间（天）
+# {timeline mo}：游戏剩余时间（以月为单位）
+# {timeleft y}：游戏剩余时间（以年为单位）
+# {date}：今天的日期格式为YYYY/M/D，如2080/3/27
+# {ip}：配置文件中serverIp的值
+# {bw}：配置文件中meanBedwards的值
+# {mode}：配置文件中mean...mode的值。如果是2v2，则为mean2v2Mode的值；如果是4v4，则为mean4v4Mode的值
+# {kill}：你在本场游戏中的杀敌数量
+# {fkill}：你在本场游戏中的最终击杀次数
+# {kd}：你在本场游戏中的kd值
+# {death}：你在本场游戏中的死亡次数
+# {bed}：你在本场游戏中的挖床字数
+# {game}：此游戏的游戏名称
+# {region}：该局的区域
+
+ScoreBoard4v4Title: "&e&l{bw}"
+ScoreBoard4v4Line01: "&7{date} &8{mode}"
+ScoreBoard4v4Line02: "&f{LastTaskTimeLeft}\u540e &a{LastTaskName}"
+ScoreBoard4v4Line03: "&f "
+ScoreBoard4v4Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard4v4Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard4v4Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard4v4Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard4v4Line08: "&f  "
+ScoreBoard4v4Line09: "&f\u51fb\u6740\u6570: &a{kill}"
+ScoreBoard4v4Line10: "&f\u6700\u7ec8\u51fb\u6740: &a{fkill}"
+ScoreBoard4v4Line11: "&f\u7834\u574f\u5e8a\u6570: &a{bed}"
+ScoreBoard4v4Line12: "&f      "
+ScoreBoard4v4Line13: "&e{ip}"
+ScoreBoard4v4Line14: ""
+ScoreBoard4v4Line15: ""
+ScoreBoard4v4Line16: ""
+#4v4模式下的自定义记分板内容
+# 支持的可变团队名称红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
+# 注意：相同的内容将被折叠到同一行中。例如，如果需要两个空行，则第一行需要是一个空格，第二行需要是两个空格
+# 变量:
+# ...TeamName：团队名称，请参阅relTeamName_了解详细信息。团队颜色名称的值必须以小写字母开头，如redTeamName、grayTeamName
+# ...TeamStat：团队的状态，详细信息请参阅meanTeam。团队颜色名称的值必须以小写字母开头，如greenTeamStat、grayTeamStat
+# ...TeamIsMe：你是否在团队中？mean...You的值。团队颜色名称的值必须以小写字母开头，如blueTeamIsMe、grayTeamIsMe
+# ...TeamNameShort：队伍名称的第一个字符。团队颜色名称的值必须以小写字母开头，如blueTeamNameShort、grayTeamNameShort
+# {formatTimeLeft}：格式化游戏的剩余时间
+# {timeleft-s}：游戏剩余时间（秒）
+# {timeleft-m}：游戏剩余时间（分钟）
+# {timeleft-h}：游戏剩余时间（小时）
+# {timeleft-d}：游戏剩余时间（天）
+# {timeline mo}：游戏剩余时间（以月为单位）
+# {timeleft y}：游戏剩余时间（以年为单位）
+# {date}：今天的日期格式为YYYY/M/D，如2080/3/27
+# {ip}：配置文件中serverIp的值
+# {bw}：配置文件中meanBedwards的值
+# {mode}：配置文件中mean...mode的值。如果是2v2，则为mean2v2Mode的值；如果是4v4，则为mean4v4Mode的值
+# {kill}：你在本场游戏中的杀敌数量
+# {fkill}：你在本场游戏中的最终击杀次数
+# {kd}：你在本场游戏中的kd值
+# {death}：你在本场游戏中的死亡次数
+# {bed}：你在本场游戏中的挖床字数
+# {game}：此游戏的游戏名称
+# {region}：该局的区域
+
+breakTitle: true
+breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c\u7684\u5e8a\u5df2\u88ab\u7834\u574f"
+breakSubTitleAll: "&7\u7834\u574f\u8005:{BreakPlayerTeamColor}{BreakPlayerName}"
+breakTitleBreakPlayer: "{BreakTeamColor}{BreakTeamName}"
+breakSubTitleBreakPlayer: "&a\u5e8a\u88ab\u4f60\u6467\u6bc1"
+breakTitleBreakTeam: "&c\u5e8a\u5df2\u88ab\u6467\u6bc1"
+breakSubTitleBreakTeam: "&7\u7834\u574f\u8005:{BreakPlayerTeamColor}{BreakPlayerName}"
+# breakTitle：是否启用破坏床 提示信息
+# all：发送给所有玩家
+# breakPlayer：发送给破坏床的玩家
+# breakTeam：发送给床被破坏的玩家
+# 变量
+#｛BreakTeamColor｝：床被破坏的团队的团队颜色
+#｛BreakTeamName｝：床被破坏的团队的团队名称
+#｛BreakPlayerTeamColor｝：破坏床的玩家的团队颜色
+#｛BreakPlayerName｝：破坏床的玩家的玩家名称
+#｛breakPlayerTeamName｝：破坏床的玩家的队名
+
+deathGameMode: true
+deathGameMode_tpto: "lobby"
+respawnDelay: 5
+respawnTitle: "&e&l{timeleft}&a&l\u79d2\u540e\u590d\u6d3b"
+respawnSubTitle: " "
+respawnChat: ""
+respawnActionBar: ""
+respawnSuccTitle: "&f"
+respawnSuccSubTitle: " "
+respawnSuccChat: " "
+respawnSuccActionBar: " "
+preventloadworld: true
+# deathGameMode：复活倒计时 是否启用
+# deathGameMode_tpto :复活倒计时时传送到哪
+# 支持以下模式:
+# none : 不传送
+# team : 队伍出生点
+# lobby : 大厅加入点
+# respawnDelay：复活的倒计时时间（秒）
+# respawnSucc：复活成功
+# title：标题
+# subtitle：字幕
+# chat：聊天栏信息
+# ActionBar: 工具栏信息
+# 变量：｛timeleft｝：剩余复活倒计时时间（秒）
+# preventloadworld：是否要启用阻止在之后重新加载世界(即无死亡界面)
+# 需要同时禁用BedwarsRel配置文件中的die-on-void选项
+
+breakBedCheck: true
+tpDis: 0.74
+# 防卡床是否启用
+# 当站在床上破坏床时，向上传送以防止玩家被困在床上
+# tpDis：向上传送的距离，必须为 double 类型
+
+noHunger: true
+maxFoodLevel: 20
+# noHunger：是否启用 无饥饿 功能
+# maxFoodLevel：要锁定的饥饿度
+
+noPearlDamage: true
+noPearlDamage_TPSound: true
+startKitCompass: false
+antiDrop: true
+grassPaneWalk: true
+cleanBottle: true
+kill_res: true
+kill_res_chat: ""
+NoItemBreak: true
+CleanHostileOnStart: true
+cleanBed: true
+creativeGameModeFix: true
+# noPearlDamage：是否启用 无末影珍珠伤害
+# noPearlDamage_TPSound：是否启用末影珍珠的传送声
+# startKitCompass：是否自动给玩家指南针
+# antiDrop：是否启用 防止丢弃物品
+# grassPaneWalk：是否启用 防卡玻璃板 功能
+# CleanBottle：是否启用 自动清理 空瓶子
+# Kild_res：是否启用击杀掠夺资源
+# Kild_res_chat：击杀后提示信息，支持变量
+# {res}：资源名称，对应的资源名
+# {count}：获得的资源量
+# NoitemBreak：防止物品被破坏
+# CleanHostileOnStart 是否启用 游戏开始时清理所有敌对生物
+# CleanBed：是否启用 自动清理 床
+# creativeGameModeFix：修复BedwarsRel插件在切换到创建时无法飞行的问题
+
+levelupShop: true
+levelupShopOpenMode: "click on item"
+levelupShopOpenModeEntityName: "\u5347\u7ea7\u5546\u5e97"
+LevelupItemType: "BOOK_AND_QUILL"
+LevelupItemName: "\u5347\u7ea7\u5546\u5e97"
+levelupShopDelayOpen: true
+meanIron: "&f\u94c1"
+meanGold: "&6\u91d1"
+meanDiamond: "&b\u94bb\u77f3"
+meanEmerlad: "&a\u7eff\u5b9d\u77f3"
+shopLevelup: "\u5347\u7ea7\u5546\u5e97"
+shopItem: ""
+teamEnchInvRow: 6
+#LevelupShop：是否开启 升级商店 功能
+#LevelupShopOpenMode：升级商店的打开方式，
+# 支持以下模式
+# "click on item" ：点击物品打开
+# "click on entity "：点击村民打开
+# LevelupShopOpenModeEntityName：点击村民的名字，需要匹配才能打开菜单
+# LevelupItemType：在商店中打开的商品的商品类型
+# LevelupShopDelayOpen：是否打开延迟打开菜单：如果点开物品之后会马上
+# 打开其他物品栏，添加一点延迟以覆盖打开升级菜单
+#TeamEnchitemName_…：菜单中附魔等级的名称
+# meanIron：表示铁锭
+# meanGold：表示金锭
+# meanDiamond：代表钻石
+# meanEmerald：代表绿宝石
+# shopLevelup:用于升级菜单的菜单标题
+# shopItem：当点击一个项目时，如果当前物品栏的名称与该值匹配，才打开菜单
+# 如果不需要此功能，请将其设置为“”
+# teamEnchInvRow：升级存储中的行数，最多6行
+
+levelupsharpItemType: "IRON_SWORD"
+levelupsharpItemSlot: 10
+teamEnchItemName_Sharp1: "\u950b\u5229 I"
+teamEnchItemName_Sharp2: "\u950b\u5229 II"
+teamEnchItemName_Sharp3: "\u950b\u5229 III"
+teamEnchItemName_Sharp4: "\u950b\u5229 IV"
+teamEnchItemName_sharpMax: "\u950b\u5229 (\u5df2\u6ee1\u7ea7)"
+
+levelupprotItemType: "IRON_CHESTPLATE"
+levelupprotItemSlot: 11
+teamEnchItemName_Prot1: "\u4fdd\u62a4 I"
+teamEnchItemName_Prot2: "\u4fdd\u62a4 II"
+teamEnchItemName_Prot3: "\u4fdd\u62a4 III"
+teamEnchItemName_Prot4: "\u4fdd\u62a4 IV"
+teamEnchItemName_protMax: "\u4fdd\u62a4 (\u5df2\u6ee1\u7ea7)"
+
+leveluphasteItemType: "GOLD_PICKAXE"
+leveluphasteItemSlot: 12
+teamEffItemName_haste1: "\u6025\u8feb I"
+teamEffItemName_haste2: "\u6025\u8feb II"
+teamEffItemName_hasteMax: "\u6025\u8feb (\u5df2\u6ee1\u7ea7)"
+
+leveluphealItemType: "BEACON"
+leveluphealItemSlot: 20
+teamEffItemName_heal1: "\u6cbb\u6108\u6c60 I"
+teamEffItemName_healMax: "\u6cbb\u6108\u6c60 (\u5df2\u6ee1\u7ea7)"
+teamEff_Heal_dis: 15
+
+sharp1Cost2v2: 4
+sharp2Cost2v2: 8
+sharp3Cost2v2: 16
+sharp4Cost2v2: 32
+prot1Cost2v2: 2
+prot2Cost2v2: 4
+prot3Cost2v2: 8
+prot4Cost2v2: 16
+haste1Cost2v2: 2
+haste2Cost2v2: 4
+heal1Cost2v2: 1
+
+sharp1Cost4v4: 8
+sharp2Cost4v4: 16
+sharp3Cost4v4: 26
+sharp4Cost4v4: 36
+prot1Cost4v4: 5
+prot2Cost4v4: 10
+prot3Cost4v4: 20
+prot4Cost4v4: 30
+haste1Cost4v4: 4
+haste2Cost4v4: 6
+heal1Cost4v4: 3
+
+TeamEnchantMaxCost: "\u5df2\u6ee1\u7ea7"
+
+messLevelUpSharp1: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u950b\u5229 I"
+messLevelUpSharp2: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u950b\u5229 II"
+messLevelUpSharp3: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u950b\u5229 III"
+messLevelUpSharp4: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u950b\u5229 IV"
+
+messLevelUpProt1: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u4fdd\u62a4 I"
+messLevelUpProt2: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u4fdd\u62a4 II"
+messLevelUpProt3: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u4fdd\u62a4 III"
+messLevelUpProt4: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u4fdd\u62a4 IV"
+
+messLevelUpHaste1: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u6025\u8feb I"
+messLevelUpHaste2: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u6025\u8feb II"
+messLevelUpHeal1: "&6{player} &a\u8d2d\u4e70\u4e86\u56e2\u961f\u5347\u7ea7 &6\u6cbb\u6108\u6c60"
+
+messLevelUpFailed: "&c\u8d44\u6e90\u4e0d\u591f\u6216\u8005\u5df2\u62e5\u6709\u66f4\u9ad8\u7684\u9644\u9b54\u0021"
+
+dieOutGameItem_playAgain: true
+dieOutGameItem_playAgain_ItemName: "\u518d\u6765\u4e00\u5c40"
+dieOutGameItem_playAgain_ItemType: "PAPER"
+dieOutGameItem_playAgain_ItemSlot: 4;
+dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
+
+damagefb_attackmess: true
+damagefb_attackchat: ""
+damagefb_attackTitle: ""
+damagefb_attackSubTitle: "&f\u4f24\u5bb3 &7- &3{damage}"
+damagefb_attackactionbar: ""
+damagefb_attackBlood: true
+damagefb_attackBloodMode: "player"
+damagefb_attackBloodType: 152
+#damagefb_attackmess：是否启用伤害反馈功能
+#Damagefb.attackTitle:攻击玩家时显示的标题
+#Damagefb.attackSubTitle：攻击玩家时显示的字幕
+#Damagefb.attackBlood：攻击玩家的粒子效果
+#Damagefb attakBloodMode：攻击玩家的粒子效果显示模式，
+#支持以下模式：
+#｛single｝：玩家的位置
+#｛player｝：整个玩家
+#｛box｝：玩家的周围环境
+# damagefb attakBloodType：粒子的原理是发送方块行走的效果，
+# 可以设置不同的方块来实现不同的效果，只支持数字ID。默认值为152:红石
+
+killfb_sendmess: true
+killfb_sendmess_chat: ""
+killfb_sendmess_title: "{ohk} \u6740"
+killfb_sendmess_subtitle: ""
+killfb_sendmess_actionbar: ""
+killfb_oneHealthKill: true
+killfb_oneHealthKill_itemType: "NETHER_STAR"
+killfb_oneHealthKill_itemName: "&4&l\u7075\u9b42"
+#Killfb_sendmes：是否启用发送杀敌反馈消息的功能
+#支持变量：
+#｛dp｝：被杀玩家的名字
+#｛kp｝：杀死敌人的玩家的名字
+#｛…p_health｝：填写d或k，表示玩家的生命值
+# killfb_oneHealthKill: 是否启用一命连杀反馈信息
+# 需要同时更改BedwarsRL的配置文件
+# 将 keep-inventory-on-death 改为 true
+
+meanSecond: "\u79d2"
+
+tab: false
+tab_is_multiLine: false
+tab_head: "MC.MCSERVER.ORG"
+tab_foot: "MC.MCSERVER.ORG"
+tab_headList:
+  - "MC.MCSERVER.ORG"
+  - " "
+tab_footList:
+  - " "
+  - "MC.MCSERVER.ORG"
+
+upToChainArmor: "CHAINMAIL_CHESTPLATE"
+upToIronArmor: "IRON_CHESTPLATE"
+upToDiamondArmor: "DIAMOND_CHESTPLATE"
+# 检测到项目时自动升级设备
+# UpToChainArmor:升级为链式设备
+# UpToIronArmor:升级为钢铁装备
+# UpToDiamondArmor:升级为钻石装备
+
+chainPriceType: "IRON_INGOT"
+ironPriceType: "GOLD_INGOT"
+diamondPriceType: "EMERALD"
+chainPrice: 35
+ironPrice: 12
+diamondPrice: 6
+# 当检测到购买了太多装备时，将返回物品的类型及其价格
+# PriceType：价格物品的类型
+# Price：项目价格
+
+messreloadnow: "&bBedwarsKit &7>> &e\u6b63\u5728\u91cd\u8f7d\u914d\u7f6e\u6587\u4ef6"
+messreloadsucc: "&bBedwarsKit &7>> &a\u6210\u529f\u91cd\u8f7d\u914d\u7f6e\u6587\u4ef6"
+
+startmess: true
+startmess_all_chat: ""
+startmess_all_title: " "
+startmess_all_subtitle: " "
+startmess_all_actionbar: " "
+
+placeCorrect_ResSpawner: true
+placeCorrect_ResSpawner_mess_chat: ""
+placeCorrect_ResSpawner_mess_title: ""
+placeCorrect_ResSpawner_mess_subtitle: ""
+placeCorrect_ResSpawner_mess_actionbar: "&c\u4f60\u4e0d\u80fd\u5728\u8fd9\u91cc\u653e\u7f6e\u65b9\u5757\uff01"
+placeCorrect_ResSpawner_dis: 3
+
+placeCorrect_PlayerSpawnLoc: true
+placeCorrect_PlayerSpawnLoc_mess_chat: ""
+placeCorrect_PlayerSpawnLoc_mess_title: ""
+placeCorrect_PlayerSpawnLoc_mess_subtitle: ""
+placeCorrect_PlayerSpawnLoc_mess_actionbar: "&c\u4f60\u4e0d\u80fd\u5728\u8fd9\u91cc\u653e\u7f6e\u65b9\u5757\uff01"
+placeCorrect_PlayerSpawnLoc_dis: 3
+
+placeCorrect_notInGame: true
+placeCorrect_notInGame_OpBypass: true
+breakCorrect_notInGame: true
+breakCorrect_notInGame_OpBypass: true
+
+nobreakList:
+  - "WOOD_SWORD"
+  - "WOOD_PICKAXE"
+  - "WOOD_AXE"
+  - "STONE_SWORD"
+  - "IRON_SWORD"
+  - "DIAMOND_SWORD"
+  - "GOLD_SWORD"
+  - "GOLD_PICKAXE"
+  - "GOLD_AXE"
+  - "LEATHER_HELMET"
+  - "LEATHER_CHESTPLATE"
+  - "LEATHER_LEGGINGS"
+  - "LEATHER_BOOTS"
+  - "CHAINMAIL_HELMET"
+  - "CHAINMAIL_CHESTPLATE"
+  - "CHAINMAIL_LEGGINGS"
+  - "CHAINMAIL_BOOTS"
+  - "IRON_HELMET"
+  - "IRON_CHESTPLATE"
+  - "IRON_LEGGINGS"
+  - "IRON_BOOTS"
+  - "DIAMOND_HELMET"
+  - "DIAMOND_CHESTPLATE"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
+noMoveList:
+  - "HELMET"
+  - "CHESTP"
+  - "LEG"
+  - "BOOT"
+giveSharpEnchList:
+  - "WOOD_SWORD"
+  - "STONE_SWORD"
+  - "IRON_SWORD"
+  - "DIAMOND_SWORD"
+  - "GOLD_SWORD"
+  - "WOOD_AXE"
+  - "STONE_AXE"
+  - "IRON_AXE"
+  - "DIAMOND_AXE"
+  - "GOLD_AXE"
+giveProtEnchList:
+  - "LEATHER_LEGGINGS"
+  - "LEATHER_BOOTS"
+  - "CHAINMAIL_LEGGINGS"
+  - "CHAINMAIL_BOOTS"
+  - "IRON_LEGGINGS"
+  - "IRON_BOOTS"
+  - "DIAMOND_LEGGINGS"
+  - "DIAMOND_BOOTS"
+
+lobbyleaveTeam: true
+lobbyleaveTeamMess: "&b\u8d77\u5e8a\u6218\u4e89 &7>> &a\u4f60\u79bb\u5f00\u4e86 {teamColor}{teamName}"
+lobbyjoinTeamMess_chat: ""
+lobbyjoinTeamMess_title: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}"
+lobbyjoinTeamMess_subtitle: "&e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
+lobbyjoinTeamMess_actionbar: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}, &e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
+
+paneItemName: "&7\u5206\u5272\u7ebf"
+paneItemLore:
+  - ""
+
+levelupresItemType: "FURNACE"
+levelupresItemSlot: 19
+teamEffItemName_res1: "FURNACE I"
+teamEffItemName_res2: "FURNACE II"
+teamEffItemName_res3: "FURNACE III"
+teamEffItemName_res4: "FURNACE IV"
+teamEffItemName_resMax: "FURNACE (Max)"
+
+# ======== #
+# 更新设置 #
+# ======== #
+config-version: "1.9.55"
+update_checker: true
+update_reportOp: true
+# config-version：配置文件版本
+# 请勿修改，否则会重置
+# update_checker: 检查更新
+# update_reportOp: 向管理员报告更新的信息

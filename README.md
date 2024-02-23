@@ -6,10 +6,11 @@ Depend: BedwarsRel
 
 ## Functions:
 - Fix issues related to BedwarslRel
-- Custom Game ScoreBoard
 - Seize resources on kill
-- Select Kit & ForceKit
+- Custom Game ScoreBoard
 - Leave Team on waiting
+- Select Kit & ForceKit
+- Disable villager AI
 - Auto Clean Bottle
 - Kill Information
 - Break bed title
@@ -28,7 +29,6 @@ Depend: BedwarsRel
 - Anti Bed Stuck & Anti GlassPane Stuck
 - No BlockPlace at TeamSpawn & ResSpawn
 - Game Task (ResSpawner SpeedUp & Death Mode)
-- Ensure that there is a sword & Auto Clear wood Sword
 
 - (Most functions can be customized)
 

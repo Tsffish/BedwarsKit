@@ -1,0 +1,64 @@
+# ===================== #
+# BedwarsKit Kit Config #
+# ===================== #
+
+kitenable: true
+kitDefault: "default"
+kitForce: false
+kitForceKit: "Default"
+
+kitMenuTitle: "Select a Kit"
+kitMenurow: 6
+
+kitMenuItemGive: true
+kitMenuItemType: "IRON_SWORD"
+kitMenuItemAmount: 1
+kitMenuItemName: "Selet Kit"
+meanSelKitSucc: "&bBedwars &7>> &aSuccessfully selected kit!"
+
+KitDefaultName: "Default"
+KitDefaultDescription: "default kit."
+KitDefaultItemType: "GOLD_HELMET"
+KitDefaultItemAmount: 1
+KitDefaultItemSlot: 0
+KitDefaultItemName: "&fDefault"
+KitDefaultItemLore:
+  - "&f"
+  - "&aKit Introduction"
+  - "&fdefault kit"
+  - "&f"
+  - "&aKit content"
+  - "&fPermanent armor"
+  - "&fPermanent speed effect"
+  - "&f"
+KitDefault_Boost_GiveSpeed_enable: true
+KitDefault_Boost_GiveSpeed_level: 1
+
+KitNoneName: "None"
+KitNoneDescription: "None kit"
+KitNoneItemType: "BARRIER"
+KitNoneItemAmount: 1
+KitNoneItemSlot: 1
+KitNoneItemName: "&fNone"
+KitNoneItemLore:
+  - "&f"
+  - "&aKit Introduction"
+  - "&fnone kit"
+
+KitDefaultlessName: "DefaultLess"
+KitDefaultlessDescription: "default less kit."
+KitDefaultlessItemType: "LEATHER_HELMET"
+KitDefaultlessItemAmount: 1
+KitDefaultlessItemSlot: 2
+KitDefaultlessItemName: "&fDefaultLess "
+KitDefaultlessItemLore:
+  - "&f"
+  - "&aKit Introduction"
+  - "&fdefault kit"
+  - "&f"
+  - "&aKit content"
+  - "&fPermanent armor (Except for leg guards and boots)"
+  - "&f"
+  -
+KitDefaultless_Boost_GiveSpeed_enable: false
+KitDefaultless_Boost_GiveSpeed_level: 1

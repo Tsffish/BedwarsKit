@@ -1,0 +1,64 @@
+# ===================== #
+# BedwarsKit 职业配置   #
+# ===================== #
+
+kitenable: true
+kitDefault: "default"
+kitForce: false
+kitForceKit: "Default"
+
+kitMenuTitle: "\u9009\u62e9\u4e00\u4e2a\u804c\u4e1a"
+kitMenurow: 6
+
+kitMenuItemGive: true
+kitMenuItemType: "IRON_SWORD"
+kitMenuItemAmount: 1
+kitMenuItemName: "\u804c\u4e1a\u9009\u62e9"
+meanSelKitSucc: "&b\u8d77\u5e8a\u6218\u4e89 &7>> &a\u9009\u62e9\u804c\u4e1a\u6210\u529f\uff01"
+
+KitDefaultName: "\u9ed8\u8ba4"
+KitDefaultDescription: "\u9ed8\u8ba4\u804c\u4e1a"
+KitDefaultItemType: "GOLD_HELMET"
+KitDefaultItemAmount: 1
+KitDefaultItemSlot: 0
+KitDefaultItemName: "&f\u9ed8\u8ba4"
+KitDefaultItemLore:
+  - "&f"
+  - "&a\u804c\u4e1a\u4ecb\u7ecd\u003a"
+  - "&f\u9ed8\u8ba4\u804c\u4e1a"
+  - "&f"
+  - "&a\u804c\u4e1a\u5185\u5bb9:"
+  - "&f\u6c38\u4e45\u7684\u62a4\u7532"
+  - "&f\u6c38\u4e45\u7684\u901f\u5ea6"
+  - "&f"
+KitDefault_Boost_GiveSpeed_enable: true
+KitDefault_Boost_GiveSpeed_level: 1
+
+KitNoneName: "\u65e0"
+KitNoneDescription: "\u65e0"
+KitNoneItemType: "BARRIER"
+KitNoneItemAmount: 1
+KitNoneItemSlot: 1
+KitNoneItemName: "&f\u65e0"
+KitNoneItemLore:
+  - "&f"
+  - "&a\u804c\u4e1a\u4ecb\u7ecd\u003a"
+  - "&f\u65e0"
+
+KitDefaultlessName: "\u9ed8\u8ba4 2"
+KitDefaultlessDescription: "\u9ed8\u8ba4\u804c\u4e1a 2"
+KitDefaultlessItemType: "LEATHER_HELMET"
+KitDefaultlessItemAmount: 1
+KitDefaultlessItemSlot: 2
+KitDefaultlessItemName: "&f\u9ed8\u8ba4\u804c\u4e1a 2"
+KitDefaultlessItemLore:
+  - "&f"
+  - "&a\u804c\u4e1a\u4ecb\u7ecd\u003a"
+  - "&f\u9ed8\u8ba4\u804c\u4e1a 2"
+  - "&f"
+  - "&a\u804c\u4e1a\u5185\u5bb9"
+  - "&f\u6c38\u4e45\u7684\u62a4\u7532 (\u4e0d\u7ed9\u4e88\u76ae\u9769\u88e4\u5b50\u4e0e\u978b\u5b50)"
+  - "&f"
+  -
+KitDefaultless_Boost_GiveSpeed_enable: false
+KitDefaultless_Boost_GiveSpeed_level: 1

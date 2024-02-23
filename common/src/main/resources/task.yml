@@ -1,0 +1,161 @@
+# ====================== #
+# BedwarsKit Task Config #
+# ====================== #
+
+gametask: true
+gametask_spawntime: true
+gametask_spawntime_iron_base: 1000
+gametask_spawntime_iron_1: 900
+gametask_spawntime_iron_2: 750
+gametask_spawntime_iron_3: 500
+gametask_spawntime_iron_4: 350
+gametask_spawntime_gold_base: 12000
+gametask_spawntime_gold_1: 10000
+gametask_spawntime_gold_2: 8000
+gametask_spawntime_gold_3: 6000
+gametask_spawntime_gold_4: 3000
+gametask_spawntime_diamond_base: 60000
+gametask_spawntime_diamond_1: 45000
+gametask_spawntime_diamond_2: 30000
+gametask_spawntime_diamond_3: 20000
+gametask_spawntime_diamond_4: 10000
+gametask_spawntime_emerald_base: 80000
+gametask_spawntime_emerald_1: 65000
+gametask_spawntime_emerald_2: 50000
+gametask_spawntime_emerald_3: 35000
+gametask_spawntime_emerald_4: 20000
+gametask_boundaries_size: 256
+gametask_finalbattle: true
+gametask_finalbattle_boundaries_size: 32
+gametask_finalbattle_boundaries_time: 60
+gametask_finalbattle_boundaries_warnidis: 0
+gametask_finalbattle_boundaries_damagebuffer: 1
+gametask_finalbattle_boundaries_damage: 1
+# Gametask: Is the countdown task feature enabled
+# Gametask_splaytime: Enable resource point speed control task
+# Gametask_spaytime__ The speed of the speed control level for 1/2/3/4 of this resource, in milliseconds
+# Gametask_finalbattle: Whether to enable the kill mode task
+# Gametask_finalbattle_boundaries_size: The size of the world boundary in the kill mode
+# Gametask_finalbattle'boundaries_time: The time to shrink the world boundary in the kill mode
+# Gametask_finalbattle_boundaries_warnings: Edge warnings for world boundaries in kill mode
+# Gametask_finalbattle_boundaries_damagebuffer: Damage buffer for world boundaries in kill mode
+# Gametask_finalbattle'boundaries_damage: Damage at World Boundaries in Kill Mode
+
+
+gametask_spawntime_tasks_iron1: 200
+gametask_spawntime_tasks_iron2: 400
+gametask_spawntime_tasks_iron3: 600
+gametask_spawntime_tasks_iron4: 800
+gametask_spawntime_tasks_gold1: 1000
+gametask_spawntime_tasks_gold2: 1200
+gametask_spawntime_tasks_gold3: 1400
+gametask_spawntime_tasks_gold4: 1600
+gametask_spawntime_tasks_diamond1: 1800
+gametask_spawntime_tasks_diamond2: 2000
+gametask_spawntime_tasks_diamond3: 2200
+gametask_spawntime_tasks_diamond4: 2400
+gametask_spawntime_tasks_emerald1: 2600
+gametask_spawntime_tasks_emerald2: 2800
+gametask_spawntime_tasks_emerald3: 3000
+gametask_spawntime_tasks_emerald4: 3200
+gametask_finalbattle_time: 3400
+# How long will the task take to execute? The game starts counting in seconds
+# Gametask_spawntime_tasks_ 1/2/3/4: Resource tasks
+# Gametask_finalbattle_time: Kill Mode Mission
+
+gametask_name_iron1: "Iron I"
+gametask_name_iron2: "Iron II"
+gametask_name_iron3: "Iron III"
+gametask_name_iron4: "Iron IV"
+gametask_name_gold1: "Gold I"
+gametask_name_gold2: "Gold II"
+gametask_name_gold3: "Gold III"
+gametask_name_gold4: "Gold IV"
+gametask_name_diamond1: "Diamond I"
+gametask_name_diamond2: "Diamond II"
+gametask_name_diamond3: "Diamond III"
+gametask_name_diamond4: "Diamond IV"
+gametask_name_emerald1: "Emerald I"
+gametask_name_emerald2: "Emerald II"
+gametask_name_emerald3: "Emerald III"
+gametask_name_emerald4: "Emerald IV"
+gametask_name_finalbattle: "Death Mode"
+# This option is temporarily unavailable
+# Gametaskname: The name of the task on the scoreboard
+# Gametaskname_ 1/2/3/4 resource point speed regulation level
+# Gametaskname_finalbattle: Kill mode
+
+
+# Information sent after completing the task
+gametask_mess_iron1_chat: ""
+gametask_mess_iron1_title: ""
+gametask_mess_iron1_subtitle: "&4&lThe speed of iron resources has increased"
+gametask_mess_iron1_actionbar: ""
+gametask_mess_iron2_chat: ""
+gametask_mess_iron2_title: ""
+gametask_mess_iron2_subtitle: "&4&lThe speed of iron resources has increased"
+gametask_mess_iron2_actionbar: ""
+gametask_mess_iron3_chat: ""
+gametask_mess_iron3_title: ""
+gametask_mess_iron3_subtitle: "&4&lThe speed of iron resources has increased"
+gametask_mess_iron3_actionbar: ""
+gametask_mess_iron4_chat: ""
+gametask_mess_iron4_title: ""
+gametask_mess_iron4_subtitle: "&4&lThe speed of iron resources has increased"
+gametask_mess_iron4_actionbar: ""
+
+gametask_mess_gold1_chat: ""
+gametask_mess_gold1_title: ""
+gametask_mess_gold1_subtitle: "&4&lThe speed of gold resources has increased"
+gametask_mess_gold1_actionbar: ""
+gametask_mess_gold2_chat: ""
+gametask_mess_gold2_title: ""
+gametask_mess_gold2_subtitle: "&4&lThe speed of gold resources has increased"
+gametask_mess_gold2_actionbar: ""
+gametask_mess_gold3_chat: ""
+gametask_mess_gold3_title: ""
+gametask_mess_gold3_subtitle: "&4&lThe speed of gold resources has increased"
+gametask_mess_gold3_actionbar: ""
+gametask_mess_gold4_chat: ""
+gametask_mess_gold4_title: ""
+gametask_mess_gold4_subtitle: "&4&lThe speed of gold resources has increased"
+gametask_mess_gold4_actionbar: ""
+
+gametask_mess_diamond1_chat: ""
+gametask_mess_diamond1_title: ""
+gametask_mess_diamond1_subtitle: "&4&lThe speed of diamond resources has increased"
+gametask_mess_diamond1_actionbar: ""
+gametask_mess_diamond2_chat: ""
+gametask_mess_diamond2_title: ""
+gametask_mess_diamond2_subtitle: "&4&lThe speed of diamond resources has increased"
+gametask_mess_diamond2_actionbar: ""
+gametask_mess_diamond3_chat: ""
+gametask_mess_diamond3_title: ""
+gametask_mess_diamond3_subtitle: "&4&lThe speed of diamond resources has increased"
+gametask_mess_diamond3_actionbar: ""
+gametask_mess_diamond4_chat: ""
+gametask_mess_diamond4_title: ""
+gametask_mess_diamond4_subtitle: "&4&lThe speed of diamond resources has increased"
+gametask_mess_diamond4_actionbar: ""
+
+gametask_mess_emerald1_chat: ""
+gametask_mess_emerald1_title: ""
+gametask_mess_emerald1_subtitle: "&4&lThe speed of emerald resources has increased"
+gametask_mess_emerald1_actionbar: ""
+gametask_mess_emerald2_chat: ""
+gametask_mess_emerald2_title: ""
+gametask_mess_emerald2_subtitle: "&4&lThe speed of emerald resources has increased"
+gametask_mess_emerald2_actionbar: ""
+gametask_mess_emerald3_chat: ""
+gametask_mess_emerald3_title: ""
+gametask_mess_emerald3_subtitle: "&4&lThe speed of emerald resources has increased"
+gametask_mess_emerald3_actionbar: ""
+gametask_mess_emerald4_chat: ""
+gametask_mess_emerald4_title: ""
+gametask_mess_emerald4_subtitle: "&4&lThe speed of emerald resources has increased"
+gametask_mess_emerald4_actionbar: ""
+
+gametask_mess_finalbattle_chat: "&fThe border is starting to shrink, go to the main island as soon as possible to avoid damage!"
+gametask_mess_finalbattle_title: "&4&lDeath Mode"
+gametask_mess_finalbattle_subtitle: "&fThe boundary begins to shrink"
+gametask_mess_finalbattle_actionbar: ""
