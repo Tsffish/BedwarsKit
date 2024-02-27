@@ -2,89 +2,54 @@ package github.tsffish.bedwarskit.util;
 
 import github.tsffish.bedwarskit.util.kit.KitDefault;
 import github.tsffish.bedwarskit.util.kit.KitDefaultless;
-import org.bukkit.entity.Player;
+import github.tsffish.bedwarskit.util.misc.StringMgr;
 
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.kitenable;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
 
-public class RelPlayerKit {
-    static ConcurrentHashMap<String, String> playerKitList = new ConcurrentHashMap<>(100);
-    public static void applykit(Player player){
-        String playerName = player.getName();
+public class RelPlayerKit extends StringMgr {
+    private static final String className = "RelPlayerKit";
+    public static final String kitNameDefault = "default";
+    public static final String kitNameNone = "none";
+    public static final String kitNameDefaultLess = "defaultless";
+    static ConcurrentHashMap<UUID, String> playerKitList = new ConcurrentHashMap<>(100);
+    public static void applykit(UUID uuid){
         if (kitenable){
-        String kit = playerKitList.get(playerName);
+        String kit = playerKitList.get(uuid);
             if (kit != null) {
-                switch (kit.toLowerCase()) {
-                    case "default":
-                        KitDefault.setKit(player, true);
-                        break;
-                    case "defaultless":
-                        KitDefaultless.setKit(player, true);
-                        break;
-                    case "none":
-                        break;
-                    default:
-                        sendError("applykit",kit);
-                        break;
-                }
+                pdKit(uuid,kit);
             }
-    }
-}
-
-public static void applykitforce(Player player, String kit){
-        switch (kit.toLowerCase()){
-            case "default":
-                KitDefault.setKit(player, true);
-                break;
-            case "defaultless":
-                KitDefaultless.setKit(player, true);
-                break;
-            case "none":
-                break;
-            default:
-                sendError("applykitforce", kit);
-                break;
         }
-}
+    }
 
-static void pdKit(Player player, String kit){
+    public static void applykitforce(UUID uuid, String kit){
+        pdKit(uuid,kit);
+    }
+
+static void pdKit(UUID uuid, String kit){
     switch (kit.toLowerCase()){
-        case "default":
-            KitDefault.setKit(player, true);
+        case kitNameDefault:
+            KitDefault.setKit(uuid, true);
             break;
-        case "defaultless":
-            KitDefaultless.setKit(player, true);
+        case kitNameDefaultLess:
+            KitDefaultless.setKit(uuid, true);
             break;
-        case "none":
+        case kitNameNone:
             break;
         default:
-            sendError("applykitforce", kit);
+            sendError("pdkit", kit);
             break;
     }
 }
-
-
-
-
-
-
-
-
-
-
-    private static final String className = "RelPlayerKit";
-
-    public static String getPlayerKit(String playerName){
-        return playerKitList.get(playerName);
+    public static String getPlayerKit(UUID uuid){
+        return playerKitList.get(uuid);
     }
-
-    public static void setPlayerKit(String playerName,String kit){
-        playerKitList.put(playerName,kit);
+    public static void setPlayerKit(UUID uuid,String kit){
+        playerKitList.put(uuid,kit);
 }
-
 
     static void sendError(String method, String kit){
         le(className,method + " error: " + "kit" + vauleIsWrong + ": " + kit);

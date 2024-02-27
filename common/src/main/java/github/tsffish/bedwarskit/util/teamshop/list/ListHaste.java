@@ -21,7 +21,7 @@ public class ListHaste {
             boolean found = false;
             for (String[] oldTeamInfo : teamDatas) {
                 if (oldTeamInfo[0].equals(teamInfo[0])) {
-                    oldTeamInfo[1] = teamInfo[1]; // 更新队伍等级信息
+                    oldTeamInfo[1] = teamInfo[1];
                     found = true;
                     break;
                 }
@@ -33,13 +33,6 @@ public class ListHaste {
         }
 
         listMap.put(gameName, teamDatas);
-        if (isDebug()) {
-            System.out.println("ListHast:");
-            System.out.println("setTeamDatas:");
-            for (String[] string : teamDatas) {
-                System.out.println(string[0] + ": " + string[1]);
-            }
-        }
     }
 
     public static List<String[]> getTeamDatas(String gameName){
@@ -48,7 +41,7 @@ public class ListHaste {
 
     public static void setTeamDatasDefault(String gameName, List<Team> teamList) {
         List<String[]> teamDatas = getTeamDatas(gameName);
-        if (teamDatas == null || teamDatas.size() == 0) {
+        if (teamDatas == null || teamDatas.size() <= 0) {
             teamDatas = new ArrayList<>();
             for (Team team : teamList) {
                 String[] teamInfo = {team.getName(), "0"}; // 默认设置队伍的 level 为 0

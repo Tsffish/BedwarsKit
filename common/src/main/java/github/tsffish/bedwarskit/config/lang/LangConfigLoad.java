@@ -1,6 +1,7 @@
 package github.tsffish.bedwarskit.config.lang;
 
 import github.tsffish.bedwarskit.Main;
+import github.tsffish.bedwarskit.util.misc.StringMgr;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -9,9 +10,9 @@ import java.io.File;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.command_help;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
-import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 
 public class LangConfigLoad{
     private static final String name = "LangConfigLoad";

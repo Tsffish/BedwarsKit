@@ -344,8 +344,6 @@ dieOutGameItem_playAgain_ItemType: "PAPER"
 dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
 
 
-
-
 damagefb_attackmess: true
 damagefb_attackchat: ""
 damagefb_attackTitle: ""
@@ -509,7 +507,7 @@ teamEffItemName_resMax: "FURNACE (Max)"
 # ================= #
 # Update Config     #
 # ================= #
-config-version: "1.9.55"
+config-version: "1.9.56"
 update_checker: true
 update_reportOp: true
 # Config version: Configuration file version

@@ -47,7 +47,7 @@ public class ListHeal {
 
     public static void setTeamDatasDefault(String gameName, List<Team> teamList) {
         List<String[]> teamDatas = getTeamDatas(gameName);
-        if (teamDatas == null || teamDatas.size() == 0) {
+        if (teamDatas == null || teamDatas.size() <= 0) {
             teamDatas = new ArrayList<>();
             for (Team team : teamList) {
                 String[] teamInfo = {team.getName(), "0"}; // 默认设置队伍的 level 为 0

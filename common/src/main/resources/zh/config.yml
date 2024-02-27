@@ -510,7 +510,7 @@ teamEffItemName_resMax: "FURNACE (Max)"
 # ======== #
 # 更新设置 #
 # ======== #
-config-version: "1.9.55"
+config-version: "1.9.56"
 update_checker: true
 update_reportOp: true
 # config-version：配置文件版本

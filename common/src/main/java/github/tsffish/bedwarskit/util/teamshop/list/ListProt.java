@@ -56,7 +56,7 @@ public class ListProt {
             boolean found = false;
             for (String[] teamInfo : teamDatas) {
                 if (teamInfo[0].equals(team.getName())) {
-                    teamInfo[1] = "0"; // 将队伍的等级设置为 0
+                    teamInfo[1] = "0";
                     found = true;
                     break;
                 }

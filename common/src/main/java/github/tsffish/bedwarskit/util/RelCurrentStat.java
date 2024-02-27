@@ -2,69 +2,68 @@ package github.tsffish.bedwarskit.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class RelCurrentStat {
-    static ConcurrentHashMap<String, Integer> playerKill = new ConcurrentHashMap<>(100);
-    static ConcurrentHashMap<String, Integer> playerFKill = new ConcurrentHashMap<>(100);
-    static ConcurrentHashMap<String, Integer> playerDeath = new ConcurrentHashMap<>(100);
-    static ConcurrentHashMap<String, Integer> playerBreakBed = new ConcurrentHashMap<>(100);
-    static ConcurrentHashMap<String, Double> playerKD = new ConcurrentHashMap<>(100);
-    static ConcurrentHashMap<String, Integer> playerOHKill = new ConcurrentHashMap<>(100);
-
-
-    public static int getPlayerOHKill(String playerName){
-        return playerOHKill.get(playerName);
+    protected static final String className = "RelCurrentStat";
+    protected static ConcurrentHashMap<UUID, Integer> playerKill = new ConcurrentHashMap<>(100);
+    protected static ConcurrentHashMap<UUID, Integer> playerFKill = new ConcurrentHashMap<>(100);
+    protected static ConcurrentHashMap<UUID, Integer> playerDeath = new ConcurrentHashMap<>(100);
+    protected static ConcurrentHashMap<UUID, Integer> playerBreakBed = new ConcurrentHashMap<>(100);
+    protected static ConcurrentHashMap<UUID, Double> playerKD = new ConcurrentHashMap<>(100);
+    protected static ConcurrentHashMap<UUID, Integer> playerOHKill = new ConcurrentHashMap<>(100);
+    public static int getPlayerOHKill(UUID uuid){
+        return playerOHKill.get(uuid);
     }
-    public static int getPlayerKill(String playerName){
-        return playerKill.get(playerName);
+    public static int getPlayerKill(UUID uuid){
+        return playerKill.get(uuid);
     }
-
-    public static int getPlayerFinalKill(String playerName){
-        return playerFKill.get(playerName);
+    public static int getPlayerFinalKill(UUID uuid){
+        return playerFKill.get(uuid);
     }
-
-    public static int getPlayerDeath(String playerName){
-        return playerDeath.get(playerName);
+    public static int getPlayerDeath(UUID uuid){
+        return playerDeath.get(uuid);
     }
-    public static int getPlayerBreakBed(String playerName){
-        return playerBreakBed.get(playerName);
+    public static int getPlayerBreakBed(UUID uuid){
+        return playerBreakBed.get(uuid);
     }
-    public static double getPlayerKD(String playerName){
-        return playerKD.get(playerName);
+    public static double getPlayerKD(UUID uuid){
+        return playerKD.get(uuid);
     }
 
-    public static void updatePlayerStat(String playerName, String pd, int value){
+    public static void updatePlayerStat(UUID uuid, String pd, int value){
         
-        if (playerName == null || pd == null){
+        if (pd == null){
+            le(className,"pd is null");
             return;
         }
 
         switch (pd.toLowerCase()){
             case "k":
-                int k = playerKill.get(playerName);
-                playerKill.put(playerName, k + value);
+                int k = playerKill.get(uuid);
+                playerKill.put(uuid, k + value);
                 break;
             case "d":
-                int d = playerDeath.get(playerName);
-                playerDeath.put(playerName, d + value);
+                int d = playerDeath.get(uuid);
+                playerDeath.put(uuid, d + value);
                 break;
             case "b":
-                int b = playerBreakBed.get(playerName);
-                playerBreakBed.put(playerName, b + value);
+                int b = playerBreakBed.get(uuid);
+                playerBreakBed.put(uuid, b + value);
                 break;
             case "f":
-                int f = playerFKill.get(playerName);
-                playerFKill.put(playerName, f + value);
+                int f = playerFKill.get(uuid);
+                playerFKill.put(uuid, f + value);
                 break;
             case "ohk":
-                int ohk = playerOHKill.getOrDefault(playerName, 0);
-                playerOHKill.put(playerName, ohk + value);
+                int ohk = playerOHKill.getOrDefault(uuid, 0);
+                playerOHKill.put(uuid, ohk + value);
                 break;
             case "setohk":
-                playerOHKill.put(playerName, value);
+                playerOHKill.put(uuid, value);
                 break;
             default:
                 le("RelCurrentStat","updatePlayerStat Error: pd : "
@@ -73,43 +72,43 @@ public class RelCurrentStat {
         }
 
         
-        int kills = playerKill.getOrDefault(playerName, 0);
-        int deaths = playerDeath.getOrDefault(playerName, 0);
+        int kills = playerKill.getOrDefault(uuid, 0);
+        int deaths = playerDeath.getOrDefault(uuid, 0);
         double kd = deaths != 0 ? kills / (double) deaths : kills;
-        playerKD.put(playerName, kd);
+        playerKD.put(uuid, kd);
     }
 
-    public static void removePlayerStat(String playerName){
+    public static void removePlayerStat(UUID uuid){
         
-        playerKill.remove(playerName);
-        playerFKill.remove(playerName);
-        playerDeath.remove(playerName);
-        playerBreakBed.remove(playerName);
-        playerKD.remove(playerName);
-        playerOHKill.remove(playerName);
+        playerKill.remove(uuid);
+        playerFKill.remove(uuid);
+        playerDeath.remove(uuid);
+        playerBreakBed.remove(uuid);
+        playerKD.remove(uuid);
+        playerOHKill.remove(uuid);
     }
 
-    public static void setDefaultPlayerStat(String playerName){
+    public static void setDefaultPlayerStat(UUID uuid){
         
-        playerKill.put(playerName, 0);
-        playerFKill.put(playerName, 0);
-        playerDeath.put(playerName, 0);
-        playerBreakBed.put(playerName, 0);
-        playerKD.put(playerName, 0.0);
-        playerOHKill.put(playerName, 0);
+        playerKill.put(uuid, 0);
+        playerFKill.put(uuid, 0);
+        playerDeath.put(uuid, 0);
+        playerBreakBed.put(uuid, 0);
+        playerKD.put(uuid, 0.0);
+        playerOHKill.put(uuid, 0);
     }
 
 
 
-    static List<String> playerIsOut = new ArrayList<>(100);
-    public static boolean PlayerisOut(String playerName){
-        return playerIsOut.contains(playerName);
+    protected static List<UUID> playerIsOut = new ArrayList<>(100);
+    public static boolean PlayerisOut(UUID uuid){
+        return playerIsOut.contains(uuid);
     }
-    public static void addPlayerIsOut(String playerName){
-        playerIsOut.add(playerName);
+    public static void addPlayerIsOut(UUID uuid){
+        playerIsOut.add(uuid);
     }
-    public static void removePlayerIsOut(String playerName){
-        playerIsOut.remove(playerName);
+    public static void removePlayerIsOut(UUID uuid){
+        playerIsOut.remove(uuid);
     }
 
 }

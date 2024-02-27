@@ -12,7 +12,7 @@ import java.io.File;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
-import static github.tsffish.bedwarskit.util.kit.MenuItem.loadKitMenuItem;
+import static github.tsffish.bedwarskit.util.kit.KitOpenItem.loadKitMenuItem;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;

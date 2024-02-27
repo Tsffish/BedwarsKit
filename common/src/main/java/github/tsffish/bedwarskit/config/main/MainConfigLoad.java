@@ -4,10 +4,7 @@ import github.tsffish.bedwarskit.Main;
 import github.tsffish.bedwarskit.config.kit.KitConfigLoad;
 import github.tsffish.bedwarskit.config.lang.LangConfigLoad;
 import github.tsffish.bedwarskit.config.task.TaskConfigLoad;
-import github.tsffish.bedwarskit.listener.PlayerClickHandler;
-import github.tsffish.bedwarskit.listener.PlayerDamageHandler;
-import github.tsffish.bedwarskit.listener.PlayerGameModeHandler;
-import github.tsffish.bedwarskit.listener.bedwarsrel.*;
+import github.tsffish.bedwarskit.listener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,9 +24,9 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
-import static github.tsffish.bedwarskit.util.teamshop.RelShopLevelUp.loadLevelUpInv;
+import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.loadLevelUpInv;
 
-public class MainConfigLoad{
+public class MainConfigLoad {
     private static final String name = "MainConfigLoad";
     private static final String reason = vauleIsNull;
     private static final Main plugin = Main.getInstance();
@@ -1653,14 +1650,14 @@ public class MainConfigLoad{
 
             pm.registerEvents(new RelClickInventory(), plugin);
 
-            pm.registerEvents(new RelFoodLock(), plugin);
+            pm.registerEvents(new RelPlayerFoodLevel(), plugin);
 
             pm.registerEvents(new RelGameOver(), plugin);
 
             pm.registerEvents(new RelGameStarted(), plugin);
 
             pm.registerEvents(new RelKillPlayer(),plugin);
-            pm.registerEvents(new RelNoItemBreak(), plugin);
+            pm.registerEvents(new RelBreakItem(), plugin);
 
             pm.registerEvents(new RelPlaceCorrect(), plugin);
             pm.registerEvents(new RelPlayerDeath(), plugin);
@@ -1676,9 +1673,9 @@ public class MainConfigLoad{
 
 
 
-            pm.registerEvents(new PlayerClickHandler(), plugin);
-            pm.registerEvents(new PlayerDamageHandler(), plugin);
-            pm.registerEvents(new PlayerGameModeHandler(), plugin);
+            pm.registerEvents(new RelPlayerClick(), plugin);
+            pm.registerEvents(new RelPlayerDamage(), plugin);
+            pm.registerEvents(new RelPlayerGameMode(), plugin);
 
 
             l(ChatColor.GREEN + "BedwarsRel found, related support enable");

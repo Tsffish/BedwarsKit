@@ -9,8 +9,7 @@ import java.util.List;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
-public class KitNone
-{
+public class KitNone {
     public static String description;
     static ItemStack kitItemInMenu;
         public static void loadKit() {

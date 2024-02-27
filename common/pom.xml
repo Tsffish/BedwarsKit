@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>github.tsffish</groupId>
+        <artifactId>BedwarsKit</artifactId>
+        <version>1.9.56</version>
+    </parent>
+
+    <name>common</name>
+    <dependencies>
+        <dependency>
+            <groupId>github.tsffish</groupId>
+            <artifactId>v1_8_r8</artifactId>
+            <version>1.9.56</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>github.tsffish</groupId>
+            <artifactId>v1_12_r2</artifactId>
+            <version>1.9.56</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <artifactId>common</artifactId>
+    <version>1.9.56</version>
+
+
+</project>

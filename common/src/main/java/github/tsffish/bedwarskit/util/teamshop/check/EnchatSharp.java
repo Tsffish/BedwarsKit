@@ -1,7 +1,7 @@
 package github.tsffish.bedwarskit.util.teamshop.check;
 
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
-import github.tsffish.bedwarskit.util.player.GetItemInHand;
+import github.tsffish.bedwarskit.util.misc.GetItemInHand;
 import github.tsffish.bedwarskit.util.teamshop.list.ListSharp;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-
 
 public class EnchatSharp {
 

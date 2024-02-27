@@ -1,8 +1,8 @@
 package github.tsffish.bedwarskit;
+
 import github.tsffish.bedwarskit.command.CommandInfo;
 import github.tsffish.bedwarskit.config.main.MainConfigLoad;
-import github.tsffish.bedwarskit.util.update.UpdateChecker;
-import org.bstats.bukkit.Metrics;
+import github.tsffish.bedwarskit.util.misc.update.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,15 +15,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Locale;
 
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
+import static github.tsffish.bedwarskit.util.misc.bstats.StartMetrics.startMetrics;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class Main extends JavaPlugin implements Listener {
     private static final String pluginName = "BedwarsKit";
     public static String pluginName(){
         return pluginName;
     }
-    private static final String pluginVersion = "1.9.55";
+    private static final String pluginVersion = "1.9.56";
     public static String pluginVersion(){
         return pluginVersion;
     }
@@ -53,16 +53,22 @@ public class Main extends JavaPlugin implements Listener {
     }
     public static final String msgline = "================================";
     public static String language;
+    public static String language() {
+        return language;
+    }
     private static Main instance;
     public static Main getInstance() {
         return instance;
     }
     public static boolean isBungeeMode;
+    public static boolean isBungeeMode() {
+        return isBungeeMode;
+    }
     private static String serverVersion;
     public static String serverVersion(){
         return serverVersion;
     }
-
+    private static final String relName = "BedwarsRel";
     public void onEnable() {
         serverVersion = getServer().getVersion();
         Locale currentLocale = Locale.getDefault();
@@ -73,7 +79,8 @@ public class Main extends JavaPlugin implements Listener {
         }
 
         instance = this;
-        if (pluginManager.getPlugin("BedwarsRel") != null) {
+
+        if (pluginManager.getPlugin(relName) != null) {
 
             sendPluginStartUpInfo(ChatColor.GREEN);
 
@@ -81,25 +88,13 @@ public class Main extends JavaPlugin implements Listener {
 
             getCommand("bwk").setExecutor(new CommandInfo());
             getCommand("bwk reload").setExecutor(new CommandInfo());
+
             handlerHub();
 
             l("Command registered");
 
             if (!isDebug) {
-
-                try {
-                    Metrics metrics = new Metrics(this, 20914);
-
-                    metrics.addCustomChart(new Metrics.SimplePie("server_version", () -> getServer().getVersion()));
-                    metrics.addCustomChart(new Metrics.SimplePie("server_language", () -> language));
-                    metrics.addCustomChart(new Metrics.SimplePie("server_auth_mode", () -> String.valueOf(getServer().getOnlineMode())));
-                    metrics.addCustomChart(new Metrics.SimplePie("bungeecord_enabled", () -> String.valueOf(isBungeeMode)));
-                    metrics.addCustomChart(new Metrics.SimplePie("plugin_version", () -> pluginVersion));
-                    metrics.addCustomChart(new Metrics.SimplePie("os_name", () -> System.getProperty("os.name")));
-
-                } catch (RuntimeException e) {
-                    le("Main", "Bstat error:" + e);
-                }
+                startMetrics();
             }
         } else
             {
@@ -134,7 +129,7 @@ public class Main extends JavaPlugin implements Listener {
             l(color + msgline);
 
             if (color == red){
-                l(red + "BedwarsRel not found, unable to enable related support");
+                l(red + relName + " not found, unable to enable related support");
             }
         }
 
@@ -152,8 +147,7 @@ public class Main extends JavaPlugin implements Listener {
                     }
 
                 }
-            }
-            );
+            });
         }
         public static boolean pluginIsDisabling = false;
     @EventHandler

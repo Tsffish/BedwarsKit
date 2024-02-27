@@ -2,39 +2,38 @@ package github.tsffish.bedwarskit.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RelArmorList {
-    public static List<String> armorChain = new ArrayList<>(100);
-    public static List<String> armorIron = new ArrayList<>(100);
-    public static List<String> armorDiamond = new ArrayList<>(100);
-    public static void addArmorChain(String playerName){
-        armorChain.add(playerName);
+    private static List<UUID> armorChain = new ArrayList<>(100);
+    private static List<UUID> armorIron = new ArrayList<>(100);
+    private static List<UUID> armorDiamond = new ArrayList<>(100);
+    public static void addArmorChain(UUID uuid){
+        armorChain.add(uuid);
     }
-    public static boolean hasArmorChain(String playerName){
-        return armorChain.contains(playerName);
+    public static boolean hasArmorChain(UUID uuid){
+        return armorChain.contains(uuid);
     }
-    public static void removeArmorChain(String playerName){
-        armorChain.remove(playerName);
+    public static void removeArmorChain(UUID uuid){
+        armorChain.remove(uuid);
     }
-
-    public static void addArmorIron(String playerName){
-        armorIron.add(playerName);
+    public static void addArmorIron(UUID uuid){
+        armorIron.add(uuid);
     }
-    public static boolean hasArmorIron(String playerName){
-        return armorIron.contains(playerName);
+    public static boolean hasArmorIron(UUID uuid){
+        return armorIron.contains(uuid);
     }
-    public static void removeArmorIron(String playerName){
-        armorIron.remove(playerName);
+    public static void removeArmorIron(UUID uuid){
+        armorIron.remove(uuid);
     }
-
-    public static void addArmorDiamond(String playerName){
-        armorDiamond.add(playerName);
+    public static void addArmorDiamond(UUID uuid){
+        armorDiamond.add(uuid);
     }
-    public static boolean hasArmorDiamond(String playerName){
-        return armorDiamond.contains(playerName);
+    public static boolean hasArmorDiamond(UUID uuid){
+        return armorDiamond.contains(uuid);
     }
-    public static void removeArmorDiamond(String playerName){
-        armorDiamond.remove(playerName);
+    public static void removeArmorDiamond(UUID uuid){
+        armorDiamond.remove(uuid);
     }
 
 

@@ -1,10 +1,11 @@
 package github.tsffish.bedwarskit.util.kit;
 
-import github.tsffish.bedwarskit.util.GetItemType;
+import github.tsffish.bedwarskit.util.misc.GetItemType;
 import github.tsffish.bedwarskit.util.RelArmorColor;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,12 +17,13 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
-public class KitDefaultless {
+public class KitDefaultless{
     private static final int EffectTime = 999999;
     public static String description;
     private static Material helmetItemType;
@@ -66,7 +68,9 @@ public class KitDefaultless {
         coloredleatherArmor = Colored;
     }
 
-    public static void setKit(Player player, boolean Colored) {
+    public static void setKit(UUID uuid, boolean Colored) {
+
+        Player player = Bukkit.getPlayer(uuid);
         helmetItem = new ItemStack(helmetItemType, helmetItemAmount);
         chestItem = new ItemStack(chestItemType, chestItemAmount);
 

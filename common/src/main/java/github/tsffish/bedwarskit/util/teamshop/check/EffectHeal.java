@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.util.teamshop.check;
 
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;

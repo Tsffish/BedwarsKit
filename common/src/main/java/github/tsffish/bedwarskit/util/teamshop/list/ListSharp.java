@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.Main.isDebug;
-
 public class ListSharp {
     private static ConcurrentHashMap<String, List<String[]>> listMap = new ConcurrentHashMap<>(24);
     public static void setTeamDatas(String gameName, List<String[]> newTeamDatas) {
@@ -20,7 +18,7 @@ public class ListSharp {
             boolean found = false;
             for (String[] oldTeamInfo : teamDatas) {
                 if (oldTeamInfo[0].equals(teamInfo[0])) {
-                    oldTeamInfo[1] = teamInfo[1]; // 更新队伍等级信息
+                    oldTeamInfo[1] = teamInfo[1];
                     found = true;
                     break;
                 }
@@ -32,13 +30,6 @@ public class ListSharp {
         }
 
         listMap.put(gameName, teamDatas);
-        if (isDebug()) {
-            System.out.println("ListSharp:");
-            System.out.println("setTeamDatas:");
-            for (String[] string : teamDatas) {
-                System.out.println(string[0] + ": " + string[1]);
-            }
-        }
     }
 
     public static List<String[]> getTeamDatas(String gameName){
@@ -55,7 +46,7 @@ public class ListSharp {
             boolean found = false;
             for (String[] teamInfo : teamDatas) {
                 if (teamInfo[0].equals(team.getName())) {
-                    teamInfo[1] = "0"; // 将队伍的等级设置为 0
+                    teamInfo[1] = "0";
                     found = true;
                     break;
                 }

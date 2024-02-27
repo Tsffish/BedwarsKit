@@ -1,5 +1,5 @@
 # ================= #
-# BedwarsKit 职业配置 #
+# BedwarsKit 任务配置 #
 # ================= #
 
 gametask: true
@@ -80,7 +80,6 @@ gametask_name_emerald2: "\u7eff\u5b9d\u77f3 \u5347\u7ea7\u81f3 II"
 gametask_name_emerald3: "\u7eff\u5b9d\u77f3 \u5347\u7ea7\u81f3 III"
 gametask_name_emerald4: "\u7eff\u5b9d\u77f3 \u5347\u7ea7\u81f3 IV"
 gametask_name_finalbattle: "\u7edd\u6740\u6a21\u5f0f"
-# 此选项暂时不可用
 # gametaskname：记分牌上任务的名称
 # gametask_name_....1/2/3/4 : 资源点调速等级
 # finalbattle：绝杀模式

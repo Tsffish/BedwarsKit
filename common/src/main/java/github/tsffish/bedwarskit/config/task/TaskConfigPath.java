@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.config.task;
 
 class TaskConfigPath {
-
     static String path_gametask = "gametask";
     static String path_gametask_spawntime = "gametask_spawntime";
     static String path_gametask_spawntime_iron_base = "gametask_spawntime_iron_base";

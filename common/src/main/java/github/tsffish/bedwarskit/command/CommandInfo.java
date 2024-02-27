@@ -14,6 +14,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 
+import java.util.UUID;
+
 import static github.tsffish.bedwarskit.Main.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.command_help;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.giveProtEnchList;
@@ -119,7 +121,9 @@ public class CommandInfo implements CommandExecutor {
             }
 
             player.sendMessage("getPlayerOHKill:");
-            player.sendMessage(RelCurrentStat.getPlayerOHKill(player.getName()) + "");
+
+            UUID uuid = player.getUniqueId();
+            player.sendMessage(RelCurrentStat.getPlayerOHKill(uuid) + "");
 
         }
     }

@@ -2,18 +2,17 @@ package github.tsffish.bedwarskit.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RelPlayerIsRespawn {
-    static List<String> playerRespawn = new ArrayList<>(100);
-    public static boolean getPlayerRespawn(String playerName){
-        return playerRespawn.contains(playerName);
+    static List<UUID> playerRespawn = new ArrayList<>(100);
+    public static boolean getPlayerRespawn(UUID uuid){
+        return playerRespawn.contains(uuid);
     }
-
-    public static void addPlayerRespawn(String playerName){
-        playerRespawn.add(playerName);
+    public static void addPlayerRespawn(UUID uuid){
+        playerRespawn.add(uuid);
     }
-
-    public static void removePlayerRespawn(String playerName){
-        playerRespawn.remove(playerName);
+    public static void removePlayerRespawn(UUID uuid){
+        playerRespawn.remove(uuid);
     }
 }

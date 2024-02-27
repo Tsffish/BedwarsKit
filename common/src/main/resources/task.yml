@@ -80,7 +80,6 @@ gametask_name_emerald2: "Emerald II"
 gametask_name_emerald3: "Emerald III"
 gametask_name_emerald4: "Emerald IV"
 gametask_name_finalbattle: "Death Mode"
-# This option is temporarily unavailable
 # Gametaskname: The name of the task on the scoreboard
 # Gametaskname_ 1/2/3/4 resource point speed regulation level
 # Gametaskname_finalbattle: Kill mode

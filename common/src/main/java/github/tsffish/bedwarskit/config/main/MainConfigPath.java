@@ -1,9 +1,5 @@
 package github.tsffish.bedwarskit.config.main;
 
-import org.bukkit.Material;
-
-import java.util.List;
-
 class MainConfigPath {
     static String path_breakTitle = "breakTitle";
     static String path_breakTitleAll = "breakTitleAll";
