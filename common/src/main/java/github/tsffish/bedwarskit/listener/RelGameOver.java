@@ -1,7 +1,7 @@
 package github.tsffish.bedwarskit.listener;
 
-import github.tsffish.bedwarskit.Main;
-import github.tsffish.bedwarskit.util.RelCurrentStat;
+import github.tsffish.bedwarskit.BedwarsKit;
+import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import github.tsffish.bedwarskit.util.misc.SoundPlayer;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.events.BedwarsGameEndEvent;
@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.Main.isDebug;
+import static github.tsffish.bedwarskit.BedwarsKit.isDebug;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.lobbyWorld;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.setDefaultPlayerStat;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 
 public class RelGameOver implements Listener {
-    private static final Main plugin = Main.getInstance();
+    private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final Material bed = Material.BED;
     private static final double maxBord = 9999;
     @EventHandler
@@ -41,6 +41,8 @@ public class RelGameOver implements Listener {
             }
         }
 
+        Game game = event.getGame();
+        RelSpectatorPlayer.clearSpectatorPlayers();
 
         for (Player player : event.getWinner().getPlayers()){
 
@@ -55,9 +57,6 @@ public class RelGameOver implements Listener {
             //player.sendMessage("&b&l==============================================");
         }
 
-
-        Game game = event.getGame();
-
         World world = game.getRegion().getWorld();
         WorldBorder worldBorder = world.getWorldBorder();
         worldBorder.setCenter(game.getLobby());
@@ -69,7 +68,7 @@ public class RelGameOver implements Listener {
     public void on(final BedwarsGameEndEvent event){
         Game game = event.getGame();
         World world = game.getRegion().getWorld();
-        for (Team team : game.getPlayingTeams()){
+        for (Team team : game.getTeams().values()){
             if (team.getHeadTarget().getType() != bed){
                 world.getBlockAt(team.getTargetHeadBlock()).setType(bed, true);
             }

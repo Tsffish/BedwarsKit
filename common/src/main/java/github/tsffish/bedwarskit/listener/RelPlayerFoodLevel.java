@@ -8,14 +8,14 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 
 public class RelPlayerFoodLevel implements Listener {
     @EventHandler
-    public void on(final FoodLevelChangeEvent e) {
-        if (e.getEntity() == null) {
+    public void on(final FoodLevelChangeEvent event) {
+        if (event.getEntity() == null) {
             return;
         }
         if (noHunger
-                && e.getEntity().getWorld().getName().contains(rushWorld)
-                && e.getFoodLevel() != maxFoodLevel) {
-            e.setFoodLevel(maxFoodLevel);
+                && event.getEntity().getWorld().getName().contains(rushWorld)
+                && event.getFoodLevel() != maxFoodLevel) {
+            event.setFoodLevel(maxFoodLevel);
         }
 
     }

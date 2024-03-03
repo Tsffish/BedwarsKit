@@ -1,13 +1,11 @@
 package github.tsffish.bedwarskit.command;
 
-import github.tsffish.bedwarskit.Main;
+import github.tsffish.bedwarskit.BedwarsKit;
 import github.tsffish.bedwarskit.config.main.MainConfigLoad;
-import github.tsffish.bedwarskit.util.RelCurrentStat;
 import github.tsffish.bedwarskit.util.RelIsCheckingPlayer;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
 import io.github.bedwarsrel.BedwarsRel;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,11 +14,14 @@ import org.bukkit.plugin.PluginManager;
 
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.Main.*;
+import static github.tsffish.bedwarskit.BedwarsKit.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.command_help;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.giveProtEnchList;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.giveSharpEnchList;
+import static github.tsffish.bedwarskit.util.RelCurrentStat.getPlayerOHKill;
+import static github.tsffish.bedwarskit.util.misc.ChatColor.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.StringMgr.*;
 
 public class CommandInfo implements CommandExecutor {
     public boolean onCommand(
@@ -44,7 +45,7 @@ public class CommandInfo implements CommandExecutor {
                 }
             }
 
-            if(Main.isDebug()){
+            if(BedwarsKit.isDebug()){
                 showDebugInfo(sender);
             }else {
                 showHelpMess(sender);
@@ -76,7 +77,7 @@ public class CommandInfo implements CommandExecutor {
     }
     private void toggleDebug(CommandSender sender){
         changeIsDebug();
-        if (Main.isDebug()){
+        if (BedwarsKit.isDebug()){
             sender.sendMessage("Debug now Enabled");
         }else {
             sender.sendMessage("Debug now Disabled");
@@ -123,31 +124,31 @@ public class CommandInfo implements CommandExecutor {
             player.sendMessage("getPlayerOHKill:");
 
             UUID uuid = player.getUniqueId();
-            player.sendMessage(RelCurrentStat.getPlayerOHKill(uuid) + "");
+            player.sendMessage(getPlayerOHKill(uuid) + "");
 
         }
     }
     private static void showPluginInfo(CommandSender sender) {
-        sender.sendMessage(ChatColor.GREEN + msgline);
+        sender.sendMessage(green + msgline);
         sender.sendMessage(" ");
-        sender.sendMessage(ChatColor.WHITE + pluginName() + " " + ChatColor.AQUA + pluginVersion());
+        sender.sendMessage(white + pluginName + " " + aqua + pluginVersion());
         sender.sendMessage(" ");
-        sender.sendMessage(ChatColor.WHITE + "Author: " + ChatColor.YELLOW + author());
+        sender.sendMessage(white + "Author: " + yellow + author());
         sender.sendMessage(" ");
-        sender.sendMessage(ChatColor.GREEN + msgline);
+        sender.sendMessage(green + msgline);
     }
 
     private void showHelpMess(CommandSender sender) {
     if (command_help == null){
         PluginManager pm = Bukkit.getPluginManager();
-        if (pm.getPlugin("BedwarsRel") != null) {
-            sender.sendMessage(ChatColor.GREEN + msgline);
+        if (pm.getPlugin(relName) != null) {
+            sender.sendMessage(green + msgline);
             helpMsg(sender);
-            sender.sendMessage(ChatColor.GREEN + msgline);
+            sender.sendMessage(green + msgline);
         } else {
-            sender.sendMessage(ChatColor.RED + msgline);
+            sender.sendMessage(red + msgline);
             helpMsg(sender);
-            sender.sendMessage(ChatColor.RED + msgline);
+            sender.sendMessage(red + msgline);
         }
     }else {
         for(String list : command_help){
@@ -157,10 +158,10 @@ public class CommandInfo implements CommandExecutor {
 }
     private static void helpMsg(CommandSender sender) {
         sender.sendMessage(" ");
-        sender.sendMessage(ChatColor.WHITE + pluginName() + " " + ChatColor.AQUA + "Commands:");
+        sender.sendMessage(white + pluginName + " " + aqua + "Commands:");
         sender.sendMessage(" ");
-        sender.sendMessage(" " + ChatColor.WHITE + "/bwk" + ChatColor.YELLOW + " Display this help information.");
-        sender.sendMessage(" " + ChatColor.WHITE + "/bwk reload" + ChatColor.YELLOW + " Reload configuration file.");
+        sender.sendMessage(" " + white + "/bwk" + yellow + " Display this help information.");
+        sender.sendMessage(" " + white + "/bwk reload" + yellow + " Reload configuration file.");
         sender.sendMessage(" ");
     }
     }

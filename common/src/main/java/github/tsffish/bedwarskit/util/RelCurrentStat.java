@@ -1,20 +1,27 @@
 package github.tsffish.bedwarskit.util;
 
+import github.tsffish.bedwarskit.BedwarsKit;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static github.tsffish.bedwarskit.BedwarsKit.hidePlayer;
+import static github.tsffish.bedwarskit.BedwarsKit.showPlayer;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
 
 public class RelCurrentStat {
     protected static final String className = "RelCurrentStat";
-    protected static ConcurrentHashMap<UUID, Integer> playerKill = new ConcurrentHashMap<>(100);
-    protected static ConcurrentHashMap<UUID, Integer> playerFKill = new ConcurrentHashMap<>(100);
-    protected static ConcurrentHashMap<UUID, Integer> playerDeath = new ConcurrentHashMap<>(100);
-    protected static ConcurrentHashMap<UUID, Integer> playerBreakBed = new ConcurrentHashMap<>(100);
-    protected static ConcurrentHashMap<UUID, Double> playerKD = new ConcurrentHashMap<>(100);
-    protected static ConcurrentHashMap<UUID, Integer> playerOHKill = new ConcurrentHashMap<>(100);
+    private static ConcurrentHashMap<UUID, Integer> playerKill = new ConcurrentHashMap<>(101);
+    private static ConcurrentHashMap<UUID, Integer> playerFKill = new ConcurrentHashMap<>(101);
+    private static ConcurrentHashMap<UUID, Integer> playerDeath = new ConcurrentHashMap<>(101);
+    private static ConcurrentHashMap<UUID, Integer> playerBreakBed = new ConcurrentHashMap<>(101);
+    private static ConcurrentHashMap<UUID, Double> playerKD = new ConcurrentHashMap<>(101);
+    private static ConcurrentHashMap<UUID, Integer> playerOHKill = new ConcurrentHashMap<>(101);
     public static int getPlayerOHKill(UUID uuid){
         return playerOHKill.get(uuid);
     }
@@ -33,41 +40,57 @@ public class RelCurrentStat {
     public static double getPlayerKD(UUID uuid){
         return playerKD.get(uuid);
     }
+    public static final String addKill = "k";
+    public static final String addDeath = "d";
+    public static final String addBreakBed = "b";
+    public static final String addFinalKill = "f";
 
+    public static final String addOneHeathKill = "ohk";
+    public static final String setOneHeathKill = "setohk";
+    private static List<UUID> playerIsOut = new ArrayList<>(101);
+    public static boolean getPlayerisOut(UUID uuid){
+        return playerIsOut.contains(uuid);
+    }
+    public static void addPlayerIsOut(UUID uuid){
+        playerIsOut.add(uuid);
+        Player player = Bukkit.getPlayer(uuid);
+        hidePlayer(player);
+    }
+    public static void removePlayerIsOut(UUID uuid){
+        playerIsOut.remove(uuid);
+        Player player = Bukkit.getPlayer(uuid);
+        showPlayer(player);
+    }
     public static void updatePlayerStat(UUID uuid, String pd, int value){
-        
-        if (pd == null){
-            le(className,"pd is null");
-            return;
-        }
+        if (pd == null){le(className,"pd is null");return;}
+        if (pd.isEmpty()){le(className,"pd is empty");return;}
 
         switch (pd.toLowerCase()){
-            case "k":
+            case addKill:
                 int k = playerKill.get(uuid);
                 playerKill.put(uuid, k + value);
                 break;
-            case "d":
+            case addDeath:
                 int d = playerDeath.get(uuid);
                 playerDeath.put(uuid, d + value);
                 break;
-            case "b":
+            case addBreakBed:
                 int b = playerBreakBed.get(uuid);
                 playerBreakBed.put(uuid, b + value);
                 break;
-            case "f":
+            case addFinalKill:
                 int f = playerFKill.get(uuid);
                 playerFKill.put(uuid, f + value);
                 break;
-            case "ohk":
+            case addOneHeathKill:
                 int ohk = playerOHKill.getOrDefault(uuid, 0);
                 playerOHKill.put(uuid, ohk + value);
                 break;
-            case "setohk":
+            case setOneHeathKill:
                 playerOHKill.put(uuid, value);
                 break;
             default:
-                le("RelCurrentStat","updatePlayerStat Error: pd : "
-                        + pd + " is a wrong vaule!");
+                sendError("updatePlayerStat",pd);
                 break;
         }
 
@@ -97,18 +120,9 @@ public class RelCurrentStat {
         playerKD.put(uuid, 0.0);
         playerOHKill.put(uuid, 0);
     }
-
-
-
-    protected static List<UUID> playerIsOut = new ArrayList<>(100);
-    public static boolean PlayerisOut(UUID uuid){
-        return playerIsOut.contains(uuid);
-    }
-    public static void addPlayerIsOut(UUID uuid){
-        playerIsOut.add(uuid);
-    }
-    public static void removePlayerIsOut(UUID uuid){
-        playerIsOut.remove(uuid);
+    static void sendError(String method, String pd){
+        le(className,method + " error: pd : "
+                + pd + vauleIsWrong);
     }
 
 }

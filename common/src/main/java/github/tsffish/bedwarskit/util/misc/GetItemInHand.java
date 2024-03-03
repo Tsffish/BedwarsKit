@@ -5,8 +5,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Method;
 
-import static github.tsffish.bedwarskit.Main.pluginIsDisabling;
-import static github.tsffish.bedwarskit.Main.serverVersion;
+import static github.tsffish.bedwarskit.BedwarsKit.serverVersion;
+import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 

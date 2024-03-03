@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.config.task;
 
-import github.tsffish.bedwarskit.Main;
+import github.tsffish.bedwarskit.BedwarsKit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -15,7 +15,7 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
 public class TaskConfigLoad{
     private static final String name = "TaskConfigLoad";
     private static final String reason = vauleIsNull;
-    private static final Main plugin = Main.getInstance();
+    private static final BedwarsKit plugin = BedwarsKit.getInstance();
     public static YamlConfiguration config;
 
     public static void loadTaskConfig(){

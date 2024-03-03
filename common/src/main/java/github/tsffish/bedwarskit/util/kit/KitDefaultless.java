@@ -1,7 +1,7 @@
 package github.tsffish.bedwarskit.util.kit;
 
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import github.tsffish.bedwarskit.util.misc.GetItemType;
-import github.tsffish.bedwarskit.util.RelArmorColor;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.killfb_oneHealthKill_itemType;
+import static github.tsffish.bedwarskit.util.RelArmorColor.*;
+import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
@@ -79,7 +82,11 @@ public class KitDefaultless{
         pi.setChestplate(chestItem);
 
         if (wood_sword != null){
-            pi.setItemInHand(wood_sword);
+            if (pi.getItemInHand().getType() != killfb_oneHealthKill_itemType){
+                pi.setItemInHand(wood_sword);
+            }else if (!pi.contains(wood_sword)){
+                pi.addItem(wood_sword);
+            }
         }
         applyKitBoost(player, Colored);
     }
@@ -104,42 +111,41 @@ public class KitDefaultless{
                     String playerteam = game.getPlayerTeam(player).getColor().name();
 
                     LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmetItem.getItemMeta();
-                    LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestItem.getItemMeta();
-                    switch (playerteam) {
-                    case "RED":
-                        helmetMeta.setColor(RelArmorColor.red);
-                        chestplateMeta.setColor(RelArmorColor.red);
-                        break;
-                    case "BLUE":
-                        helmetMeta.setColor(RelArmorColor.blue);
-                        chestplateMeta.setColor(RelArmorColor.blue);
-                        break;
-                    case "GREEN":
-                        helmetMeta.setColor(RelArmorColor.green);
-                        chestplateMeta.setColor(RelArmorColor.green);
-                        break;
-                    case "YELLOW":
-                        helmetMeta.setColor(RelArmorColor.yellow);
-                        chestplateMeta.setColor(RelArmorColor.yellow);
-                        break;
-                    case "WHITE":
-                        helmetMeta.setColor(RelArmorColor.white);
-                        chestplateMeta.setColor(RelArmorColor.white);
-                        break;
-                    case "AQUA":
-                        helmetMeta.setColor(RelArmorColor.aqua);
-                        chestplateMeta.setColor(RelArmorColor.aqua);
-                        break;
-                    case "LIGHT_PURPLE":
-                        helmetMeta.setColor(RelArmorColor.pink);
-                        chestplateMeta.setColor(RelArmorColor.pink);
-                        break;
-                    case "GRAY":
-                        helmetMeta.setColor(RelArmorColor.gray);
-                        chestplateMeta.setColor(RelArmorColor.gray);
-                        break;
-                    default:
-                        break;
+                    LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestItem.getItemMeta();                    switch (playerteam) {
+                        case RED_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(red);
+                            chestplateMeta.setColor(red);
+                            break;
+                        case BLUE_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(blue);
+                            chestplateMeta.setColor(blue);
+                            break;
+                        case GREEN_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(green);
+                            chestplateMeta.setColor(green);
+                            break;
+                        case YELLOW_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(yellow);
+                            chestplateMeta.setColor(yellow);
+                            break;
+                        case WHITE_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(white);
+                            chestplateMeta.setColor(white);
+                            break;
+                        case AQUA_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(aqua);
+                            chestplateMeta.setColor(aqua);
+                            break;
+                        case PINK_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(pink);
+                            chestplateMeta.setColor(pink);
+                            break;
+                        case GRAY_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(gray);
+                            chestplateMeta.setColor(gray);
+                            break;
+                        default:
+                            break;
                     }
                     helmetItem.setItemMeta(helmetMeta);
                     chestItem.setItemMeta(chestplateMeta);

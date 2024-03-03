@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.listener;
 
-import github.tsffish.bedwarskit.Main;
+import github.tsffish.bedwarskit.BedwarsKit;
 import io.github.bedwarsrel.events.BedwarsTargetBlockDestroyedEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,12 +10,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Objects;
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitleBreakTeam;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakSubTitleBreakTeam;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitleBreakPlayer;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakSubTitleBreakPlayer;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitleAll;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakSubTitleAll;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitle;
+import static github.tsffish.bedwarskit.util.RelCurrentStat.addBreakBed;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.updatePlayerStat;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class RelBreakBed implements Listener {
-    private static final Main plugin = Main.getInstance();
+    private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private String bt(
             String text,
             String breakTeamColor,
@@ -31,40 +38,41 @@ public class RelBreakBed implements Listener {
                 replace("{breakPlayerTeamName}", breakPlayerTeamName);
     }
     @EventHandler
-    public void on(final BedwarsTargetBlockDestroyedEvent e) {
+    public void on(final BedwarsTargetBlockDestroyedEvent event) {
         if (!breakTitle) {
             return;
         }
-
-            Player breakPlayer = e.getPlayer();
-            String playerName = breakPlayer.getName();
-            String breakPlayerName = e.getPlayer().getName();
-            String breakPlayerTeamName = e.getGame().getPlayerTeam(breakPlayer).getName();
-
-            String breakTeamName = e.getTeam().getName();
-            String breakTeamColor = e.getTeam().getChatColor().toString();
-            String breakPlayerTeamColor = e.getGame().getPlayerTeam(breakPlayer).getChatColor().toString();
-
-            String breakTitleBreakTeamReal = bt(breakTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakSubtitleBreakTeamReal = bt(breakSubTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakTitleBreakPlayerReal = bt(breakTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakSubtitleBreakPlayerReal = bt(breakSubTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakTitleAllReal = bt(breakTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-            String breakSubtitleAllReal = bt(breakSubTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
-
             new BukkitRunnable()
             {
             @Override
             public void run()
             {
-                    e.getGame().getPlayers().forEach((player) -> {
-                        String playerTeam = e.getGame().getPlayerTeam(player).getName();
+
+                Player breakPlayer = event.getPlayer();
+                String playerName = breakPlayer.getName();
+                String breakPlayerName = event.getPlayer().getName();
+                String breakPlayerTeamName = event.getGame().getPlayerTeam(breakPlayer).getName();
+
+                String breakTeamName = event.getTeam().getName();
+                String breakTeamColor = event.getTeam().getChatColor().toString();
+                String breakPlayerTeamColor = event.getGame().getPlayerTeam(breakPlayer).getChatColor().toString();
+
+                String breakTitleBreakTeamReal = bt(breakTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+                String breakSubtitleBreakTeamReal = bt(breakSubTitleBreakTeam, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+                String breakTitleBreakPlayerReal = bt(breakTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+                String breakSubtitleBreakPlayerReal = bt(breakSubTitleBreakPlayer, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+                String breakTitleAllReal = bt(breakTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+                String breakSubtitleAllReal = bt(breakSubTitleAll, breakTeamColor, breakTeamName, breakPlayerTeamColor, breakPlayerName, breakPlayerTeamName);
+
+
+                event.getGame().getPlayers().forEach((player) -> {
+                        String playerTeam = event.getGame().getPlayerTeam(player).getName();
                         
-                        if (!Objects.equals(playerName, breakPlayerName)
+                        if (!playerName.equals(breakPlayerName)
                                 && !Objects.equals(playerTeam, breakTeamName))
                         {
                             player.sendTitle(t(breakTitleAllReal), t(breakSubtitleAllReal));
-                        } else if (Objects.equals(playerTeam, breakTeamName))
+                        } else if (playerTeam.equals(breakTeamName))
                         {
                             
                             player.sendTitle(t(breakTitleBreakTeamReal), t(breakSubtitleBreakTeamReal));
@@ -74,7 +82,7 @@ public class RelBreakBed implements Listener {
                 breakPlayer.sendTitle(t(breakTitleBreakPlayerReal), t(breakSubtitleBreakPlayerReal));
 
                 UUID breakPlayerUUID = breakPlayer.getUniqueId();
-                updatePlayerStat(breakPlayerUUID, "b", 1);
+                updatePlayerStat(breakPlayerUUID, addBreakBed, 1);
 
             }
             

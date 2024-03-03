@@ -1,12 +1,11 @@
 package github.tsffish.bedwarskit.config.main;
 
-import github.tsffish.bedwarskit.Main;
+import github.tsffish.bedwarskit.BedwarsKit;
 import github.tsffish.bedwarskit.config.kit.KitConfigLoad;
 import github.tsffish.bedwarskit.config.lang.LangConfigLoad;
 import github.tsffish.bedwarskit.config.task.TaskConfigLoad;
 import github.tsffish.bedwarskit.listener.*;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -17,19 +16,58 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static github.tsffish.bedwarskit.Main.*;
+import static github.tsffish.bedwarskit.BedwarsKit.spigotId;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
+import static github.tsffish.bedwarskit.util.misc.StringMgr.*;
+import static github.tsffish.bedwarskit.util.misc.update.StartCheck.checkUpdate;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.loadLevelUpInv;
 
 public class MainConfigLoad {
     private static final String name = "MainConfigLoad";
     private static final String reason = vauleIsNull;
-    private static final Main plugin = Main.getInstance();
+    private static final BedwarsKit plugin = BedwarsKit.getInstance();
+    private static void regListener(){
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        pluginManager.registerEvents(new PluginDisable(), plugin);
+
+        pluginManager.registerEvents(new RelBreakBed(), plugin);
+        pluginManager.registerEvents(new RelBreakCorrect(), plugin);
+
+        pluginManager.registerEvents(new RelClickInventory(), plugin);
+
+        pluginManager.registerEvents(new RelPlayerFoodLevel(), plugin);
+
+        pluginManager.registerEvents(new RelGameOver(), plugin);
+
+        pluginManager.registerEvents(new RelGameStarted(), plugin);
+
+        pluginManager.registerEvents(new RelKillPlayer(),plugin);
+        pluginManager.registerEvents(new RelBreakItem(), plugin);
+
+        pluginManager.registerEvents(new RelPlaceCorrect(), plugin);
+        pluginManager.registerEvents(new RelPlayerDeath(), plugin);
+
+        pluginManager.registerEvents(new RelPlayerDrop(), plugin);
+        pluginManager.registerEvents(new RelPlayerJoin(), plugin);
+
+        pluginManager.registerEvents(new RelPlayerLeave(), plugin);
+        pluginManager.registerEvents(new RelPlayerMove(), plugin);
+        pluginManager.registerEvents(new RelPlayerOpenShop(),plugin);
+
+        pluginManager.registerEvents(new RelPlayerTeleport(), plugin);
+
+        pluginManager.registerEvents(new RelPlayerClick(), plugin);
+        pluginManager.registerEvents(new RelPlayerDamage(), plugin);
+        pluginManager.registerEvents(new RelPlayerGameMode(), plugin);
+
+        pluginManager.registerEvents(new RelPickupItem(), plugin);
+    }
+    private static void sendError(String path){
+        er(name, path, reason);
+    }
     public static void loadMainConfig(CommandSender executer, boolean firstload) {
 
         File file = new File(plugin.getDataFolder(), "config.yml");
@@ -43,14 +81,14 @@ public class MainConfigLoad {
         if (c.getString(MainConfigPath.path_messreloadnow) != null) {
             messreloadnow = c.getString(MainConfigPath.path_messreloadnow);
         } else {
-            messreloadnow = t("&b" + pluginName() + " &7>> &eReloading configuration file");
+            messreloadnow = t("&b" + pluginName + " &7>> &eReloading configuration file");
             sendError(MainConfigPath.path_messreloadnow);
         }
 
         if (c.getString(MainConfigPath.path_messreloadsucc) != null) {
             messreloadsucc = c.getString(MainConfigPath.path_messreloadsucc);
         } else {
-            messreloadsucc = t("&b" + pluginName() + " &7>> &aSuccessfully reloaded configuration file");
+            messreloadsucc = t("&b" + pluginName + " &7>> &aSuccessfully reloaded configuration file");
             sendError(MainConfigPath.path_messreloadsucc);
         }
 
@@ -1642,46 +1680,7 @@ public class MainConfigLoad {
                 executer.sendMessage(t(messreloadsucc));
             }
         }else {
-
-            PluginManager pm = Bukkit.getPluginManager();
-
-            pm.registerEvents(new RelBreakBed(), plugin);
-            pm.registerEvents(new RelBreakCorrect(), plugin);
-
-            pm.registerEvents(new RelClickInventory(), plugin);
-
-            pm.registerEvents(new RelPlayerFoodLevel(), plugin);
-
-            pm.registerEvents(new RelGameOver(), plugin);
-
-            pm.registerEvents(new RelGameStarted(), plugin);
-
-            pm.registerEvents(new RelKillPlayer(),plugin);
-            pm.registerEvents(new RelBreakItem(), plugin);
-
-            pm.registerEvents(new RelPlaceCorrect(), plugin);
-            pm.registerEvents(new RelPlayerDeath(), plugin);
-
-            pm.registerEvents(new RelPlayerDrop(), plugin);
-            pm.registerEvents(new RelPlayerJoin(), plugin);
-
-            pm.registerEvents(new RelPlayerLeave(), plugin);
-            pm.registerEvents(new RelPlayerMove(), plugin);
-            pm.registerEvents(new RelPlayerOpenShop(),plugin);
-
-            pm.registerEvents(new RelPlayerTeleport(), plugin);
-
-
-
-            pm.registerEvents(new RelPlayerClick(), plugin);
-            pm.registerEvents(new RelPlayerDamage(), plugin);
-            pm.registerEvents(new RelPlayerGameMode(), plugin);
-
-
-            l(ChatColor.GREEN + "BedwarsRel found, related support enable");
+            regListener();
         }
-    }
-    private static void sendError(String path){
-        er(name, path, reason);
     }
 }

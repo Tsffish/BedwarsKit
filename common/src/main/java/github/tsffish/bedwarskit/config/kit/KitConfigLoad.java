@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.config.kit;
 
-import github.tsffish.bedwarskit.Main;
+import github.tsffish.bedwarskit.BedwarsKit;
 import github.tsffish.bedwarskit.util.kit.KitDefault;
 import github.tsffish.bedwarskit.util.kit.KitDefaultless;
 import github.tsffish.bedwarskit.util.kit.KitNone;
@@ -18,7 +18,7 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
 
 public class KitConfigLoad {
-    private static final Main plugin = Main.getInstance();
+    private static final BedwarsKit plugin = BedwarsKit.getInstance();
     public static void loadKitConfig() {
 
         File file = new File(plugin.getDataFolder(), "kit.yml");

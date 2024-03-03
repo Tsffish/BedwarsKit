@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class RelArmorList {
-    private static List<UUID> armorChain = new ArrayList<>(100);
-    private static List<UUID> armorIron = new ArrayList<>(100);
-    private static List<UUID> armorDiamond = new ArrayList<>(100);
+    private static List<UUID> armorChain = new ArrayList<>(101);
+    private static List<UUID> armorIron = new ArrayList<>(101);
+    private static List<UUID> armorDiamond = new ArrayList<>(101);
     public static void addArmorChain(UUID uuid){
         armorChain.add(uuid);
     }
@@ -35,6 +35,4 @@ public class RelArmorList {
     public static void removeArmorDiamond(UUID uuid){
         armorDiamond.remove(uuid);
     }
-
-
 }

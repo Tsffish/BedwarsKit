@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.Main.isDebug;
+import static github.tsffish.bedwarskit.BedwarsKit.isDebug;
 
 public class ListHeal {
     private static ConcurrentHashMap<String, List<String[]>> listMap = new ConcurrentHashMap<>(24);

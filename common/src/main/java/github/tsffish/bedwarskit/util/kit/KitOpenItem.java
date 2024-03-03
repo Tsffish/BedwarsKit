@@ -12,7 +12,6 @@ public class KitOpenItem
 
     public static ItemStack kitMenuItem;
     public static void loadKitMenuItem() {
-
         kitMenuItem = new ItemStack(kitMenuItemType, kitMenuItemAmount);
         ItemMeta kitMenuItemMeta = kitMenuItem.getItemMeta();
         kitMenuItemMeta.setDisplayName(t(kitMenuItemName));

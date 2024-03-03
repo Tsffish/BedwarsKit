@@ -1,24 +1,45 @@
 package github.tsffish.bedwarskit.listener;
 
+import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
+import io.github.bedwarsrel.BedwarsRel;
+import io.github.bedwarsrel.game.GameManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
+import java.util.UUID;
+
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.creativeGameModeFix;
 
 public class RelPlayerGameMode implements Listener {
     private static final GameMode creative = GameMode.CREATIVE;
+    private static final GameMode survival = GameMode.SURVIVAL;
     @EventHandler
-    public void on(final PlayerToggleFlightEvent event){
-        if (!creativeGameModeFix) {
+    public void on(final PlayerToggleFlightEvent event) {
+        Player player = event.getPlayer();
+        if (BedwarsRel.getInstance() == null){
             return;
         }
-        Player player = event.getPlayer();
-        player.setFlying(
-                  !player.isFlying()
-                && player.getGameMode() == creative
-        );
+        BedwarsRel bedwarsRel = BedwarsRel.getInstance();
+        if (bedwarsRel.getGameManager() == null){
+            return;
+        }
+        GameManager gameManager = bedwarsRel.getGameManager();
+        if (gameManager.getGameOfPlayer(player) == null){
+            return;
+        }
+
+        if (creativeGameModeFix && player.getGameMode() == creative) {
+            player.setFlying(!player.isFlying());
+            return;
+        }
+        UUID playerUUID = player.getUniqueId();
+        if (RelSpectatorPlayer.getPlayerIsSp(playerUUID) && player.getGameMode() == survival){
+            if (player.getAllowFlight()){
+            player.setFlying(!player.isFlying());
+            }
+        }
     }
 }

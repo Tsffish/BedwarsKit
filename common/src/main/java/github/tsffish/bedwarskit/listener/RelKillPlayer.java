@@ -17,8 +17,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
+import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.RelCurrentStat.updatePlayerStat;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class RelKillPlayer implements Listener {
@@ -47,7 +47,7 @@ public class RelKillPlayer implements Listener {
     @EventHandler
     public void on(final BedwarsPlayerKilledEvent e) {
 
-        if (e.getKiller() == null && e.getPlayer() == null) {
+        if (e.getKiller() == null || e.getPlayer() == null) {
             return;
         }
         if (!e.getKiller().isOnline()){
@@ -67,26 +67,26 @@ public class RelKillPlayer implements Listener {
             UUID kuuid = k.getUniqueId();
             String kHealth = k.getHealth() + "";
             PlayerInventory kpi = k.getInventory();
-            updatePlayerStat(kuuid, "k", 1);
+            updatePlayerStat(kuuid, addKill, 1);
 
             Player d = e.getPlayer();
             String dName = d.getName();
             UUID duuid = d.getUniqueId();
             String dHealth = d.getHealth() + "";
             PlayerInventory dpi = d.getInventory();
-            updatePlayerStat(duuid, "d", 1);
+            updatePlayerStat(duuid, addDeath, 1);
 
 
-            if (game.getPlayerTeam(d).getHeadTarget() == null || game.getPlayerTeam(d).getHeadTarget().getType() != Material.BED) {
-                updatePlayerStat(kuuid, "f", 1);
+            if (game.getPlayerTeam(d).getHeadTarget() == null || game.getPlayerTeam(d).getHeadTarget().getType() != Material.BED_BLOCK) {
+                updatePlayerStat(kuuid, addFinalKill, 1);
                 SoundPlayer.LEVEL_UP(k,1);
             }
 
             if (killfb_oneHealthKill){
 
-                updatePlayerStat(kuuid,"ohk", 1);
+                updatePlayerStat(kuuid,addOneHeathKill, 1);
 
-                if (RelCurrentStat.getPlayerOHKill(kuuid) > 1){
+                if (getPlayerOHKill(kuuid) > 1){
                 PlayerInventory pi = k.getInventory();
                 ItemStack fbItem = new ItemStack(killfb_oneHealthKill_itemType);
                 ItemMeta fbItemMeta = fbItem.getItemMeta();

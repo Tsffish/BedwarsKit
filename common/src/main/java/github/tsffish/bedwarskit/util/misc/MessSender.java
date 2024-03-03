@@ -5,7 +5,7 @@ import org.bukkit.command.ConsoleCommandSender;
 
 import java.util.logging.Logger;
 
-import static github.tsffish.bedwarskit.Main.pluginNameConsole;
+import static github.tsffish.bedwarskit.BedwarsKit.pluginNameConsole;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
 public class MessSender {

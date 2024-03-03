@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.Main.isDebug;
-
 public class ListHaste {
 
     private static ConcurrentHashMap<String, List<String[]>> listMap = new ConcurrentHashMap<>(24);

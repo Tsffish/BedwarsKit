@@ -1,11 +1,11 @@
 package github.tsffish.bedwarskit.util.misc;
 
-import github.tsffish.bedwarskit.Main;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 
-import static github.tsffish.bedwarskit.Main.serverVersion;
+import static github.tsffish.bedwarskit.BedwarsKit.serverVersion;
+import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 
@@ -17,7 +17,7 @@ public class SendActionBar {
                 Method method = github.tsffish.bedwarskit.com.v1_8_r8.ActionBarSender.class.getMethod("sendActionBar", Player.class, String.class);
                 method.invoke(null, player, string);
             }catch (Exception e){
-                if (!Main.pluginIsDisabling){
+                if (!pluginIsDisabling){
                     le(className, e);
                 }
             }
@@ -27,7 +27,7 @@ public class SendActionBar {
                 Method method = github.tsffish.bedwarskit.com.v1_12_r2.ActionBarSender.class.getMethod("sendActionBar", Player.class, String.class);
                 method.invoke(null, player, string);
             }catch (Exception e){
-                if (!Main.pluginIsDisabling){
+                if (!pluginIsDisabling){
                     le(className,e);
                 }
             }
@@ -39,7 +39,7 @@ public class SendActionBar {
                 Method method = github.tsffish.bedwarskit.com.v1_12_r2.ActionBarSender.class.getMethod("sendActionBar", Player.class, String.class);
                 method.invoke(null, player, string);
             }catch (Exception e){
-                if (!Main.pluginIsDisabling){
+                if (!pluginIsDisabling){
                     le(className,e);
                 }
             }

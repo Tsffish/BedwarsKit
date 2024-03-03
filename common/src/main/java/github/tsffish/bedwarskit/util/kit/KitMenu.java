@@ -6,13 +6,15 @@ import org.bukkit.inventory.ItemStack;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 
-public class KitMenu
-{
+public class KitMenu {
+    private static final int perRow = 9;
     public static Inventory kitMenu;
     static void loadKitMenu()
     {
-
-        kitMenu = Bukkit.getServer().createInventory(null,kitMenurow * 9, kitMenuTitle);
+        kitMenu = Bukkit.getServer().createInventory(
+                null,
+                kitMenurow * perRow,
+                kitMenuTitle);
 
         ItemStack Default = KitDefault.kitItemInMenu;
         kitMenu.setItem(KitDefaultItemSlot,Default);
@@ -23,9 +25,4 @@ public class KitMenu
         ItemStack Defaultless = KitDefaultless.kitItemInMenu;
         kitMenu.setItem(KitDefaultlessItemSlot,Defaultless);
     }
-
-
-
-
-
 }

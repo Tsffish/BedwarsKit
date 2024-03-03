@@ -1,5 +1,6 @@
 package github.tsffish.bedwarskit.listener;
 
+import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import io.github.bedwarsrel.events.BedwarsPlayerLeaveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,7 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.Main.pluginIsDisabling;
+import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
 import static github.tsffish.bedwarskit.util.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.RelPlayerIsRespawn.removePlayerRespawn;
@@ -35,6 +36,8 @@ public class RelPlayerLeave implements Listener {
             removePlayerStat(uuid);
             removePlayerRespawn(uuid);
 
+            RelSpectatorPlayer.removePlayer(uuid);
+
         }catch (RuntimeException e){
             if (!pluginIsDisabling){
                 le(className, "BedwarsPlayerLeaveEvent error:" + e);
@@ -52,6 +55,7 @@ public class RelPlayerLeave implements Listener {
 
             removePlayerIsOut(uuid);
             removePlayerRespawn(uuid);
+            RelSpectatorPlayer.removePlayer(uuid);
 
         }catch (RuntimeException e){
             if (!pluginIsDisabling){

@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.util.kit;
 
-import github.tsffish.bedwarskit.util.RelArmorColor;
+import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -19,11 +19,15 @@ import java.util.List;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
-import static github.tsffish.bedwarskit.util.misc.GetItemType.WOOD_SWORD;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.killfb_oneHealthKill_itemType;
+import static github.tsffish.bedwarskit.util.RelArmorColor.*;
+import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.GetItemType.WOOD_SWORD;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class KitDefault{
+    private static final String className = "KitDefault";
     private static final int EffectTime = 999999;
     public static String description;
     private static Material helmetItemType;
@@ -46,7 +50,7 @@ public class KitDefault{
         if (ws != null){
             wood_sword = new ItemStack(ws,1);
         }else {
-            le("KitDefault","wood_sword is null,cant set it");
+            le(className,"wood_sword is null,cant set it");
         }
         kitItemInMenu = new ItemStack(KitDefaultItemType, KitDefaultItemAmount);
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
@@ -93,7 +97,11 @@ public class KitDefault{
         pi.setBoots(bootItem);
 
         if (wood_sword != null){
-        pi.setItemInHand(wood_sword);
+            if (pi.getItemInHand().getType() != killfb_oneHealthKill_itemType){
+            pi.setItemInHand(wood_sword);
+            }else if (!pi.contains(wood_sword)){
+                pi.addItem(wood_sword);
+            }
         }
         applyKitBoost(player, Colored);
     }
@@ -122,56 +130,56 @@ public class KitDefault{
                     LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) legItem.getItemMeta();
                     LeatherArmorMeta bootsMeta = (LeatherArmorMeta) bootItem.getItemMeta();
                     switch (playerteam) {
-                    case "RED":
-                        helmetMeta.setColor(RelArmorColor.red);
-                        chestplateMeta.setColor(RelArmorColor.red);
-                        leggingsMeta.setColor(RelArmorColor.red);
-                        bootsMeta.setColor(RelArmorColor.red);
-                        break;
-                    case "BLUE":
-                        helmetMeta.setColor(RelArmorColor.blue);
-                        chestplateMeta.setColor(RelArmorColor.blue);
-                        leggingsMeta.setColor(RelArmorColor.blue);
-                        bootsMeta.setColor(RelArmorColor.blue);
-                        break;
-                    case "GREEN":
-                        helmetMeta.setColor(RelArmorColor.green);
-                        chestplateMeta.setColor(RelArmorColor.green);
-                        leggingsMeta.setColor(RelArmorColor.green);
-                        bootsMeta.setColor(RelArmorColor.green);
-                        break;
-                    case "YELLOW":
-                        helmetMeta.setColor(RelArmorColor.yellow);
-                        chestplateMeta.setColor(RelArmorColor.yellow);
-                        leggingsMeta.setColor(RelArmorColor.yellow);
-                        bootsMeta.setColor(RelArmorColor.yellow);
-                        break;
-                    case "WHITE":
-                        helmetMeta.setColor(RelArmorColor.white);
-                        chestplateMeta.setColor(RelArmorColor.white);
-                        leggingsMeta.setColor(RelArmorColor.white);
-                        bootsMeta.setColor(RelArmorColor.white);
-                        break;
-                    case "AQUA":
-                        helmetMeta.setColor(RelArmorColor.aqua);
-                        chestplateMeta.setColor(RelArmorColor.aqua);
-                        leggingsMeta.setColor(RelArmorColor.aqua);
-                        bootsMeta.setColor(RelArmorColor.aqua);
-                        break;
-                    case "LIGHT_PURPLE":
-                        helmetMeta.setColor(RelArmorColor.pink);
-                        chestplateMeta.setColor(RelArmorColor.pink);
-                        leggingsMeta.setColor(RelArmorColor.pink);
-                        bootsMeta.setColor(RelArmorColor.pink);
-                        break;
-                    case "GRAY":
-                        helmetMeta.setColor(RelArmorColor.gray);
-                        chestplateMeta.setColor(RelArmorColor.gray);
-                        leggingsMeta.setColor(RelArmorColor.gray);
-                        bootsMeta.setColor(RelArmorColor.gray);
-                        break;
-                    default:
-                        break;
+                        case RED_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(red);
+                            chestplateMeta.setColor(red);
+                            leggingsMeta.setColor(red);
+                            bootsMeta.setColor(red);
+                            break;
+                        case BLUE_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(blue);
+                            chestplateMeta.setColor(blue);
+                            leggingsMeta.setColor(blue);
+                            bootsMeta.setColor(blue);
+                            break;
+                        case GREEN_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(green);
+                            chestplateMeta.setColor(green);
+                            leggingsMeta.setColor(green);
+                            bootsMeta.setColor(green);
+                            break;
+                        case YELLOW_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(yellow);
+                            chestplateMeta.setColor(yellow);
+                            leggingsMeta.setColor(yellow);
+                            bootsMeta.setColor(yellow);
+                            break;
+                        case WHITE_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(white);
+                            chestplateMeta.setColor(white);
+                            leggingsMeta.setColor(white);
+                            bootsMeta.setColor(white);
+                            break;
+                        case AQUA_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(aqua);
+                            chestplateMeta.setColor(aqua);
+                            leggingsMeta.setColor(aqua);
+                            bootsMeta.setColor(aqua);
+                            break;
+                        case PINK_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(pink);
+                            chestplateMeta.setColor(pink);
+                            leggingsMeta.setColor(pink);
+                            bootsMeta.setColor(pink);
+                            break;
+                        case GRAY_TEAM_COLOR_NAME:
+                            helmetMeta.setColor(gray);
+                            chestplateMeta.setColor(gray);
+                            leggingsMeta.setColor(gray);
+                            bootsMeta.setColor(gray);
+                            break;
+                        default:
+                            break;
                     }
                     helmetItem.setItemMeta(helmetMeta);
                     chestItem.setItemMeta(chestplateMeta);
