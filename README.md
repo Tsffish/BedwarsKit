@@ -1,8 +1,11 @@
-# BedwarsKit
+# Introduction
 
+A Minecraft plugin, Added some features to BedwarsRel
 A Addon for BedwarsRel, let you keep your Kit in the game
 
-Depend: BedwarsRel,ProtocolLib(5.1.0 or above)
+### Depend: 
+- BedwarsRel
+- ProtocolLib(5.1.0 or above)
 
 ## Functions:
 - Fix issues related to BedwarslRel
@@ -32,6 +35,9 @@ Depend: BedwarsRel,ProtocolLib(5.1.0 or above)
 
 - (Most functions can be customized)
 
+## Download
+You can download the latest version [here](https://www.spigotmc.org/resources/bedwarskit.105616/)
+
 ## Installation:
 - 1.Stop your server
 - 2.Place the plugin jar file in the plugins folder of the root directory
@@ -44,3 +50,8 @@ Depend: BedwarsRel,ProtocolLib(5.1.0 or above)
 - Finally, make sure that your lobby name includes the items in "lobbyWorld" (The standard for determining a world name is to include but not equal to (except for the lobby))
 
 - 2.Ensure relTeamColorName_ Xxx Eight teams correspond to your BedwarsRel team name (displayed name not color name)
+
+## Commands:
+- /bwk - display help message
+- /bwk reload - reload the config
+- /bwk debug - toggle debug mode
