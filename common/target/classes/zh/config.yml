@@ -11,9 +11,9 @@ bungeeMode: "2v2"
 # 如果是蹦极模式，不会再判断世界名。要将游戏视为什么模式？
 # 只支持 "2v2" 和 "4v4"
 
-rushWorld: "rush"
-rushWorld2v2: "2v2"
-rushWorld4v4: "4v4"
+gameWorld: "rush"
+gameWorld2v2: "2v2"
+gameWorld4v4: "4v4"
 lobbyWorld: "lobby"
 # 确定世界名称的最基本配置 (Bungee模式下此内容无效)
 # 判断方法是世界名称是否包括
@@ -32,13 +32,14 @@ relTeamName_Gray: "\u7070\u4e4b\u961f"
 relTeamName_Pink: "\u7c89\u4e4b\u961f"
 # 游戏中最基本的队名配置
 # 填写队伍的显示名称，而不是颜色名
+# 提示：在正常情况下，团队名称不应该有空格
 
 # ======== #
 # 其他设置 #
 # ======== #
 customScoreboard: true
 meanTeamBedYes: "&a\u2714"
-meanTeamNone: "&4\u2718"
+meanTeamNone: "&c\u2718"
 meanTeamBedNo: "&a{aliveCount}"
 meanYou: "\u0028\u4f60\u0029"
 meanNotYou: " "
@@ -62,7 +63,7 @@ meanGameEnd: "\u6e38\u620f\u7ed3\u675f"
 
 ScoreBoard2v2Title: "&e&l{bw}"
 ScoreBoard2v2Line01: "&7{date} &8{mode}"
-ScoreBoard2v2Line02: "&f{LastTaskTimeLeft}\u540e &a{LastTaskName}"
+ScoreBoard2v2Line02: "&f{lastTaskTimeLeft}\u540e &a{lastTaskName}"
 ScoreBoard2v2Line03: "&f "
 ScoreBoard2v2Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
 ScoreBoard2v2Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
@@ -103,10 +104,12 @@ ScoreBoard2v2Line16: ""
 # {bed}：你在本场游戏中的挖床字数
 # {game}：此游戏的游戏名称
 # {region}：该局的区域
+# {lastTaskTimeLeft} : 下一个执行的任务 的剩余时间
+# {lastTaskName} : 下一个执行的任务 的任务名称
 
 ScoreBoard4v4Title: "&e&l{bw}"
 ScoreBoard4v4Line01: "&7{date} &8{mode}"
-ScoreBoard4v4Line02: "&f{LastTaskTimeLeft}\u540e &a{LastTaskName}"
+ScoreBoard4v4Line02: "&f{lastTaskTimeLeft}\u540e &a{lastTaskName}"
 ScoreBoard4v4Line03: "&f "
 ScoreBoard4v4Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
 ScoreBoard4v4Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
@@ -147,6 +150,8 @@ ScoreBoard4v4Line16: ""
 # {bed}：你在本场游戏中的挖床字数
 # {game}：此游戏的游戏名称
 # {region}：该局的区域
+# {lastTaskTimeLeft} : 下一个执行的任务 的剩余时间
+# {lastTaskName} : 下一个执行的任务 的任务名称
 
 breakTitle: true
 breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c\u7684\u5e8a\u5df2\u88ab\u7834\u574f"
@@ -172,11 +177,11 @@ respawnDelay: 5
 respawnTitle: "&e&l{timeleft}&a&l\u79d2\u540e\u590d\u6d3b"
 respawnSubTitle: " "
 respawnChat: ""
-respawnActionBar: ""
+respawnActionBar: "&e&l{timeleft}&a&l\u79d2\u540e\u590d\u6d3b"
 respawnSuccTitle: "&f"
 respawnSuccSubTitle: " "
 respawnSuccChat: " "
-respawnSuccActionBar: " "
+respawnSuccActionBar: "&a&l\u5df2\u590d\u6d3b"
 preventloadworld: true
 # deathGameMode：复活倒计时 是否启用
 # deathGameMode_tpto :复活倒计时时传送到哪
@@ -265,7 +270,7 @@ teamEnchInvRow: 6
 # teamEnchInvRow：升级存储中的行数，最多6行
 
 levelupsharpItemType: "IRON_SWORD"
-levelupsharpItemSlot: 10
+levelupsharpItemSlot: 19
 teamEnchItemName_Sharp1: "\u950b\u5229 I"
 teamEnchItemName_Sharp2: "\u950b\u5229 II"
 teamEnchItemName_Sharp3: "\u950b\u5229 III"
@@ -273,7 +278,7 @@ teamEnchItemName_Sharp4: "\u950b\u5229 IV"
 teamEnchItemName_sharpMax: "\u950b\u5229 (\u5df2\u6ee1\u7ea7)"
 
 levelupprotItemType: "IRON_CHESTPLATE"
-levelupprotItemSlot: 11
+levelupprotItemSlot: 20
 teamEnchItemName_Prot1: "\u4fdd\u62a4 I"
 teamEnchItemName_Prot2: "\u4fdd\u62a4 II"
 teamEnchItemName_Prot3: "\u4fdd\u62a4 III"
@@ -281,13 +286,13 @@ teamEnchItemName_Prot4: "\u4fdd\u62a4 IV"
 teamEnchItemName_protMax: "\u4fdd\u62a4 (\u5df2\u6ee1\u7ea7)"
 
 leveluphasteItemType: "GOLD_PICKAXE"
-leveluphasteItemSlot: 12
+leveluphasteItemSlot: 22
 teamEffItemName_haste1: "\u6025\u8feb I"
 teamEffItemName_haste2: "\u6025\u8feb II"
 teamEffItemName_hasteMax: "\u6025\u8feb (\u5df2\u6ee1\u7ea7)"
 
 leveluphealItemType: "BEACON"
-leveluphealItemSlot: 20
+leveluphealItemSlot: 23
 teamEffItemName_heal1: "\u6cbb\u6108\u6c60 I"
 teamEffItemName_healMax: "\u6cbb\u6108\u6c60 (\u5df2\u6ee1\u7ea7)"
 teamEff_Heal_dis: 15
@@ -337,7 +342,7 @@ messLevelUpFailed: "&c\u8d44\u6e90\u4e0d\u591f\u6216\u8005\u5df2\u62e5\u6709\u66
 dieOutGameItem_playAgain: true
 dieOutGameItem_playAgain_ItemName: "\u518d\u6765\u4e00\u5c40"
 dieOutGameItem_playAgain_ItemType: "PAPER"
-dieOutGameItem_playAgain_ItemSlot: 4;
+dieOutGameItem_playAgain_ItemSlot: 7
 dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
 
 damagefb_attackmess: true
@@ -379,16 +384,18 @@ killfb_oneHealthKill_itemName: "&4&l\u7075\u9b42"
 
 meanSecond: "\u79d2"
 
-tab: false
-tab_is_multiLine: false
-tab_head: "MC.MCSERVER.ORG"
-tab_foot: "MC.MCSERVER.ORG"
+tab: true
+tab_is_multiLine: true
+tab_head: "   &b&l\u8d77\u5e8a\u6218\u4e89   "
+tab_foot: "&d&l\u795d\u4f60\u73a9\u5f97\u5f00\u5fc3\uff01"
 tab_headList:
-  - "MC.MCSERVER.ORG"
+  - "   &b&l\u8d77\u5e8a\u6218\u4e89   "
+  - " "
+  - "&e&l\u8f93\u5165\u002f\u0068\u0075\u0062\u8fd4\u56de\u5927\u5385"
   - " "
 tab_footList:
   - " "
-  - "MC.MCSERVER.ORG"
+  - "&d&l\u795d\u4f60\u73a9\u5f97\u5f00\u5fc3\uff01"
 
 upToChainArmor: "CHAINMAIL_CHESTPLATE"
 upToIronArmor: "IRON_CHESTPLATE"
@@ -489,7 +496,6 @@ giveProtEnchList:
   - "DIAMOND_BOOTS"
 
 lobbyleaveTeam: true
-lobbyleaveTeamMess: "&b\u8d77\u5e8a\u6218\u4e89 &7>> &a\u4f60\u79bb\u5f00\u4e86 {teamColor}{teamName}"
 lobbyjoinTeamMess_chat: ""
 lobbyjoinTeamMess_title: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}"
 lobbyjoinTeamMess_subtitle: "&e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
@@ -499,13 +505,9 @@ paneItemName: "&7\u5206\u5272\u7ebf"
 paneItemLore:
   - ""
 
+levelupresItemName: " "
 levelupresItemType: "FURNACE"
-levelupresItemSlot: 19
-teamEffItemName_res1: "FURNACE I"
-teamEffItemName_res2: "FURNACE II"
-teamEffItemName_res3: "FURNACE III"
-teamEffItemName_res4: "FURNACE IV"
-teamEffItemName_resMax: "FURNACE (Max)"
+levelupresItemSlot: 25
 
 # ======== #
 # 更新设置 #
@@ -517,3 +519,4 @@ update_reportOp: true
 # 请勿修改，否则会重置
 # update_checker: 检查更新
 # update_reportOp: 向管理员报告更新的信息
+

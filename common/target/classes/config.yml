@@ -12,9 +12,9 @@ bungeeMode: "2v2"
 # What pattern do you want to determine?
 # only Support "2v2" and "4v4"
 
-rushWorld: "rush"
-rushWorld2v2: "2v2"
-rushWorld4v4: "4v4"
+gameWorld: "rush"
+gameWorld2v2: "2v2"
+gameWorld4v4: "4v4"
 lobbyWorld: "lobby"
 # The most basic configuration for determining world names
 # The judgment method is whether the world name includes
@@ -23,16 +23,17 @@ lobbyWorld: "lobby"
 # RushWorld4v4: Recognized as game room 4v4 mode
 # LobbyWorld: Recognized as a lobby (the identification method for the lobby includes)
 
-relTeamName_Red: "Red Team"
-relTeamName_Blue: "Blue Team"
-relTeamName_Green: "Green Team"
-relTeamName_Yellow: "Yellow Team"
-relTeamName_Aqua: "Aqua Team"
-relTeamName_White: "White Team"
-relTeamName_Gray: "Gray Team"
-relTeamName_Pink: "Pink Team"
+relTeamName_Red: "Red"
+relTeamName_Blue: "Blue"
+relTeamName_Green: "Green"
+relTeamName_Yellow: "Yellow"
+relTeamName_Aqua: "Aqua"
+relTeamName_White: "White"
+relTeamName_Gray: "Gray"
+relTeamName_Pink: "Pink"
 # The most basic configuration of team names in the game
 # It's the team display name, not the color name
+# Tip: Under normal circumstances, team names should not have spaces
 
 # ================= #
 # Other Setting     #
@@ -49,21 +50,21 @@ serverIp: "&eGithub@Tsffish"
 meanBedwars: "Bedwars"
 meanGameEnd: "Game End"
 # customScoreboard: Is the custom scoreboard feature enabled
-# MeanTeamBedYes: TeamStat indicates the presence of beds in the team
-# MeanTeamNone: TeamStat indicates that the team has been eliminated
-# MeanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
+# meanTeamBedYes: TeamStat indicates the presence of beds in the team
+# meanTeamNone: TeamStat indicates that the team has been eliminated
+# meanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
 # {aliveCount}: The remaining players in the team
-# MeanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
-# MeanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
-# Mean2v2Mode: indicates that this is a 2v2 mode
-# Mean4v4Mode: indicates that this is a 4v4 mode
-# ServerIP: can be used to fill in the server address or to add duplicate characters
-# MeanBedwards: can be used to fill in the wake-up war or to add duplicate characters
-# MeanGameEnd: indicates the end of the game
+# meanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
+# meanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
+# mean2v2Mode: indicates that this is a 2v2 mode
+# mean4v4Mode: indicates that this is a 4v4 mode
+# serverIP: can be used to fill in the server address or to add duplicate characters
+# meanBedwards: can be used to fill in the wake-up war or to add duplicate characters
+# meanGameEnd: indicates the end of the game
 
 ScoreBoard2v2Title: "&e&l{bw}"
 ScoreBoard2v2Line01: "&7{date} &8{mode}"
-ScoreBoard2v2Line02: "&a{LastTaskName} in &f{LastTaskTimeLeft}"
+ScoreBoard2v2Line02: "&a{lastTaskName} in &f{lastTaskTimeLeft}"
 ScoreBoard2v2Line03: "&f "
 ScoreBoard2v2Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
 ScoreBoard2v2Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
@@ -105,10 +106,12 @@ ScoreBoard2v2Line16: ""
 # {bed}: The number of digging beds in your current game
 # {game}: The game name of this game
 # {region}: The region of this bureau
+# {lastTaskTimeLeft} : Remaining time for the next task to be executed
+# {lastTaskName} : The task name of the next executed task
 
 ScoreBoard4v4Title: "&e&l{bw}"
 ScoreBoard4v4Line01: "&7{date} &8{mode}"
-ScoreBoard4v4Line02: "&a{LastTaskName} in &f{LastTaskTimeLeft}"
+ScoreBoard4v4Line02: "&a{lastTaskName} in &f{lastTaskTimeLeft}"
 ScoreBoard4v4Line03: "&f "
 ScoreBoard4v4Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
 ScoreBoard4v4Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
@@ -150,6 +153,8 @@ ScoreBoard4v4Line16: ""
 # {bed}: The number of digging beds in your current game
 # {game}: The game name of this game
 # {region}: The region of this bureau
+# {lastTaskTimeLeft} : Remaining time for the next task to be executed
+# {lastTaskName} : The task name of the next executed task
 
 breakTitle: true
 breakTitleAll: "{BreakTeamColor}{BreakTeamName}&c bed has been destory"
@@ -175,11 +180,11 @@ respawnDelay: 5
 respawnTitle: "&a&lRespawn In &e&l{timeleft} &a&lSec"
 respawnSubTitle: " "
 respawnChat: ""
-respawnActionBar: ""
+respawnActionBar: "&a&lRespawn In &e&l{timeleft} &a&lSec"
 respawnSuccTitle: "&f"
 respawnSuccSubTitle: " "
 respawnSuccChat: " "
-respawnSuccActionBar: " "
+respawnSuccActionBar: "&a&lRespawned"
 preventloadworld: true
 # DeathGameMode: Is the resurrection countdown enabled
 # deathGameMode_tpto : teleport to when death
@@ -269,7 +274,7 @@ teamEnchInvRow: 6
 # TeamEnchitemSlot_...: The location of the enchantment level item
 
 levelupsharpItemType: "IRON_SWORD"
-levelupsharpItemSlot: 10
+levelupsharpItemSlot: 19
 teamEnchItemName_Sharp1: "Sharpness I"
 teamEnchItemName_Sharp2: "Sharpness II"
 teamEnchItemName_Sharp3: "Sharpness III"
@@ -277,7 +282,7 @@ teamEnchItemName_Sharp4: "Sharpness IV"
 teamEnchItemName_sharpMax: "Sharpness (Maxed)"
 
 levelupprotItemType: "IRON_CHESTPLATE"
-levelupprotItemSlot: 11
+levelupprotItemSlot: 20
 teamEnchItemName_Prot1: "Protection I"
 teamEnchItemName_Prot2: "Protection II"
 teamEnchItemName_Prot3: "Protection III"
@@ -285,13 +290,13 @@ teamEnchItemName_Prot4: "Protection IV"
 teamEnchItemName_protMax: "Protection (Maxed)"
 
 leveluphasteItemType: "GOLD_PICKAXE"
-leveluphasteItemSlot: 12
+leveluphasteItemSlot: 22
 teamEffItemName_haste1: "Haste I"
 teamEffItemName_haste2: "Haste II"
 teamEffItemName_hasteMax: "Haste (MAX)"
 
 leveluphealItemType: "BEACON"
-leveluphealItemSlot: 20
+leveluphealItemSlot: 23
 teamEffItemName_heal1: "Heal I"
 teamEffItemName_healMax: "Heal (MAX)"
 teamEff_Heal_dis: 15
@@ -341,6 +346,7 @@ messLevelUpFailed: "&cInsufficient resources or having a higher level of enchant
 dieOutGameItem_playAgain: true
 dieOutGameItem_playAgain_ItemName: "Play Again"
 dieOutGameItem_playAgain_ItemType: "PAPER"
+dieOutGameItem_playAgain_ItemSlot: 7
 dieOutGameItem_playAgain_ClickSendCommand: "bwrj join {player}"
 
 
@@ -383,16 +389,18 @@ killfb_oneHealthKill_itemName: "&4&lSoul"
 
 meanSecond: "Second"
 
-tab: false
-tab_is_multiLine: false
-tab_head: "MC.MCSERVER.ORG"
-tab_foot: "MC.MCSERVER.ORG"
+tab: true
+tab_is_multiLine: true
+tab_head: "   &b&lBedwars   "
+tab_foot: "&d&lHave Fun!"
 tab_headList:
-  - "MC.MCSERVER.ORG"
+  - "   &b&lBedwars   "
+  - " "
+  - "&e&lEnter/hub to return to the lobby"
   - " "
 tab_footList:
   - " "
-  - "MC.MCSERVER.ORG"
+  - "&d&lHave Fun!"
 
 upToChainArmor: "CHAINMAIL_CHESTPLATE"
 upToIronArmor: "IRON_CHESTPLATE"
@@ -488,7 +496,6 @@ giveProtEnchList:
   - "DIAMOND_BOOTS"
   -
 lobbyleaveTeam: true
-lobbyleaveTeamMess: "&bBedwars &7>> &aYou Leave {teamColor}{teamName}"
 lobbyjoinTeamMess_chat: ""
 lobbyjoinTeamMess_title: "&aYou Joined {teamColor}{teamName}"
 lobbyjoinTeamMess_subtitle: "&eHold team clothes and right-click to leave"
@@ -497,13 +504,11 @@ lobbyjoinTeamMess_actionbar: "&aYou Joined {teamColor}{teamName}, &eHold team cl
 paneItemName: "&7Pane"
 paneItemLore:
   - ""
+
+levelupresItemName: " "
 levelupresItemType: "FURNACE"
-levelupresItemSlot: 19
-teamEffItemName_res1: "FURNACE I"
-teamEffItemName_res2: "FURNACE II"
-teamEffItemName_res3: "FURNACE III"
-teamEffItemName_res4: "FURNACE IV"
-teamEffItemName_resMax: "FURNACE (Max)"
+levelupresItemSlot: 25
+
 # ================= #
 # Update Config     #
 # ================= #

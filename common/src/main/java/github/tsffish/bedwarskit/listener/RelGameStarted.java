@@ -2,7 +2,6 @@ package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
 import github.tsffish.bedwarskit.util.misc.SoundPlayer;
-import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import github.tsffish.bedwarskit.util.task.game.*;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
@@ -36,7 +35,7 @@ import static github.tsffish.bedwarskit.util.RelPlayerKit.applykit;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.applykitforce;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.DisableVillagerAI.disableVillagerAI;
-import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
 
 public class RelGameStarted implements Listener {
@@ -51,12 +50,8 @@ public class RelGameStarted implements Listener {
     private static final DisplaySlot sidebar = DisplaySlot.SIDEBAR;
     @EventHandler
     public void on(final BedwarsGameStartedEvent event) {
-        if (event.getGame() == null) {
-            return;
-        }
-        Game game = event.getGame();
 
-        RelSpectatorPlayer.clearSpectatorPlayers();
+        Game game = event.getGame();
 
         World world = game.getRegion().getWorld();
         world.setThundering(false);
@@ -72,14 +67,17 @@ public class RelGameStarted implements Listener {
 
         Map<String, Team> teamMap = game.getTeams();
 
-        List<Team> teamList = new ArrayList<>(teamMap.values().size() + 1);
+        if (teamMap != null && !teamMap.isEmpty()) {
+            List<Team> teamList = new ArrayList<>(teamMap.values());
 
-                ListHaste.setTeamDatasDefault(gameName, teamList);
-                ListHeal.setTeamDatasDefault(gameName, teamList);
-                ListSharp.setTeamDatasDefault(gameName, teamList);
-                ListProt.setTeamDatasDefault(gameName, teamList);
+            ListHaste.setTeamDatasDefault(gameName, teamList);
+            ListHeal.setTeamDatasDefault(gameName, teamList);
+            ListSharp.setTeamDatasDefault(gameName, teamList);
+            ListProt.setTeamDatasDefault(gameName, teamList);
+        } else {
+            System.out.println("teamMap is null or empty.");
+        }
 
-                try {
                     if (gametask) {
                         if (gametask_spawntime) {
 
@@ -125,9 +123,6 @@ public class RelGameStarted implements Listener {
                             }
                         }
                     }
-                }catch (Exception e){
-                    le(className,e);
-                }
 
                     ScoreboardManager manager = Bukkit.getScoreboardManager();
                     Scoreboard scoreboard = manager.getNewScoreboard();
@@ -154,6 +149,11 @@ public class RelGameStarted implements Listener {
                                     UUID uuid = player.getUniqueId();
                                     SoundPlayer.LEVEL_UP(player, 1);
 
+                                    if (game.getRespawnProtections().containsKey(player)){
+                                    game.removeProtection(player);
+                                    }
+
+
                                     String message = startmess_all_chat;
                                     if (message != null && !message.isEmpty()) {
                                         player.sendMessage(message);
@@ -162,7 +162,7 @@ public class RelGameStarted implements Listener {
                                     String title = Optional.ofNullable(startmess_all_title).orElse(" ");
                                     String subtitle = Optional.ofNullable(startmess_all_subtitle).orElse("");
 
-                                    player.sendTitle(title, subtitle);
+                                    sendTitle(player, title, subtitle);
 
                                     Optional.ofNullable(startmess_all_actionbar)
                                             .filter(actionBarMessage -> !actionBarMessage.isEmpty())
@@ -189,11 +189,7 @@ public class RelGameStarted implements Listener {
                                     }
                                 });
 
-        try {
             disableVillagerAI(worldName);
-        }catch (Exception e){
-            le(className,e);
-        }
 
         if (CleanHostileOnStart) {
             Difficulty difficultyOrg;
@@ -219,6 +215,8 @@ public class RelGameStarted implements Listener {
                 }
             }.runTaskTimer(plugin, 1L, 20L);
         }
+
+
 
     }
 }

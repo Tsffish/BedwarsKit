@@ -12,14 +12,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.BedwarsKit.showPlayer;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.startKitCompass;
+import static github.tsffish.bedwarskit.listener.procol.PlayerVisibility.showPlayer;
 import static github.tsffish.bedwarskit.util.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.RelPlayerIsRespawn.removePlayerRespawn;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.applykit;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.applykitforce;
-import static github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer.removePlayer;
 
 public class RelPlayerRespawn {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
@@ -32,7 +31,7 @@ public class RelPlayerRespawn {
     private static final ItemStack compass = new ItemStack(Material.COMPASS);
     private static final GameMode survival = GameMode.SURVIVAL;
     private static final PotionEffectType invisibility = PotionEffectType.INVISIBILITY;
-    protected static void playerrespawn(UUID uuid, long delay){
+    public static void playerrespawn(UUID uuid, long delay){
         Player player = Bukkit.getPlayer(uuid);
 
             player.setFlying(false);
@@ -80,7 +79,6 @@ public class RelPlayerRespawn {
                             player.setHealth(player.getMaxHealth());
 
                             removePlayerRespawn(uuid);
-                            removePlayer(uuid);
                             showPlayer(player);
 
                         }

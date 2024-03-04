@@ -1,13 +1,12 @@
 package github.tsffish.bedwarskit.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RelArmorList {
-    private static List<UUID> armorChain = new ArrayList<>(101);
-    private static List<UUID> armorIron = new ArrayList<>(101);
-    private static List<UUID> armorDiamond = new ArrayList<>(101);
+    private static Set<UUID> armorChain = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static Set<UUID> armorIron = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static Set<UUID> armorDiamond = Collections.newSetFromMap(new ConcurrentHashMap<>());
     public static void addArmorChain(UUID uuid){
         armorChain.add(uuid);
     }

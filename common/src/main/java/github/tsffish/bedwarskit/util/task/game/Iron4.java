@@ -15,6 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.config.task.TaskConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 
 public class Iron4 {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
@@ -62,8 +64,6 @@ public class Iron4 {
                         .findFirst()
                         .ifPresent(item -> spawner.setInterval(gametask_spawntime_iron_base)));
     }
-
-
     private static void notifyPlayers(Game game) {
         game.getPlayers().stream()
                 .filter(Objects::nonNull)
@@ -71,13 +71,13 @@ public class Iron4 {
                 .forEach(player -> {
                     String message = gametask_mess_iron4_chat;
                     if (message != null && !message.isEmpty()) {
-                        player.sendMessage(message);
+                        sendMessage(player,message);
                     }
 
                     String title = Optional.ofNullable(gametask_mess_iron4_title).orElse(" ");
                     String subtitle = Optional.ofNullable(gametask_mess_iron4_subtitle).orElse("");
 
-                    player.sendTitle(title, subtitle);
+                    sendTitle(player, title, subtitle);
 
                     Optional.ofNullable(gametask_mess_iron4_actionbar)
                             .filter(actionBarMessage -> !actionBarMessage.isEmpty())

@@ -1,10 +1,11 @@
 package github.tsffish.bedwarskit.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RelIsCheckingPlayer {
-    protected static List<String> isCheckingPlayer = new ArrayList<>(100);
+    private static Set<String> isCheckingPlayer = Collections.newSetFromMap(new ConcurrentHashMap<>());
     public static void joinCheckList(String worldName){
         isCheckingPlayer.add(worldName);
     }

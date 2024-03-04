@@ -16,7 +16,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
@@ -24,9 +26,9 @@ import static github.tsffish.bedwarskit.listener.RelPlayerOpenShop.openShop;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.consoleSendCommand;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
 import static github.tsffish.bedwarskit.util.misc.SoundPlayer.*;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer2v2;
-import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer4v4;
 
 public class RelClickInventory implements Listener {
     private static final Material woodSword = Material.WOOD_SWORD;
@@ -75,18 +77,15 @@ public class RelClickInventory implements Listener {
                 playerSoundSucc(player);
                 player.closeInventory();
             }
+            return;
         }
-
-        if (inventoryName.equals(shopLevelup)) {
-            event.setCancelled(true);
-        }
-
 
         if (dieOutGameItem_playAgain) {
             if (itemTypeText.equals(dieOutGameItem_playAgain_ItemType.toString())
                     && itemStack.getItemMeta().getDisplayName().equals(dieOutGameItem_playAgain_ItemName)) {
                 String willSend = dieOutGameItem_playAgain_ClickSendCommand.replace("{player}", playerName);
                 consoleSendCommand(willSend);
+                return;
             }
         }
 
@@ -98,40 +97,53 @@ public class RelClickInventory implements Listener {
                 playerSoundOpen(player);
                 openShop(player, 0L);
             }
+            return;
         }
-        if (player.getWorld().getName().contains(rushWorld)
-                && inventoryName.equalsIgnoreCase(shopLevelup)) {
 
-            GameManager gameManager = BedwarsRel.getInstance().getGameManager();
-            Game game = gameManager.getGameOfPlayer(player);
-            Team playerTeam = game.getPlayerTeam(player);
-
-            String gameName = game.getName();
-
-            ItemStack clickedItem = event.getCurrentItem();
-            event.setCancelled(true);
-
-            if (clickedItem == null) {
-                return;
+        if (event.getCurrentItem() != null
+                && event.getCurrentItem().getType() == woodSword) {
+            ItemStack cursorItem = event.getCursor();
+            if (cursorItem != null
+                    && cursorItem.getType() == woodSword) {
+                event.setCancelled(true);
             }
+        }
 
-            if (event.getCurrentItem() != null
-                    && event.getCurrentItem().getType() == woodSword) {
-                ItemStack cursorItem = event.getCursor();
-                if (cursorItem != null
-                        && cursorItem.getType() == woodSword) {
+        if (event.getCurrentItem() != null
+        ){
+            for (String string : noMoveList){
+                if (itemTypeText.contains(string)){
                     event.setCancelled(true);
+                    break;
                 }
             }
+        }
 
-            String clickedItemName = clickedItem.getItemMeta().getDisplayName();
-            String teamName = playerTeam.getName();
-            Material clickedItemType = clickedItem.getType();
+        if (player.getWorld().getName().contains(rushWorld)
+                || isBungeeMode()) {
+            if (inventoryName.equalsIgnoreCase(shopLevelup)) {
 
-            boolean buyFail = true;
+                event.setCancelled(true);
+                GameManager gameManager = BedwarsRel.getInstance().getGameManager();
+                Game game = gameManager.getGameOfPlayer(player);
+                Team playerTeam = game.getPlayerTeam(player);
 
-            if (player.getWorld().getName().contains(rushWorld2v2)) {
-                {
+                String gameName = game.getName();
+
+                ItemStack clickedItem = event.getCurrentItem();
+
+                if (clickedItem == null) {
+                    return;
+                }
+
+
+                String clickedItemName = clickedItem.getItemMeta().getDisplayName();
+                String teamName = playerTeam.getName();
+                Material clickedItemType = clickedItem.getType();
+
+                boolean buyFail = true;
+
+                if (player.getWorld().getName().contains(rushWorld2v2) || bungeeMode.equals("2v2")) {
 
                     if (clickedItemType == leveluphasteItemType
                             && clickedItem.hasItemMeta()) {
@@ -498,9 +510,7 @@ public class RelClickInventory implements Listener {
                         openForPlayer2v2(player, game);
                         playerSoundSucc(player);
                     }
-                }
-            } else if (player.getWorld().getName().contains(rushWorld4v4)) {
-                {
+                } else if (player.getWorld().getName().contains(rushWorld4v4) || bungeeMode.equals("4v4")) {
 
                     if (clickedItemType == leveluphasteItemType
                             && clickedItem.hasItemMeta()) {
@@ -861,25 +871,17 @@ public class RelClickInventory implements Listener {
                             }
                         }
                     }
-                    if (buyFail) {
-                        playerSoundFail(player);
-                    } else {
-                        openForPlayer4v4(player, game);
-                        playerSoundSucc(player);
-                    }
                 }
-
                 if (buyFail) {
                     playerSoundFail(player);
                     String mess = messLevelUpFailed.replace("{player}", player.getName());
                     player.sendMessage(t(mess));
                 } else {
                     playerSoundSucc(player);
-                    openForPlayer4v4(player, game);
+                    openShop(player, 1L);
                 }
             }
         }
-        // End
     }
 
     void playerSoundOpen(Player player){

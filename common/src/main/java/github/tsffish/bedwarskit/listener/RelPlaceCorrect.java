@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import java.util.Objects;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 
@@ -63,13 +64,13 @@ public class RelPlaceCorrect implements Listener {
                                     if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle, "")) {
                                         String subtitleReal = t(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle);
 
-                                        p.sendTitle(titleReal, subtitleReal);
+                                        sendTitle(p,titleReal, subtitleReal);
                                     }
                                 } else if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle, "")) {
                                     String titleReal = " ";
                                     String subtitleReal = t(MainConfigHandler.placeCorrect_ResSpawner_mess_subtitle);
 
-                                    p.sendTitle(titleReal, subtitleReal);
+                                    sendTitle(p,titleReal, subtitleReal);
                                 }
                                 if (!Objects.equals(MainConfigHandler.placeCorrect_ResSpawner_mess_actionbar, "")) {
                                     sendActionBar(p, t(MainConfigHandler.placeCorrect_ResSpawner_mess_actionbar));
@@ -99,13 +100,13 @@ public class RelPlaceCorrect implements Listener {
                                     if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle, "")) {
                                         String subtitleReal = t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle);
 
-                                        p.sendTitle(titleReal, subtitleReal);
+                                        sendTitle(p,titleReal, subtitleReal);
                                     }
                                 } else if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle, "")) {
                                     String titleReal = " ";
                                     String subtitleReal = t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_subtitle);
 
-                                    p.sendTitle(titleReal, subtitleReal);
+                                    sendTitle(p,titleReal, subtitleReal);
                                 }
                                 if (!Objects.equals(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_actionbar, "")) {
                                     sendActionBar(p, t(MainConfigHandler.placeCorrect_PlayerSpawnLoc_mess_actionbar));

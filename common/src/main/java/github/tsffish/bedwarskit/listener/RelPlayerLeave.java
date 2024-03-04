@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.listener;
 
-import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import io.github.bedwarsrel.events.BedwarsPlayerLeaveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,8 +35,6 @@ public class RelPlayerLeave implements Listener {
             removePlayerStat(uuid);
             removePlayerRespawn(uuid);
 
-            RelSpectatorPlayer.removePlayer(uuid);
-
         }catch (RuntimeException e){
             if (!pluginIsDisabling){
                 le(className, "BedwarsPlayerLeaveEvent error:" + e);
@@ -55,7 +52,6 @@ public class RelPlayerLeave implements Listener {
 
             removePlayerIsOut(uuid);
             removePlayerRespawn(uuid);
-            RelSpectatorPlayer.removePlayer(uuid);
 
         }catch (RuntimeException e){
             if (!pluginIsDisabling){

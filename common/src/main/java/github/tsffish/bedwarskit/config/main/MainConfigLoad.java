@@ -5,6 +5,7 @@ import github.tsffish.bedwarskit.config.kit.KitConfigLoad;
 import github.tsffish.bedwarskit.config.lang.LangConfigLoad;
 import github.tsffish.bedwarskit.config.task.TaskConfigLoad;
 import github.tsffish.bedwarskit.listener.*;
+import github.tsffish.bedwarskit.util.misc.reglistener.RelPickupItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -16,11 +17,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static github.tsffish.bedwarskit.BedwarsKit.spigotId;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static github.tsffish.bedwarskit.util.misc.PluginState.spigotId;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.*;
 import static github.tsffish.bedwarskit.util.misc.update.StartCheck.checkUpdate;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.loadLevelUpInv;
@@ -63,7 +64,7 @@ public class MainConfigLoad {
         pluginManager.registerEvents(new RelPlayerDamage(), plugin);
         pluginManager.registerEvents(new RelPlayerGameMode(), plugin);
 
-        pluginManager.registerEvents(new RelPickupItem(), plugin);
+        RelPickupItem.regListener();
     }
     private static void sendError(String path){
         er(name, path, reason);
@@ -99,6 +100,7 @@ public class MainConfigLoad {
         }
 
         if (firstload) {
+
             if (c.getString(MainConfigPath.path_update_checker) != null) {
                 boolean update_checker = c.getBoolean(MainConfigPath.path_update_checker);
                 if (update_checker) {
@@ -1587,12 +1589,6 @@ public class MainConfigLoad {
             sendError( MainConfigPath.path_lobbyleaveTeam);
         }
 
-        if (c.getString(MainConfigPath.path_lobbyleaveTeamMess) != null) {
-            lobbyleaveTeamMess = c.getString(MainConfigPath.path_lobbyleaveTeamMess);
-        } else {
-            sendError( MainConfigPath.path_lobbyleaveTeamMess);
-        }
-
         if (c.getString(MainConfigPath.path_creativeGameModeFix) != null) {
             creativeGameModeFix = c.getBoolean(MainConfigPath.path_creativeGameModeFix);
         } else {
@@ -1617,38 +1613,6 @@ public class MainConfigLoad {
             sendError(MainConfigPath.path_paneItemName);
         }
 
-
-        if (c.getString(MainConfigPath.path_teamEffItemName_res1) != null) {
-            teamEffItemName_res1 = c.getString(MainConfigPath.path_teamEffItemName_res1);
-        } else {
-            sendError(MainConfigPath.path_teamEffItemName_res1);
-        }
-
-        if (c.getString(MainConfigPath.path_teamEffItemName_res2) != null) {
-            teamEffItemName_res2 = c.getString(MainConfigPath.path_teamEffItemName_res2);
-        } else {
-            sendError(MainConfigPath.path_teamEffItemName_res2);
-        }
-
-        if (c.getString(MainConfigPath.path_teamEffItemName_res3) != null) {
-            teamEffItemName_res3 = c.getString(MainConfigPath.path_teamEffItemName_res3);
-        } else {
-            sendError(MainConfigPath.path_teamEffItemName_res3);
-        }
-
-        if (c.getString(MainConfigPath.path_teamEffItemName_res4) != null) {
-            teamEffItemName_res4 = c.getString(MainConfigPath.path_teamEffItemName_res4);
-        } else {
-            sendError(MainConfigPath.path_teamEffItemName_res4);
-        }
-
-
-        if (c.getString(MainConfigPath.path_teamEffItemName_resMax) != null) {
-            teamEffItemName_resMax = c.getString(MainConfigPath.path_teamEffItemName_resMax);
-        } else {
-            sendError(MainConfigPath.path_teamEffItemName_resMax);
-        }
-
         if (c.getString(MainConfigPath.path_levelupresItemType) != null) {
             levelupresItemType = Material.getMaterial(c.getString(MainConfigPath.path_levelupresItemType));
         } else {
@@ -1665,6 +1629,13 @@ public class MainConfigLoad {
             dieOutGameItem_playAgain_ItemSlot = c.getInt(MainConfigPath.path_dieOutGameItem_playAgain_ItemSlot);
         } else {
             sendError(MainConfigPath.path_dieOutGameItem_playAgain_ItemSlot);
+        }
+
+
+        if (c.getString(MainConfigPath.path_levelupresItemName) != null) {
+            levelupresItemName = c.getString(MainConfigPath.path_levelupresItemName);
+        } else {
+            sendError(MainConfigPath.path_levelupresItemName);
         }
 
         l("<" + name + "> " + finishLoadConfig);

@@ -19,15 +19,12 @@ public class SendTab {
         IChatBaseComponent headerComponent = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + headerList + "\"}");
         IChatBaseComponent footerComponent = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + footerList + "\"}");
 
-        // 构建 PacketPlayOutPlayerListHeader 实例
         Constructor<?> constructor = Objects.requireNonNull(ReflectionUtil.getNMSClass("PacketPlayOutPlayerListHeader")).getDeclaredConstructor(IChatBaseComponent.class);
         Object packetHeader = constructor.newInstance(headerComponent);
 
-        // 构建 PacketPlayOutPlayerListFooter 实例
         Constructor<?> constructor2 = Objects.requireNonNull(ReflectionUtil.getNMSClass("PacketPlayOutPlayerListFooter")).getDeclaredConstructor(IChatBaseComponent.class);
         Object packetFooter = constructor2.newInstance(footerComponent);
 
-        // 发送包
         connection.sendPacket((Packet) packetHeader);
         connection.sendPacket((Packet) packetFooter);
     }
@@ -38,11 +35,9 @@ public class SendTab {
         IChatBaseComponent headerComponent = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + header + "\"}");
         IChatBaseComponent footerComponent = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + footer + "\"}");
 
-        // 构建 PacketPlayOutPlayerListHeader 实例
         Constructor<?> constructor = Objects.requireNonNull(ReflectionUtil.getNMSClass("PacketPlayOutPlayerListHeader")).getDeclaredConstructor(IChatBaseComponent.class);
         Object packetHeader = constructor.newInstance(headerComponent);
 
-        // 构建 PacketPlayOutPlayerListFooter 实例
         Constructor<?> constructor2 = Objects.requireNonNull(ReflectionUtil.getNMSClass("PacketPlayOutPlayerListFooter")).getDeclaredConstructor(IChatBaseComponent.class);
         Object packetFooter = constructor2.newInstance(footerComponent);
 

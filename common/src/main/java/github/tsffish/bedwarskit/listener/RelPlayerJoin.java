@@ -2,7 +2,6 @@ package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
 import github.tsffish.bedwarskit.util.misc.SoundPlayer;
-import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import github.tsffish.bedwarskit.util.teamshop.check.EffectHaste;
 import github.tsffish.bedwarskit.util.teamshop.check.EffectHeal;
 import github.tsffish.bedwarskit.util.teamshop.check.EnchatProt;
@@ -29,8 +28,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Objects;
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.BedwarsKit.getIsLastestVersion;
-import static github.tsffish.bedwarskit.BedwarsKit.isDebug;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
@@ -44,11 +41,21 @@ import static github.tsffish.bedwarskit.util.RelScoreBoard.updateScoreBoard;
 import static github.tsffish.bedwarskit.util.kit.KitOpenItem.kitMenuItem;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isLastestVersion;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
 import static github.tsffish.bedwarskit.util.misc.SendTab.sendTab;
 import static github.tsffish.bedwarskit.util.task.LeaveCheckTask.leaveList;
 
 public class RelPlayerJoin implements Listener {
+    void check(Game game){
+        EffectHaste.check(game);
+        EffectHeal.check(game);
+        EnchatProt.check(game);
+        EnchatSharp.check(game);
+    }
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static ItemStack playAgainItem;
     private static final ItemStack bot = new ItemStack(Material.GLASS_BOTTLE);
@@ -65,12 +72,6 @@ public class RelPlayerJoin implements Listener {
     private static final GameState running = GameState.RUNNING;
     private static final GameState waiting = GameState.WAITING;
     private static final PotionEffect invs = new PotionEffect(PotionEffectType.INVISIBILITY,9999,0);
-    void checkTeamLevelUp(Game game) {
-        EffectHaste.check(game);
-        EffectHeal.check(game);
-        EnchatSharp.check(game);
-        EnchatProt.check(game);
-    }
     void playerSoundSucc(Player player){
         SoundPlayer.CHICKEN_EGG_POP(player, 1);
     }
@@ -93,7 +94,6 @@ public class RelPlayerJoin implements Listener {
         Player player = event.getPlayer();
 
         if (!player.isOnline()) {return;}
-        String playerName = player.getName();
         UUID playerUUID = player.getUniqueId();
 
         if (!game.getPlayers().contains(player)) {return;}
@@ -113,8 +113,9 @@ public class RelPlayerJoin implements Listener {
                 && game.getPlayerTeam(player).getHeadTarget().getType() != bedType
         ) {
             addPlayerIsOut(playerUUID);
-            RelSpectatorPlayer.addPlayer(playerUUID);
+            game.addProtection(player);
         }
+
 
         if (!player.getInventory().contains(kitMenuItem)) {
             player.getInventory().addItem(kitMenuItem);}
@@ -136,13 +137,13 @@ public class RelPlayerJoin implements Listener {
                     if (world.getPlayers().isEmpty()){
                         leaveList(worldName);
                     }
-
                     if (tab) {
-                        sendTab(player);
-                        if (isDebug()) {
-                            l("sendTab: " + playerName);
+                        for (Player list : game.getPlayers()){
+                        sendTab(list);
                         }
                     }
+
+
                     if (customScoreboard) {
                         updateScoreBoard(game);
                     }
@@ -162,7 +163,6 @@ public class RelPlayerJoin implements Listener {
 
                     } else if (game.getState() == running) {
 
-                        checkTeamLevelUp(game);
                         ItemStack chain = new ItemStack(chainPriceType, chainPrice);
                         ItemStack iron = new ItemStack(ironPriceType, ironPrice);
                         ItemStack diamond = new ItemStack(diamondPriceType, diamondPrice);
@@ -171,10 +171,10 @@ public class RelPlayerJoin implements Listener {
                             if (player != null && player.isOnline()) {
 
                                 if (isDebug()) {
-                                    if (RelSpectatorPlayer.getPlayerIsSp(playerUUID)) {
-                                        sendActionBar(player, "You are in spectatorPlayer");
+                                    if (game.getRespawnProtections().containsKey(player)) {
+                                        sendActionBar(player, "You has prot");
                                     } else {
-                                        sendActionBar(player, "You are Not in spectatorPlayer");
+                                        sendActionBar(player, "You not have prot");
                                     }
                                 }
                                 PlayerInventory pi = player.getInventory();
@@ -190,9 +190,6 @@ public class RelPlayerJoin implements Listener {
 
                                     if (player.getGameMode() == spectator){
                                         player.setGameMode(survival);
-                                    }
-                                    if (!RelSpectatorPlayer.getPlayerIsSp(playerUUID)){
-                                        RelSpectatorPlayer.addPlayer(playerUUID);
                                     }
 
                                     player.addPotionEffect(invs);
@@ -257,6 +254,8 @@ public class RelPlayerJoin implements Listener {
                                 }
                             }
                         }
+
+                        check(game);
                     }
                 }
             }.runTaskTimer(plugin, 0L, 20L);
@@ -269,7 +268,7 @@ public class RelPlayerJoin implements Listener {
             return;
         }
         if (player.isOp()) {
-            if (!getIsLastestVersion()) {
+            if (!isLastestVersion()) {
                 if (update_reportOp) {
                     if (update_tip != null && !update_tip.isEmpty()) {
                         for (String list : update_tip) {
@@ -291,7 +290,7 @@ public class RelPlayerJoin implements Listener {
 
         playerSoundSucc(player);
         if (!lobbyjoinTeamMess_chat.isEmpty()) {
-            player.sendMessage(replaceString(lobbyjoinTeamMess_chat,
+            sendMessage(player,replaceString(lobbyjoinTeamMess_chat,
                     teamColor,teamName));
         }
         if (!Objects.equals(lobbyjoinTeamMess_title, "")) {
@@ -301,14 +300,14 @@ public class RelPlayerJoin implements Listener {
                 String subtitleReal = t(replaceString(lobbyjoinTeamMess_subtitle,
                         teamColor,teamName));
 
-                player.sendTitle(titleReal, subtitleReal);
+                sendTitle(player,titleReal, subtitleReal);
             }
         } else if (!Objects.equals(lobbyjoinTeamMess_subtitle, "")) {
             String titleReal = " ";
             String subtitleReal = t(replaceString(lobbyjoinTeamMess_subtitle,
                     teamColor,teamName));
 
-            player.sendTitle(titleReal, subtitleReal);
+            sendTitle(player,titleReal, subtitleReal);
         }
         if (!lobbyjoinTeamMess_actionbar.isEmpty()) {
             sendActionBar(player, t(replaceString(lobbyjoinTeamMess_actionbar,

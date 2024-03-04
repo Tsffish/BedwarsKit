@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.util;
 
 import github.tsffish.bedwarskit.util.misc.GetBlockType;
-import github.tsffish.bedwarskit.util.misc.SecondToTime;
 import github.tsffish.bedwarskit.util.task.game.*;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
@@ -23,13 +22,15 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.BedwarsKit.isBungeeMode;
+
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.config.task.TaskConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MathUtil.formatTime;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
 
 
 public class RelScoreBoard {
@@ -47,7 +48,6 @@ public class RelScoreBoard {
             le("RelScoreBoard", "can't get bed Material");
             return;
         }
-        //if (isDebug()) {l("updateing scoreboad for game: " + game.getName());}
 
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
         for (Player player : game.getPlayers()) {
@@ -61,10 +61,11 @@ public class RelScoreBoard {
                     String worldname = game.getRegion().getWorld().getName();
                     String regionName = game.getRegionName();
                     int gameTimeLeft = game.getTimeLeft();
-                    String formatTimeLeft = SecondToTime.formatTime(gameTimeLeft);
+                    String formatTimeLeft = formatTime(gameTimeLeft);
 
                     String lastTaskName = "";
-                    String LastTaskTimeLeftText = "";
+                    String lastTaskTimeLeftText = "";
+
 
                     if (taskMap == null) {
                         taskMap = new ConcurrentHashMap<>(42);
@@ -127,6 +128,7 @@ public class RelScoreBoard {
                         taskMap.put(FinalBattle.getTaskTimeLeft(gameName), gametask_name_finalbattle);
                     }
 
+
                     if (!taskMap.isEmpty()) {
                         int minValue = Integer.MAX_VALUE;
                         String minTaskName = null;
@@ -146,15 +148,15 @@ public class RelScoreBoard {
 
                         if (minTaskName != null) {
                             if (minTaskName.equals(meanGameEnd)) {
-                                LastTaskTimeLeftText = t(formatTimeLeft);
+                                lastTaskTimeLeftText = t(formatTimeLeft);
                             } else {
-                                LastTaskTimeLeftText = minValue + t(meanSecond);
+                                lastTaskTimeLeftText = minValue + t(meanSecond);
                             }
                             lastTaskName = t(minTaskName);
                         }
                     } else {
                         int minValue = 0;
-                        LastTaskTimeLeftText = minValue + t(SecondToTime.formatTime(gameTimeLeft));
+                        lastTaskTimeLeftText = minValue + t(formatTime(gameTimeLeft));
                         String minTaskName = t(meanGameEnd);
                         lastTaskName = t(minTaskName);
                     }
@@ -162,9 +164,8 @@ public class RelScoreBoard {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                     String formattedDate = currentDate.format(formatter);
 
-
                     boolean isInRushWorld = worldname.contains(rushWorld);
-                    if (isInRushWorld || isBungeeMode) {
+                    if (isInRushWorld || isBungeeMode()) {
 
                         boolean isInRush2v2 = worldname.contains(rushWorld2v2);
                         boolean isInRush4v4 = worldname.contains(rushWorld4v4);
@@ -385,23 +386,21 @@ public class RelScoreBoard {
                             yellowTeamPlayer = yellow.getPlayers().size();
                         }
 
-                        if (pink.getPlayers() != null && !pink.getPlayers().isEmpty()) {
+                        if (pink != null && pink.getPlayers() != null && !pink.getPlayers().isEmpty()) {
                             pinkTeamPlayer = pink.getPlayers().size();
                         }
 
-                        if (aqua.getPlayers() != null && !aqua.getPlayers().isEmpty()) {
+                        if (aqua != null && aqua.getPlayers() != null && !aqua.getPlayers().isEmpty()) {
                             aquaTeamPlayer = aqua.getPlayers().size();
                         }
 
-                        if (gray.getPlayers() != null && !gray.getPlayers().isEmpty()) {
+                        if (gray != null && gray.getPlayers() != null && !gray.getPlayers().isEmpty()) {
                             grayTeamPlayer = gray.getPlayers().size();
                         }
-
 
                         if (white != null && white.getPlayers() != null && !white.getPlayers().isEmpty()) {
                             whiteTeamPlayer = white.getPlayers().size();
                         }
-
 
                         ScoreboardManager mgr = Bukkit.getScoreboardManager();
 
@@ -486,8 +485,8 @@ public class RelScoreBoard {
                                         .replace("{game}", gameName != null ? gameName : "")
                                         .replace("{region}", regionName != null ? regionName : "")
                                         .replace("{world}", worldname)
-                                        .replace("{LastTaskName}", lastTaskName)
-                                        .replace("{LastTaskTimeLeft}", LastTaskTimeLeftText)
+                                        .replace("{lastTaskName}", lastTaskName)
+                                        .replace("{lastTaskTimeLeft}", lastTaskTimeLeftText)
                                         .replace("{formatTimeLeft}", formatTimeLeft);
                                 ScoreBoard2v2LineReal.put(score, stringReal);
                             }
@@ -632,8 +631,8 @@ public class RelScoreBoard {
                                         .replace("{game}", gameName != null ? gameName : "")
                                         .replace("{region}", regionName != null ? regionName : "")
                                         .replace("{world}", worldname)
-                                        .replace("{LastTaskName}", lastTaskName)
-                                        .replace("{LastTaskTimeLeft}", LastTaskTimeLeftText)
+                                        .replace("{lastTaskName}", lastTaskName)
+                                        .replace("{lastTaskTimeLeft}", lastTaskTimeLeftText)
                                         .replace("{formatTimeLeft}", formatTimeLeft);
                                 ScoreBoard4v4LineReal.put(score, stringReal);
                             }

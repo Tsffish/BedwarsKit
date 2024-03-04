@@ -10,10 +10,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static github.tsffish.bedwarskit.BedwarsKit.isBungeeMode;
-import static github.tsffish.bedwarskit.BedwarsKit.isDebug;
+
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer2v2;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer4v4;
 
@@ -48,7 +49,7 @@ public class RelPlayerOpenShop implements Listener {
         }
 
         Game game = gameManager.getGameOfPlayer(player);
-        if (isBungeeMode) {
+        if (isBungeeMode()) {
             new BukkitRunnable() {
                 @Override
                 public void run() {

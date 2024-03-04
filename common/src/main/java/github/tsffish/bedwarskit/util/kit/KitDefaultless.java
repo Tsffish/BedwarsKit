@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.util.kit;
 
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import github.tsffish.bedwarskit.util.misc.GetItemType;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
@@ -38,6 +37,8 @@ public class KitDefaultless{
     private static ItemStack chestItem;
     static ItemStack kitItemInMenu;
     static ItemStack wood_sword;
+    static ItemStack wood_pickaxe;
+    static ItemStack wood_axe;
     public static void loadKit(boolean Colored) {
         Material ws = GetItemType.WOOD_SWORD();
         if (ws != null){
@@ -45,6 +46,10 @@ public class KitDefaultless{
         }else {
             le("KitDefault","wood_sword is null,cant set it");
         }
+        wood_pickaxe = new ItemStack(Material.WOOD_PICKAXE,1);
+        wood_axe = new ItemStack(Material.WOOD_AXE,1);
+
+
         kitItemInMenu = new ItemStack(KitDefaultlessItemType, KitDefaultlessItemAmount);
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
 
@@ -88,6 +93,19 @@ public class KitDefaultless{
                 pi.addItem(wood_sword);
             }
         }
+
+        if (wood_pickaxe != null){
+            if(!pi.contains(wood_pickaxe)){
+                pi.addItem(wood_pickaxe);
+            }
+        }
+
+        if (wood_axe != null){
+            if(!pi.contains(wood_axe)){
+                pi.addItem(wood_axe);
+            }
+        }
+
         applyKitBoost(player, Colored);
     }
 

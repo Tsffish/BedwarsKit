@@ -55,10 +55,7 @@ public class ShopMenu {
     private static ItemStack heal14v4;
     private static ItemStack healMax4v4;
     private static ItemStack res12v2;
-    private static ItemStack res22v2;
-    private static ItemStack res32v2;
-    private static ItemStack res42v2;
-    private static ItemStack resMax2v2;
+    private static ItemStack res14v4;
     private static List<Integer> paneList;
     public static void loadLevelUpInv(){
         loadLevelUpInv2v2();
@@ -223,45 +220,11 @@ public class ShopMenu {
 
         res12v2 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
         ItemMeta res12v2Real = res12v2.getItemMeta();
-        res12v2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_res1));
+        res12v2Real.setDisplayName(t(levelupresItemName));
         lore.clear();
         lore.add(t("&f" +  MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
         res12v2Real.setLore(lore);
         res12v2.setItemMeta(res12v2Real);
-
-        res22v2 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
-        ItemMeta res22v2Real = res22v2.getItemMeta();
-        res22v2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_res2));
-        lore.clear();
-        lore.add(t("&f" +  MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
-        res22v2Real.setLore(lore);
-        res22v2.setItemMeta(res22v2Real);
-
-        res32v2 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
-        ItemMeta res32v2Real = res32v2.getItemMeta();
-        res32v2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_res3));
-        lore.clear();
-        lore.add(t("&f" +  MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
-        res32v2Real.setLore(lore);
-        res32v2.setItemMeta(res32v2Real);
-
-        res42v2 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
-        ItemMeta res42v2Real = res42v2.getItemMeta();
-        res42v2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_res4));
-        lore.clear();
-        lore.add(t("&f" +  MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
-        res42v2Real.setLore(lore);
-        res42v2.setItemMeta(res42v2Real);
-
-        resMax2v2 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
-        ItemMeta resMax2v2Real = resMax2v2.getItemMeta();
-        resMax2v2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_resMax));
-        lore.clear();
-        lore.add(t("&f" +  MainConfigHandler.TeamEnchantMaxCost));
-        resMax2v2Real.setLore(lore);
-        resMax2v2.setItemMeta(resMax2v2Real);
-
-
 
 
 
@@ -404,6 +367,13 @@ public class ShopMenu {
         healMaxReal.setLore(lore);
         healMax4v4.setItemMeta(healMaxReal);
 
+        res14v4 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
+        ItemMeta res14v4Real = res14v4.getItemMeta();
+        res14v4Real.setDisplayName(t(levelupresItemName));
+        lore.clear();
+        lore.add(t("&f" +  MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        res14v4Real.setLore(lore);
+        res14v4.setItemMeta(res14v4Real);
     }
 
     public static void openForPlayer2v2(Player player, Game game) {
@@ -561,9 +531,9 @@ public class ShopMenu {
             }
 
         }
-
-        inventory.setItem(levelupresItemSlot, res12v2);
-
+            if (levelupresItemSlot > -1) {
+                inventory.setItem(levelupresItemSlot, res12v2);
+            }
 
         player.openInventory(inventory);
 
@@ -685,7 +655,9 @@ public class ShopMenu {
             }
 
         }
-
+        if (levelupresItemSlot > -1) {
+            inventory.setItem(levelupresItemSlot, res14v4);
+        }
         player.openInventory(inventory);
 
     }

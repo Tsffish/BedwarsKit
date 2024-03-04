@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 
 import java.util.logging.Logger;
 
-import static github.tsffish.bedwarskit.BedwarsKit.pluginNameConsole;
+import static github.tsffish.bedwarskit.util.misc.PluginState.pluginNameConsole;
 
 public class ErrorConfigHandler {
     private static final String mess = "An error occurred while attempting to load -> ";

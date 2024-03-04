@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
-
+import java.util.Iterator;
 import java.util.List;
 
 public class SendTab {
@@ -17,22 +17,23 @@ public class SendTab {
         PlayerConnection connection = craftPlayer.getHandle().playerConnection;
 
         StringBuilder headerBuilder = new StringBuilder(20);
-
-            if (!headerList.isEmpty()) {
-                for (String line : headerList) {
-                    headerBuilder.append(line).append("\n");
-                }
+        Iterator<String> iterator = headerList.iterator();
+        while (iterator.hasNext()) {
+            headerBuilder.append(iterator.next());
+            if (iterator.hasNext()) {
+                headerBuilder.append("\n");
             }
+        }
         IChatBaseComponent tabHeader = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + headerBuilder + "\"}");
 
         StringBuilder footerBuilder = new StringBuilder(20);
-
-
-            if (!footerList.isEmpty()) {
-                for (String line : footerList) {
-                    footerBuilder.append(line).append("\n");
-                }
+        Iterator<String> iterator2 = footerList.iterator();
+        while (iterator2.hasNext()) {
+            footerBuilder.append(iterator2.next());
+            if (iterator2.hasNext()) {
+                footerBuilder.append("\n");
             }
+        }
 
         IChatBaseComponent tabFooter = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + footerBuilder + "\"}");
 

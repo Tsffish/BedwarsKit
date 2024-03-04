@@ -288,8 +288,6 @@ public class MainConfigHandler {
     public static String teamEffItemName_Heal1;
 
     public static boolean lobbyleaveTeam;
-    public static String lobbyleaveTeamMess;
-
     public static int teamEff_Heal_dis;
     public static boolean dieOutGameItem_playAgain;
     public static String dieOutGameItem_playAgain_ItemName;
@@ -309,12 +307,7 @@ public class MainConfigHandler {
 
     public static Material levelupresItemType;
     public static int levelupresItemSlot;
-    public static String teamEffItemName_res1;
-    public static String teamEffItemName_res2;
-    public static String teamEffItemName_res3;
-    public static String teamEffItemName_res4;
-    public static String teamEffItemName_resMax;
-
+    public static String levelupresItemName;
 
 
 

@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.command;
 
-import github.tsffish.bedwarskit.BedwarsKit;
 import github.tsffish.bedwarskit.config.main.MainConfigLoad;
 import github.tsffish.bedwarskit.util.RelIsCheckingPlayer;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
@@ -14,13 +13,13 @@ import org.bukkit.plugin.PluginManager;
 
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.BedwarsKit.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.command_help;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.giveProtEnchList;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.giveSharpEnchList;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.getPlayerOHKill;
 import static github.tsffish.bedwarskit.util.misc.ChatColor.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.PluginState.*;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.*;
 
 public class CommandInfo implements CommandExecutor {
@@ -45,7 +44,7 @@ public class CommandInfo implements CommandExecutor {
                 }
             }
 
-            if(BedwarsKit.isDebug()){
+            if(isDebug()){
                 showDebugInfo(sender);
             }else {
                 showHelpMess(sender);
@@ -77,7 +76,7 @@ public class CommandInfo implements CommandExecutor {
     }
     private void toggleDebug(CommandSender sender){
         changeIsDebug();
-        if (BedwarsKit.isDebug()){
+        if (isDebug()){
             sender.sendMessage("Debug now Enabled");
         }else {
             sender.sendMessage("Debug now Disabled");
@@ -133,7 +132,7 @@ public class CommandInfo implements CommandExecutor {
         sender.sendMessage(" ");
         sender.sendMessage(white + pluginName + " " + aqua + pluginVersion());
         sender.sendMessage(" ");
-        sender.sendMessage(white + "Author: " + yellow + author());
+        sender.sendMessage(white + "Author: " + yellow + getAuthor());
         sender.sendMessage(" ");
         sender.sendMessage(green + msgline);
     }

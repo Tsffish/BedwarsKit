@@ -1,15 +1,13 @@
 package github.tsffish.bedwarskit.listener;
 
-import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import io.github.bedwarsrel.BedwarsRel;
+import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
-
-import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.creativeGameModeFix;
 
@@ -35,8 +33,8 @@ public class RelPlayerGameMode implements Listener {
             player.setFlying(!player.isFlying());
             return;
         }
-        UUID playerUUID = player.getUniqueId();
-        if (RelSpectatorPlayer.getPlayerIsSp(playerUUID) && player.getGameMode() == survival){
+        Game game = gameManager.getGameOfPlayer(player);
+        if (game.getRespawnProtections().containsKey(player) && player.getGameMode() == survival){
             if (player.getAllowFlight()){
             player.setFlying(!player.isFlying());
             }

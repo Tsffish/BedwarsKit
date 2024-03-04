@@ -1,16 +1,13 @@
 package github.tsffish.bedwarskit.util;
 
-import github.tsffish.bedwarskit.BedwarsKit;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.BedwarsKit.hidePlayer;
-import static github.tsffish.bedwarskit.BedwarsKit.showPlayer;
+import static github.tsffish.bedwarskit.listener.procol.PlayerVisibility.hidePlayer;
+import static github.tsffish.bedwarskit.listener.procol.PlayerVisibility.showPlayer;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
 
@@ -47,7 +44,7 @@ public class RelCurrentStat {
 
     public static final String addOneHeathKill = "ohk";
     public static final String setOneHeathKill = "setohk";
-    private static List<UUID> playerIsOut = new ArrayList<>(101);
+    private static Set<UUID> playerIsOut = Collections.newSetFromMap(new ConcurrentHashMap<>());
     public static boolean getPlayerisOut(UUID uuid){
         return playerIsOut.contains(uuid);
     }

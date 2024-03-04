@@ -1,6 +1,7 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.util.RelCurrentStat;
+import github.tsffish.bedwarskit.util.misc.SendActionBar;
 import github.tsffish.bedwarskit.util.misc.SoundPlayer;
 import io.github.bedwarsrel.events.BedwarsPlayerKilledEvent;
 import io.github.bedwarsrel.game.Game;
@@ -14,19 +15,24 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.GetBlockType.BED_BLOCK;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
 
 public class RelKillPlayer implements Listener {
-    static Map<Material, Integer> list;
+    private static Map<Material, Integer> list;
     private static final Material ironIngot = Material.IRON_INGOT;
     private static final Material goldIngot = Material.GOLD_INGOT;
     private static final Material diamond = Material.DIAMOND;
     private static final Material emerald = Material.EMERALD;
+    private static final Material bed_block = BED_BLOCK();
     private String replaceString(
             String text,
             String kName,
@@ -45,39 +51,43 @@ public class RelKillPlayer implements Listener {
                 ;
     }
     @EventHandler
-    public void on(final BedwarsPlayerKilledEvent e) {
+    public void on(final BedwarsPlayerKilledEvent event) {
 
-        if (e.getKiller() == null || e.getPlayer() == null) {
+        if (       event.getKiller() == null
+                || event.getPlayer() == null
+                || event.getKiller() == event.getPlayer()
+        ) {
             return;
         }
-        if (!e.getKiller().isOnline()){
-            return;
-        }
-        Game game = e.getGame();
-
-        if (game == null) {
+        if (!event.getKiller().isOnline()) {
             return;
         }
 
-        if (!kill_res || e.getKiller() == null || e.getKiller() == e.getPlayer()) {
+        if (event.getGame() == null) {
             return;
         }
-            Player k = e.getKiller();
+
+        Game game = event.getGame();
+        if (!kill_res)
+            {return;}
+
+            Player k = event.getKiller();
             String kName = k.getName();
             UUID kuuid = k.getUniqueId();
             String kHealth = k.getHealth() + "";
             PlayerInventory kpi = k.getInventory();
             updatePlayerStat(kuuid, addKill, 1);
 
-            Player d = e.getPlayer();
+            Player d = event.getPlayer();
             String dName = d.getName();
             UUID duuid = d.getUniqueId();
             String dHealth = d.getHealth() + "";
             PlayerInventory dpi = d.getInventory();
             updatePlayerStat(duuid, addDeath, 1);
+            updatePlayerStat(duuid,setOneHeathKill,0);
 
-
-            if (game.getPlayerTeam(d).getHeadTarget() == null || game.getPlayerTeam(d).getHeadTarget().getType() != Material.BED_BLOCK) {
+            if (game.getPlayerTeam(d).getHeadTarget() == null
+                    || game.getPlayerTeam(d).getHeadTarget().getType() != bed_block) {
                 updatePlayerStat(kuuid, addFinalKill, 1);
                 SoundPlayer.LEVEL_UP(k,1);
             }
@@ -93,6 +103,31 @@ public class RelKillPlayer implements Listener {
                 fbItemMeta.setDisplayName(t(killfb_oneHealthKill_itemName));
                 fbItem.setItemMeta(fbItemMeta);
                 pi.addItem(fbItem);
+
+                String ohk = getPlayerOHKill(kuuid) + "";
+                String message = killfb_sendmess_chat;
+                if (message != null && !message.isEmpty()) {
+                    sendMessage(k,
+                            message.
+                            replace("{ohk}",ohk));
+                }
+
+                String title = Optional.ofNullable(killfb_sendmess_title).orElse(" ");
+                String subtitle = Optional.ofNullable(killfb_sendmess_subtitle).orElse("");
+
+                sendTitle(k,
+                        title.
+                        replace("{ohk}",ohk),
+
+                        subtitle.
+                        replace("{ohk}",ohk));
+
+                Optional.ofNullable(killfb_sendmess_actionbar)
+                        .filter(actionBarMessage -> !actionBarMessage.isEmpty())
+                        .ifPresent(actionBarMessage -> SendActionBar.sendActionBar(k,
+                                actionBarMessage.
+                                replace("{ohk}",ohk)
+                                ));
                 }
             }
 
@@ -161,12 +196,12 @@ public class RelKillPlayer implements Listener {
                 if (killfb_sendmess) {
 
                     if (!killfb_sendmess_chat.isEmpty()) {
-                        k.sendMessage(t(
+                        sendMessage(k,
                                 replaceString(
                                         killfb_sendmess_chat
                                         ,kName,dName,kHealth,dHealth,kuuid
                                 )
-                        ));
+                        );
                     }
                     if (!killfb_sendmess_title.isEmpty()) {
                         String titleReal = t(
@@ -183,7 +218,7 @@ public class RelKillPlayer implements Listener {
                                     )
                             );
 
-                            k.sendTitle(titleReal, subtitleReal);
+                            sendTitle(k,titleReal, subtitleReal);
                         }
                     } else if (!killfb_sendmess_subtitle.isEmpty()) {
                         String titleReal = " ";
@@ -194,7 +229,7 @@ public class RelKillPlayer implements Listener {
                                 )
                         );
 
-                        k.sendTitle(titleReal, subtitleReal);
+                        sendTitle(k,titleReal, subtitleReal);
                     }
                     if (!killfb_sendmess_actionbar.isEmpty()) {
                         sendActionBar(k, t(
@@ -235,5 +270,8 @@ public class RelKillPlayer implements Listener {
                                 .replace("{count}", emeraldCount + "")
                         );
                                             }
+
+                    d.setLastDamageCause(null);
+                    game.setPlayerDamager(null,d);
     }
 }

@@ -7,19 +7,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Objects;
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitleBreakTeam;
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakSubTitleBreakTeam;
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitleBreakPlayer;
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakSubTitleBreakPlayer;
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitleAll;
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakSubTitleAll;
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.breakTitle;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.addBreakBed;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.updatePlayerStat;
-import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 
 public class RelBreakBed implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
@@ -69,17 +62,17 @@ public class RelBreakBed implements Listener {
                         String playerTeam = event.getGame().getPlayerTeam(player).getName();
                         
                         if (!playerName.equals(breakPlayerName)
-                                && !Objects.equals(playerTeam, breakTeamName))
+                                && !playerTeam.equals(breakTeamName))
                         {
-                            player.sendTitle(t(breakTitleAllReal), t(breakSubtitleAllReal));
+                            sendTitle(player, breakTitleAllReal, breakSubtitleAllReal);
                         } else if (playerTeam.equals(breakTeamName))
                         {
                             
-                            player.sendTitle(t(breakTitleBreakTeamReal), t(breakSubtitleBreakTeamReal));
+                            sendTitle(player, breakTitleBreakTeamReal,breakSubtitleBreakTeamReal);
                         }
                     });
 
-                breakPlayer.sendTitle(t(breakTitleBreakPlayerReal), t(breakSubtitleBreakPlayerReal));
+                sendTitle(breakPlayer,breakTitleBreakPlayerReal,breakSubtitleBreakPlayerReal);
 
                 UUID breakPlayerUUID = breakPlayer.getUniqueId();
                 updatePlayerStat(breakPlayerUUID, addBreakBed, 1);

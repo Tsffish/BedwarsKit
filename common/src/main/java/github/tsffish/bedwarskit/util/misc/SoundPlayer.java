@@ -2,9 +2,9 @@ package github.tsffish.bedwarskit.util.misc;
 
 import org.bukkit.entity.Player;
 
-import static github.tsffish.bedwarskit.BedwarsKit.serverVersion;
 import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 
 public class SoundPlayer {

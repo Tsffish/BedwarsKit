@@ -7,9 +7,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-import static github.tsffish.bedwarskit.BedwarsKit.isDebug;
+
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.nobreakList;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 
 public class RelBreakItem implements Listener {
     private static final String className = "RelNoItemBreak";

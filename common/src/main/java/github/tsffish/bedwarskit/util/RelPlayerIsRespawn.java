@@ -1,11 +1,10 @@
 package github.tsffish.bedwarskit.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RelPlayerIsRespawn {
-    static List<UUID> playerRespawn = new ArrayList<>(100);
+    private static Set<UUID> playerRespawn = Collections.newSetFromMap(new ConcurrentHashMap<>());
     public static boolean getPlayerRespawn(UUID uuid){
         return playerRespawn.contains(uuid);
     }

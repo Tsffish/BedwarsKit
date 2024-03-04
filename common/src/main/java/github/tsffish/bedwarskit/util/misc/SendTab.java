@@ -6,15 +6,27 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
-import static github.tsffish.bedwarskit.BedwarsKit.serverVersion;
 import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
+import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 
 public class SendTab {
     private static final String className = "SendTab";
     public static void sendTabData(Player player, List<String> headerList, List<String> footerList) {
+        ListIterator<String> headerIterator = headerList.listIterator();
+        while (headerIterator.hasNext()) {
+            headerIterator.set(t(headerIterator.next()));
+        }
+
+        ListIterator<String> footerIterator = footerList.listIterator();
+        while (footerIterator.hasNext()) {
+            footerIterator.set(t(footerIterator.next()));
+        }
+
         if (serverVersion().contains("1.8")) {
             try {
                 Method method = github.tsffish.bedwarskit.com.v1_8_r8.SendTab.class.getMethod("sendTab", Player.class, List.class, List.class);
@@ -58,7 +70,7 @@ public class SendTab {
         if (serverVersion().contains("1.8")) {
             try {
                 Method method = github.tsffish.bedwarskit.com.v1_8_r8.SendTab.class.getMethod("sendTab", Player.class, String.class, String.class);
-                method.invoke(null, player, header, footer);
+                method.invoke(null, player, t(header), t(footer));
             } catch (Exception e) {
                 if (!pluginIsDisabling) {
                     le(className, e);
@@ -67,7 +79,7 @@ public class SendTab {
         } else if (serverVersion().contains("1.12")) {
             try {
                 Method method = github.tsffish.bedwarskit.com.v1_12_r2.SendTab.class.getMethod("sendTab", Player.class, String.class, String.class);
-                method.invoke(null, player, header, footer);
+                method.invoke(null, player, t(header), t(footer));
 
             } catch (Exception e) {
                 if (!pluginIsDisabling) {
@@ -79,7 +91,7 @@ public class SendTab {
                 || serverVersion().contains("1.11")){
             try {
                 Method method = github.tsffish.bedwarskit.com.v1_12_r2.SendTab.class.getMethod("sendTab", Player.class, String.class, String.class);
-                method.invoke(null, player, header, footer);
+                method.invoke(null, player, t(header), t(footer));
 
             } catch (Exception e) {
                 if (!pluginIsDisabling) {

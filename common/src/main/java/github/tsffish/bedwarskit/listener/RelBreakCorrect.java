@@ -21,7 +21,6 @@ import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 public class RelBreakCorrect implements Listener {
     private static final String className = "RelBreakCorrect";
-    static final Material air_block = Material.AIR;
     static final Material bed_block = BED_BLOCK();
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
 
@@ -74,7 +73,6 @@ try {
                             Material breakblock = e.getBlock().getType();
                             if (blockType == bed_block
                                     && breakblock == bed_block
-                                    && playerTeamBlockHead.getType() != air_block
                                     && playerLocation.getBlock().getLocation() == e.getBlock().getLocation())
 
                                 new BukkitRunnable() {

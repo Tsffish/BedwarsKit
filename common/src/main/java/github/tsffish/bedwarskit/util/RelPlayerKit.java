@@ -15,7 +15,7 @@ public class RelPlayerKit {
     public static final String kitNameDefault = "default";
     public static final String kitNameNone = "none";
     public static final String kitNameDefaultLess = "defaultless";
-    private static ConcurrentHashMap<UUID, String> playerKitList = new ConcurrentHashMap<>(100);
+    private static ConcurrentHashMap<UUID, String> playerKitList = new ConcurrentHashMap<>(101);
     public static void applykit(UUID uuid){
         if (kitenable){
         String kit = playerKitList.get(uuid);

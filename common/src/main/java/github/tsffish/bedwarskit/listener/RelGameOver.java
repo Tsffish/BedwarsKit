@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
-import github.tsffish.bedwarskit.util.spectator.RelSpectatorPlayer;
 import github.tsffish.bedwarskit.util.misc.SoundPlayer;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.events.BedwarsGameEndEvent;
@@ -22,14 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.BedwarsKit.isDebug;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.lobbyWorld;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.setDefaultPlayerStat;
+import static github.tsffish.bedwarskit.util.misc.GetBlockType.BED_BLOCK;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 
 public class RelGameOver implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
-    private static final Material bed = Material.BED;
+    private static final Material bed_block = BED_BLOCK();
     private static final double maxBord = 9999;
     @EventHandler
     public void on(final BedwarsGameOverEvent event) {
@@ -42,19 +42,9 @@ public class RelGameOver implements Listener {
         }
 
         Game game = event.getGame();
-        RelSpectatorPlayer.clearSpectatorPlayers();
 
         for (Player player : event.getWinner().getPlayers()){
-
             SoundPlayer.LEVEL_UP(player, 1);
-            //player.sendMessage("&b&l==============================================");
-            //player.sendMessage("&6&l胜者: &f{team}");
-            //player.sendMessage("&f");
-            //player.sendMessage("&6击杀第一名: ");
-            //player.sendMessage("&e击杀第二名: ");
-            //player.sendMessage("&a击杀第三名: ");
-            //player.sendMessage("&f");
-            //player.sendMessage("&b&l==============================================");
         }
 
         World world = game.getRegion().getWorld();
@@ -69,11 +59,11 @@ public class RelGameOver implements Listener {
         Game game = event.getGame();
         World world = game.getRegion().getWorld();
         for (Team team : game.getTeams().values()){
-            if (team.getHeadTarget().getType() != bed){
-                world.getBlockAt(team.getTargetHeadBlock()).setType(bed, true);
+            if (team.getHeadTarget().getType() != bed_block){
+                world.getBlockAt(team.getTargetHeadBlock()).setType(bed_block, true);
             }
-            if (team.getFeetTarget().getType() != bed){
-                world.getBlockAt(team.getTargetFeetBlock()).setType(bed, true);
+            if (team.getFeetTarget().getType() != bed_block){
+                world.getBlockAt(team.getTargetFeetBlock()).setType(bed_block, true);
             }
         }
 

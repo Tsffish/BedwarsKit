@@ -15,9 +15,9 @@ class MainConfigPath {
     static final String path_breakBedCheck = "breakBedCheck";
     static final String path_tpDis = "tpDis";
     static final String path_deathGameMode = "deathGameMode";
-    static final String path_rushWorld = "rushWorld";
-    static final String path_rushWorld2v2 = "rushWorld2v2";
-    static final String path_rushWorld4v4 = "rushWorld4v4";
+    static final String path_rushWorld = "gameWorld";
+    static final String path_rushWorld2v2 = "gameWorld2v2";
+    static final String path_rushWorld4v4 = "gameWorld4v4";
     static final String path_lobbyWorld = "lobbyWorld";
     static final String path_startKitCompass = "startKitCompass";
     static final String path_respawnDelay = "respawnDelay";
@@ -251,7 +251,6 @@ class MainConfigPath {
     static final String path_teamEffItemName_Heal1 = "teamEffItemName_heal1";
 
     static final String path_lobbyleaveTeam = "lobbyleaveTeam";
-    static final String path_lobbyleaveTeamMess = "lobbyleaveTeamMess";
     static final String path_teamEff_Heal_dis = "teamEff_Heal_dis";
     static final String path_messLevelUpSharp2 = "messLevelUpSharp2";
     static final String path_messLevelUpSharp3 = "messLevelUpSharp3";
@@ -282,15 +281,8 @@ class MainConfigPath {
     static final String path_paneItemName = "paneItemName";
     static final String path_paneItemLore = "paneItemLore";
     static final String path_dieOutGameItem_playAgain_ItemSlot = "dieOutGameItem_playAgain_ItemSlot";
-
-
-    static final String path_teamEffItemName_res1 = "teamEffItemName_res1";
-    static final String path_teamEffItemName_res2 = "teamEffItemName_res2";
-    static final String path_teamEffItemName_res3 = "teamEffItemName_res3";
-    static final String path_teamEffItemName_res4 = "teamEffItemName_res4";
-    static final String path_teamEffItemName_resMax = "teamEffItemName_resMax";
-
     static final String path_levelupresItemType = "levelupresItemType";
     static final String path_levelupresItemSlot = "levelupresItemSlot";
 
+    static final String path_levelupresItemName = "levelupresItemName";
 }
