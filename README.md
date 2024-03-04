@@ -2,7 +2,7 @@
 
 A Addon for BedwarsRel, let you keep your Kit in the game
 
-Depend: BedwarsRel
+Depend: BedwarsRel,ProtocolLib(5.1.0 or above)
 
 ## Functions:
 - Fix issues related to BedwarslRel
@@ -39,8 +39,8 @@ Depend: BedwarsRel
 - 4.The plugin is enabled, and you can use/bwk to view command help
 
 ## Usage:
-- 1.Make sure your world name includes the "rushWorld" entry in config to make the plugin recognize it.
-- On this basis, match "rushWorld2v2" and "rushWorld4v4" to distinguish between two different patterns
+- 1.Make sure your world name includes the "gameWorld" entry in config to make the plugin recognize it.
+- On this basis, match "gameWorld2v2" and "gameWorld4v4" to distinguish between two different patterns
 - Finally, make sure that your lobby name includes the items in "lobbyWorld" (The standard for determining a world name is to include but not equal to (except for the lobby))
 
 - 2.Ensure relTeamColorName_ Xxx Eight teams correspond to your BedwarsRel team name (displayed name not color name)
