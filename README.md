@@ -1,6 +1,6 @@
 # Introduction
 
-A Minecraft plugin, Added some features to BedwarsRel
+A Minecraft plugin, Added some features to BedwarsRel.
 A Addon for BedwarsRel, let you keep your Kit in the game
 
 ### Depend: 
