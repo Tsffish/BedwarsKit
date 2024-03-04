@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.util;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelTeamColorName {
     public static final String RED_TEAM_COLOR_NAME = "RED";
     public static final String BLUE_TEAM_COLOR_NAME = "BLUE";

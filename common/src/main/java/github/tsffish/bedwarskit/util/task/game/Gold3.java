@@ -17,7 +17,12 @@ import static github.tsffish.bedwarskit.config.task.TaskConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendMessage;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class Gold3 {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static ConcurrentHashMap<String, Integer> taskTimeLeftMap = new ConcurrentHashMap<>();

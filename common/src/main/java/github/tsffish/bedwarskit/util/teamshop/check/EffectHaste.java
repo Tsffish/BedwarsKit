@@ -9,7 +9,12 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class EffectHaste {
     static final PotionEffectType haste = PotionEffectType.FAST_DIGGING;
     public static void check(Game game) {

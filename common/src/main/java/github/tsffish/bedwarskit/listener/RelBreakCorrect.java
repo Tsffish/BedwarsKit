@@ -18,7 +18,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.GetBlockType.BED_BLOCK;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelBreakCorrect implements Listener {
     private static final String className = "RelBreakCorrect";
     static final Material bed_block = BED_BLOCK();

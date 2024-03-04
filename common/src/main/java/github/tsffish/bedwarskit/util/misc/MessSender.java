@@ -8,7 +8,12 @@ import java.util.logging.Logger;
 
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.PluginState.pluginNameConsole;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class MessSender {
     private static final ConsoleCommandSender console = Bukkit.getConsoleSender();
     private static final Logger l = Bukkit.getLogger();

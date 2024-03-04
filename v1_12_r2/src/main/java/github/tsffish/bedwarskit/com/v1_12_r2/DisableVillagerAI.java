@@ -7,7 +7,12 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.CraftVillager;
 import org.bukkit.entity.Entity;
 
 import java.util.List;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class DisableVillagerAI {
     public static void disableVillagerAI(String worldName){
                 World world = Bukkit.getWorld(worldName);

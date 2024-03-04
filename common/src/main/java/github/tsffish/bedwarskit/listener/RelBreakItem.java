@@ -11,7 +11,12 @@ import org.bukkit.inventory.ItemStack;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.nobreakList;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelBreakItem implements Listener {
     private static final String className = "RelNoItemBreak";
     @EventHandler

@@ -1,6 +1,6 @@
 package github.tsffish.bedwarskit.com.v1_12_r2;
 
-import github.tsffish.bedwarskit.util.ReflectionUtil;
+import github.tsffish.bedwarskit.com.v1_12_r2.util.ReflectionUtil;
 import net.minecraft.server.v1_12_R1.IChatBaseComponent;
 import net.minecraft.server.v1_12_R1.Packet;
 import net.minecraft.server.v1_12_R1.PlayerConnection;
@@ -11,7 +11,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class SendTab {
     public static void sendTab(Player player, List<String> headerList, List<String> footerList) throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
         CraftPlayer craftPlayer = (CraftPlayer) player;

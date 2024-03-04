@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.util.misc;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class MathUtil {
     public static double roundToOneDecimalPlace(double value) {
         return Math.round(value * 10) / 10.0;

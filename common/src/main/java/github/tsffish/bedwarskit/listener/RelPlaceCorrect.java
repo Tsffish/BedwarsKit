@@ -15,7 +15,12 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlaceCorrect implements Listener {
     @EventHandler
     public void on(final BlockPlaceEvent e) {

@@ -19,7 +19,12 @@ import static github.tsffish.bedwarskit.util.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.RelPlayerIsRespawn.removePlayerRespawn;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.applykit;
 import static github.tsffish.bedwarskit.util.RelPlayerKit.applykitforce;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerRespawn {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final ItemStack chain1 = new ItemStack(Material.CHAINMAIL_LEGGINGS);

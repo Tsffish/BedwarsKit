@@ -10,7 +10,12 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class SendTab {
     public static void sendTab(Player player, List<String> headerList, List<String> footerList) throws NoSuchFieldException, IllegalAccessException {
         CraftPlayer craftPlayer = (CraftPlayer) player;

@@ -1,11 +1,14 @@
 package github.tsffish.bedwarskit.config.lang;
 
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
-import java.util.Map;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class LangConfigHandler {
     public static FileConfiguration c;
     public static List<String> update_tip;

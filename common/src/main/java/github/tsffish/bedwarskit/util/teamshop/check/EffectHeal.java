@@ -12,7 +12,12 @@ import java.util.List;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.teamEff_Heal_dis;
 
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class EffectHeal {
     static final PotionEffectType heal = PotionEffectType.REGENERATION;
     public static void check(Game game) {

@@ -24,7 +24,12 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerDamage implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final String bloodModeSingle = "single";

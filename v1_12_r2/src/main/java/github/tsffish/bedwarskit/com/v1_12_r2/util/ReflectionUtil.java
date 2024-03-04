@@ -1,7 +1,12 @@
-package github.tsffish.bedwarskit.util;
+package github.tsffish.bedwarskit.com.v1_12_r2.util;
 
 import java.lang.reflect.Field;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class ReflectionUtil {
     public static Class<?> getNMSClass(String className) {
         String version = getVersion();

@@ -5,7 +5,12 @@ import io.github.bedwarsrel.game.Team;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class ListHaste {
 
     private static ConcurrentHashMap<String, List<String[]>> listMap = new ConcurrentHashMap<>(24);

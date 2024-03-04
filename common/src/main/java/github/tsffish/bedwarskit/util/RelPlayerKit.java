@@ -9,7 +9,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.kitenable;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerKit {
     private static final String className = "RelPlayerKit";
     public static final String kitNameDefault = "default";

@@ -5,7 +5,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class MainConfigHandler {
     public static FileConfiguration c;
     public static boolean breakTitle;

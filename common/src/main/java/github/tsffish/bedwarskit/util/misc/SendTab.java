@@ -13,7 +13,12 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class SendTab {
     private static final String className = "SendTab";
     public static void sendTabData(Player player, List<String> headerList, List<String> footerList) {

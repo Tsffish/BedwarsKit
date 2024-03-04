@@ -1,7 +1,12 @@
 package github.tsffish.bedwarskit.util;
 
 import org.bukkit.Color;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelArmorColor {
     public static final Color red = Color.fromRGB(255, 0, 0);
     public static final Color blue = Color.fromRGB(0, 0, 255);

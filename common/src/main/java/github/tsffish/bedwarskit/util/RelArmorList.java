@@ -2,7 +2,12 @@ package github.tsffish.bedwarskit.util;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelArmorList {
     private static Set<UUID> armorChain = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private static Set<UUID> armorIron = Collections.newSetFromMap(new ConcurrentHashMap<>());

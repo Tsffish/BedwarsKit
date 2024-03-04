@@ -10,7 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.creativeGameModeFix;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerGameMode implements Listener {
     private static final GameMode creative = GameMode.CREATIVE;
     private static final GameMode survival = GameMode.SURVIVAL;

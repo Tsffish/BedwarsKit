@@ -15,7 +15,12 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.*;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.msgline;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.pluginName;
 import static github.tsffish.bedwarskit.util.misc.bstats.StartMetrics.startMetrics;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class PluginStartUp {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     public static void sendPluginStartUpInfo(){

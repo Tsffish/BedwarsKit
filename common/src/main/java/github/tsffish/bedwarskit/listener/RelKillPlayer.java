@@ -25,7 +25,12 @@ import static github.tsffish.bedwarskit.util.misc.GetBlockType.BED_BLOCK;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendMessage;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static io.github.bedwarsrel.com.v1_8_r3.ActionBar.sendActionBar;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelKillPlayer implements Listener {
     private static Map<Material, Integer> list;
     private static final Material ironIngot = Material.IRON_INGOT;

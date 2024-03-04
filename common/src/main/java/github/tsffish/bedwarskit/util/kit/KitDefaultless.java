@@ -24,7 +24,12 @@ import static github.tsffish.bedwarskit.util.RelArmorColor.*;
 import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class KitDefaultless{
     private static final int EffectTime = 999999;
     public static String description;

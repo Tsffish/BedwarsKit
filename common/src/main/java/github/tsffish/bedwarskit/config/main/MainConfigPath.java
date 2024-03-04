@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.config.main;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 class MainConfigPath {
     static final String path_breakTitle = "breakTitle";
     static final String path_breakTitleAll = "breakTitleAll";

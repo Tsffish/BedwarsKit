@@ -8,7 +8,12 @@ import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class GetItemType {
     private static final String className = "GetItemType";
     public static Material WOOD_SWORD(){

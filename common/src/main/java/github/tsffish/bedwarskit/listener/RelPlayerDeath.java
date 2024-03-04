@@ -35,7 +35,12 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.GetBlockType.BED_BLOCK;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerDeath implements Listener{
     private static final Material bed_block = BED_BLOCK();
     private static final BedwarsKit plugin = BedwarsKit.getInstance();

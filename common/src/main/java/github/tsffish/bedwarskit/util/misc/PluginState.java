@@ -1,7 +1,12 @@
 package github.tsffish.bedwarskit.util.misc;
 
 import static github.tsffish.bedwarskit.util.misc.StringMgr.pluginName;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class PluginState {
     private static final String pluginVersion = "1.9.56";
     public static String pluginVersion(){

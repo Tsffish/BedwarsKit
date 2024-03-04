@@ -6,7 +6,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.util.kit.KitMenu.loadKitMenu;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class KitOpenItem
 {
 

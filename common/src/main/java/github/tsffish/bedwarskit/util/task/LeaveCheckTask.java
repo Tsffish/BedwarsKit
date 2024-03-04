@@ -12,7 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.leaveCheckList;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class LeaveCheckTask {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static Set<String> leavingList = Collections.newSetFromMap(new ConcurrentHashMap<>());

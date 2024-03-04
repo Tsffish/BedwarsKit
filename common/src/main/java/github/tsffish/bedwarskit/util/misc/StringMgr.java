@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.util.misc;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class StringMgr {
     public static final String vauleIsWrong = " vaule is wrong ";
     public static final String vauleIsNull = " vaule is null ";

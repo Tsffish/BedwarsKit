@@ -29,7 +29,12 @@ import static github.tsffish.bedwarskit.util.misc.MessSender.consoleSendCommand;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
 import static github.tsffish.bedwarskit.util.misc.SoundPlayer.*;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer2v2;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelClickInventory implements Listener {
     private static final Material woodSword = Material.WOOD_SWORD;
     @EventHandler

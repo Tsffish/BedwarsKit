@@ -21,7 +21,12 @@ import java.util.List;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class ShopMenu {
     private static ItemStack paneItem = GetItem.GRAY_STAINED_GLASS_PANE();
     private static ItemStack sharp12v2;

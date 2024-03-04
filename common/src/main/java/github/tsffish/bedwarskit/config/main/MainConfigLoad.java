@@ -25,7 +25,12 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.spigotId;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.*;
 import static github.tsffish.bedwarskit.util.misc.update.StartCheck.checkUpdate;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.loadLevelUpInv;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class MainConfigLoad {
     private static final String name = "MainConfigLoad";
     private static final String reason = vauleIsNull;

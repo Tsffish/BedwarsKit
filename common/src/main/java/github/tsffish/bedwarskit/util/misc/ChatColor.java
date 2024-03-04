@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.util.misc;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class ChatColor {
     public static final org.bukkit.ChatColor white = org.bukkit.ChatColor.WHITE;
     public static final org.bukkit.ChatColor red = org.bukkit.ChatColor.RED;

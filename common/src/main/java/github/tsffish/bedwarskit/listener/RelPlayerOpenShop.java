@@ -17,7 +17,12 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer2v2;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer4v4;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerOpenShop implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final String clickOnEntityName = "click on entity";

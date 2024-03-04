@@ -13,7 +13,12 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.lobbyWorld;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noPearlDamage_TPSound;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerTeleport implements Listener {
     private static final float resFallDis = 0.0f;
     private static final GameMode survival = GameMode.SURVIVAL;

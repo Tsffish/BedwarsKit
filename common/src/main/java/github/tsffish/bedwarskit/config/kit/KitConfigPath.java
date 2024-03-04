@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.config.kit;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 class KitConfigPath {
     static final String path_kitenable = "kitenable";
     static final String path_meanSelKitSucc = "meanSelKitSucc";

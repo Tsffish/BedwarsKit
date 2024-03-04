@@ -11,7 +11,12 @@ import org.bukkit.entity.Player;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class PlayerVisibility {
     private static final Set<Player> hiddenPlayers = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private static final BedwarsKit plugin = BedwarsKit.getInstance();

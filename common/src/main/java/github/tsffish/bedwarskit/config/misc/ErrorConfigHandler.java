@@ -5,7 +5,12 @@ import org.bukkit.Bukkit;
 import java.util.logging.Logger;
 
 import static github.tsffish.bedwarskit.util.misc.PluginState.pluginNameConsole;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class ErrorConfigHandler {
     private static final String mess = "An error occurred while attempting to load -> ";
     private static final Logger l = Bukkit.getLogger();

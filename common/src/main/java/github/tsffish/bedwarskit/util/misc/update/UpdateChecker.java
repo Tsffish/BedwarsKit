@@ -11,7 +11,12 @@ import java.util.function.Consumer;
 
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class UpdateChecker {
     private final JavaPlugin plugin;
     private final int resourceId;

@@ -6,7 +6,12 @@ import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class DisableVillagerAI {
     private static final String className = "DisableVillagerAI";
     public static void disableVillagerAI(String worldName){

@@ -13,7 +13,12 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.addBreakBed;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.updatePlayerStat;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelBreakBed implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private String bt(

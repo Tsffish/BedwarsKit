@@ -21,7 +21,12 @@ import static github.tsffish.bedwarskit.util.misc.ChatColor.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.PluginState.*;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.*;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class CommandInfo implements CommandExecutor {
     public boolean onCommand(
             CommandSender sender,

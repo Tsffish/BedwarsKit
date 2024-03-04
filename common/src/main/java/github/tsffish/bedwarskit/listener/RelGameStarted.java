@@ -37,7 +37,12 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.DisableVillagerAI.disableVillagerAI;
 import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelGameStarted implements Listener {
     private static final String className = "RelGameStarted";
     private static final BedwarsKit plugin = BedwarsKit.getInstance();

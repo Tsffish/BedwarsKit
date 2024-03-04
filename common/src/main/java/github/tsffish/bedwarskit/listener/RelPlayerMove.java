@@ -9,7 +9,12 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.grassPaneWalk;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerMove implements Listener {
     private static final int glassPaneId = 102;
     private static final GameMode spectator = GameMode.SPECTATOR;

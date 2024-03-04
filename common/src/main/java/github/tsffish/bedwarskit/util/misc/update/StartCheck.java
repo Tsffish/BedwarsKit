@@ -7,7 +7,12 @@ import static github.tsffish.bedwarskit.BedwarsKit.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.PluginState.*;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class StartCheck {
     public static void checkUpdate(int resId)
     {

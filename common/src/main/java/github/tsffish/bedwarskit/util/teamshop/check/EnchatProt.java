@@ -10,7 +10,12 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class EnchatProt {
 
     public static void check(Game game) {

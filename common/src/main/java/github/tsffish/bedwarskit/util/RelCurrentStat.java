@@ -10,7 +10,12 @@ import static github.tsffish.bedwarskit.listener.procol.PlayerVisibility.hidePla
 import static github.tsffish.bedwarskit.listener.procol.PlayerVisibility.showPlayer;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelCurrentStat {
     protected static final String className = "RelCurrentStat";
     private static ConcurrentHashMap<UUID, Integer> playerKill = new ConcurrentHashMap<>(101);

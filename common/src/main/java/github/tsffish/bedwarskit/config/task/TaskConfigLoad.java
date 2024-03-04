@@ -11,7 +11,12 @@ import static github.tsffish.bedwarskit.config.task.TaskConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class TaskConfigLoad{
     private static final String name = "TaskConfigLoad";
     private static final String reason = vauleIsNull;

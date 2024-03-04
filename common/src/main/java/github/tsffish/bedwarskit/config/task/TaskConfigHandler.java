@@ -1,5 +1,10 @@
 package github.tsffish.bedwarskit.config.task;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class TaskConfigHandler {
 
     public static boolean gametask;

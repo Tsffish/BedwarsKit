@@ -32,7 +32,12 @@ import static github.tsffish.bedwarskit.util.misc.MathUtil.formatTime;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
 
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelScoreBoard {
     private static final Material bed = GetBlockType.BED_BLOCK();
     private static ConcurrentHashMap<Integer, String> taskMap;

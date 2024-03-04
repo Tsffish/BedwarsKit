@@ -13,7 +13,12 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.deathGameMode_tpto;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerSpawn implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     @EventHandler

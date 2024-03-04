@@ -5,7 +5,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class KitMenu {
     private static final int perRow = 9;
     public static Inventory kitMenu;

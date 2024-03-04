@@ -26,7 +26,12 @@ import static github.tsffish.bedwarskit.util.RelCurrentStat.setDefaultPlayerStat
 import static github.tsffish.bedwarskit.util.misc.GetBlockType.BED_BLOCK;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelGameOver implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final Material bed_block = BED_BLOCK();

@@ -48,7 +48,12 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.isLastestVersion;
 import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
 import static github.tsffish.bedwarskit.util.misc.SendTab.sendTab;
 import static github.tsffish.bedwarskit.util.task.LeaveCheckTask.leaveList;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerJoin implements Listener {
     void check(Game game){
         EffectHaste.check(game);

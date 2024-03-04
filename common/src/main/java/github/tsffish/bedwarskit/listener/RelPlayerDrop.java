@@ -14,7 +14,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noMoveList;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerDrop implements Listener {
     private static final Material woodSword = Material.WOOD_SWORD;
     private static final Material stoneSword = Material.STONE_SWORD;

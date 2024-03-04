@@ -13,7 +13,12 @@ import static github.tsffish.bedwarskit.util.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
 import static github.tsffish.bedwarskit.util.RelPlayerIsRespawn.removePlayerRespawn;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class RelPlayerLeave implements Listener {
     private static final String className = "RelPlayerLeave";
     private static final float resFallDis = 0.0f;

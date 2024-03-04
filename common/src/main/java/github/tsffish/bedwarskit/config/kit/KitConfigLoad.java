@@ -16,7 +16,12 @@ import static github.tsffish.bedwarskit.util.kit.KitOpenItem.loadKitMenuItem;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
 import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class KitConfigLoad {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     public static void loadKitConfig() {

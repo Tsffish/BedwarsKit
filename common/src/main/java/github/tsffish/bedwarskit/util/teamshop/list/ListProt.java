@@ -7,7 +7,12 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-
+/**
+ * A Addon for BedwarsRel, Added some features to BedwarsRel
+ * github.com/Tsffish/BedwarsKit
+ *
+ * @author Tsffish
+ */
 public class ListProt {
     private static ConcurrentHashMap<String, List<String[]>> listMap = new ConcurrentHashMap<>(24);
     public static void setTeamDatas(String gameName, List<String[]> newTeamDatas) {
