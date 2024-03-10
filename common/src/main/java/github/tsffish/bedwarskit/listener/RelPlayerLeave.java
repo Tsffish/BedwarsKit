@@ -9,10 +9,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
-import static github.tsffish.bedwarskit.util.RelArmorList.*;
-import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
-import static github.tsffish.bedwarskit.util.RelPlayerIsRespawn.removePlayerRespawn;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.player.RelArmorList.*;
+import static github.tsffish.bedwarskit.util.player.RelCurrentStat.*;
+import static github.tsffish.bedwarskit.util.player.RelPlayerIsRespawn.removePlayerRespawn;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -22,27 +23,31 @@ import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 public class RelPlayerLeave implements Listener {
     private static final String className = "RelPlayerLeave";
     private static final float resFallDis = 0.0f;
+
     @EventHandler
     public void on(final BedwarsPlayerLeaveEvent event) {
         try {
             Player player = event.getPlayer();
-            UUID uuid = player.getUniqueId();
+            UUID playerUUID = player.getUniqueId();
+
+            event.getGame().getPlayers().remove(player);
 
             player.setFallDistance(resFallDis);
 
-            removeArmorChain(uuid);
-            removeArmorIron(uuid);
-            removeArmorDiamond(uuid);
+            removeArmorChain(playerUUID);
+            removeArmorIron(playerUUID);
+            removeArmorDiamond(playerUUID);
 
-            setDefaultPlayerStat(uuid);
+            setDefaultPlayerStat(playerUUID);
 
-            removePlayerIsOut(uuid);
-            removePlayerStat(uuid);
-            removePlayerRespawn(uuid);
+            removePlayerIsOut(playerUUID);
+            removePlayerStat(playerUUID);
+            removePlayerRespawn(playerUUID);
 
-        }catch (RuntimeException e){
-            if (!pluginIsDisabling){
-                le(className, "BedwarsPlayerLeaveEvent error:" + e);
+            event.getGame().getPlayers().remove(player);
+        } catch (RuntimeException e) {
+            if (!pluginIsDisabling) {
+                le(className, e);
             }
         }
 
@@ -50,17 +55,17 @@ public class RelPlayerLeave implements Listener {
 
 
     @EventHandler
-    public void on(final PlayerQuitEvent event){
+    public void on(final PlayerQuitEvent event) {
         try {
             Player player = event.getPlayer();
-            UUID uuid = player.getUniqueId();
+            UUID playerUUID = player.getUniqueId();
 
-            removePlayerIsOut(uuid);
-            removePlayerRespawn(uuid);
+            removePlayerIsOut(playerUUID);
+            removePlayerRespawn(playerUUID);
 
-        }catch (RuntimeException e){
-            if (!pluginIsDisabling){
-                le(className, "PlayerQuitEvent error:" + e);
+        } catch (RuntimeException e) {
+            if (!pluginIsDisabling) {
+                le(className, e);
             }
         }
     }

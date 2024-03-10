@@ -1,4 +1,5 @@
 package github.tsffish.bedwarskit.config.task;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -156,4 +157,40 @@ public class TaskConfigHandler {
     public static String gametask_mess_finalbattle_title;
     public static String gametask_mess_finalbattle_subtitle;
     public static String gametask_mess_finalbattle_actionbar;
+
+    public static int gametask_time_healthset1;
+    public static int gametask_time_healthset2;
+    public static int gametask_time_healthset3;
+    public static int gametask_time_healthset4;
+
+    public static double gametask_healthset_1;
+    public static double gametask_healthset_2;
+    public static double gametask_healthset_3;
+    public static double gametask_healthset_4;
+
+
+    public static String gametask_name_healthset1;
+    public static String gametask_name_healthset2;
+    public static String gametask_name_healthset3;
+    public static String gametask_name_healthset4;
+
+
+    public static String gametask_mess_healthset1_chat;
+    public static String gametask_mess_healthset1_title;
+    public static String gametask_mess_healthset1_subtitle;
+    public static String gametask_mess_healthset1_actionbar;
+    public static String gametask_mess_healthset2_chat;
+    public static String gametask_mess_healthset2_title;
+    public static String gametask_mess_healthset2_subtitle;
+    public static String gametask_mess_healthset2_actionbar;
+    public static String gametask_mess_healthset3_chat;
+    public static String gametask_mess_healthset3_title;
+    public static String gametask_mess_healthset3_subtitle;
+    public static String gametask_mess_healthset3_actionbar;
+    public static String gametask_mess_healthset4_chat;
+    public static String gametask_mess_healthset4_title;
+    public static String gametask_mess_healthset4_subtitle;
+    public static String gametask_mess_healthset4_actionbar;
+
+
 }

@@ -1,6 +1,8 @@
-# ================= #
+# ================== #
 # BedwarsKit 任务配置 #
 # ================= #
+config-version: "1.9.57"
+# 不要修改: 配置文件版本，如果不符合当前插件使用的版本，该文件会自动重命名
 
 gametask: true
 gametask_spawntime: true
@@ -29,8 +31,12 @@ gametask_finalbattle: true
 gametask_finalbattle_boundaries_size: 32
 gametask_finalbattle_boundaries_time: 60
 gametask_finalbattle_boundaries_warnidis: 0
-gametask_finalbattle_boundaries_damagebuffer: 1
-gametask_finalbattle_boundaries_damage: 1
+gametask_finalbattle_boundaries_damagebuffer: 0
+gametask_finalbattle_boundaries_damage: 6
+gametask_healthset_1: 24.0
+gametask_healthset_2: 28.0
+gametask_healthset_3: 34.0
+gametask_healthset_4: 40.0
 # 游戏任务：是否启用倒计时任务功能
 # gametask_splaytime：启用资源点速度控制任务
 # gametask_spaytime__此资源1/2/3/4的速度控制级别的速度，以毫秒为单位
@@ -42,23 +48,27 @@ gametask_finalbattle_boundaries_damage: 1
 # gametask_finalbattle'边界_图像：杀戮模式下的世界边界伤害
 
 
-gametask_spawntime_tasks_iron1: 200
-gametask_spawntime_tasks_iron2: 400
-gametask_spawntime_tasks_iron3: 600
-gametask_spawntime_tasks_iron4: 800
-gametask_spawntime_tasks_gold1: 1000
-gametask_spawntime_tasks_gold2: 1200
+gametask_spawntime_tasks_iron1: 400
+gametask_spawntime_tasks_iron2: 800
+gametask_spawntime_tasks_iron3: 1600
+gametask_spawntime_tasks_iron4: 2200
+gametask_spawntime_tasks_gold1: 600
+gametask_spawntime_tasks_gold2: 600
 gametask_spawntime_tasks_gold3: 1400
-gametask_spawntime_tasks_gold4: 1600
-gametask_spawntime_tasks_diamond1: 1800
-gametask_spawntime_tasks_diamond2: 2000
-gametask_spawntime_tasks_diamond3: 2200
-gametask_spawntime_tasks_diamond4: 2400
-gametask_spawntime_tasks_emerald1: 2600
-gametask_spawntime_tasks_emerald2: 2800
-gametask_spawntime_tasks_emerald3: 3000
-gametask_spawntime_tasks_emerald4: 3200
-gametask_finalbattle_time: 3400
+gametask_spawntime_tasks_gold4: 2400
+gametask_spawntime_tasks_diamond1: 200
+gametask_spawntime_tasks_diamond2: 1200
+gametask_spawntime_tasks_diamond3: 2000
+gametask_spawntime_tasks_diamond4: 2600
+gametask_spawntime_tasks_emerald1: 2500
+gametask_spawntime_tasks_emerald2: 1000
+gametask_spawntime_tasks_emerald3: 1800
+gametask_spawntime_tasks_emerald4: 2800
+gametask_finalbattle_time: 3000
+gametask_time_healthset1: 300
+gametask_time_healthset2: 900
+gametask_time_healthset3: 1700
+gametask_time_healthset4: 2700
 # 执行任务需要多长时间？游戏以秒为单位开始计数
 # 游戏任务_当押时间_任务_1/2/3/4：资源任务
 # 游戏任务_最后战斗_时间：杀戮模式任务
@@ -80,6 +90,10 @@ gametask_name_emerald2: "\u7eff\u5b9d\u77f3 \u5347\u7ea7\u81f3 II"
 gametask_name_emerald3: "\u7eff\u5b9d\u77f3 \u5347\u7ea7\u81f3 III"
 gametask_name_emerald4: "\u7eff\u5b9d\u77f3 \u5347\u7ea7\u81f3 IV"
 gametask_name_finalbattle: "\u7edd\u6740\u6a21\u5f0f"
+gametask_name_healthset1: "\u751f\u547d\u503c\u63d0\u5347 I"
+gametask_name_healthset2: "\u751f\u547d\u503c\u63d0\u5347 II"
+gametask_name_healthset3: "\u751f\u547d\u503c\u63d0\u5347 III"
+gametask_name_healthset4: "\u751f\u547d\u503c\u63d0\u5347 IV"
 # gametaskname：记分牌上任务的名称
 # gametask_name_....1/2/3/4 : 资源点调速等级
 # finalbattle：绝杀模式
@@ -87,73 +101,90 @@ gametask_name_finalbattle: "\u7edd\u6740\u6a21\u5f0f"
 #完成任务后发送的信息
 gametask_mess_iron1_chat: ""
 gametask_mess_iron1_title: ""
-gametask_mess_iron1_subtitle: "&4&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_iron1_subtitle: "&f&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_iron1_actionbar: ""
 gametask_mess_iron2_chat: ""
 gametask_mess_iron2_title: ""
-gametask_mess_iron2_subtitle: "&4&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_iron2_subtitle: "&f&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_iron2_actionbar: ""
 gametask_mess_iron3_chat: ""
 gametask_mess_iron3_title: ""
-gametask_mess_iron3_subtitle: "&4&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_iron3_subtitle: "&f&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_iron3_actionbar: ""
 gametask_mess_iron4_chat: ""
 gametask_mess_iron4_title: ""
-gametask_mess_iron4_subtitle: "&4&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_iron4_subtitle: "&f&l\u94c1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_iron4_actionbar: ""
 
 gametask_mess_gold1_chat: ""
 gametask_mess_gold1_title: ""
-gametask_mess_gold1_subtitle: "&4&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_gold1_subtitle: "&f&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_gold1_actionbar: ""
 gametask_mess_gold2_chat: ""
 gametask_mess_gold2_title: ""
-gametask_mess_gold2_subtitle: "&4&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_gold2_subtitle: "&f&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_gold2_actionbar: ""
 gametask_mess_gold3_chat: ""
 gametask_mess_gold3_title: ""
-gametask_mess_gold3_subtitle: "&4&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_gold3_subtitle: "&f&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_gold3_actionbar: ""
 gametask_mess_gold4_chat: ""
 gametask_mess_gold4_title: ""
-gametask_mess_gold4_subtitle: "&4&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_gold4_subtitle: "&f&l\u91d1\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_gold4_actionbar: ""
 
 gametask_mess_diamond1_chat: ""
 gametask_mess_diamond1_title: ""
-gametask_mess_diamond1_subtitle: "&4&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_diamond1_subtitle: "&f&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_diamond1_actionbar: ""
 gametask_mess_diamond2_chat: ""
 gametask_mess_diamond2_title: ""
-gametask_mess_diamond2_subtitle: "&4&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_diamond2_subtitle: "&f&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_diamond2_actionbar: ""
 gametask_mess_diamond3_chat: ""
 gametask_mess_diamond3_title: ""
-gametask_mess_diamond3_subtitle: "&4&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_diamond3_subtitle: "&f&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_diamond3_actionbar: ""
 gametask_mess_diamond4_chat: ""
 gametask_mess_diamond4_title: ""
-gametask_mess_diamond4_subtitle: "&4&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_diamond4_subtitle: "&f&l\u94bb\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_diamond4_actionbar: ""
 
 gametask_mess_emerald1_chat: ""
 gametask_mess_emerald1_title: ""
-gametask_mess_emerald1_subtitle: "&4&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_emerald1_subtitle: "&f&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_emerald1_actionbar: ""
 gametask_mess_emerald2_chat: ""
 gametask_mess_emerald2_title: ""
-gametask_mess_emerald2_subtitle: "&4&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_emerald2_subtitle: "&f&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_emerald2_actionbar: ""
 gametask_mess_emerald3_chat: ""
 gametask_mess_emerald3_title: ""
-gametask_mess_emerald3_subtitle: "&4&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_emerald3_subtitle: "&f&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_emerald3_actionbar: ""
 gametask_mess_emerald4_chat: ""
 gametask_mess_emerald4_title: ""
-gametask_mess_emerald4_subtitle: "&4&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
+gametask_mess_emerald4_subtitle: "&f&l\u7eff\u5b9d\u77f3\u8d44\u6e90\u751f\u6210\u52a0\u901f"
 gametask_mess_emerald4_actionbar: ""
 
 gametask_mess_finalbattle_chat: "&f\u8fb9\u754c\u5f00\u59cb\u7f29\u5c0f\uff0c\u5c3d\u5feb\u524d\u5f80\u4e3b\u5c9b\u4ee5\u89c4\u907f\u4f24\u5bb3\uff01"
-gametask_mess_finalbattle_title: "&4&l\u7edd\u6740\u6a21\u5f0f"
+gametask_mess_finalbattle_title: "&f&l\u7edd\u6740\u6a21\u5f0f"
 gametask_mess_finalbattle_subtitle: "&f\u8fb9\u754c\u5f00\u59cb\u7f29\u5c0f"
 gametask_mess_finalbattle_actionbar: ""
+
+gametask_mess_healthset1_chat: ""
+gametask_mess_healthset1_title: "&b&l\u751f\u547d\u503c\u63d0\u5347!"
+gametask_mess_healthset1_subtitle: ""
+gametask_mess_healthset1_actionbar: ""
+gametask_mess_healthset2_chat: ""
+gametask_mess_healthset2_title: "&b&l\u751f\u547d\u503c\u63d0\u5347!"
+gametask_mess_healthset2_subtitle: ""
+gametask_mess_healthset2_actionbar: ""
+gametask_mess_healthset3_chat: ""
+gametask_mess_healthset3_title: "&b&l\u751f\u547d\u503c\u63d0\u5347!"
+gametask_mess_healthset3_subtitle: ""
+gametask_mess_healthset3_actionbar: ""
+gametask_mess_healthset4_chat: ""
+gametask_mess_healthset4_title: "&b&l\u751f\u547d\u503c\u63d0\u5347!"
+gametask_mess_healthset4_subtitle: ""
+gametask_mess_healthset4_actionbar: ""

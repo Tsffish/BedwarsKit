@@ -1,10 +1,11 @@
 package github.tsffish.bedwarskit.config.main;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.inventory.InventoryType;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -12,22 +13,18 @@ import java.util.Map;
  * @author Tsffish
  */
 public class MainConfigHandler {
-    public static FileConfiguration c;
     public static boolean breakTitle;
     public static boolean noHunger;
     public static boolean noPearlDamage;
     public static boolean noPearlDamage_TPSound;
-    public static boolean breakBedCheck;
     public static boolean deathGameMode;
     public static boolean startKitCompass;
-    public static boolean customScoreboard;
     public static boolean antiDrop;
-    public static boolean grassPaneWalk;
     public static boolean cleanBottle;
     public static boolean cleanBed;
     public static boolean levelupShopDelayOpen;
     public static boolean kill_res;
-    public static boolean NoItemBreak;
+    public static boolean noItemBreak;
     public static boolean levelupShop;
     public static boolean damagefb_attackBlood;
     public static boolean startmess;
@@ -57,9 +54,6 @@ public class MainConfigHandler {
     public static int maxFoodLevel;
     public static int respawnDelay;
 
-    public static double tpDis;
-
-
 
     public static String breakTitleAll;
     public static String breakSubTitleAll;
@@ -68,9 +62,9 @@ public class MainConfigHandler {
     public static String breakTitleBreakTeam;
     public static String breakSubTitleBreakTeam;
 
-    public static String rushWorld;
-    public static String rushWorld2v2;
-    public static String rushWorld4v4;
+    public static String gameWorld;
+    public static String gameWorld2v2;
+    public static String gameWorld4v4;
     public static String lobbyWorld;
     public static String respawnTitle;
     public static String respawnSubTitle;
@@ -81,12 +75,6 @@ public class MainConfigHandler {
     public static String respawnSuccSubTitle;
     public static String respawnSuccChat;
     public static String respawnSuccActionBar;
-    public static String meanTeamBedYes;
-    public static String meanTeamBedNo;
-    public static String meanTeamNone;
-    public static String meanYou;
-    public static String meanNotYou;
-    public static String serverIp;
     public static String relTeamName_Red;
     public static String relTeamName_Blue;
     public static String relTeamName_Green;
@@ -118,49 +106,8 @@ public class MainConfigHandler {
     public static String messLevelUpFailed;
     public static String messreloadnow;
     public static String messreloadsucc;
-    public static String meanBedwars;
-    public static String mean2v2Mode;
-    public static String mean4v4Mode;
     public static String levelupShopOpenMode;
     public static String levelupShopOpenModeEntityName;
-    public static String ScoreBoard2v2Title;
-    public static String ScoreBoard2v2Line01;
-    public static String ScoreBoard2v2Line02;
-    public static String ScoreBoard2v2Line03;
-    public static String ScoreBoard2v2Line04;
-    public static String ScoreBoard2v2Line05;
-    public static String ScoreBoard2v2Line06;
-    public static String ScoreBoard2v2Line07;
-    public static String ScoreBoard2v2Line08;
-    public static String ScoreBoard2v2Line09;
-    public static String ScoreBoard2v2Line10;
-    public static String ScoreBoard2v2Line11;
-    public static String ScoreBoard2v2Line12;
-    public static String ScoreBoard2v2Line13;
-    public static String ScoreBoard2v2Line14;
-    public static String ScoreBoard2v2Line15;
-    public static String ScoreBoard2v2Line16;
-    public static String ScoreBoard4v4Title;
-    public static String ScoreBoard4v4Line01;
-    public static String ScoreBoard4v4Line02;
-    public static String ScoreBoard4v4Line03;
-    public static String ScoreBoard4v4Line04;
-    public static String ScoreBoard4v4Line05;
-    public static String ScoreBoard4v4Line06;
-    public static String ScoreBoard4v4Line07;
-    public static String ScoreBoard4v4Line08;
-    public static String ScoreBoard4v4Line09;
-    public static String ScoreBoard4v4Line10;
-    public static String ScoreBoard4v4Line11;
-    public static String ScoreBoard4v4Line12;
-    public static String ScoreBoard4v4Line13;
-    public static String ScoreBoard4v4Line14;
-    public static String ScoreBoard4v4Line15;
-    public static String ScoreBoard4v4Line16;
-    public static Map<Integer, String> ScoreBoard2v2Line;
-    public static Map<Integer, String> ScoreBoard4v4Line;
-
-
     public static Material LevelupItemType;
     public static Material chainPriceType;
     public static Material ironPriceType;
@@ -182,20 +129,16 @@ public class MainConfigHandler {
     public static int damagefb_attackBloodType;
 
 
-
     public static String startmess_all_chat;
     public static String startmess_all_title;
     public static String startmess_all_subtitle;
     public static String startmess_all_actionbar;
 
-
-
-    public static String shopItem;
+    public static boolean openShopOnCustomEntityName;
+    public static String shopItemEntityName;
     public static boolean update_reportOp;
 
-;
-
-    public static boolean preventloadworld;
+    public static boolean preventLoadWorld;
 
     public static boolean placeCorrect_ResSpawner;
     public static String placeCorrect_ResSpawner_mess_chat;
@@ -219,13 +162,10 @@ public class MainConfigHandler {
 
     public static boolean breakCorrect_notInGame;
 
-    public static boolean CleanHostileOnStart;
+    public static boolean cleanHostileOnStart;
 
 
     public static String kill_res_chat;
-
-    public static String meanGameEnd;
-
 
     public static boolean placeCorrect_notInGame_OpBypass;
     public static boolean breakCorrect_notInGame_OpBypass;
@@ -237,13 +177,9 @@ public class MainConfigHandler {
     public static String lobbyjoinTeamMess_subtitle;
     public static String lobbyjoinTeamMess_actionbar;
 
-
     public static int teamEnchInvRow;
 
-
-
     public static boolean tab;
-
 
     public static boolean tab_is_multiLine;
     public static String tab_head;
@@ -263,7 +199,6 @@ public class MainConfigHandler {
 
     public static String teamEnchItemName_sharpMax;
     public static String teamEnchItemName_protMax;
-
 
 
     public static Material leveluphasteItemType;
@@ -313,13 +248,7 @@ public class MainConfigHandler {
     public static Material levelupresItemType;
     public static int levelupresItemSlot;
     public static String levelupresItemName;
-
-
-
-
-
-
-
-
-
+    public static boolean noEndermanGriefing;
+    public static boolean noOpenInventory;
+    public static Set<InventoryType> noOpenInventoryTypeList;
 }

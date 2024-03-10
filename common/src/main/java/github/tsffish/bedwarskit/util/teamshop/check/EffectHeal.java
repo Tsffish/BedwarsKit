@@ -1,14 +1,14 @@
 package github.tsffish.bedwarskit.util.teamshop.check;
 
 import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
-import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
+import io.github.bedwarsrel.game.Team;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+import java.util.Set;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.teamEff_Heal_dis;
 
@@ -20,16 +20,19 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.teamEff_He
  */
 public class EffectHeal {
     static final PotionEffectType heal = PotionEffectType.REGENERATION;
+
     public static void check(Game game) {
 
         String gameName = game.getName();
 
-        BedwarsRel.getInstance().getGameManager().getGame(gameName);
+        if (ListHeal.getTeamDatas(gameName) == null) {
+            return;
+        }
 
-        List<String[]> teamDatas = ListHeal.getTeamDatas(gameName);
+        Set<String[]> teamDatas = ListHeal.getTeamDatas(gameName);
 
-        for (Player list : game.getPlayers()) {
-            String teamName = game.getPlayerTeam(list).getName();
+        for (Team team : game.getPlayingTeams()) {
+            String teamName = team.getName();
 
             for (String[] strings : teamDatas) {
                 if (strings[0].equals(teamName)) {
@@ -48,25 +51,24 @@ public class EffectHeal {
                             break;
                     }
 
-                    if (finallyLevel >= 0){
-
-                    Location spawnLoc = BedwarsRel
-                            .getInstance()
-                            .getGameManager()
-                            .getGameOfPlayer(list)
-                            .getPlayerTeam(list)
-                            .getSpawnLocation();
-
-                    Location current = list.getLocation();
-
-                    if (current.distance(spawnLoc) < teamEff_Heal_dis) {
-
-                        list.addPotionEffect(
-                                new PotionEffect(
-                                        heal,
-                                        10 * 20,
-                                        finallyLevel));
+                    if (finallyLevel < 0) {
+                        return;
                     }
+                    Location spawnLoc = team.getSpawnLocation();
+                    if (!team.getPlayers().isEmpty()) {
+                        for (Player player : team.getPlayers()) {
+
+                            Location current = player.getLocation();
+
+                            if (current.distance(spawnLoc) < teamEff_Heal_dis) {
+
+                                player.addPotionEffect(
+                                        new PotionEffect(
+                                                heal,
+                                                10 * 20,
+                                                finallyLevel));
+                            }
+                        }
                     }
                 }
             }

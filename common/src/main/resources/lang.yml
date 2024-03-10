@@ -1,6 +1,9 @@
 # ====================== #
 # BedwarsKit Lang Config #
 # ====================== #
+config-version: "1.9.57"
+# Do not modify: The configuration file will be automatically
+# renamed if it does not match the version currently used by the plugin
 
 update_tip:
   - "&a ================================"
@@ -18,6 +21,11 @@ command_help:
   - "&f "
   - "&f /bwk &eDisplay this help information."
   - "&f /bwk reload &eReload configuration file."
-  - "&f /bwk debug &eToggle debug mode."
+  - "&f /bwk edit &eToggle edit mode."
   - "&f "
   - "&a ================================"
+needIsWrong_preventLoadWorld: "&epreventLoadWorld is on but BedwarsRel's Config -> {path} is wrong, setting..."
+needIsWrong_killfb_oneHealthKill: "&ekillfb_oneHealthKill is on but BedwarsRel's Config -> {path} is wrong, setting..."
+relConfigIsChange_tryToSave: "&eBedwarsRel's Config is changed, saving..."
+relConfigIsChange_Saved: "&aBedwarsRel's Config is saved."
+meanInvalidInventoryType: "Invalid InventoryType: {type}"

@@ -1,4 +1,5 @@
 package github.tsffish.bedwarskit.config.kit;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -35,8 +36,6 @@ class KitConfigPath {
     static final String path_KitNoneItemLore = "KitNoneItemLore";
     static final String path_KitNoneName = "KitNoneName";
     static final String path_KitNoneDescription = "KitNoneDescription";
-
-
 
 
     static final String path_KitDefaultlessItemType = "KitDefaultlessItemType";

@@ -1,11 +1,14 @@
 # ===================== #
 # BedwarsKit Kit Config #
 # ===================== #
+config-version: "1.9.57"
+# Do not modify: The configuration file will be automatically
+# renamed if it does not match the version currently used by the plugin
 
 kitenable: true
 kitDefault: "default"
 kitForce: false
-kitForceKit: "Default"
+kitForceKit: "default"
 
 kitMenuTitle: "Select a Kit"
 kitMenurow: 6
@@ -31,7 +34,7 @@ KitDefaultItemLore:
   - "&fPermanent armor"
   - "&fPermanent speed effect"
   - "&f"
-KitDefault_Boost_GiveSpeed_enable: true
+KitDefault_Boost_GiveSpeed_enable: false
 KitDefault_Boost_GiveSpeed_level: 1
 
 KitNoneName: "None"

@@ -22,18 +22,21 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.killfb_one
 import static github.tsffish.bedwarskit.util.RelArmorColor.*;
 import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.GetItemType.WOOD_SWORD;
-import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
  *
  * @author Tsffish
  */
-public class KitDefault{
+public class KitDefault {
     private static final String className = "KitDefault";
     private static final int EffectTime = 999999;
     public static String description;
+    static ItemStack kitItemInMenu;
+    static ItemStack wood_sword;
+    static ItemStack wood_pickaxe;
+    static ItemStack wood_axe;
     private static Material helmetItemType;
     private static Material chestItemType;
     private static Material legItemType;
@@ -47,26 +50,18 @@ public class KitDefault{
     private static ItemStack chestItem;
     private static ItemStack legItem;
     private static ItemStack bootItem;
-    static ItemStack kitItemInMenu;
-    static ItemStack wood_sword;
-    static ItemStack wood_pickaxe;
-    static ItemStack wood_axe;
+
     public static void loadKit(boolean Colored) {
-        Material ws = WOOD_SWORD();
-        if (ws != null){
-            wood_sword = new ItemStack(ws,1);
-        }else {
-            le(className,"wood_sword is null,cant set it");
-        }
-        wood_pickaxe = new ItemStack(Material.WOOD_PICKAXE,1);
-        wood_axe = new ItemStack(Material.WOOD_AXE,1);
+        wood_sword = new ItemStack(Material.WOOD_SWORD, 1);
+        wood_pickaxe = new ItemStack(Material.WOOD_PICKAXE, 1);
+        wood_axe = new ItemStack(Material.WOOD_AXE, 1);
 
         kitItemInMenu = new ItemStack(KitDefaultItemType, KitDefaultItemAmount);
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
 
         List<String> lore = new ArrayList<>(8);
 
-        for (String s : KitDefaultItemLore){
+        for (String s : KitDefaultItemLore) {
             lore.add(t(s));
         }
 
@@ -80,7 +75,7 @@ public class KitDefault{
 
         helmetItemAmount = 1;
         chestItemAmount = 1;
-        legItemAmount =1;
+        legItemAmount = 1;
         bootItemAmount = 1;
 
         helmetItemType = Material.LEATHER_HELMET;
@@ -105,22 +100,22 @@ public class KitDefault{
         pi.setLeggings(legItem);
         pi.setBoots(bootItem);
 
-        if (wood_sword != null){
-            if (pi.getItemInHand().getType() != killfb_oneHealthKill_itemType){
-            pi.setItemInHand(wood_sword);
-            }else if (!pi.contains(wood_sword)){
+        if (wood_sword != null) {
+            if (pi.getItemInHand().getType() != killfb_oneHealthKill_itemType) {
+                pi.setItemInHand(wood_sword);
+            } else if (!pi.contains(wood_sword)) {
                 pi.addItem(wood_sword);
             }
         }
 
-        if (wood_pickaxe != null){
-            if(!pi.contains(wood_pickaxe)){
+        if (wood_pickaxe != null) {
+            if (!pi.contains(wood_pickaxe)) {
                 pi.addItem(wood_pickaxe);
             }
         }
 
-        if (wood_axe != null){
-            if(!pi.contains(wood_axe)){
+        if (wood_axe != null) {
+            if (!pi.contains(wood_axe)) {
                 pi.addItem(wood_axe);
             }
         }

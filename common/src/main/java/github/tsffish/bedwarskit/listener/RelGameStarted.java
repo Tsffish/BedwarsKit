@@ -1,8 +1,12 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
-import github.tsffish.bedwarskit.util.misc.SoundPlayer;
+import github.tsffish.bedwarskit.util.player.SoundPlayer;
 import github.tsffish.bedwarskit.util.task.game.*;
+import github.tsffish.bedwarskit.util.task.text.ResDiamondTextTask;
+import github.tsffish.bedwarskit.util.task.text.ResEmeraldTextTask;
+import github.tsffish.bedwarskit.util.task.text.ResGoldTextTask;
+import github.tsffish.bedwarskit.util.task.text.ResIronTextTask;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
 import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
 import github.tsffish.bedwarskit.util.teamshop.list.ListProt;
@@ -12,6 +16,8 @@ import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.ResourceSpawner;
 import io.github.bedwarsrel.game.Team;
 import org.bukkit.*;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,16 +33,20 @@ import java.util.*;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.config.task.TaskConfigHandler.*;
-import static github.tsffish.bedwarskit.util.RelArmorList.*;
-import static github.tsffish.bedwarskit.util.RelCurrentStat.removePlayerIsOut;
-import static github.tsffish.bedwarskit.util.RelCurrentStat.setDefaultPlayerStat;
-import static github.tsffish.bedwarskit.util.RelPlayerIsRespawn.removePlayerRespawn;
-import static github.tsffish.bedwarskit.util.RelPlayerKit.applykit;
-import static github.tsffish.bedwarskit.util.RelPlayerKit.applykitforce;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.DisableVillagerAI.disableVillagerAI;
-import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
-import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
+import static github.tsffish.bedwarskit.util.misc.DisableAI.disableAI;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
+import static github.tsffish.bedwarskit.util.player.RelArmorList.*;
+import static github.tsffish.bedwarskit.util.player.RelCurrentStat.removePlayerIsOut;
+import static github.tsffish.bedwarskit.util.player.RelCurrentStat.setDefaultPlayerStat;
+import static github.tsffish.bedwarskit.util.player.RelPlayerIsRespawn.removePlayerRespawn;
+import static github.tsffish.bedwarskit.util.player.RelPlayerKit.applykit;
+import static github.tsffish.bedwarskit.util.player.RelPlayerKit.applykitforce;
+import static github.tsffish.bedwarskit.util.player.SendActionBar.sendActionBar;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -53,6 +63,7 @@ public class RelGameStarted implements Listener {
     private static final String meanfalse = "false";
     private static final int maxSize = 9999;
     private static final DisplaySlot sidebar = DisplaySlot.SIDEBAR;
+
     @EventHandler
     public void on(final BedwarsGameStartedEvent event) {
 
@@ -62,6 +73,12 @@ public class RelGameStarted implements Listener {
         world.setThundering(false);
         world.setWeatherDuration(0);
         world.setGameRuleValue(doWeatherCycle, meanfalse);
+
+        for (Entity entity : world.getEntities()) {
+            if (entity instanceof ArmorStand) {
+                entity.remove();
+            }
+        }
 
         WorldBorder worldBorder = world.getWorldBorder();
         worldBorder.setCenter(game.getLobby());
@@ -80,123 +97,138 @@ public class RelGameStarted implements Listener {
             ListSharp.setTeamDatasDefault(gameName, teamList);
             ListProt.setTeamDatasDefault(gameName, teamList);
         } else {
-            System.out.println("teamMap is null or empty.");
+            if (isDebug()) {
+                le(className, "teamMap is null or empty.");
+            }
         }
 
-                    if (gametask) {
-                        if (gametask_spawntime) {
+        if (gametask) {
+            if (gametask_spawntime) {
 
-                            List<ResourceSpawner> resourceSpawners = game.getResourceSpawners();
-                            resourceSpawners.forEach(spawner -> spawner.getResources().stream()
-                                    .filter(Objects::nonNull)
-                                    .findFirst()
-                                    .ifPresent(item -> {
-                                        if (item.getType() == Material.IRON_INGOT) {
-                                            spawner.setInterval(gametask_spawntime_iron_base);
-                                        } else if (item.getType() == Material.GOLD_INGOT) {
-                                            spawner.setInterval(gametask_spawntime_gold_base);
-                                        } else if (item.getType() == Material.DIAMOND) {
-                                            spawner.setInterval(gametask_spawntime_diamond_base);
-                                        } else if (item.getType() == Material.EMERALD) {
-                                            spawner.setInterval(gametask_spawntime_emerald_base);
-                                        }
-                                    }));
-
-                            if (gametask_spawntime_tasks_iron1 > 0) Iron1.runTask(game);
-                            if (gametask_spawntime_tasks_iron2 > 0) Iron2.runTask(game);
-                            if (gametask_spawntime_tasks_iron3 > 0) Iron3.runTask(game);
-                            if (gametask_spawntime_tasks_iron4 > 0) Iron4.runTask(game);
-
-                            if (gametask_spawntime_tasks_gold1 > 0) Gold1.runTask(game);
-                            if (gametask_spawntime_tasks_gold2 > 0) Gold2.runTask(game);
-                            if (gametask_spawntime_tasks_gold3 > 0) Gold3.runTask(game);
-                            if (gametask_spawntime_tasks_gold4 > 0) Gold4.runTask(game);
-
-                            if (gametask_spawntime_tasks_diamond1 > 0) Diamond1.runTask(game);
-                            if (gametask_spawntime_tasks_diamond2 > 0) Diamond2.runTask(game);
-                            if (gametask_spawntime_tasks_diamond3 > 0) Diamond3.runTask(game);
-                            if (gametask_spawntime_tasks_diamond4 > 0) Diamond4.runTask(game);
-
-
-                            if (gametask_spawntime_tasks_emerald1 > 0) Emerald1.runTask(game);
-                            if (gametask_spawntime_tasks_emerald2 > 0) Emerald2.runTask(game);
-                            if (gametask_spawntime_tasks_emerald3 > 0) Emerald3.runTask(game);
-                            if (gametask_spawntime_tasks_emerald4 > 0) Emerald4.runTask(game);
-
-                            if (gametask_finalbattle) {
-                                if (gametask_finalbattle_time > 0) FinalBattle.runTask(game);
+                List<ResourceSpawner> resourceSpawners = game.getResourceSpawners();
+                resourceSpawners.forEach(spawner -> spawner.getResources().stream()
+                        .filter(Objects::nonNull)
+                        .findFirst()
+                        .ifPresent(item -> {
+                            if (item.getType() == Material.IRON_INGOT) {
+                                spawner.setInterval(gametask_spawntime_iron_base);
+                            } else if (item.getType() == Material.GOLD_INGOT) {
+                                spawner.setInterval(gametask_spawntime_gold_base);
+                            } else if (item.getType() == Material.DIAMOND) {
+                                spawner.setInterval(gametask_spawntime_diamond_base);
+                            } else if (item.getType() == Material.EMERALD) {
+                                spawner.setInterval(gametask_spawntime_emerald_base);
                             }
+                        }));
+
+                if (gametask_spawntime_tasks_iron1 > 0) TaskIron1.runTask(game);
+                if (gametask_spawntime_tasks_iron2 > 0) TaskIron2.runTask(game);
+                if (gametask_spawntime_tasks_iron3 > 0) TaskIron3.runTask(game);
+                if (gametask_spawntime_tasks_iron4 > 0) TaskIron4.runTask(game);
+
+                if (gametask_spawntime_tasks_gold1 > 0) TaskGold1.runTask(game);
+                if (gametask_spawntime_tasks_gold2 > 0) TaskGold2.runTask(game);
+                if (gametask_spawntime_tasks_gold3 > 0) TaskGold3.runTask(game);
+                if (gametask_spawntime_tasks_gold4 > 0) TaskGold4.runTask(game);
+
+                if (gametask_spawntime_tasks_diamond1 > 0) TaskDiamond1.runTask(game);
+                if (gametask_spawntime_tasks_diamond2 > 0) TaskDiamond2.runTask(game);
+                if (gametask_spawntime_tasks_diamond3 > 0) TaskDiamond3.runTask(game);
+                if (gametask_spawntime_tasks_diamond4 > 0) TaskDiamond4.runTask(game);
+
+
+                if (gametask_spawntime_tasks_emerald1 > 0) TaskEmerald1.runTask(game);
+                if (gametask_spawntime_tasks_emerald2 > 0) TaskEmerald2.runTask(game);
+                if (gametask_spawntime_tasks_emerald3 > 0) TaskEmerald3.runTask(game);
+                if (gametask_spawntime_tasks_emerald4 > 0) TaskEmerald4.runTask(game);
+
+            }
+
+            if (gametask_time_healthset1 > 0) TaskHealthSet1.runTask(game);
+            if (gametask_time_healthset2 > 0) TaskHealthSet2.runTask(game);
+            if (gametask_time_healthset3 > 0) TaskHealthSet3.runTask(game);
+            if (gametask_time_healthset4 > 0) TaskHealthSet4.runTask(game);
+
+            if (gametask_finalbattle) {
+                if (gametask_finalbattle_time > 0) TaskFinalBattle.runTask(game);
+            }
+        }
+
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Scoreboard scoreboard = manager.getNewScoreboard();
+        Objective obj = scoreboard.registerNewObjective("load", "dummy");
+        obj.setDisplayName(t("                "));
+        obj.setDisplaySlot(sidebar);
+        obj.getScore(" ").setScore(1);
+        obj.getScore("  ").setScore(2);
+        obj.getScore("   ").setScore(3);
+        obj.getScore("    ").setScore(4);
+        obj.getScore("      ").setScore(5);
+        obj.getScore("        ").setScore(6);
+        game.getPlayers().stream()
+                .filter(Objects::nonNull)
+                .filter(Player::isOnline)
+                .forEach(player -> player.setScoreboard(scoreboard));
+
+
+        game.getPlayers().stream()
+                .filter(Objects::nonNull)
+                .filter(Player::isOnline)
+                .forEach(player -> {
+
+                    UUID playerUUID = player.getUniqueId();
+                    SoundPlayer.LEVEL_UP(player, 1);
+
+                    if (game.getRespawnProtections() != null) {
+                        if (game.getRespawnProtections().containsKey(player)) {
+                            game.removeProtection(player);
                         }
                     }
 
-                    ScoreboardManager manager = Bukkit.getScoreboardManager();
-                    Scoreboard scoreboard = manager.getNewScoreboard();
-                    Objective obj = scoreboard.registerNewObjective("load", "dummy");
-                    obj.setDisplayName(t("                "));
-                    obj.setDisplaySlot(sidebar);
-                    obj.getScore(" ").setScore(1);
-                    obj.getScore("  ").setScore(2);
-                    obj.getScore("   ").setScore(3);
-                    obj.getScore("    ").setScore(4);
-                    obj.getScore("      ").setScore(5);
-                    obj.getScore("        ").setScore(6);
-                    game.getPlayers().stream()
-                            .filter(Objects::nonNull)
-                            .filter(Player::isOnline)
-                            .forEach(player -> player.setScoreboard(scoreboard));
+                    if (!Objects.equals(startmess_all_chat, "")) {
+                        sendMessage(player, startmess_all_chat);
+                    }
+                    if (!Objects.equals(startmess_all_title, "")) {
+                        String titleReal = startmess_all_title;
+                        if (!Objects.equals(startmess_all_subtitle, "")) {
+                            String subtitleReal = startmess_all_subtitle;
 
+                            sendTitle(player, titleReal, subtitleReal);
+                        }
+                    } else if (!Objects.equals(startmess_all_subtitle, "")) {
+                        String titleReal = " ";
+                        String subtitleReal = startmess_all_subtitle;
 
-                        game.getPlayers().stream()
-                                .filter(Objects::nonNull)
-                                .filter(Player::isOnline)
-                                .forEach(player -> {
+                        sendTitle(player, titleReal, subtitleReal);
+                    }
+                    if (!Objects.equals(startmess_all_actionbar, "")) {
+                        sendActionBar(player, startmess_all_actionbar);
+                    }
 
-                                    UUID uuid = player.getUniqueId();
-                                    SoundPlayer.LEVEL_UP(player, 1);
+                    setDefaultPlayerStat(playerUUID);
+                    removePlayerRespawn(playerUUID);
+                    if (kitenable) {
+                        if (kitForce) {
+                            applykitforce(playerUUID, kitForceKit);
+                        } else {
+                            applykit(playerUUID);
+                        }
+                    }
 
-                                    if (game.getRespawnProtections().containsKey(player)){
-                                    game.removeProtection(player);
-                                    }
+                    removePlayerIsOut(playerUUID);
 
+                    removeArmorChain(playerUUID);
+                    removeArmorIron(playerUUID);
+                    removeArmorDiamond(playerUUID);
 
-                                    String message = startmess_all_chat;
-                                    if (message != null && !message.isEmpty()) {
-                                        player.sendMessage(message);
-                                    }
+                    if (startKitCompass) {
+                        player.getInventory().addItem(compass);
+                    }
+                });
 
-                                    String title = Optional.ofNullable(startmess_all_title).orElse(" ");
-                                    String subtitle = Optional.ofNullable(startmess_all_subtitle).orElse("");
+        disableAI(worldName);
 
-                                    sendTitle(player, title, subtitle);
-
-                                    Optional.ofNullable(startmess_all_actionbar)
-                                            .filter(actionBarMessage -> !actionBarMessage.isEmpty())
-                                            .ifPresent(actionBarMessage -> sendActionBar(player, actionBarMessage));
-
-                                    setDefaultPlayerStat(uuid);
-                                    removePlayerRespawn(uuid);
-                                    if (kitenable) {
-                                        if (kitForce) {
-                                            applykitforce(uuid, kitForceKit);
-                                        } else {
-                                            applykit(uuid);
-                                        }
-                                    }
-
-                                    removePlayerIsOut(uuid);
-
-                                    removeArmorChain(uuid);
-                                    removeArmorIron(uuid);
-                                    removeArmorDiamond(uuid);
-
-                                    if (startKitCompass) {
-                                        player.getInventory().addItem(compass);
-                                    }
-                                });
-
-            disableVillagerAI(worldName);
-
-        if (CleanHostileOnStart) {
+        if (cleanHostileOnStart) {
             Difficulty difficultyOrg;
             if (world.getDifficulty() != peaceful) {
                 difficultyOrg = world.getDifficulty();
@@ -205,7 +237,10 @@ public class RelGameStarted implements Listener {
             }
             new BukkitRunnable() {
                 int h;
-                {h = 3;}
+
+                {
+                    h = 3;
+                }
 
                 public void run() {
                     if (h != 0) {
@@ -221,7 +256,15 @@ public class RelGameStarted implements Listener {
             }.runTaskTimer(plugin, 1L, 20L);
         }
 
-
+        ResIronTextTask resIronTextTask = new ResIronTextTask(game);
+        resIronTextTask.runTask();
+        ResGoldTextTask resGoldTextTask = new ResGoldTextTask(game);
+        resGoldTextTask.runTask();
+        ResDiamondTextTask resDiamondTextTask = new ResDiamondTextTask(game);
+        resDiamondTextTask.runTask();
+        ResEmeraldTextTask resEmeraldTextTask = new ResEmeraldTextTask(game);
+        resEmeraldTextTask.runTask();
 
     }
+
 }

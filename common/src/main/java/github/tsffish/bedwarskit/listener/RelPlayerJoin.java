@@ -1,7 +1,7 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
-import github.tsffish.bedwarskit.util.misc.SoundPlayer;
+import github.tsffish.bedwarskit.util.player.SoundPlayer;
 import github.tsffish.bedwarskit.util.teamshop.check.EffectHaste;
 import github.tsffish.bedwarskit.util.teamshop.check.EffectHeal;
 import github.tsffish.bedwarskit.util.teamshop.check.EnchatProt;
@@ -31,23 +31,26 @@ import java.util.UUID;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
-import static github.tsffish.bedwarskit.util.RelArmorList.*;
-import static github.tsffish.bedwarskit.util.RelCurrentStat.*;
+import static github.tsffish.bedwarskit.config.scb.ScbConfigHandler.customScoreboard;
 import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.isInCheckList;
 import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.joinCheckList;
-import static github.tsffish.bedwarskit.util.RelPlayerKit.getPlayerKit;
-import static github.tsffish.bedwarskit.util.RelPlayerKit.setPlayerKit;
-import static github.tsffish.bedwarskit.util.RelScoreBoard.updateScoreBoard;
 import static github.tsffish.bedwarskit.util.kit.KitOpenItem.kitMenuItem;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendMessage;
-import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isLastestVersion;
-import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
-import static github.tsffish.bedwarskit.util.misc.SendTab.sendTab;
-import static github.tsffish.bedwarskit.util.task.LeaveCheckTask.leaveList;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
+import static github.tsffish.bedwarskit.util.player.RelArmorList.*;
+import static github.tsffish.bedwarskit.util.player.RelCurrentStat.*;
+import static github.tsffish.bedwarskit.util.player.RelEditGame.isEditGamePlayer;
+import static github.tsffish.bedwarskit.util.player.RelPlayerKit.getPlayerKit;
+import static github.tsffish.bedwarskit.util.player.RelPlayerKit.setPlayerKit;
+import static github.tsffish.bedwarskit.util.player.SendActionBar.sendActionBar;
+import static github.tsffish.bedwarskit.util.player.SendTab.sendTab;
+import static github.tsffish.bedwarskit.util.scb.RelScoreBoard.updateScoreBoard;
+import static github.tsffish.bedwarskit.util.task.TaskLeaveCheck.leaveList;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -55,14 +58,7 @@ import static github.tsffish.bedwarskit.util.task.LeaveCheckTask.leaveList;
  * @author Tsffish
  */
 public class RelPlayerJoin implements Listener {
-    void check(Game game){
-        EffectHaste.check(game);
-        EffectHeal.check(game);
-        EnchatProt.check(game);
-        EnchatSharp.check(game);
-    }
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
-    private static ItemStack playAgainItem;
     private static final ItemStack bot = new ItemStack(Material.GLASS_BOTTLE);
     private static final ItemStack bed = new ItemStack(Material.BED);
     private static final Material bedType = Material.BED;
@@ -76,33 +72,55 @@ public class RelPlayerJoin implements Listener {
     private static final GameMode survival = GameMode.SURVIVAL;
     private static final GameState running = GameState.RUNNING;
     private static final GameState waiting = GameState.WAITING;
-    private static final PotionEffect invs = new PotionEffect(PotionEffectType.INVISIBILITY,9999,0);
-    void playerSoundSucc(Player player){
+    private static final PotionEffectType invsType = PotionEffectType.INVISIBILITY;
+    private static final PotionEffect invs = new PotionEffect(invsType, 9999, 0);
+    private static ItemStack playAgainItem;
+
+    void check(Game game) {
+        EffectHaste.check(game);
+        EffectHeal.check(game);
+        EnchatProt.check(game);
+        EnchatSharp.check(game);
+    }
+
+    void playerSoundSucc(Player player) {
         SoundPlayer.CHICKEN_EGG_POP(player, 1);
     }
+
     String replaceString(
             String text,
             String teamColor,
             String teamName
-    ){
+    ) {
         return text
-                .replace("{teamColor}",teamColor)
-                .replace("{teamName}",teamName)
+                .replace("{teamColor}", teamColor)
+                .replace("{teamName}", teamName)
                 ;
     }
+
     @EventHandler
     public void on(final BedwarsPlayerJoinedEvent event) {
-        if (event.getGame() == null) return;
+        if (event.getGame() == null) {
+            return;
+        }
         Game game = event.getGame();
 
-        if (event.getPlayer() == null) {return;}
+        if (event.getPlayer() == null) {
+            return;
+        }
         Player player = event.getPlayer();
 
-        if (!player.isOnline()) {return;}
+        if (!player.isOnline()) {
+            return;
+        }
         UUID playerUUID = player.getUniqueId();
 
-        if (!game.getPlayers().contains(player)) {return;}
-        if (getPlayerKit(playerUUID) == null) {setPlayerKit(playerUUID, kitDefault);}
+        if (!game.getPlayers().contains(player)) {
+            return;
+        }
+        if (getPlayerKit(playerUUID) == null) {
+            setPlayerKit(playerUUID, kitDefault);
+        }
 
         playAgainItem = new ItemStack(dieOutGameItem_playAgain_ItemType, 1);
         ItemMeta playAgainItemMeta = playAgainItem.getItemMeta();
@@ -112,56 +130,58 @@ public class RelPlayerJoin implements Listener {
         setDefaultPlayerStat(playerUUID);
 
         if (
-                   game.getState() == running
-                && game.getPlayerTeam(player) != null
-                && game.getPlayerTeam(player).getHeadTarget() != null
-                && game.getPlayerTeam(player).getHeadTarget().getType() != bedType
+                game.getState() == running
+                        && game.getPlayerTeam(player) != null
+                        && game.getPlayerTeam(player).getHeadTarget() != null
+                        && game.getPlayerTeam(player).getHeadTarget().getType() != bedType
         ) {
             addPlayerIsOut(playerUUID);
             game.addProtection(player);
         }
 
-
-        if (!player.getInventory().contains(kitMenuItem)) {
-            player.getInventory().addItem(kitMenuItem);}
+        game.getPlayers().forEach(players -> {
+            SoundPlayer.CHICKEN_EGG_POP(players, 2);
+        });
 
         World world = player.getWorld();
         String worldName = world.getName();
 
         if (!isInCheckList(worldName)) {
             joinCheckList(worldName);
-            if (isDebug()) {l("joinCheckList: " + worldName);}
+            if (isDebug()) {
+                l(worldName + " joinCheckList");
+            }
             new BukkitRunnable() {
                 public void run() {
 
-
-                    if (!isInCheckList(worldName)){
-                        return;
+                    if (!isInCheckList(worldName)) {
+                        cancel();
                     }
 
-                    if (world.getPlayers().isEmpty()){
+                    if (world.getPlayers().isEmpty()) {
                         leaveList(worldName);
                     }
                     if (tab) {
-                        for (Player list : game.getPlayers()){
-                        sendTab(list);
+                        for (Player list : game.getPlayers()) {
+                            sendTab(list);
                         }
                     }
 
-
                     if (customScoreboard) {
-                        updateScoreBoard(game);
+                        updateScoreBoard(game.getName());
                     }
                     if (game.getState() == waiting) {
 
                         if (kitenable) {
+
                             if (kitMenuItemGive) {
 
                                 for (Player player : game.getPlayers()) {
-                                    PlayerInventory inventory = player.getInventory();
-                                    if (!inventory.contains(kitMenuItem)) {
-                                        inventory.addItem(kitMenuItem);
+                                    PlayerInventory pi = player.getInventory();
+                                    if (!pi.contains(kitMenuItem)) {
+                                        pi.addItem(kitMenuItem);
                                     }
+
                                 }
                             }
                         }
@@ -176,35 +196,45 @@ public class RelPlayerJoin implements Listener {
                             if (player != null && player.isOnline()) {
 
                                 if (isDebug()) {
+                                    String youHaveProt = "youHaveProt[ERROR]";
+                                    String YouAreSpe = "YouAreSpe[ERROR]";
+                                    String gameMode = player.getGameMode().toString();
                                     if (game.getRespawnProtections().containsKey(player)) {
-                                        sendActionBar(player, "You has prot");
+                                        youHaveProt = "You has prot";
                                     } else {
-                                        sendActionBar(player, "You not have prot");
+                                        youHaveProt = "You not has prot";
                                     }
+                                    if (game.isSpectator(player)) {
+                                        YouAreSpe = "You are Spe";
+                                    } else {
+                                        YouAreSpe = "You are not Spe";
+                                    }
+
+                                    sendActionBar(player, youHaveProt + " | " + YouAreSpe + " | " + gameMode + " | " + isEditGamePlayer(player.getUniqueId()));
                                 }
                                 PlayerInventory pi = player.getInventory();
 
                                 if (getPlayerisOut(playerUUID) && game.isSpectator(player)) {
-                                        if (dieOutGameItem_playAgain){
-                                                if(!pi.contains(playAgainItem)) {
+                                    if (dieOutGameItem_playAgain) {
+                                        if (!pi.contains(playAgainItem)) {
                                             pi.setItem(
                                                     dieOutGameItem_playAgain_ItemSlot,
                                                     playAgainItem);
                                         }
                                     }
-
-                                    if (player.getGameMode() == spectator){
-                                        player.setGameMode(survival);
-                                    }
+                                    player.setGameMode(spectator);
 
                                     player.addPotionEffect(invs);
                                     player.setAllowFlight(true);
-                                }
-                            else {
+                                } else {
                                     if (player.getHealth() >= 0 && !player.isDead()) {
 
-                                        if (cleanBottle && pi.contains(bot)) {pi.remove(bot);}
-                                        if (cleanBed && pi.contains(bed)) {pi.remove(bed);}
+                                        if (cleanBottle && pi.contains(bot)) {
+                                            pi.remove(bot);
+                                        }
+                                        if (cleanBed && pi.contains(bed)) {
+                                            pi.remove(bed);
+                                        }
 
 
                                         if (pi.contains(upToDiamondArmor)) {
@@ -253,8 +283,6 @@ public class RelPlayerJoin implements Listener {
                                             pi.setLeggings(chain1);
                                             pi.setBoots(chain2);
                                         }
-
-
                                     }
                                 }
                             }
@@ -266,6 +294,7 @@ public class RelPlayerJoin implements Listener {
             }.runTaskTimer(plugin, 0L, 20L);
         }
     }
+
     @EventHandler
     public void on(final PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -284,8 +313,9 @@ public class RelPlayerJoin implements Listener {
             }
         }
     }
+
     @EventHandler
-    public void on(BedwarsPlayerJoinTeamEvent event){
+    public void on(BedwarsPlayerJoinTeamEvent event) {
         Player player = event.getPlayer();
         if (player == null || !player.isOnline()) return;
         if (BedwarsRel.getInstance() == null) return;
@@ -294,29 +324,29 @@ public class RelPlayerJoin implements Listener {
         String teamName = event.getTeam().getName();
 
         playerSoundSucc(player);
-        if (!lobbyjoinTeamMess_chat.isEmpty()) {
-            sendMessage(player,replaceString(lobbyjoinTeamMess_chat,
-                    teamColor,teamName));
+        if (!Objects.equals(lobbyjoinTeamMess_chat, "")) {
+            sendMessage(player, replaceString(lobbyjoinTeamMess_chat,
+                    teamColor, teamName));
         }
         if (!Objects.equals(lobbyjoinTeamMess_title, "")) {
             String titleReal = t(replaceString(lobbyjoinTeamMess_title,
-                    teamColor,teamName));
+                    teamColor, teamName));
             if (!Objects.equals(lobbyjoinTeamMess_subtitle, "")) {
                 String subtitleReal = t(replaceString(lobbyjoinTeamMess_subtitle,
-                        teamColor,teamName));
+                        teamColor, teamName));
 
-                sendTitle(player,titleReal, subtitleReal);
+                sendTitle(player, titleReal, subtitleReal);
             }
         } else if (!Objects.equals(lobbyjoinTeamMess_subtitle, "")) {
             String titleReal = " ";
             String subtitleReal = t(replaceString(lobbyjoinTeamMess_subtitle,
-                    teamColor,teamName));
+                    teamColor, teamName));
 
-            sendTitle(player,titleReal, subtitleReal);
+            sendTitle(player, titleReal, subtitleReal);
         }
-        if (!lobbyjoinTeamMess_actionbar.isEmpty()) {
+        if (!Objects.equals(lobbyjoinTeamMess_actionbar, "")) {
             sendActionBar(player, t(replaceString(lobbyjoinTeamMess_actionbar,
-                    teamColor,teamName)));
+                    teamColor, teamName)));
         }
     }
 }

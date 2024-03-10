@@ -1,4 +1,5 @@
 package github.tsffish.bedwarskit.util.misc;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -9,10 +10,12 @@ public class MathUtil {
     public static double roundToOneDecimalPlace(double value) {
         return Math.round(value * 10) / 10.0;
     }
-    public static String formatTime(int seconds)
-    {
+
+    public static String formatTime(int seconds) {
         int minutes = seconds / 60;
         int remainingSeconds = seconds % 60;
-        return String.format("%2d:%2d", minutes, remainingSeconds);
+
+        String formattedTime = String.format("%02d:%02d", minutes, remainingSeconds);
+        return formattedTime;
     }
 }

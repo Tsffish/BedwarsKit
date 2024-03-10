@@ -5,9 +5,9 @@ import org.bukkit.command.ConsoleCommandSender;
 
 import java.util.logging.Logger;
 
-
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.PluginState.pluginNameConsole;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -18,19 +18,19 @@ public class MessSender {
     private static final ConsoleCommandSender console = Bukkit.getConsoleSender();
     private static final Logger l = Bukkit.getLogger();
 
-    public static void l(String string){
+    public static void l(String string) {
         console.sendMessage(t(pluginNameConsole() + " " + string));
     }
 
-    public static void le(String name,String casue){
+    public static void le(String name, String casue) {
         l.warning(t(pluginNameConsole() + " " + name + " " + casue));
     }
 
-    public static void le(String name,Exception casue){
+    public static void le(String name, Exception casue) {
         l.warning(t(pluginNameConsole() + " " + name + " " + casue));
     }
 
-    public static void consoleSendCommand(String command){
+    public static void consoleSendCommand(String command) {
         Bukkit.dispatchCommand(console, command);
     }
 }

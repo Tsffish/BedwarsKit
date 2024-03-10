@@ -1,0 +1,131 @@
+# ============================ #
+# BedwarsKit ScoreBoard Config #
+# ============================ #
+config-version: "1.9.57"
+# Do not modify: The configuration file will be automatically
+# renamed if it does not match the version currently used by the plugin
+
+customScoreboard: true
+# customScoreboard: Is the custom scoreboard feature enabled
+
+teamStat_BedYes: "&a\u2714"
+teamStat_None: "&c\u2718"
+teamStat_BedNo: "&a{aliveCount}"
+meanTeamStat_Alive: "&a"
+meanTeamStat_Dead: "&4"
+meanBedStat_Yes: "\u2714"
+meanBedStat_No: "\u2718"
+meanYou: "{teamColor}\u2b60"
+meanNotYou: "{teamColor}"
+mean2v2Mode: "Double Mode"
+mean4v4Mode: "4v4v4v4 Mode"
+serverIp: "&eGithub@Tsffish"
+meanBedwars: "Bedwars"
+meanGameEnd: "Game end"
+# meanTeamBedYes: TeamStat indicates the presence of beds in the team
+# meanTeamNone: TeamStat indicates that the team has been eliminated
+# meanTeamBedNo: In TeamStat, it indicates that the team does not have a bed, but there are players present in the team
+# {aliveCount}: The remaining players in the team
+# meanYou: TeamIsMe indicates that you are in the team, {teamColor}: the team color of the player's current team
+# meanNotYou: TeamIsMe indicates that you are not in the team, {teamColor}: the team color of the player's current team
+# mean2v2Mode: indicates that this is a 2v2 mode
+# mean4v4Mode: indicates that this is a 4v4 mode
+# serverIP: can be used to fill in the server address or to add duplicate characters
+# meanBedwars: can be used to fill in the bedwars or to add duplicate characters
+# meanGameEnd: indicates the end of the game
+
+ScoreBoard2v2Title: "&e&l{bw}"
+ScoreBoard2v2Line01: "&7{date} &8{mode}"
+ScoreBoard2v2Line02: "&a{lastTaskName} in &f{lastTaskTimeLeft}"
+ScoreBoard2v2Line03: "&f "
+ScoreBoard2v2Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard2v2Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard2v2Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard2v2Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard2v2Line08: "&f{whiteTeamNameShort} &f{whiteTeamName} {whiteTeamStat} &7{whiteTeamIsMe}"
+ScoreBoard2v2Line09: "&7{grayTeamNameShort} &f{grayTeamName} {grayTeamStat} &7{grayTeamIsMe}"
+ScoreBoard2v2Line10: "&b{aquaTeamNameShort} &f{aquaTeamName} {aquaTeamStat} &7{aquaTeamIsMe}"
+ScoreBoard2v2Line11: "&d{pinkTeamNameShort} &f{pinkTeamName} {pinkTeamStat} &7{pinkTeamIsMe}"
+ScoreBoard2v2Line12: "&f  "
+ScoreBoard2v2Line13: "&e{ip}"
+ScoreBoard2v2Line14: ""
+ScoreBoard2v2Line15: ""
+ScoreBoard2v2Line16: ""
+# variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+# note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
+# variable:
+# ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
+# ...TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
+# ...TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# ...TeamNameShort: The first character of the team name. Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, redTeamIsMe
+# ...TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+# ...TeamIsAlive: meanTeamStat_ The value of is required to be the same as above
+# ...TeamBedStat: meanBedStat_ The value of is required to be the same as above
+# {formatTimeLeft}: The remaining time of the formatted game
+# {timeleft-s}: Game remaining time in seconds
+# {timeleft-m}: Game remaining time in minutes
+# {timeleft-h}: Game remaining time - hours
+# {timeleft-d}: Game remaining time in days
+# {timeline mo}: Game remaining time in months
+# {timeleft y}: Game remaining time in years
+# {date}: Today's date format is YYYY/M/D, such as 2080/3/27
+# {ip}: The value of serverIp in the configuration file
+# {bw}: The value of meanBedwards in the configuration file
+# {mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+# {kill}: The number of enemies killed in your current game
+# {fkill}: Your KD value in this game
+# {kd}: Your KD value in this game
+# {death}: The number of deaths in your current game
+# {bed}: The number of digging beds in your current game
+# {game}: The game name of this game
+# {region}: The region of this bureau
+# {lastTaskTimeLeft} : Remaining time for the next task to be executed
+# {lastTaskName} : The task name of the next executed task
+
+ScoreBoard4v4Title: "&e&l{bw}"
+ScoreBoard4v4Line01: "&7{date} &8{mode}"
+ScoreBoard4v4Line02: "&a{lastTaskName} in &f{lastTaskTimeLeft}"
+ScoreBoard4v4Line03: "&f "
+ScoreBoard4v4Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard4v4Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard4v4Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard4v4Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard4v4Line08: "&f  "
+ScoreBoard4v4Line09: "&fKills: &a{kill}"
+ScoreBoard4v4Line10: "&fBreak Beds: &a{bed}"
+ScoreBoard4v4Line11: "&fFinal Kills: &a{fkill}"
+ScoreBoard4v4Line12: "&f      "
+ScoreBoard4v4Line13: "&e{ip}"
+ScoreBoard4v4Line14: ""
+ScoreBoard4v4Line15: ""
+ScoreBoard4v4Line16: ""
+# variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+# note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
+# variable:
+# ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
+# ...TeamStat: The status of the team, please refer to meanTeam for details The value of the team color name must start with lowercase letters, such as greenTeamStat, grayTeamStat
+# ...TeamIsMe: Are you in the team or not? Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, grayTeamIsMe
+# ...TeamNameShort: The first character of the team name. Please refer to mean for more details The value of the team color name must start with lowercase letters, such as blueTeamIsMe, redTeamIsMe
+# ...TeamPlayer: The number of people in the team, and the team color name must start with lowercase letters, such as pinkTeamPlayer, grayTeamPlayer
+# ...TeamIsAlive: meanTeamStat_ The value of is required to be the same as above
+# ...TeamBedStat: meanBedStat_ The value of is required to be the same as above
+# {formatTimeLeft}: The remaining time of the formatted game
+# {timeleft-s}: Game remaining time in seconds
+# {timeleft-m}: Game remaining time in minutes
+# {timeleft-h}: Game remaining time - hours
+# {timeleft-d}: Game remaining time in days
+# {timeline mo}: Game remaining time in months
+# {timeleft y}: Game remaining time in years
+# {date}: Today's date format is YYYY/M/D, such as 2080/3/27
+# {ip}: The value of serverIp in the configuration file
+# {bw}: The value of meanBedwards in the configuration file
+# {mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
+# {kill}: The number of enemies killed in your current game
+# {fkill}: Your KD value in this game
+# {kd}: Your KD value in this game
+# {death}: The number of deaths in your current game
+# {bed}: The number of digging beds in your current game
+# {game}: The game name of this game
+# {region}: The region of this bureau
+# {lastTaskTimeLeft} : Remaining time for the next task to be executed
+# {lastTaskName} : The task name of the next executed task

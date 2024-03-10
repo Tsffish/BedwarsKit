@@ -2,11 +2,13 @@ package github.tsffish.bedwarskit.util.teamshop.list;
 
 import io.github.bedwarsrel.game.Team;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -14,18 +16,19 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
  * @author Tsffish
  */
 public class ListProt {
-    private static ConcurrentHashMap<String, List<String[]>> listMap = new ConcurrentHashMap<>(24);
-    public static void setTeamDatas(String gameName, List<String[]> newTeamDatas) {
-        List<String[]> teamDatas = getTeamDatas(gameName);
+    private static ConcurrentHashMap<String, Set<String[]>> listMap = new ConcurrentHashMap<>(24);
+
+    public static void setTeamDatas(String gameName, Set<String[]> newTeamDatas) {
+        Set<String[]> teamDatas = getTeamDatas(gameName);
         if (teamDatas == null) {
-            teamDatas = new ArrayList<>();
+            teamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
         }
 
         for (String[] teamInfo : newTeamDatas) {
             boolean found = false;
             for (String[] oldTeamInfo : teamDatas) {
                 if (oldTeamInfo[0].equals(teamInfo[0])) {
-                    oldTeamInfo[1] = teamInfo[1]; // 更新队伍等级信息
+                    oldTeamInfo[1] = teamInfo[1];
                     found = true;
                     break;
                 }
@@ -47,14 +50,14 @@ public class ListProt {
 
     }
 
-    public static List<String[]> getTeamDatas(String gameName){
+    public static Set<String[]> getTeamDatas(String gameName) {
         return listMap.get(gameName);
     }
 
     public static void setTeamDatasDefault(String gameName, List<Team> teamList) {
-        List<String[]> teamDatas = getTeamDatas(gameName);
+        Set<String[]> teamDatas = getTeamDatas(gameName);
         if (teamDatas == null) {
-            teamDatas = new ArrayList<>();
+            teamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
         }
 
         for (Team team : teamList) {

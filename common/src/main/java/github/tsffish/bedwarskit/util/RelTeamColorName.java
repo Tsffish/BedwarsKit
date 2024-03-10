@@ -1,4 +1,5 @@
 package github.tsffish.bedwarskit.util;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit

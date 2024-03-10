@@ -4,6 +4,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.misc.PluginStartUp.startup;
+import static github.tsffish.bedwarskit.util.misc.StringMgr.pluginDisable;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -12,6 +14,7 @@ import static github.tsffish.bedwarskit.util.misc.PluginStartUp.startup;
  */
 public class BedwarsKit extends JavaPlugin {
     private static BedwarsKit instance;
+
     public static BedwarsKit getInstance() {
         return instance;
     }
@@ -20,9 +23,9 @@ public class BedwarsKit extends JavaPlugin {
         instance = this;
         startup();
     }
-        @Override
-        public void onDisable ()
-        {
-            l("Disabled.");
-        }
+
+    @Override
+    public void onDisable() {
+        l(pluginDisable);
+    }
 }

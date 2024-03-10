@@ -1,15 +1,17 @@
 package github.tsffish.bedwarskit.util.teamshop.check;
 
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
-import github.tsffish.bedwarskit.util.misc.GetItemInHand;
 import github.tsffish.bedwarskit.util.teamshop.list.ListSharp;
-import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
+import io.github.bedwarsrel.game.Team;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.List;
+import java.util.Set;
+
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.giveSharpEnchList;
+import static github.tsffish.bedwarskit.util.player.GetItemInHand.getItemInHand;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -17,17 +19,20 @@ import java.util.List;
  * @author Tsffish
  */
 public class EnchatSharp {
+    private static final Enchantment sharp = Enchantment.DAMAGE_ALL;
 
     public static void check(Game game) {
 
         String gameName = game.getName();
 
-        BedwarsRel.getInstance().getGameManager().getGame(gameName);
+        if (ListSharp.getTeamDatas(gameName) == null) {
+            return;
+        }
 
-        List<String[]> teamDatas = ListSharp.getTeamDatas(gameName);
+        Set<String[]> teamDatas = ListSharp.getTeamDatas(gameName);
 
-        for (Player list : game.getPlayers()) {
-            String teamName = game.getPlayerTeam(list).getName();
+        for (Team team : game.getPlayingTeams()) {
+            String teamName = team.getName();
 
             for (String[] strings : teamDatas) {
                 if (strings[0].equals(teamName)) {
@@ -52,17 +57,21 @@ public class EnchatSharp {
                             break;
                     }
 
-                    if (finallyLevel == 0) return;
-
-                    ItemStack item = GetItemInHand.getItemInHand(list);
-                    if (item != null) {
-                        for (String string : MainConfigHandler.giveSharpEnchList) {
-                            if (item.getType().toString().toUpperCase().contains(string)) {
-                                item.addEnchantment(Enchantment.DAMAGE_ALL, finallyLevel);
-                                break;
+                    if (finallyLevel < 1) {
+                        return;
+                    }
+                    for (Player player : team.getPlayers()) {
+                        ItemStack item = getItemInHand(player);
+                        if (item != null) {
+                            for (String string : giveSharpEnchList) {
+                                String itemTypeText = item.getType().toString().toUpperCase();
+                                if (itemTypeText.contains(string)) {
+                                    item.addEnchantment(sharp, finallyLevel);
+                                    break;
+                                }
+                            }
                         }
                     }
-                }
                 }
             }
         }

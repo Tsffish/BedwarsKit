@@ -1,8 +1,6 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
-import github.tsffish.bedwarskit.util.RelPlayerIsRespawn;
 import github.tsffish.bedwarskit.util.misc.MathUtil;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
@@ -13,17 +11,21 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.PlayerSender.sendTitle;
-import static github.tsffish.bedwarskit.util.misc.SendActionBar.sendActionBar;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
+import static github.tsffish.bedwarskit.util.player.RelPlayerIsRespawn.getPlayerRespawn;
+import static github.tsffish.bedwarskit.util.player.SendActionBar.sendActionBar;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -37,8 +39,10 @@ public class RelPlayerDamage implements Listener {
     private static final String bloodModeBox = "box";
     private static final GameState running = GameState.RUNNING;
     private static final GameState waiting = GameState.WAITING;
+    private static final Effect step = Effect.STEP_SOUND;
     private static final EntityDamageEvent.DamageCause damageCauseVoid = EntityDamageEvent.DamageCause.VOID;
-    @EventHandler
+
+    @EventHandler(priority = EventPriority.LOW)
     public void on(final EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             if (BedwarsRel.getInstance().getGameManager() == null) {
@@ -49,6 +53,7 @@ public class RelPlayerDamage implements Listener {
             Player damagedPlayer = (Player) event.getEntity();
             UUID damagedPlayerUUID = damagedPlayer.getUniqueId();
             Player attackingPlayer = (Player) event.getDamager();
+
             if (gameManager.getGameOfPlayer(damagedPlayer) == null) {
                 return;
             }
@@ -56,81 +61,83 @@ public class RelPlayerDamage implements Listener {
             if (gameManager.getGameOfPlayer(attackingPlayer) == null) {
                 return;
             }
+
             Game game = gameManager.getGameOfPlayer(attackingPlayer);
-            if (RelPlayerIsRespawn.getPlayerRespawn(damagedPlayerUUID)
+
+            if (getPlayerRespawn(damagedPlayerUUID)
                     || game.getRespawnProtections().containsKey(damagedPlayer)
-                    || game.getRespawnProtections().containsKey(attackingPlayer)) {
+                    || game.getRespawnProtections().containsKey(attackingPlayer)
+            ) {
                 event.setCancelled(true);
             }
 
-            if (damagefb_attackBlood) {
-                new BukkitRunnable() {
-                    public void run() {
-                        if (event.isCancelled()){
-                            cancel();
-                        }
+            if (!event.isCancelled()) {
+                if (damagefb_attackBlood) {
+                    new BukkitRunnable() {
+                        public void run() {
 
-                        int parttype = MainConfigHandler.damagefb_attackBloodType;
-                        switch (damagefb_attackBloodMode.toLowerCase()) {
-                            case bloodModeSingle:
-                                attackingPlayer.playEffect(damagedPlayer.getLocation(), Effect.STEP_SOUND, parttype);
-                                break;
-                            case bloodModePlayer:
-                                attackingPlayer.playEffect(damagedPlayer.getLocation(), Effect.STEP_SOUND, parttype);
-                                attackingPlayer.playEffect(damagedPlayer.getLocation().add(1, 0, 0), Effect.STEP_SOUND, parttype);
-                                break;
-                            case bloodModeBox:
-                                for (int x = -1; x <= 1; x++) {
-                                    for (int y = -1; y <= 1; y++) {
-                                        for (int z = -1; z <= 1; z++) {
-                                            Location location = damagedPlayer.getLocation().add(x, y, z);
-                                            attackingPlayer.playEffect(location, Effect.STEP_SOUND, parttype);
+                            int partType = damagefb_attackBloodType;
+                            Location damagedPlayerLocation = damagedPlayer.getLocation();
+                            switch (damagefb_attackBloodMode.toLowerCase()) {
+                                case bloodModeSingle:
+                                    attackingPlayer.playEffect(damagedPlayerLocation, step, partType);
+                                    break;
+                                case bloodModePlayer:
+                                    attackingPlayer.playEffect(damagedPlayerLocation, step, partType);
+                                    attackingPlayer.playEffect(damagedPlayerLocation.add(1, 0, 0), step, partType);
+                                    break;
+                                case bloodModeBox:
+                                    for (int x = -1; x <= 1; x++) {
+                                        for (int y = -1; y <= 1; y++) {
+                                            for (int z = -1; z <= 1; z++) {
+                                                Location location = damagedPlayerLocation.add(x, y, z);
+                                                attackingPlayer.playEffect(location, step, partType);
+                                            }
                                         }
                                     }
-                                }
-                                break;
-                            default:
-                                break;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                }.runTaskLater(plugin, 1L);
+                    }.runTaskLater(plugin, 1L);
                 }
-
+            }
             if (damagefb_attackmess) {
 
-                double damageOrg = event.getDamage();
+                double damageOrg = event.getFinalDamage();
                 double damage = MathUtil.roundToOneDecimalPlace(damageOrg);
 
                 new BukkitRunnable() {
                     public void run() {
-                        if (event.isCancelled()){
+                        if (event.isCancelled()) {
                             cancel();
                         }
-                            if (!damagefb_attackchat.isEmpty()) {
-                                attackingPlayer.sendMessage(t(MainConfigHandler.damagefb_attackchat).
-                                        replace("{damage}", damage + ""));
-                            }
-                            if (!MainConfigHandler.damagefb_attackTitle.isEmpty()) {
-                                String titleReal = t(MainConfigHandler.damagefb_attackTitle).
-                                        replace("{damage}", damage + "");
-                                if (!damagefb_attackSubTitle.isEmpty()) {
-                                    String subtitleReal = t(MainConfigHandler.damagefb_attackSubTitle).
-                                            replace("{damage}", damage + "");
-
-                                    sendTitle(attackingPlayer,titleReal, subtitleReal);
-                                }
-                            } else if (!damagefb_attackSubTitle.isEmpty()) {
-                                String titleReal = " ";
+                        if (!Objects.equals(damagefb_attackchat, "")) {
+                            attackingPlayer.sendMessage(t(damagefb_attackchat).
+                                    replace("{damage}", damage + ""));
+                        }
+                        if (!Objects.equals(damagefb_attackTitle, "")) {
+                            String titleReal = t(damagefb_attackTitle).
+                                    replace("{damage}", damage + "");
+                            if (!Objects.equals(damagefb_attackSubTitle, "")) {
                                 String subtitleReal = t(damagefb_attackSubTitle).
                                         replace("{damage}", damage + "");
 
-                                sendTitle(attackingPlayer,titleReal, subtitleReal);
+                                sendTitle(attackingPlayer, titleReal, subtitleReal);
                             }
-                            if (!damagefb_attackactionbar.isEmpty()) {
-                                sendActionBar(attackingPlayer, t(damagefb_attackactionbar).
-                                        replace("{damage}", damage + ""));
-                            }
+                        } else if (!Objects.equals(damagefb_attackSubTitle, "")) {
+                            String titleReal = " ";
+                            String subtitleReal = t(damagefb_attackSubTitle).
+                                    replace("{damage}", damage + "");
+
+                            sendTitle(attackingPlayer, titleReal, subtitleReal);
                         }
+                        if (!Objects.equals(damagefb_attackactionbar, "")) {
+                            sendActionBar(attackingPlayer, t(damagefb_attackactionbar).
+                                    replace("{damage}", damage + ""));
+                        }
+                    }
                 }.runTaskLater(plugin, 1L);
             }
         }
@@ -147,46 +154,39 @@ public class RelPlayerDamage implements Listener {
 
             Player player = (Player) event.getEntity();
             UUID playerUUID = player.getUniqueId();
-            if (RelPlayerIsRespawn.getPlayerRespawn(playerUUID)) {
+            if (getPlayerRespawn(playerUUID)) {
                 event.setCancelled(true);
             }
-            if (preventloadworld) {
+            if (preventLoadWorld) {
                 Game game = gameManager.getGameOfPlayer(player);
-            if (game == null) {
-                return;
-            }
-
-
-
+                if (game == null) {
+                    return;
+                }
 
                 EntityDamageEvent.DamageCause damageCause = event.getCause();
-                if (damageCause == damageCauseVoid && game.isSpectator(player)) {
+                if (damageCause == damageCauseVoid && game.getRespawnProtections().containsKey(player)) {
                     Team team = game.getPlayerTeam(player);
                     Location spawnLocation = team.getSpawnLocation();
                     Location lobbyLoc = game.getLobby();
 
                     player.setFallDistance(0);
-                    if (!deathGameMode_tpto.equalsIgnoreCase("none")){
-                        if (deathGameMode_tpto.equalsIgnoreCase("team")){
+                    if (!deathGameMode_tpto.equalsIgnoreCase("none")) {
+                        if (deathGameMode_tpto.equalsIgnoreCase("team")) {
                             player.teleport(spawnLocation);
-                        }  else if (deathGameMode_tpto.equalsIgnoreCase("lobby")){
+                        } else if (deathGameMode_tpto.equalsIgnoreCase("lobby")) {
                             player.teleport(lobbyLoc);
                         }
                     }
                     event.setCancelled(true);
                     return;
                 }
-            if (game.getState() == running) {
+                if (game.getState() == running) {
                     if (damageCause == damageCauseVoid) {
-                        if (game.getRespawnProtections().containsKey(player)){
+                        if (game.getRespawnProtections().containsKey(player)) {
                             event.setCancelled(true);
-                        }else {
+                        } else {
                             event.setDamage(player.getHealth());
                         }
-                    }
-                } else if (game.getState() == waiting) {
-                    if (damageCause == damageCauseVoid) {
-                        event.setCancelled(true);
                     }
                 }
             }

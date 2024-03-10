@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.com.v1_8_r8;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit

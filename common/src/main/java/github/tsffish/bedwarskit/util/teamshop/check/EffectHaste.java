@@ -1,13 +1,13 @@
 package github.tsffish.bedwarskit.util.teamshop.check;
 
 import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
-import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
+import io.github.bedwarsrel.game.Team;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -17,16 +17,19 @@ import java.util.List;
  */
 public class EffectHaste {
     static final PotionEffectType haste = PotionEffectType.FAST_DIGGING;
+
     public static void check(Game game) {
 
         String gameName = game.getName();
 
-        BedwarsRel.getInstance().getGameManager().getGame(gameName);
+        if (ListHaste.getTeamDatas(gameName) == null) {
+            return;
+        }
 
-        List<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
+        Set<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
 
-        for (Player list : game.getPlayers()) {
-            String teamName = game.getPlayerTeam(list).getName();
+        for (Team team : game.getPlayingTeams()) {
+            String teamName = team.getName();
 
             for (String[] strings : teamDatas) {
                 if (strings[0].equals(teamName)) {
@@ -43,11 +46,15 @@ public class EffectHaste {
                         default:
                             break;
                     }
-                    if (finallyLevel >= 0) {
-                        list.removePotionEffect(haste);
-                        list.addPotionEffect(new PotionEffect(haste, 999999, finallyLevel));
+                    if (finallyLevel < 0) {
+                        return;
                     }
-
+                    if (!team.getPlayers().isEmpty()) {
+                        for (Player player : team.getPlayers()) {
+                            player.removePotionEffect(haste);
+                            player.addPotionEffect(new PotionEffect(haste, 999999, finallyLevel));
+                        }
+                    }
                 }
             }
         }

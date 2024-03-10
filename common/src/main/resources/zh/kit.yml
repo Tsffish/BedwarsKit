@@ -1,11 +1,13 @@
-# ===================== #
-# BedwarsKit 职业配置   #
-# ===================== #
+# ================== #
+# BedwarsKit 职业配置 #
+# ================= #
+config-version: "1.9.57"
+# 不要修改: 配置文件版本，如果不符合当前插件使用的版本，该文件会自动重命名
 
 kitenable: true
 kitDefault: "default"
 kitForce: false
-kitForceKit: "Default"
+kitForceKit: "default"
 
 kitMenuTitle: "\u9009\u62e9\u4e00\u4e2a\u804c\u4e1a"
 kitMenurow: 6
@@ -31,7 +33,7 @@ KitDefaultItemLore:
   - "&f\u6c38\u4e45\u7684\u62a4\u7532"
   - "&f\u6c38\u4e45\u7684\u901f\u5ea6"
   - "&f"
-KitDefault_Boost_GiveSpeed_enable: true
+KitDefault_Boost_GiveSpeed_enable: false
 KitDefault_Boost_GiveSpeed_level: 1
 
 KitNoneName: "\u65e0"

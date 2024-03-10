@@ -1,6 +1,5 @@
 package github.tsffish.bedwarskit.util.kit;
 
-import github.tsffish.bedwarskit.util.misc.GetItemType;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -23,16 +22,20 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.killfb_one
 import static github.tsffish.bedwarskit.util.RelArmorColor.*;
 import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
  *
  * @author Tsffish
  */
-public class KitDefaultless{
+public class KitDefaultless {
     private static final int EffectTime = 999999;
     public static String description;
+    static ItemStack kitItemInMenu;
+    static ItemStack wood_sword;
+    static ItemStack wood_pickaxe;
+    static ItemStack wood_axe;
     private static Material helmetItemType;
     private static Material chestItemType;
     private static int helmetItemAmount;
@@ -40,19 +43,13 @@ public class KitDefaultless{
     private static boolean coloredleatherArmor;
     private static ItemStack helmetItem;
     private static ItemStack chestItem;
-    static ItemStack kitItemInMenu;
-    static ItemStack wood_sword;
-    static ItemStack wood_pickaxe;
-    static ItemStack wood_axe;
+
     public static void loadKit(boolean Colored) {
-        Material ws = GetItemType.WOOD_SWORD();
-        if (ws != null){
-            wood_sword = new ItemStack(ws,1);
-        }else {
-            le("KitDefault","wood_sword is null,cant set it");
-        }
-        wood_pickaxe = new ItemStack(Material.WOOD_PICKAXE,1);
-        wood_axe = new ItemStack(Material.WOOD_AXE,1);
+
+
+        wood_sword = new ItemStack(Material.WOOD_SWORD, 1);
+        wood_pickaxe = new ItemStack(Material.WOOD_PICKAXE, 1);
+        wood_axe = new ItemStack(Material.WOOD_AXE, 1);
 
 
         kitItemInMenu = new ItemStack(KitDefaultlessItemType, KitDefaultlessItemAmount);
@@ -60,7 +57,7 @@ public class KitDefaultless{
 
         List<String> lore = new ArrayList<>(8);
 
-        for (String s : KitDefaultlessItemLore){
+        for (String s : KitDefaultlessItemLore) {
             lore.add(t(s));
         }
 
@@ -91,22 +88,22 @@ public class KitDefaultless{
         pi.setHelmet(helmetItem);
         pi.setChestplate(chestItem);
 
-        if (wood_sword != null){
-            if (pi.getItemInHand().getType() != killfb_oneHealthKill_itemType){
+        if (wood_sword != null) {
+            if (pi.getItemInHand().getType() != killfb_oneHealthKill_itemType) {
                 pi.setItemInHand(wood_sword);
-            }else if (!pi.contains(wood_sword)){
+            } else if (!pi.contains(wood_sword)) {
                 pi.addItem(wood_sword);
             }
         }
 
-        if (wood_pickaxe != null){
-            if(!pi.contains(wood_pickaxe)){
+        if (wood_pickaxe != null) {
+            if (!pi.contains(wood_pickaxe)) {
                 pi.addItem(wood_pickaxe);
             }
         }
 
-        if (wood_axe != null){
-            if(!pi.contains(wood_axe)){
+        if (wood_axe != null) {
+            if (!pi.contains(wood_axe)) {
                 pi.addItem(wood_axe);
             }
         }
@@ -134,7 +131,8 @@ public class KitDefaultless{
                     String playerteam = game.getPlayerTeam(player).getColor().name();
 
                     LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmetItem.getItemMeta();
-                    LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestItem.getItemMeta();                    switch (playerteam) {
+                    LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestItem.getItemMeta();
+                    switch (playerteam) {
                         case RED_TEAM_COLOR_NAME:
                             helmetMeta.setColor(red);
                             chestplateMeta.setColor(red);

@@ -1,0 +1,54 @@
+# =============================== #
+# BedwarsKit Floating font Config #
+# =============================== #
+config-version: "1.9.57"
+# Do not modify: The configuration file will be automatically
+# renamed if it does not match the version currently used by the plugin
+
+resBlock_Emerald: true
+resBlock_Emerald_isSmall: false
+resBlock_Emerald_y: -1.75
+resBlock_Emerald_spinSpeed: 1
+resBlock_Emerald_yawPerTick: 18
+resText1_Emerald: ""
+resText2_Emerald: "&a&lEMERALD"
+resText3_Emerald: "&fSpawn in &b&l{s} &fsecond"
+resText1_Emerald_y: 0.0
+resText2_Emerald_y: 1.9
+resText3_Emerald_y: 1.67
+
+resBlock_Diamond: true
+resBlock_Diamond_isSmall: false
+resBlock_Diamond_y: -1.75
+resBlock_Diamond_spinSpeed: 1
+resBlock_Diamond_yawPerTick: 18
+resText1_Diamond: ""
+resText2_Diamond: "&b&lDIAMOND"
+resText3_Diamond: "&fSpawn in &b&l{s} &fsecond"
+resText1_Diamond_y: 0.0
+resText2_Diamond_y: 1.9
+resText3_Diamond_y: 1.67
+
+resBlock_Gold: true
+resBlock_Gold_isSmall: false
+resBlock_Gold_y: -1.75
+resBlock_Gold_spinSpeed: 1
+resBlock_Gold_yawPerTick: 18
+resText1_Gold: ""
+resText2_Gold: ""
+resText3_Gold: ""
+resText1_Gold_y: 0.0
+resText2_Gold_y: 0.0
+resText3_Gold_y: 0.0
+
+resBlock_Iron: true
+resBlock_Iron_isSmall: false
+resBlock_Iron_y: -1.75
+resBlock_Iron_spinSpeed: 1
+resBlock_Iron_yawPerTick: 18
+resText1_Iron: ""
+resText2_Iron: ""
+resText3_Iron: ""
+resText1_Iron_y: 0.0
+resText2_Iron_y: 0.0
+resText3_Iron_y: 0.0

@@ -1,0 +1,57 @@
+# ===================== #
+# BedwarsKit 悬浮文字配置 #
+# =================== #
+config-version: "1.9.57"
+# 不要修改: 配置文件版本，如果不符合当前插件使用的版本，该文件会自动重命名
+
+resBlock_Emerald: true
+resBlock_Emerald_isSmall: false
+resBlock_Emerald_y: -1.75
+resBlock_Emerald_spinSpeed: 1
+resBlock_Emerald_yawPerTick: 18
+resBlock_Emerald_pitchPerTick: 18
+resText1_Emerald: ""
+resText2_Emerald: "&a&l\u7eff\u5b9d\u77f3"
+resText3_Emerald: "&b&l{s} &f\u79d2\u540e\u751f\u6210"
+resText1_Emerald_y: 0.0
+resText2_Emerald_y: 1.9
+resText3_Emerald_y: 1.67
+
+resBlock_Diamond: true
+resBlock_Diamond_isSmall: false
+resBlock_Diamond_y: -1.75
+resBlock_Diamond_spinSpeed: 1
+resBlock_Diamond_yawPerTick: 18
+resBlock_Diamond_pitchPerTick: 18
+resText1_Diamond: ""
+resText2_Diamond: "&b&l\u94bb\u77f3"
+resText3_Diamond: "&b&l{s} &f\u79d2\u540e\u751f\u6210"
+resText1_Diamond_y: 0.0
+resText2_Diamond_y: 1.9
+resText3_Diamond_y: 1.67
+
+resBlock_Gold: true
+resBlock_Gold_isSmall: false
+resBlock_Gold_y: -1.75
+resBlock_Gold_spinSpeed: 1
+resBlock_Gold_yawPerTick: 18
+resBlock_Gold_pitchPerTick: 18
+resText1_Gold: ""
+resText2_Gold: ""
+resText3_Gold: ""
+resText1_Gold_y: 0.0
+resText2_Gold_y: 0.0
+resText3_Gold_y: 0.0
+
+resBlock_Iron: true
+resBlock_Iron_isSmall: false
+resBlock_Iron_y: -1.75
+resBlock_Iron_spinSpeed: 1
+resBlock_Iron_yawPerTick: 18
+resBlock_Iron_pitchPerTick: 18
+resText1_Iron: ""
+resText2_Iron: ""
+resText3_Iron: ""
+resText1_Iron_y: 0.0
+resText2_Iron_y: 0.0
+resText3_Iron_y: 0.0

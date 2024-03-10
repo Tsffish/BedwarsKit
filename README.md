@@ -7,7 +7,10 @@ A Addon for BedwarsRel, Added some features to BedwarsRel
 - ProtocolLib(5.1.0 or above)
 
 ## Functions:
-- Fix issues related to BedwarslRel
+- Floating text
+- Resource fragmentation
+- Open Shop at any entity
+- Creative Flight Fix
 - Seize resources on kill
 - Custom Game ScoreBoard
 - Leave Team on waiting
@@ -24,11 +27,11 @@ A Addon for BedwarsRel, Added some features to BedwarsRel
 - Damage feedback
 - No EnderPearl Damage
 - Auto Clean hostile on start
+- Anti EnderMan Moving Blocks
 - Protect map outside of the game
 - Team Enchant & Team Effect Shop
 - Armor LevelUp & Keep Armor Level
 - Respawn Delay & Respawn Message
-- Anti Bed Stuck & Anti GlassPane Stuck
 - No BlockPlace at TeamSpawn & ResSpawn
 - Game Task (ResSpawner SpeedUp & Death Mode)
 
@@ -36,6 +39,10 @@ A Addon for BedwarsRel, Added some features to BedwarsRel
 
 ## Download
 You can download the latest version [here](https://www.spigotmc.org/resources/bedwarskit.105616/)
+
+## Noticed:
+- By default, plugins allow you to open any store through all entities, but you need to first set the name and enter/bwk edit as a player to enter editing mode
+- In editing mode, entities can be named and set as item stores or upgrade stores. After editing, enter/bwk edit again to exit editing mode
 
 ## Installation:
 - 1.Stop your server
@@ -53,4 +60,4 @@ You can download the latest version [here](https://www.spigotmc.org/resources/be
 ## Commands:
 - /bwk - display help message
 - /bwk reload - reload the config
-- /bwk debug - toggle debug mode
+- /bwk edit - toggle edit mode

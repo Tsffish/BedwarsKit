@@ -1,11 +1,26 @@
 name: BedwarsKit
-version: 1.9.56
-main: github.tsffish.bedwarskit.BedwarsKit
 author: Tsffish
+description: A Addon for BedwarsRel, Added some features to BedwarsRel.
+website: https://github.com/Tsffish/BedwarsKit
+version: 1.9.57
+main: github.tsffish.bedwarskit.BedwarsKit
 api-version: 1.13
 depend:
   - BedwarsRel
   - ProtocolLib
+permissions:
+  bwk.base:
+    description: Hello Permission
+    default: true
+  bwk.reload:
+    description: Reload Permission
+    default: op
+  shout:
+    description: Shout Permission
+    default: true
+  bwk.edit:
+    description: Edit Permission
+    default: op
 commands:
   bwk:
     description: Hello Command
@@ -13,3 +28,9 @@ commands:
   bwk reload:
     description: Reload Command
     usage: /bwk reload
+  shout:
+    description: Shout Command
+    usage: /shout <message>
+  bwk edit:
+    description: Edit Command
+    usage: /bwk edit

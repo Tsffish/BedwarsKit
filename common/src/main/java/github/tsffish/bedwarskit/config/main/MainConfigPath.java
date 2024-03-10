@@ -1,4 +1,5 @@
 package github.tsffish.bedwarskit.config.main;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -17,8 +18,6 @@ class MainConfigPath {
     static final String path_maxFoodLevel = "maxFoodLevel";
     static final String path_noPearlDamage = "noPearlDamage";
     static final String path_noPearlDamage_TPSound = "noPearlDamage_TPSound";
-    static final String path_breakBedCheck = "breakBedCheck";
-    static final String path_tpDis = "tpDis";
     static final String path_deathGameMode = "deathGameMode";
     static final String path_rushWorld = "gameWorld";
     static final String path_rushWorld2v2 = "gameWorld2v2";
@@ -34,14 +33,7 @@ class MainConfigPath {
     static final String path_respawnSuccSubTitle = "respawnSuccSubTitle";
     static final String path_respawnSuccChat = "respawnSuccChat";
     static final String path_respawnSuccActionBar = "respawnSuccActionBar";
-    static final String path_customScoreboard = "customScoreboard";
     static final String path_antiDrop = "antiDrop";
-    static final String path_meanTeamBedYes = "meanTeamBedYes";
-    static final String path_meanTeamBedNo = "meanTeamBedNo";
-    static final String path_meanTeamNone = "meanTeamNone";
-    static final String path_meanYou = "meanYou";
-    static final String path_meanNotYou = "meanNotYou";
-    static final String path_serverIp = "serverIp";
     static final String path_relTeamName_Red = "relTeamName_Red";
     static final String path_relTeamName_Blue = "relTeamName_Blue";
     static final String path_relTeamName_Green = "relTeamName_Green";
@@ -86,49 +78,11 @@ class MainConfigPath {
     static final String path_prot4Cost4v4 = "prot4Cost4v4";
     static final String path_messreloadnow = "messreloadnow";
     static final String path_messreloadsucc = "messreloadsucc";
-    static final String path_meanBedwars = "meanBedwars";
-    static final String path_mean2v2Mode = "mean2v2Mode";
-    static final String path_mean4v4Mode = "mean4v4Mode";
     static final String path_NoItemBreak = "NoItemBreak";
     static final String path_levelupShop = "levelupShop";
     static final String path_levelupShopOpenMode = "levelupShopOpenMode";
     static final String path_levelupShopOpenModeEntityName = "levelupShopOpenModeEntityName";
     static final String path_LevelupItemType = "LevelupItemType";
-    static final String path_ScoreBoard2v2Title = "ScoreBoard2v2Title";
-    static final String path_ScoreBoard2v2Line01 = "ScoreBoard2v2Line01";
-    static final String path_ScoreBoard2v2Line02 = "ScoreBoard2v2Line02";
-    static final String path_ScoreBoard2v2Line03 = "ScoreBoard2v2Line03";
-    static final String path_ScoreBoard2v2Line04 = "ScoreBoard2v2Line04";
-    static final String path_ScoreBoard2v2Line05 = "ScoreBoard2v2Line05";
-    static final String path_ScoreBoard2v2Line06 = "ScoreBoard2v2Line06";
-    static final String path_ScoreBoard2v2Line07 = "ScoreBoard2v2Line07";
-    static final String path_ScoreBoard2v2Line08 = "ScoreBoard2v2Line08";
-    static final String path_ScoreBoard2v2Line09 = "ScoreBoard2v2Line09";
-    static final String path_ScoreBoard2v2Line10 = "ScoreBoard2v2Line10";
-    static final String path_ScoreBoard2v2Line11 = "ScoreBoard2v2Line11";
-    static final String path_ScoreBoard2v2Line12 = "ScoreBoard2v2Line12";
-    static final String path_ScoreBoard2v2Line13 = "ScoreBoard2v2Line13";
-    static final String path_ScoreBoard2v2Line14 = "ScoreBoard2v2Line14";
-    static final String path_ScoreBoard2v2Line15 = "ScoreBoard2v2Line15";
-    static final String path_ScoreBoard2v2Line16 = "ScoreBoard2v2Line16";
-    static final String path_ScoreBoard4v4Title = "ScoreBoard4v4Title";
-    static final String path_ScoreBoard4v4Line01 = "ScoreBoard4v4Line01";
-    static final String path_ScoreBoard4v4Line02 = "ScoreBoard4v4Line02";
-    static final String path_ScoreBoard4v4Line03 = "ScoreBoard4v4Line03";
-    static final String path_ScoreBoard4v4Line04 = "ScoreBoard4v4Line04";
-    static final String path_ScoreBoard4v4Line05 = "ScoreBoard4v4Line05";
-    static final String path_ScoreBoard4v4Line06 = "ScoreBoard4v4Line06";
-    static final String path_ScoreBoard4v4Line07 = "ScoreBoard4v4Line07";
-    static final String path_ScoreBoard4v4Line08 = "ScoreBoard4v4Line08";
-    static final String path_ScoreBoard4v4Line09 = "ScoreBoard4v4Line09";
-    static final String path_ScoreBoard4v4Line10 = "ScoreBoard4v4Line10";
-    static final String path_ScoreBoard4v4Line11 = "ScoreBoard4v4Line11";
-    static final String path_ScoreBoard4v4Line12 = "ScoreBoard4v4Line12";
-    static final String path_ScoreBoard4v4Line13 = "ScoreBoard4v4Line13";
-    static final String path_ScoreBoard4v4Line14 = "ScoreBoard4v4Line14";
-    static final String path_ScoreBoard4v4Line15 = "ScoreBoard4v4Line15";
-    static final String path_ScoreBoard4v4Line16 = "ScoreBoard4v4Line16";
-    static final String path_grassPaneWalk = "grassPaneWalk";
     static final String path_cleanBottle = "cleanBottle";
     static final String path_cleanBed = "cleanBed";
     static final String path_chainPrice = "chainPrice";
@@ -185,8 +139,6 @@ class MainConfigPath {
     static final String path_breakCorrect_notInGame = "breakCorrect_notInGame";
 
 
-
-
     static final String path_killfb_sendmess = "killfb_sendmess";
     static final String path_killfb_sendmess_chat = "killfb_sendmess_chat";
     static final String path_killfb_sendmess_title = "killfb_sendmess_title";
@@ -201,7 +153,8 @@ class MainConfigPath {
     static final String path_placeCorrect_notInGame_OpBypass = "placeCorrect_notInGame_OpBypass";
     static final String path_breakCorrect_notInGame_OpBypass = "breakCorrect_notInGame_OpBypass";
     static final String path_meanSecond = "meanSecond";
-    static final String path_shopItem = "shopItem";
+    static final String path_openShopOnCustomEntityName = "openShopOnCustomEntityName";
+    static final String path_shopItemEntityName = "shopItemEntityName";
     static final String path_teamEnchInvRow = "teamEnchInvRow";
     static final String path_tab = "tab";
     static final String path_tab_is_multiLine = "tab_is_multiLine";
@@ -223,10 +176,6 @@ class MainConfigPath {
 
     static final String path_teamEnchItemName_sharpMax = "teamEnchItemName_sharpMax";
     static final String path_teamEnchItemName_protMax = "teamEnchItemName_protMax";
-
-
-
-
 
 
     static final String path_leveluphasteItemType = "leveluphasteItemType";
@@ -290,4 +239,7 @@ class MainConfigPath {
     static final String path_levelupresItemSlot = "levelupresItemSlot";
 
     static final String path_levelupresItemName = "levelupresItemName";
+    static final String path_noEndermanGriefing = "noEndermanGriefing";
+    static final String path_noOpenInventoryTypeList = "noOpenInventoryTypeList";
+    static final String path_noOpenInventory = "noOpenInventory";
 }

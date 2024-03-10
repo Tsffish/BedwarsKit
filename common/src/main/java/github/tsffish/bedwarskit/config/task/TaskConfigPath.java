@@ -1,4 +1,5 @@
 package github.tsffish.bedwarskit.config.task;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -148,4 +149,44 @@ class TaskConfigPath {
     static final String path_gametask_finalbattle_boundaries_warnidis = "gametask_finalbattle_boundaries_warnidis";
     static final String path_gametask_finalbattle_boundaries_damagebuffer = "gametask_finalbattle_boundaries_damagebuffer";
     static final String path_gametask_finalbattle_boundaries_damage = "gametask_finalbattle_boundaries_damage";
+    static final String path_gametask_time_healthset1 = "gametask_time_healthset1";
+    static final String path_gametask_time_healthset2 = "gametask_time_healthset2";
+    static final String path_gametask_time_healthset3 = "gametask_time_healthset3";
+    static final String path_gametask_time_healthset4 = "gametask_time_healthset4";
+
+
+    static final String path_gametask_name_healthset1 = "gametask_name_healthset1";
+    static final String path_gametask_name_healthset2 = "gametask_name_healthset2";
+    static final String path_gametask_name_healthset3 = "gametask_name_healthset3";
+    static final String path_gametask_name_healthset4 = "gametask_name_healthset4";
+
+
+
+
+
+
+
+
+
+    static final String path_gametask_mess_healthset1_chat = "gametask_mess_healthset1_chat";
+    static final String path_gametask_mess_healthset1_title = "gametask_mess_healthset1_title";
+    static final String path_gametask_mess_healthset1_subtitle = "gametask_mess_healthset1_subtitle";
+    static final String path_gametask_mess_healthset1_actionbar = "gametask_mess_healthset1_actionbar";
+    static final String path_gametask_mess_healthset2_chat = "gametask_mess_healthset2_chat";
+    static final String path_gametask_mess_healthset2_title = "gametask_mess_healthset2_title";
+    static final String path_gametask_mess_healthset2_subtitle = "gametask_mess_healthset2_subtitle";
+    static final String path_gametask_mess_healthset2_actionbar = "gametask_mess_healthset2_actionbar";
+    static final String path_gametask_mess_healthset3_chat = "gametask_mess_healthset3_chat";
+    static final String path_gametask_mess_healthset3_title = "gametask_mess_healthset3_title";
+    static final String path_gametask_mess_healthset3_subtitle = "gametask_mess_healthset3_subtitle";
+    static final String path_gametask_mess_healthset3_actionbar = "gametask_mess_healthset3_actionbar";
+    static final String path_gametask_mess_healthset4_chat = "gametask_mess_healthset4_chat";
+    static final String path_gametask_mess_healthset4_title = "gametask_mess_healthset4_title";
+    static final String path_gametask_mess_healthset4_subtitle = "gametask_mess_healthset4_subtitle";
+    static final String path_gametask_mess_healthset4_actionbar = "gametask_mess_healthset4_actionbar";
+    static final String path_gametask_healthset_1 = "gametask_healthset_1";
+    static final String path_gametask_healthset_2 = "gametask_healthset_2";
+    static final String path_gametask_healthset_3 = "gametask_healthset_3";
+    static final String path_gametask_healthset_4 = "gametask_healthset_4";
+
 }

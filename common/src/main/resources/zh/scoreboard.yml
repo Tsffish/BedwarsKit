@@ -1,0 +1,126 @@
+# ==================== #
+# BedwarsKit 计分板 配置 #
+# ==================== #
+config-version: "1.9.57"
+# 不要修改: 配置文件版本，如果不符合当前插件使用的版本，该文件会自动重命名
+
+customScoreboard: true
+# customScoreboard：是否启用自定义记分板功能
+
+teamStat_BedYes: "&a\u2714"
+teamStat_None: "&c\u2718"
+teamStat_BedNo: "&a{aliveCount}"
+meanTeamStat_Alive: "&a"
+meanTeamStat_Dead: "&4"
+meanBedStat_Yes: "\u2714"
+meanBedStat_No: "\u2718"
+meanYou: "{teamColor}\u2b60"
+meanNotYou: "{teamColor}"
+mean2v2Mode: "\u53cc\u4eba\u6a21\u5f0f"
+mean4v4Mode: "4v4v4v4\u6a21\u5f0f"
+serverIp: "&eGithub@Tsffish"
+meanBedwars: "\u8d77\u5e8a\u6218\u4e89"
+meanGameEnd: "\u6e38\u620f\u7ed3\u675f"
+# meanTeamBedYes：TeamStat表示团队中有床位
+# meanTeamNone:TeamStat表示该队已被淘汰
+# meanTeamBedNo：在TeamStat中，表示该队伍没有床，但仍然有玩家
+#{aliveCount}：团队中剩余的玩家
+# meanYou:TeamIsMe表示你在团队中，{teamColor}：玩家当前团队的团队颜色
+# meanNotYou:TeamIsMe表示您不在队伍中， {teamColor}：玩家当前队伍的队伍颜色
+# mean2v2Mode：表示这是2v2模式
+# mean4v4Mode：表示这是4v4模式
+# serverIP：可用于填写服务器地址或重复字符
+# meanBedwars：可用于填充起床战争或重复字符
+# meanGameEnd：表示游戏结束
+
+ScoreBoard2v2Title: "&e&l{bw}"
+ScoreBoard2v2Line01: "&7{date} &8{mode}"
+ScoreBoard2v2Line02: "&f{lastTaskTimeLeft}\u540e &a{lastTaskName}"
+ScoreBoard2v2Line03: "&f "
+ScoreBoard2v2Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard2v2Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard2v2Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard2v2Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard2v2Line08: "&f{whiteTeamNameShort} &f{whiteTeamName} {whiteTeamStat} &7{whiteTeamIsMe}"
+ScoreBoard2v2Line09: "&7{grayTeamNameShort} &f{grayTeamName} {grayTeamStat} &7{grayTeamIsMe}"
+ScoreBoard2v2Line10: "&b{aquaTeamNameShort} &f{aquaTeamName} {aquaTeamStat} &7{aquaTeamIsMe}"
+ScoreBoard2v2Line11: "&d{pinkTeamNameShort} &f{pinkTeamName} {pinkTeamStat} &7{pinkTeamIsMe}"
+ScoreBoard2v2Line12: "&f  "
+ScoreBoard2v2Line13: "&e{ip}"
+ScoreBoard2v2Line14: ""
+ScoreBoard2v2Line15: ""
+ScoreBoard2v2Line16: ""
+# 支持的可变团队名称红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
+# 注意：相同的内容将被折叠到同一行中。例如，如果需要两个空行，则第一行需要是一个空格，第二行需要是两个空格
+# 变量:
+# ...TeamName：团队名称，请参阅config.yml的relTeamName_了解详细信息。团队颜色名称的值必须以小写字母开头，如redTeamName、grayTeamName
+# ...TeamStat：团队的状态，详细信息请参阅meanTeam。团队颜色名称的值必须以小写字母开头，如greenTeamStat、grayTeamStat
+# ...TeamIsMe：你是否在团队中？mean...You的值。团队颜色名称的值必须以小写字母开头，如blueTeamIsMe、grayTeamIsMe
+# ...TeamNameShort：队伍名称的第一个字符。团队颜色名称的值必须以小写字母开头，如blueTeamNameShort、grayTeamNameShort
+# ...TeamIsAlive: meanTeamStat_...的值，要求同上
+# ...TeamBedStat: meanBedStat_...的值，要求同上
+# {formatTimeLeft}：格式化游戏的剩余时间
+# {timeleft-s}：游戏剩余时间（秒）
+# {timeleft-m}：游戏剩余时间（分钟）
+# {timeleft-h}：游戏剩余时间（小时）
+# {timeleft-d}：游戏剩余时间（天）
+# {timeline mo}：游戏剩余时间（以月为单位）
+# {timeleft y}：游戏剩余时间（以年为单位）
+# {date}：今天的日期格式为YYYY/M/D，如2080/3/27
+# {ip}：配置文件中serverIp的值
+# {bw}：配置文件中meanBedwards的值
+# {mode}：配置文件中mean...mode的值。如果是2v2，则为mean2v2Mode的值；如果是4v4，则为mean4v4Mode的值
+# {kill}：你在本场游戏中的杀敌数量
+# {fkill}：你在本场游戏中的最终击杀次数
+# {kd}：你在本场游戏中的kd值
+# {death}：你在本场游戏中的死亡次数
+# {bed}：你在本场游戏中的挖床字数
+# {game}：此游戏的游戏名称
+# {region}：该局的区域
+# {lastTaskTimeLeft} : 下一个执行的任务 的剩余时间
+# {lastTaskName} : 下一个执行的任务 的任务名称
+
+ScoreBoard4v4Title: "&e&l{bw}"
+ScoreBoard4v4Line01: "&7{date} &8{mode}"
+ScoreBoard4v4Line02: "&f{lastTaskTimeLeft}\u540e &a{lastTaskName}"
+ScoreBoard4v4Line03: "&f "
+ScoreBoard4v4Line04: "&c{redTeamNameShort} &f{redTeamName} {redTeamStat} &7{redTeamIsMe}"
+ScoreBoard4v4Line05: "&9{blueTeamNameShort} &f{blueTeamName} {blueTeamStat} &7{blueTeamIsMe}"
+ScoreBoard4v4Line06: "&a{greenTeamNameShort} &f{greenTeamName} {greenTeamStat} &7{greenTeamIsMe}"
+ScoreBoard4v4Line07: "&e{yellowTeamNameShort} &f{yellowTeamName} {yellowTeamStat} &7{yellowTeamIsMe}"
+ScoreBoard4v4Line08: "&f  "
+ScoreBoard4v4Line09: "&f\u51fb\u6740\u6570: &a{kill}"
+ScoreBoard4v4Line10: "&f\u6700\u7ec8\u51fb\u6740: &a{fkill}"
+ScoreBoard4v4Line11: "&f\u7834\u574f\u5e8a\u6570: &a{bed}"
+ScoreBoard4v4Line12: "&f      "
+ScoreBoard4v4Line13: "&e{ip}"
+ScoreBoard4v4Line14: ""
+ScoreBoard4v4Line15: ""
+ScoreBoard4v4Line16: ""
+# 支持的可变团队名称红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
+# 注意：相同的内容将被折叠到同一行中。例如，如果需要两个空行，则第一行需要是一个空格，第二行需要是两个空格
+# 变量:
+# ...TeamName：团队名称，请参阅relTeamName_了解详细信息。团队颜色名称的值必须以小写字母开头，如redTeamName、grayTeamName
+# ...TeamStat：团队的状态，详细信息请参阅meanTeam。团队颜色名称的值必须以小写字母开头，如greenTeamStat、grayTeamStat
+# ...TeamIsMe：你是否在团队中？mean...You的值。团队颜色名称的值必须以小写字母开头，如blueTeamIsMe、grayTeamIsMe
+# ...TeamNameShort：队伍名称的第一个字符。团队颜色名称的值必须以小写字母开头，如blueTeamNameShort、grayTeamNameShort
+# {formatTimeLeft}：格式化游戏的剩余时间
+# {timeleft-s}：游戏剩余时间（秒）
+# {timeleft-m}：游戏剩余时间（分钟）
+# {timeleft-h}：游戏剩余时间（小时）
+# {timeleft-d}：游戏剩余时间（天）
+# {timeline mo}：游戏剩余时间（以月为单位）
+# {timeleft y}：游戏剩余时间（以年为单位）
+# {date}：今天的日期格式为YYYY/M/D，如2080/3/27
+# {ip}：配置文件中serverIp的值
+# {bw}：配置文件中meanBedwards的值
+# {mode}：配置文件中mean...mode的值。如果是2v2，则为mean2v2Mode的值；如果是4v4，则为mean4v4Mode的值
+# {kill}：你在本场游戏中的杀敌数量
+# {fkill}：你在本场游戏中的最终击杀次数
+# {kd}：你在本场游戏中的kd值
+# {death}：你在本场游戏中的死亡次数
+# {bed}：你在本场游戏中的挖床字数
+# {game}：此游戏的游戏名称
+# {region}：该局的区域
+# {lastTaskTimeLeft} : 下一个执行的任务 的剩余时间
+# {lastTaskName} : 下一个执行的任务 的任务名称

@@ -1,10 +1,10 @@
 package github.tsffish.bedwarskit.config.kit;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -12,7 +12,6 @@ import java.util.List;
  * @author Tsffish
  */
 public class KitConfigHandler {
-    public static FileConfiguration c;
     public static boolean kitenable;
     public static String meanSelKitSucc;
     public static String kitDefault;

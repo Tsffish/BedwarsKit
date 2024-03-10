@@ -5,6 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -18,7 +19,7 @@ public class RelPlayerFoodLevel implements Listener {
             return;
         }
         if (noHunger
-                && event.getEntity().getWorld().getName().contains(rushWorld)
+                && event.getEntity().getWorld().getName().contains(gameWorld)
                 && event.getFoodLevel() != maxFoodLevel) {
             event.setFoodLevel(maxFoodLevel);
         }

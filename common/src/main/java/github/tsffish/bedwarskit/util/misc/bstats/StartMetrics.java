@@ -6,6 +6,7 @@ import org.bstats.bukkit.Metrics;
 
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -14,7 +15,9 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
  */
 public class StartMetrics {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
-    public static void startMetrics(){
+    private static final String className = "StartMetrics";
+
+    public static void startMetrics() {
         try {
             Metrics metrics = new Metrics(plugin, 20914);
 
@@ -25,8 +28,8 @@ public class StartMetrics {
             metrics.addCustomChart(new Metrics.SimplePie("plugin_version", PluginState::pluginVersion));
             metrics.addCustomChart(new Metrics.SimplePie("os_name", () -> System.getProperty("os.name")));
 
-        } catch (RuntimeException e) {
-            le("BedwarsKit", "bstats error:" + e);
+        } catch (Exception e) {
+            le(className, e);
         }
     }
 }
