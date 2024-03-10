@@ -1,5 +1,6 @@
 # Introduction
 
+[点击查看中文版介绍](README_zh.md)
 A Addon for BedwarsRel, Added some features to BedwarsRel
 
 ### Depend: 
@@ -41,7 +42,7 @@ A Addon for BedwarsRel, Added some features to BedwarsRel
 You can download the latest version [here](https://www.spigotmc.org/resources/bedwarskit.105616/)
 
 ## Noticed:
-- By default, plugins allow you to open any store through all entities, but you need to first set the name and enter/bwk edit as a player to enter editing mode
+- By default, plugins allow you to open any store through all entities, but you need to first set the name ,enter/bwk edit as a player to enter editing mode
 - In editing mode, entities can be named and set as item stores or upgrade stores. After editing, enter/bwk edit again to exit editing mode
 
 ## Installation:
