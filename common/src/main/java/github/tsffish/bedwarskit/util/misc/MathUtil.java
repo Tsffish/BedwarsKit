@@ -15,7 +15,6 @@ public class MathUtil {
         int minutes = seconds / 60;
         int remainingSeconds = seconds % 60;
 
-        String formattedTime = String.format("%02d:%02d", minutes, remainingSeconds);
-        return formattedTime;
+        return String.format("%02d:%02d", minutes, remainingSeconds);
     }
 }

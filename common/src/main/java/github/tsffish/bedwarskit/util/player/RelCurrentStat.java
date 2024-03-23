@@ -5,8 +5,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.vauleIsWrong;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -21,14 +21,24 @@ public class RelCurrentStat {
     public static final String addFinalKill = "f";
     public static final String addOneHeathKill = "ohk";
     public static final String setOneHeathKill = "setohk";
-    protected static final String className = "RelCurrentStat";
-    private static ConcurrentHashMap<UUID, Integer> playerKill = new ConcurrentHashMap<>(101);
-    private static ConcurrentHashMap<UUID, Integer> playerFKill = new ConcurrentHashMap<>(101);
-    private static ConcurrentHashMap<UUID, Integer> playerDeath = new ConcurrentHashMap<>(101);
-    private static ConcurrentHashMap<UUID, Integer> playerBreakBed = new ConcurrentHashMap<>(101);
-    private static ConcurrentHashMap<UUID, Double> playerKD = new ConcurrentHashMap<>(101);
-    private static ConcurrentHashMap<UUID, Integer> playerOHKill = new ConcurrentHashMap<>(101);
-    private static Set<UUID> playerIsOut = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static final String className = RelCurrentStat.class.getSimpleName();
+    private static ConcurrentHashMap<UUID, Integer> playerKill;
+    private static ConcurrentHashMap<UUID, Integer> playerFKill;
+    private static ConcurrentHashMap<UUID, Integer> playerDeath;
+    private static ConcurrentHashMap<UUID, Integer> playerBreakBed;
+    private static ConcurrentHashMap<UUID, Double> playerKD;
+    private static ConcurrentHashMap<UUID, Integer> playerOHKill;
+    private static Set<UUID> playerIsOut;
+
+    static {
+        playerKill = new ConcurrentHashMap<>(101);
+        playerFKill = new ConcurrentHashMap<>(101);
+        playerDeath = new ConcurrentHashMap<>(101);
+        playerBreakBed = new ConcurrentHashMap<>(101);
+        playerKD = new ConcurrentHashMap<>(101);
+        playerOHKill = new ConcurrentHashMap<>(101);
+        playerIsOut = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    }
 
     public static int getPlayerOHKill(UUID uuid) {
         return playerOHKill.get(uuid);
@@ -67,14 +77,6 @@ public class RelCurrentStat {
     }
 
     public static void updatePlayerStat(UUID uuid, String pd, int value) {
-        if (pd == null) {
-            le(className, "pd is null");
-            return;
-        }
-        if (pd.isEmpty()) {
-            le(className, "pd is empty");
-            return;
-        }
 
         switch (pd.toLowerCase()) {
             case addKill:

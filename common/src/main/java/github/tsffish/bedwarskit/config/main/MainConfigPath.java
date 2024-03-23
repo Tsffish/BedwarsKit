@@ -7,6 +7,7 @@ package github.tsffish.bedwarskit.config.main;
  * @author Tsffish
  */
 class MainConfigPath {
+    static final String path_resSp = "resSp";
     static final String path_breakTitle = "breakTitle";
     static final String path_breakTitleAll = "breakTitleAll";
     static final String path_breakSubTitleAll = "breakSubTitleAll";
@@ -88,16 +89,11 @@ class MainConfigPath {
     static final String path_chainPrice = "chainPrice";
     static final String path_ironPrice = "ironPrice";
     static final String path_diamondPrice = "diamondPrice";
-
     static final String path_chainPriceType = "chainPriceType";
     static final String path_ironPriceType = "ironPriceType";
     static final String path_diamondPriceType = "diamondPriceType";
-
-
     static final String path_upToChainArmor = "upToChainArmor";
-
     static final String path_upToIronArmor = "upToIronArmor";
-
     static final String path_upToDiamondArmor = "upToDiamondArmor";
     static final String path_levelupShopDelayOpen = "levelupShopDelayOpen";
     static final String path_damagefb_attackmess = "damagefb_attackmess";
@@ -108,48 +104,32 @@ class MainConfigPath {
     static final String path_damagefb_attackBlood = "damagefb_attackBlood";
     static final String path_damagefb_attackBloodMode = "damagefb_attackBloodMode";
     static final String path_damagefb_attackBloodType = "damagefb_attackBloodType";
-
-
     static final String path_startmess = "startmess";
     static final String path_startmess_all_chat = "startmess_all_chat";
     static final String path_startmess_all_title = "startmess_all_title";
     static final String path_startmess_all_subtitle = "startmess_all_subtitle";
     static final String path_startmess_all_actionbar = "startmess_all_actionbar";
-
-
     static final String path_preventloadworld = "preventloadworld";
-
     static final String path_CleanHostileOnStart = "CleanHostileOnStart";
-
-
     static final String path_placeCorrect_ResSpawner = "placeCorrect_ResSpawner";
     static final String path_placeCorrect_ResSpawner_mess_chat = "placeCorrect_ResSpawner_mess_chat";
     static final String path_placeCorrect_ResSpawner_mess_title = "placeCorrect_ResSpawner_mess_title";
     static final String path_placeCorrect_ResSpawner_mess_subtitle = "placeCorrect_ResSpawner_mess_subtitle";
     static final String path_placeCorrect_ResSpawner_mess_actionbar = "placeCorrect_ResSpawner_mess_actionbar";
-
     static final String path_placeCorrect_PlayerSpawnLoc = "placeCorrect_PlayerSpawnLoc";
     static final String path_placeCorrect_PlayerSpawnLoc_mess_chat = "placeCorrect_PlayerSpawnLoc_mess_chat";
     static final String path_placeCorrect_PlayerSpawnLoc_mess_title = "placeCorrect_PlayerSpawnLoc_mess_title";
     static final String path_placeCorrect_PlayerSpawnLoc_mess_subtitle = "placeCorrect_PlayerSpawnLoc_mess_subtitle";
     static final String path_placeCorrect_PlayerSpawnLoc_mess_actionbar = "placeCorrect_PlayerSpawnLoc_mess_actionbar";
-
-
     static final String path_placeCorrect_notInGame = "placeCorrect_notInGame";
     static final String path_breakCorrect_notInGame = "breakCorrect_notInGame";
-
-
     static final String path_killfb_sendmess = "killfb_sendmess";
     static final String path_killfb_sendmess_chat = "killfb_sendmess_chat";
     static final String path_killfb_sendmess_title = "killfb_sendmess_title";
     static final String path_killfb_sendmess_subtitle = "killfb_sendmess_subtitle";
     static final String path_killfb_sendmess_actionbar = "killfb_sendmess_actionbar";
-
     static final String path_kill_res_chat = "kill_res_chat";
-
-
     static final String path_meanGameEnd = "meanGameEnd";
-
     static final String path_placeCorrect_notInGame_OpBypass = "placeCorrect_notInGame_OpBypass";
     static final String path_breakCorrect_notInGame_OpBypass = "breakCorrect_notInGame_OpBypass";
     static final String path_meanSecond = "meanSecond";
@@ -164,7 +144,6 @@ class MainConfigPath {
     static final String path_tab_footList = "tab_footList";
     static final String path_update_checker = "update_checker";
     static final String path_update_reportOp = "update_reportOp";
-
     static final String path_levelupsharpItemType = "levelupsharpItemType";
     static final String path_levelupsharpItemSlot = "levelupsharpItemSlot";
     static final String path_levelupprotItemType = "levelupprotItemType";
@@ -173,11 +152,8 @@ class MainConfigPath {
     static final String path_teamEnchItemName_sharp3 = "teamEnchItemName_Sharp3";
     static final String path_teamEnchItemName_sharp4 = "teamEnchItemName_Sharp4";
     static final String path_TeamEnchantMaxCost = "TeamEnchantMaxCost";
-
     static final String path_teamEnchItemName_sharpMax = "teamEnchItemName_sharpMax";
     static final String path_teamEnchItemName_protMax = "teamEnchItemName_protMax";
-
-
     static final String path_leveluphasteItemType = "leveluphasteItemType";
     static final String path_leveluphasteItemSlot = "leveluphasteItemSlot";
     static final String path_teamEffItemName_haste1 = "teamEffItemName_haste1";
@@ -187,23 +163,18 @@ class MainConfigPath {
     static final String path_leveluphealItemSlot = "leveluphealItemSlot";
     static final String path_teamEffItemName_heal1 = "teamEffItemName_heal1";
     static final String path_teamEffItemName_healMax = "teamEffItemName_healMax";
-
     static final String path_haste1Cost2v2 = "haste1Cost2v2";
     static final String path_haste2Cost2v2 = "haste2Cost2v2";
     static final String path_heal1Cost2v2 = "heal1Cost2v2";
-
     static final String path_haste1Cost4v4 = "haste1Cost4v4";
     static final String path_haste2Cost4v4 = "haste2Cost4v4";
     static final String path_heal1Cost4v4 = "heal1Cost4v4";
-
-
     static final String path_messLevelUpHaste1 = "messLevelUpHaste1";
     static final String path_messLevelUpHaste2 = "messLevelUpHaste2";
     static final String path_messLevelUpHeal1 = "messLevelUpHeal1";
     static final String path_teamEffItemName_Haste1 = "teamEffItemName_haste1";
     static final String path_teamEffItemName_Haste2 = "teamEffItemName_haste2";
     static final String path_teamEffItemName_Heal1 = "teamEffItemName_heal1";
-
     static final String path_lobbyleaveTeam = "lobbyleaveTeam";
     static final String path_teamEff_Heal_dis = "teamEff_Heal_dis";
     static final String path_messLevelUpSharp2 = "messLevelUpSharp2";
@@ -213,12 +184,10 @@ class MainConfigPath {
     static final String path_dieOutGameItem_playAgain_ItemName = "dieOutGameItem_playAgain_ItemName";
     static final String path_dieOutGameItem_playAgain_ItemType = "dieOutGameItem_playAgain_ItemType";
     static final String path_dieOutGameItem_playAgain_ClickSendCommand = "dieOutGameItem_playAgain_ClickSendCommand";
-
     static final String path_noMoveList = "noMoveList";
     static final String path_nobreakList = "nobreakList";
     static final String path_giveSharpEnchList = "giveSharpEnchList";
     static final String path_giveProtEnchList = "giveProtEnchList";
-
     static final String path_killfb_oneHealthKill = "killfb_oneHealthKill";
     static final String path_killfb_oneHealthKill_itemType = "killfb_oneHealthKill_itemType";
     static final String path_killfb_oneHealthKill_itemName = "killfb_oneHealthKill_itemName";
@@ -227,7 +196,6 @@ class MainConfigPath {
     static final String path_lobbyjoinTeamMess_title = "lobbyjoinTeamMess_title";
     static final String path_lobbyjoinTeamMess_subtitle = "lobbyjoinTeamMess_subtitle";
     static final String path_lobbyjoinTeamMess_actionbar = "lobbyjoinTeamMess_actionbar";
-
     static final String path_deathGameMode_tpto = "deathGameMode_tpto";
     static final String path_placeCorrect_ResSpawner_dis = "placeCorrect_ResSpawner_dis";
     static final String path_placeCorrect_PlayerSpawnLoc_dis = "placeCorrect_PlayerSpawnLoc_dis";
@@ -237,9 +205,12 @@ class MainConfigPath {
     static final String path_dieOutGameItem_playAgain_ItemSlot = "dieOutGameItem_playAgain_ItemSlot";
     static final String path_levelupresItemType = "levelupresItemType";
     static final String path_levelupresItemSlot = "levelupresItemSlot";
-
     static final String path_levelupresItemName = "levelupresItemName";
     static final String path_noEndermanGriefing = "noEndermanGriefing";
     static final String path_noOpenInventoryTypeList = "noOpenInventoryTypeList";
     static final String path_noOpenInventory = "noOpenInventory";
+    static final String noWoodSwordDropWhenNothaveSword = "noWoodSwordDropWhenNothaveSword";
+    static final String noWoodAxeDropWhenNothaveAxe = "noWoodAxeDropWhenNothaveAxe";
+    static final String noWoodPickaxeDropWhenNothavePickaxe = "noWoodPickaxeDropWhenNothavePickaxe";
+    static final String path_relTeamName_Orange = "relTeamName_Orange";
 }

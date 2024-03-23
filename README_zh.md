@@ -3,14 +3,16 @@
 [Click here for english introduction](README.md)
 一个 BedwarsRel 拓展, 为 BedwarsRel 添加了一些功能
 
-### 前置: 
+### 前置:
+
 - BedwarsRel
 - ProtocolLib(5.1.0 或以上)
 
 ## Functions:
+
 - 悬浮文字
 - 资源分裂
-- 使用任意实体打开商店
+- 使用任意实体打开商店(可快速设置)
 - 创造飞行修复
 - 击杀掠夺资源
 - 自定义游戏计分板
@@ -39,19 +41,23 @@
 - (大部分功能都可以自定义)
 
 ## 下载
+
 你可以在[此处](https://www.spigotmc.org/resources/bedwarskit.105616/)下载最新版
 
 ## 注意:
-- 3.插件默认情况下允许你通过所有实体打开任意商店，但需要先设置名字，作为玩家输入/bwk edit以进入编辑模式
+
+- 插件默认情况下允许你通过所有实体打开任意商店，但需要先设置名字，作为玩家输入/bwk edit以进入编辑模式
 - 在编辑模式下，可以对实体进行命名，设置成物品商店或者升级商店，编辑完成后再次输入/bwk edit以退出编辑模式
 
 ## 安装:
+
 - 1.停止服务器
 - 2.将插件放在根目录的plugins文件夹
 - 3.开启服务器, 进入 plugins/BedwarsKit 文件夹的config.yml文件, 然后根据你的情况正确填写 "基本配置" 下的内容
 - 4.插件现已启用, 你可以使用/bwk 来查看指令帮助
 
 ## 用法:
+
 - 1.确保 "gameWorld" 的值包含你的世界名以让插件识别它
 - 在此基础上，再包含 "gameWorld2v2" 和 "gameWorld4v4" 来区分不同模式
 - 最后，确保 "lobbyWorld" 完全和你的大厅世界名相同
@@ -59,6 +65,7 @@
 - 2.确保 relTeamColorName_ Xxx 设置成你的游戏里的队伍名(显示名不是颜色名)
 
 ## 指令:
+
 - /bwk - 显示帮助信息
 - /bwk reload - 重载配置文件
 - /bwk edit - 开关编辑模式

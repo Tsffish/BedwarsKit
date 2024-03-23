@@ -24,8 +24,10 @@ public class KitNone {
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
         List<String> lore = new ArrayList<>(8);
 
-        for (String s : KitNoneItemLore) {
-            lore.add(t(s));
+        if (KitNoneItemLore != null) {
+            for (String s : KitNoneItemLore) {
+                lore.add(t(s));
+            }
         }
 
         kitItemMeta.setLore(lore);

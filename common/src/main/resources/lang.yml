@@ -1,7 +1,7 @@
 # ====================== #
 # BedwarsKit Lang Config #
 # ====================== #
-config-version: "1.9.57"
+config-version: "1.9.6"
 # Do not modify: The configuration file will be automatically
 # renamed if it does not match the version currently used by the plugin
 
@@ -29,3 +29,23 @@ needIsWrong_killfb_oneHealthKill: "&ekillfb_oneHealthKill is on but BedwarsRel's
 relConfigIsChange_tryToSave: "&eBedwarsRel's Config is changed, saving..."
 relConfigIsChange_Saved: "&aBedwarsRel's Config is saved."
 meanInvalidInventoryType: "Invalid InventoryType: {type}"
+
+meanConfig_renamedTo: "The configuration file {orgName} has been renamed to: {newName}"
+meanConfig_versionNotMatch: "Config {orgName} Does not match the current version, saving a new one..."
+vauleIsWrong: " vaule is wrong "
+vauleIsNull: " vaule is null "
+cantFoundSupport: "can't found support for this version: "
+finishLoadConfig: "Finish Load Config"
+
+meanDebugDisable: "Debug now Disabled"
+meanDebugEnable: "Debug now Enabled"
+meanRegExListener: "Game editing mode enabled, registering additional listeners"
+meanRegExListenerSucc: "Registered additional event listeners"
+meanEditGameToggleToTrue: "The editing game mode has been activated. Hold the naming card and right-click on the entity to name it as an upgrade store (the value of levelupShopOpenModeEntityName in config.yml), hold the item display box and right-click on the entity to name it as an item store (the value of shopitemEntityName in config.yml), hold the redstone and right-click on the entity to delete its name, and hold the paper and right-click to leave edit mode."
+meanEditGameToggleToFalse: "Edit game mode to false"
+
+meanCommandIsPlayerOnly: "This command can only be executed by player!"
+meanJavaAccessDenied: "File access denied"
+
+meanEntityNameSetTo: "&aThe entity name has been set from&r '{orgName}' &ato&r -> '{newName}'"
+meanEntityNameRemove: "&aClear Entity Name, Org ->&r '{orgName}'"

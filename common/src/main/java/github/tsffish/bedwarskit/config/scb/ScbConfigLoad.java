@@ -7,15 +7,14 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.util.HashMap;
 
+import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.finishLoadConfig;
 import static github.tsffish.bedwarskit.config.misc.ConfigVersionChecker.checkAndRenameConfig;
-import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
 import static github.tsffish.bedwarskit.config.scb.ScbConfigHandler.*;
+import static github.tsffish.bedwarskit.util.PluginInit.tipHaveChinese;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
+import static github.tsffish.bedwarskit.util.PluginState.language;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.PluginStartUp.tipHaveChinese;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-import static github.tsffish.bedwarskit.util.misc.PluginState.language;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -24,20 +23,13 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
  * @author Tsffish
  */
 public class ScbConfigLoad {
-    private static final String name = "ScbConfigLoad";
-    private static final String reason = vauleIsNull;
+    private static final String className = ScbConfigLoad.class.getSimpleName();
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
 
     public static void loadScbConfig() {
 
         String fileName = "scoreboard.yml";
         String use_config_version = "1.9.57";
-        //String currentLanguage = language();
-        //ResourceExtractor.copyResource(fileName, currentLanguage);
-
-        //File file = new File(plugin.getDataFolder() + fileName);
-
-        //FileConfiguration c = YamlConfiguration.loadConfiguration(file);
 
         File file = new File(plugin.getDataFolder(), fileName);
 
@@ -52,283 +44,88 @@ public class ScbConfigLoad {
 
         FileConfiguration c = YamlConfiguration.loadConfiguration(file);
 
-        if (c.getString(ScbConfigPath.path_customScoreboard) != null) {
-            customScoreboard = c.getBoolean(ScbConfigPath.path_customScoreboard);
-        } else {
-            sendError(ScbConfigPath.path_customScoreboard);
+        try {
+            extracted(c);
+        } catch (Exception e) {
+            le(className, e);
         }
+
+        if (isDebug()) {
+            l("<" + className + "> " + finishLoadConfig);
+        }
+
+    }
+
+    private static void extracted(FileConfiguration c) {
+        customScoreboard = c.getBoolean(ScbConfigPath.path_customScoreboard);
 
         if (customScoreboard) {
 
-            //
-            //
-            //
-            //START HERE
-            //
-            //
-            //
+            meanTeamStat_Alive = c.getString(ScbConfigPath.path_meanTeamStat_Alive);
 
-            if (c.getString(ScbConfigPath.path_meanTeamStat_Alive) != null) {
-                meanTeamStat_Alive = c.getString(ScbConfigPath.path_meanTeamStat_Alive);
-            } else {
-                sendError(ScbConfigPath.path_meanTeamStat_Alive);
-            }
+            meanTeamStat_Dead = c.getString(ScbConfigPath.path_meanTeamStat_Dead);
 
-            if (c.getString(ScbConfigPath.path_meanTeamStat_Dead) != null) {
-                meanTeamStat_Dead = c.getString(ScbConfigPath.path_meanTeamStat_Dead);
-            } else {
-                sendError(ScbConfigPath.path_meanTeamStat_Dead);
-            }
+            meanBedStat_Yes = c.getString(ScbConfigPath.path_meanBedStat_Yes);
 
-            if (c.getString(ScbConfigPath.path_meanBedStat_Yes) != null) {
-                meanBedStat_Yes = c.getString(ScbConfigPath.path_meanBedStat_Yes);
-            } else {
-                sendError(ScbConfigPath.path_meanBedStat_Yes);
-            }
+            meanBedStat_No = c.getString(ScbConfigPath.path_meanBedStat_No);
 
-            if (c.getString(ScbConfigPath.path_meanBedStat_No) != null) {
-                meanBedStat_No = c.getString(ScbConfigPath.path_meanBedStat_No);
-            } else {
-                sendError(ScbConfigPath.path_meanBedStat_No);
-            }
+            teamStat_BedYes = c.getString(ScbConfigPath.path_teamStat_BedYes);
 
-            if (c.getString(ScbConfigPath.path_teamStat_BedYes) != null) {
-                teamStat_BedYes = c.getString(ScbConfigPath.path_teamStat_BedYes);
-            } else {
-                sendError(ScbConfigPath.path_teamStat_BedYes);
-            }
+            teamStat_None = c.getString(ScbConfigPath.path_teamStat_None);
 
-            if (c.getString(ScbConfigPath.path_teamStat_None) != null) {
-                teamStat_None = c.getString(ScbConfigPath.path_teamStat_None);
-            } else {
-                sendError(ScbConfigPath.path_teamStat_None);
-            }
+            teamStat_BedNo = c.getString(ScbConfigPath.path_teamStat_BedNo);
 
-            if (c.getString(ScbConfigPath.path_teamStat_BedNo) != null) {
-                teamStat_BedNo = c.getString(ScbConfigPath.path_teamStat_BedNo);
-            } else {
-                sendError(ScbConfigPath.path_teamStat_BedNo);
-            }
+            serverIp = c.getString(ScbConfigPath.path_serverIp);
 
-            if (c.getString(ScbConfigPath.path_serverIp) != null) {
-                serverIp = c.getString(ScbConfigPath.path_serverIp);
-            } else {
-                sendError(ScbConfigPath.path_serverIp);
-            }
+            meanYou = c.getString(ScbConfigPath.path_meanYou);
 
-            if (c.getString(ScbConfigPath.path_meanYou) != null) {
-                meanYou = c.getString(ScbConfigPath.path_meanYou);
-            } else {
-                sendError(ScbConfigPath.path_meanYou);
-            }
+            meanNotYou = c.getString(ScbConfigPath.path_meanNotYou);
 
-            if (c.getString(ScbConfigPath.path_meanNotYou) != null) {
-                meanNotYou = c.getString(ScbConfigPath.path_meanNotYou);
-            } else {
-                sendError(ScbConfigPath.path_meanNotYou);
-            }
+            meanBedwars = c.getString(ScbConfigPath.path_meanBedwars);
 
+            mean2v2Mode = c.getString(ScbConfigPath.path_mean2v2Mode);
 
-            if (c.getString(ScbConfigPath.path_meanBedwars) != null) {
-                meanBedwars = c.getString(ScbConfigPath.path_meanBedwars);
-            } else {
-                sendError(ScbConfigPath.path_meanBedwars);
-            }
-            if (c.getString(ScbConfigPath.path_mean2v2Mode) != null) {
-                mean2v2Mode = c.getString(ScbConfigPath.path_mean2v2Mode);
-            } else {
-                sendError(ScbConfigPath.path_mean2v2Mode);
-            }
-            if (c.getString(ScbConfigPath.path_mean4v4Mode) != null) {
-                mean4v4Mode = c.getString(ScbConfigPath.path_mean4v4Mode);
-            } else {
-                sendError(ScbConfigPath.path_mean4v4Mode);
-            }
+            mean4v4Mode = c.getString(ScbConfigPath.path_mean4v4Mode);
 
+            meanGameEnd = c.getString(ScbConfigPath.path_meanGameEnd);
 
-            if (c.getString(ScbConfigPath.path_meanGameEnd) != null) {
-                meanGameEnd = c.getString(ScbConfigPath.path_meanGameEnd);
-            } else {
-                sendError(ScbConfigPath.path_meanGameEnd);
-            }
+            ScoreBoard2v2Title = c.getString(ScbConfigPath.path_ScoreBoard2v2Title);
 
+            ScoreBoard2v2Line01 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line01);
+            ScoreBoard2v2Line02 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line02);
+            ScoreBoard2v2Line03 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line03);
+            ScoreBoard2v2Line04 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line04);
+            ScoreBoard2v2Line05 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line05);
+            ScoreBoard2v2Line06 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line06);
+            ScoreBoard2v2Line07 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line07);
+            ScoreBoard2v2Line08 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line08);
+            ScoreBoard2v2Line09 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line09);
+            ScoreBoard2v2Line10 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line10);
+            ScoreBoard2v2Line11 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line11);
+            ScoreBoard2v2Line12 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line12);
+            ScoreBoard2v2Line13 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line13);
+            ScoreBoard2v2Line14 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line14);
+            ScoreBoard2v2Line15 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line15);
+            ScoreBoard2v2Line16 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line16);
 
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Title) != null) {
-                ScoreBoard2v2Title = c.getString(ScbConfigPath.path_ScoreBoard2v2Title);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Title);
-            }
+            ScoreBoard4v4Title = c.getString(ScbConfigPath.path_ScoreBoard4v4Title);
 
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line01) != null) {
-                ScoreBoard2v2Line01 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line01);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line01);
-            }
-
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line02) != null) {
-                ScoreBoard2v2Line02 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line02);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line02);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line03) != null) {
-                ScoreBoard2v2Line03 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line03);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line03);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line04) != null) {
-                ScoreBoard2v2Line04 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line04);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line04);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line05) != null) {
-                ScoreBoard2v2Line05 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line05);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line05);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line06) != null) {
-                ScoreBoard2v2Line06 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line06);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line06);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line07) != null) {
-                ScoreBoard2v2Line07 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line07);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line07);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line08) != null) {
-                ScoreBoard2v2Line08 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line08);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line08);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line09) != null) {
-                ScoreBoard2v2Line09 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line09);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line09);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line10) != null) {
-                ScoreBoard2v2Line10 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line10);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line10);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line11) != null) {
-                ScoreBoard2v2Line11 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line11);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line11);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line12) != null) {
-                ScoreBoard2v2Line12 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line12);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line12);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line13) != null) {
-                ScoreBoard2v2Line13 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line13);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line13);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line14) != null) {
-                ScoreBoard2v2Line14 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line14);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line14);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line15) != null) {
-                ScoreBoard2v2Line15 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line15);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line15);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard2v2Line10) != null) {
-                ScoreBoard2v2Line16 = c.getString(ScbConfigPath.path_ScoreBoard2v2Line16);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard2v2Line16);
-            }
-
-
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Title) != null) {
-                ScoreBoard4v4Title = c.getString(ScbConfigPath.path_ScoreBoard4v4Title);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Title);
-            }
-
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line01) != null) {
-                ScoreBoard4v4Line01 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line01);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line01);
-            }
-
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line02) != null) {
-                ScoreBoard4v4Line02 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line02);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line02);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line03) != null) {
-                ScoreBoard4v4Line03 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line03);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line03);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line04) != null) {
-                ScoreBoard4v4Line04 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line04);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line04);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line05) != null) {
-                ScoreBoard4v4Line05 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line05);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line05);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line06) != null) {
-                ScoreBoard4v4Line06 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line06);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line06);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line07) != null) {
-                ScoreBoard4v4Line07 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line07);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line07);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line08) != null) {
-                ScoreBoard4v4Line08 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line08);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line08);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line09) != null) {
-                ScoreBoard4v4Line09 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line09);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line09);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line10) != null) {
-                ScoreBoard4v4Line10 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line10);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line10);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line11) != null) {
-                ScoreBoard4v4Line11 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line11);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line11);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line12) != null) {
-                ScoreBoard4v4Line12 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line12);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line12);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line13) != null) {
-                ScoreBoard4v4Line13 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line13);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line13);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line14) != null) {
-                ScoreBoard4v4Line14 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line14);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line14);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line15) != null) {
-                ScoreBoard4v4Line15 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line15);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line15);
-            }
-            if (c.getString(ScbConfigPath.path_ScoreBoard4v4Line10) != null) {
-                ScoreBoard4v4Line16 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line16);
-            } else {
-                sendError(ScbConfigPath.path_ScoreBoard4v4Line16);
-            }
+            ScoreBoard4v4Line01 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line01);
+            ScoreBoard4v4Line02 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line02);
+            ScoreBoard4v4Line03 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line03);
+            ScoreBoard4v4Line04 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line04);
+            ScoreBoard4v4Line05 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line05);
+            ScoreBoard4v4Line06 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line06);
+            ScoreBoard4v4Line07 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line07);
+            ScoreBoard4v4Line08 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line08);
+            ScoreBoard4v4Line09 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line09);
+            ScoreBoard4v4Line10 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line10);
+            ScoreBoard4v4Line11 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line11);
+            ScoreBoard4v4Line12 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line12);
+            ScoreBoard4v4Line13 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line13);
+            ScoreBoard4v4Line14 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line14);
+            ScoreBoard4v4Line15 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line15);
+            ScoreBoard4v4Line16 = c.getString(ScbConfigPath.path_ScoreBoard4v4Line16);
 
 
             ScbConfigHandler.ScoreBoard2v2Line = new HashMap<>(18);
@@ -368,17 +165,6 @@ public class ScbConfigLoad {
             ScbConfigHandler.ScoreBoard4v4Line.put(3, ScbConfigHandler.ScoreBoard4v4Line14);
             ScbConfigHandler.ScoreBoard4v4Line.put(2, ScbConfigHandler.ScoreBoard4v4Line15);
             ScbConfigHandler.ScoreBoard4v4Line.put(1, ScbConfigHandler.ScoreBoard4v4Line16);
-
-
         }
-
-        if (isDebug()) {
-            l("<" + name + "> " + finishLoadConfig);
-        }
-
-    }
-
-    private static void sendError(String path) {
-        er(name, path, reason);
     }
 }

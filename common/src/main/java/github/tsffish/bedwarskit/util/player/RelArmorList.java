@@ -12,9 +12,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Tsffish
  */
 public class RelArmorList {
-    private static Set<UUID> armorChain = Collections.newSetFromMap(new ConcurrentHashMap<>());
-    private static Set<UUID> armorIron = Collections.newSetFromMap(new ConcurrentHashMap<>());
-    private static Set<UUID> armorDiamond = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static Set<UUID> armorChain;
+    private static Set<UUID> armorIron;
+    private static Set<UUID> armorDiamond;
+
+    static {
+        armorChain = Collections.newSetFromMap(new ConcurrentHashMap<>());
+        armorIron = Collections.newSetFromMap(new ConcurrentHashMap<>());
+        armorDiamond = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    }
 
     public static void addArmorChain(UUID uuid) {
         armorChain.add(uuid);

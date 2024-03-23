@@ -34,10 +34,10 @@ gametask_finalbattle_boundaries_time: 60
 gametask_finalbattle_boundaries_warnidis: 0
 gametask_finalbattle_boundaries_damagebuffer: 0
 gametask_finalbattle_boundaries_damage: 6
-gametask_healthset_1: 24.0
-gametask_healthset_2: 28.0
-gametask_healthset_3: 34.0
-gametask_healthset_4: 40.0
+gametask_healthset_1: 28.0
+gametask_healthset_2: 36.0
+gametask_healthset_3: 44.0
+gametask_healthset_4: 60.0
 # gametask: Is the countdown task feature enabled
 # gametask_splaytime: Enable resource point speed control task
 # gametask_spaytime__ The speed of the speed control level for 1/2/3/4 of this resource, in milliseconds

@@ -2,6 +2,7 @@ package github.tsffish.bedwarskit.listener;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
+import github.tsffish.bedwarskit.util.GetMaterial;
 import github.tsffish.bedwarskit.util.player.SendActionBar;
 import github.tsffish.bedwarskit.util.player.SoundPlayer;
 import io.github.bedwarsrel.events.BedwarsPlayerKilledEvent;
@@ -20,9 +21,10 @@ import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 import static github.tsffish.bedwarskit.util.player.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.player.RelCurrentStat.*;
-import static github.tsffish.bedwarskit.util.player.SendTitleUtil.sendTitlePacket;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -31,11 +33,12 @@ import static github.tsffish.bedwarskit.util.player.SendTitleUtil.sendTitlePacke
  * @author Tsffish
  */
 public class RelPlayerKilled implements Listener {
+    private static final String className = RelPlayerKilled.class.getSimpleName();
     private static final Material ironIngot = Material.IRON_INGOT;
     private static final Material goldIngot = Material.GOLD_INGOT;
     private static final Material diamond = Material.DIAMOND;
     private static final Material emerald = Material.EMERALD;
-    private static final Material bed_block = Material.BED_BLOCK;
+    private static final Material bed_block = GetMaterial.BED_BLOCK();
 
     private String replaceString(
             String text,
@@ -70,6 +73,12 @@ public class RelPlayerKilled implements Listener {
         if (event.getGame() == null) {
             return;
         }
+
+        if (bed_block == null) {
+            le(className, "bed_block mat is null");
+            return;
+        }
+
 
         Game game = event.getGame();
 
@@ -213,13 +222,13 @@ public class RelPlayerKilled implements Listener {
                 if (!Objects.equals(killfb_sendmess_subtitle, "")) {
                     String subtitleReal = replaceString(killfb_sendmess_subtitle, kName, dName, kHealth, dHealth, ohk);
 
-                    sendTitlePacket(k, titleReal, subtitleReal,0, 30,5);
+                    sendTitle(k, titleReal, subtitleReal, 0, 30, 5);
                 }
             } else if (!Objects.equals(killfb_sendmess_subtitle, "")) {
                 String titleReal = " ";
                 String subtitleReal = replaceString(killfb_sendmess_subtitle, kName, dName, kHealth, dHealth, ohk);
 
-                sendTitlePacket(k, titleReal, subtitleReal,0, 30,5);
+                sendTitle(k, titleReal, subtitleReal, 0, 30, 5);
             }
             if (!Objects.equals(killfb_sendmess_actionbar, "")) {
                 SendActionBar.sendActionBar(k, replaceString(killfb_sendmess_actionbar, kName, dName, kHealth, dHealth, ohk));

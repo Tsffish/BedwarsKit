@@ -1,9 +1,9 @@
 package github.tsffish.bedwarskit.listener;
 
-import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
-import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
-import github.tsffish.bedwarskit.util.teamshop.list.ListProt;
-import github.tsffish.bedwarskit.util.teamshop.list.ListSharp;
+import github.tsffish.bedwarskit.util.teamshop.haste.ListHaste;
+import github.tsffish.bedwarskit.util.teamshop.heal.ListHeal;
+import github.tsffish.bedwarskit.util.teamshop.prot.ListProt;
+import github.tsffish.bedwarskit.util.teamshop.sharp.ListSharp;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -25,10 +25,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.listener.RelOpenShop.openShop;
+import static github.tsffish.bedwarskit.util.PluginState.isBungeeMode;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.consoleSendCommand;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
+import static github.tsffish.bedwarskit.util.misc.MessSender.l;
 import static github.tsffish.bedwarskit.util.player.PlayerSender.sendMessage;
+import static github.tsffish.bedwarskit.util.player.PlayerUtil.removeDiamond;
 import static github.tsffish.bedwarskit.util.player.RelPlayerKit.*;
 import static github.tsffish.bedwarskit.util.player.SoundPlayer.*;
 
@@ -43,8 +46,9 @@ public class RelClickInventory implements Listener {
     private static final Material diamond = Material.DIAMOND;
     private static final Material air = Material.AIR;
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void on(final InventoryClickEvent event) {
+
         Inventory inventory = event.getClickedInventory();
 
         if (inventory == null) return;
@@ -55,7 +59,7 @@ public class RelClickInventory implements Listener {
         }
         ItemStack itemStack = event.getCurrentItem();
 
-        if (itemStack == null || itemStack.getType() == air) {
+        if (itemStack == null) {
             return;
         }
         Material itemType = itemStack.getType();
@@ -91,7 +95,7 @@ public class RelClickInventory implements Listener {
             }
 
             if (isSelected) {
-                sendMessage(player,meanSelKitSucc);
+                sendMessage(player, meanSelKitSucc);
                 playerSoundSucc(player);
                 player.closeInventory();
             }
@@ -126,7 +130,6 @@ public class RelClickInventory implements Listener {
             for (String string : noMoveList) {
                 if (itemTypeText.contains(string)) {
                     event.setCancelled(true);
-                    return;
                 }
             }
         }
@@ -157,37 +160,19 @@ public class RelClickInventory implements Listener {
 
                 if (player.getWorld().getName().contains(gameWorld2v2) || bungeeMode.equals("2v2")) {
 
-                    if (clickedItemType == leveluphasteItemType
-                            && clickedItem.hasItemMeta()) {
-
-                        Set<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
 
                         if (clickedItemType == leveluphasteItemType) {
 
+                        Set<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
                             for (String[] strings : teamDatas) {
                                 if (clickedItemName.equals(teamEffItemName_Haste1)
                                         && player.getInventory().contains(diamond, haste1Cost2v2)) {
                                     if (strings[0].equals(teamName)
                                             && !strings[1].equals("2") && !strings[1].equals("1")) {
                                         int count = haste1Cost2v2;
-                                        int deductedCount = 0;
 
-                                        for (int i = 0; i < inventory.getSize(); i++) {
-                                            if (deductedCount >= count) {
-                                                break;
-                                            }
+                                        if (removeDiamond(player,count)){
 
-                                            ItemStack item = inventory.getItem(i);
-                                            if (item != null && item.getType() == diamond) {
-
-                                                item.setAmount(item.getAmount() - 1);
-                                                deductedCount++;
-
-                                                if (item.getAmount() <= 0) {
-                                                    inventory.setItem(i, null);
-                                                }
-                                            }
-                                        }
 
                                         Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
                                         for (String[] data : teamDatas) {
@@ -207,6 +192,7 @@ public class RelClickInventory implements Listener {
                                         }
                                         ListHaste.setTeamDatas(gameName, newteamDatas);
 
+                                        }
                                         String mess = messLevelUphaste1.replace("{player}", player.getName());
                                         player.sendMessage(t(mess));
                                         buyFail = false;
@@ -219,50 +205,34 @@ public class RelClickInventory implements Listener {
                                     if (strings[0].equals(teamName)
                                             && !strings[1].equals("2")) {
                                         int count = haste2Cost2v2;
-                                        int deductedCount = 0;
+ if (removeDiamond(player,count)) {
 
-                                        for (int i = 0; i < inventory.getSize(); i++) {
-                                            if (deductedCount >= count) {
-                                                break;
-                                            }
 
-                                            ItemStack item = inventory.getItem(i);
-                                            if (item != null && item.getType() == diamond) {
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                                item.setAmount(item.getAmount() - 1);
-                                                deductedCount++;
-
-                                                if (item.getAmount() <= 0) {
-                                                    inventory.setItem(i, null);
-                                                }
-                                            }
-                                        }
-
-                                        Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                        for (String[] data : teamDatas) {
-                                            newteamDatas.add(data.clone());
-                                        }
-
-                                        for (String team : game.getTeams().keySet()) {
-                                            String[] teamData = new String[]{teamName, "2"};
-                                            String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                            for (String[] value : dataArray) {
-                                                if (value[0].equals(team)) {
-                                                    newteamDatas.remove(value);
-                                                    newteamDatas.add(teamData);
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                        ListHaste.setTeamDatas(gameName, newteamDatas);
-
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "2"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
+     ListHaste.setTeamDatas(gameName, newteamDatas);
+ }
                                         String mess = messLevelUphaste2.replace("{player}", player.getName());
                                         player.sendMessage(t(mess));
                                         buyFail = false;
                                     }
                                 }
                             }
-                        }
+
                     }
                     if (clickedItemType == leveluphealItemType) {
 
@@ -274,43 +244,27 @@ public class RelClickInventory implements Listener {
                                 if (strings[0].equals(teamName)
                                         && !strings[1].equals("1")) {
                                     int count = heal1Cost2v2;
-                                    int deductedCount = 0;
+ if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "1"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListHeal.setTeamDatas(gameName, newteamDatas);
-
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "1"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
+     ListHeal.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpheal1.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -331,43 +285,27 @@ public class RelClickInventory implements Listener {
                                         && !strings[1].equals("3")
                                         && !strings[1].equals("4")) {
                                     int count = sharp1Cost2v2;
-                                    int deductedCount = 0;
+                                    if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "1"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "1"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
+     ListSharp.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpsharp1.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -379,43 +317,26 @@ public class RelClickInventory implements Listener {
                                         && !strings[1].equals("3")
                                         && !strings[1].equals("4")) {
                                     int count = sharp2Cost2v2;
-                                    int deductedCount = 0;
+                                    if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "2"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "2"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
+     ListSharp.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpsharp2.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -426,43 +347,27 @@ public class RelClickInventory implements Listener {
                                         && !strings[1].equals("3")
                                         && !strings[1].equals("4")) {
                                     int count = sharp3Cost2v2;
-                                    int deductedCount = 0;
+                                    if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "3"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "3"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
+     ListSharp.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpsharp3.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -472,44 +377,28 @@ public class RelClickInventory implements Listener {
                                 if (strings[0].equals(teamName)
                                         && !strings[1].equals("4")) {
                                     int count = sharp1Cost2v2;
-                                    int deductedCount = 0;
+ if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "4"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
 
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "4"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
+     ListSharp.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpsharp4.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -517,7 +406,13 @@ public class RelClickInventory implements Listener {
                             }
                         }
                     }
+                    if (isDebug()){
+                        l("PD :" + clickedItemType);
+                    }
                     if (clickedItemType == levelupprotItemType) {
+                    if (isDebug()){
+                        l("clickedItemType == levelupprotItemType");
+                    }
 
                         Set<String[]> teamDatas = ListProt.getTeamDatas(gameName);
 
@@ -530,44 +425,28 @@ public class RelClickInventory implements Listener {
                                         && !strings[1].equals("3")
                                         && !strings[1].equals("4")) {
                                     int count = prot1Cost2v2;
-                                    int deductedCount = 0;
+ if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "1"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
 
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "1"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
+     ListProt.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpprot1.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -579,44 +458,27 @@ public class RelClickInventory implements Listener {
                                         && !strings[1].equals("3")
                                         && !strings[1].equals("4")) {
                                     int count = prot2Cost2v2;
-                                    int deductedCount = 0;
+ if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "2"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "2"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
+     ListProt.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpprot2.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -627,44 +489,27 @@ public class RelClickInventory implements Listener {
                                         && !strings[1].equals("3")
                                         && !strings[1].equals("4")) {
                                     int count = prot3Cost2v2;
-                                    int deductedCount = 0;
+                                    if (removeDiamond(player,count)) {
 
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
 
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "3"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
 
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "3"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
+     ListProt.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpprot3.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -674,609 +519,27 @@ public class RelClickInventory implements Listener {
                                 if (strings[0].equals(teamName)
                                         && !strings[1].equals("4")) {
                                     int count = prot4Cost2v2;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "4"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpprot4.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            }
-                        }
-                    }
-
-                } else if (player.getWorld().getName().contains(gameWorld4v4) || bungeeMode.equals("4v4")) {
-
-                    if (clickedItemType == leveluphasteItemType
-                            && clickedItem.hasItemMeta()) {
-
-                        Set<String[]> teamDatas = ListHaste.getTeamDatas(gameName);
-
-                        if (clickedItemType == leveluphasteItemType) {
-
-                            for (String[] strings : teamDatas) {
-                                if (clickedItemName.equals(teamEffItemName_Haste1)
-                                        && player.getInventory().contains(diamond, haste1Cost4v4)) {
-                                    if (strings[0].equals(teamName)
-                                            && !strings[1].equals("2") && !strings[1].equals("1")) {
-                                        int count = haste1Cost4v4;
-                                        int deductedCount = 0;
-
-                                        for (int i = 0; i < inventory.getSize(); i++) {
-                                            if (deductedCount >= count) {
-                                                break;
-                                            }
-
-                                            ItemStack item = inventory.getItem(i);
-                                            if (item != null && item.getType() == diamond) {
-
-                                                item.setAmount(item.getAmount() - 1);
-                                                deductedCount++;
-
-                                                if (item.getAmount() <= 0) {
-                                                    inventory.setItem(i, null);
-                                                }
-                                            }
-                                        }
-
-                                        Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                        for (String[] data : teamDatas) {
-                                            newteamDatas.add(data.clone());
-                                        }
-
-                                        for (String team : game.getTeams().keySet()) {
-                                            String[] teamData = new String[]{teamName, "1"};
-                                            String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                            for (String[] value : dataArray) {
-                                                if (value[0].equals(team)) {
-                                                    newteamDatas.remove(value);
-                                                    newteamDatas.add(teamData);
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                        ListHaste.setTeamDatas(gameName, newteamDatas);
-
-                                        String mess = messLevelUphaste1.replace("{player}", player.getName());
-                                        player.sendMessage(t(mess));
-                                        buyFail = false;
-                                    } else {
-                                        String mess = messLevelUpFailed.replace("{player}", player.getName());
-                                        player.sendMessage(t(mess));
-                                    }
-                                } else if (clickedItemName.equals(teamEffItemName_Haste2) && player.getInventory().contains(diamond, haste2Cost4v4)) {
-
-                                    if (strings[0].equals(teamName)
-                                            && !strings[1].equals("2")) {
-                                        int count = haste2Cost4v4;
-                                        int deductedCount = 0;
-
-                                        for (int i = 0; i < inventory.getSize(); i++) {
-                                            if (deductedCount >= count) {
-                                                break;
-                                            }
-
-                                            ItemStack item = inventory.getItem(i);
-                                            if (item != null && item.getType() == diamond) {
-
-                                                item.setAmount(item.getAmount() - 1);
-                                                deductedCount++;
-
-                                                if (item.getAmount() <= 0) {
-                                                    inventory.setItem(i, null);
-                                                }
-                                            }
-                                        }
-
-                                        Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                        for (String[] data : teamDatas) {
-                                            newteamDatas.add(data.clone());
-                                        }
-
-                                        for (String team : game.getTeams().keySet()) {
-                                            String[] teamData = new String[]{teamName, "2"};
-                                            String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                            for (String[] value : dataArray) {
-                                                if (value[0].equals(team)) {
-                                                    newteamDatas.remove(value);
-                                                    newteamDatas.add(teamData);
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                        ListHaste.setTeamDatas(gameName, newteamDatas);
-
-                                        String mess = messLevelUphaste2.replace("{player}", player.getName());
-                                        player.sendMessage(t(mess));
-                                        buyFail = false;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (clickedItemType == leveluphealItemType) {
-
-                        Set<String[]> teamDatas = ListHeal.getTeamDatas(gameName);
-
-                        for (String[] strings : teamDatas) {
-                            if (clickedItemName.equals(teamEffItemName_Heal1)
-                                    && player.getInventory().contains(diamond, heal1Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("1")) {
-                                    int count = heal1Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "1"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListHeal.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpheal1.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            }
-                        }
-                    }
-                    if (clickedItemType == levelupsharpItemType) {
-
-                        Set<String[]> teamDatas = ListSharp.getTeamDatas(gameName);
-
-                        for (String[] strings : teamDatas) {
-                            if (clickedItemName.equals(teamEnchItemName_sharp1)
-                                    && player.getInventory().contains(diamond, sharp1Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("1")
-                                        && !strings[1].equals("2")
-                                        && !strings[1].equals("3")
-                                        && !strings[1].equals("4")) {
-                                    int count = sharp1Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "1"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpsharp1.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            } else if (clickedItemName.equals(teamEnchItemName_sharp2)
-                                    && player.getInventory().contains(diamond, sharp2Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("2")
-                                        && !strings[1].equals("3")
-                                        && !strings[1].equals("4")) {
-                                    int count = sharp2Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "2"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpsharp2.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            } else if (clickedItemName.equals(teamEnchItemName_sharp3)
-                                    && player.getInventory().contains(diamond, sharp3Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("3")
-                                        && !strings[1].equals("4")) {
-                                    int count = sharp3Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "3"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpsharp3.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            } else if (clickedItemName.equals(teamEnchItemName_sharp4)
-                                    && player.getInventory().contains(diamond, sharp4Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("4")) {
-                                    int count = sharp1Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "4"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListSharp.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpsharp4.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            }
-                        }
-                    }
-                    if (clickedItemType == levelupprotItemType) {
-
-                        Set<String[]> teamDatas = ListProt.getTeamDatas(gameName);
-
-                        for (String[] strings : teamDatas) {
-                            if (clickedItemName.equals(teamEnchItemName_prot1)
-                                    && player.getInventory().contains(diamond, prot1Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("1")
-                                        && !strings[1].equals("2")
-                                        && !strings[1].equals("3")
-                                        && !strings[1].equals("4")) {
-                                    int count = prot1Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "1"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpprot1.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            } else if (clickedItemName.equals(teamEnchItemName_prot2)
-                                    && player.getInventory().contains(diamond, prot2Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("2")
-                                        && !strings[1].equals("3")
-                                        && !strings[1].equals("4")) {
-                                    int count = prot2Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "2"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpprot2.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            } else if (clickedItemName.equals(teamEnchItemName_prot3)
-                                    && player.getInventory().contains(diamond, prot3Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("3")
-                                        && !strings[1].equals("4")) {
-                                    int count = prot3Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "3"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
-                                    String mess = messLevelUpprot3.replace("{player}", player.getName());
-                                    player.sendMessage(t(mess));
-                                    buyFail = false;
-                                }
-                            } else if (clickedItemName.equals(teamEnchItemName_prot4)
-                                    && player.getInventory().contains(diamond, prot4Cost4v4)) {
-                                if (strings[0].equals(teamName)
-                                        && !strings[1].equals("4")) {
-                                    int count = prot4Cost4v4;
-                                    int deductedCount = 0;
-
-                                    for (int i = 0; i < inventory.getSize(); i++) {
-                                        if (deductedCount >= count) {
-                                            break;
-                                        }
-
-                                        ItemStack item = inventory.getItem(i);
-                                        if (item != null && item.getType() == diamond) {
-
-                                            item.setAmount(item.getAmount() - 1);
-                                            deductedCount++;
-
-                                            if (item.getAmount() <= 0) {
-                                                inventory.setItem(i, null);
-                                            }
-                                        }
-                                    }
-
-                                    Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
-                                    for (String[] data : teamDatas) {
-                                        newteamDatas.add(data.clone());
-                                    }
-
-                                    for (String team : game.getTeams().keySet()) {
-                                        String[] teamData = new String[]{teamName, "4"};
-                                        String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
-                                        for (String[] value : dataArray) {
-                                            if (value[0].equals(team)) {
-                                                newteamDatas.remove(value);
-                                                newteamDatas.add(teamData);
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    ListProt.setTeamDatas(gameName, newteamDatas);
-
+                                    if (removeDiamond(player,count)) {
+
+     Set<String[]> newteamDatas = Collections.newSetFromMap(new ConcurrentHashMap<>());
+     for (String[] data : teamDatas) {
+         newteamDatas.add(data.clone());
+     }
+
+     for (String team : game.getTeams().keySet()) {
+         String[] teamData = new String[]{teamName, "4"};
+         String[][] dataArray = newteamDatas.toArray(new String[newteamDatas.size()][]);
+         for (String[] value : dataArray) {
+             if (value[0].equals(team)) {
+                 newteamDatas.remove(value);
+                 newteamDatas.add(teamData);
+                 break;
+             }
+         }
+     }
+
+     ListProt.setTeamDatas(gameName, newteamDatas);
+ }
                                     String mess = messLevelUpprot4.replace("{player}", player.getName());
                                     player.sendMessage(t(mess));
                                     buyFail = false;
@@ -1286,6 +549,7 @@ public class RelClickInventory implements Listener {
                     }
 
                 }
+                else if (player.getWorld().getName().contains(gameWorld4v4) || bungeeMode.equals("4v4")) {}
 
 
                 if (clickedItemType == glass_pane) {

@@ -2,6 +2,7 @@ package github.tsffish.bedwarskit.listener;
 
 
 import github.tsffish.bedwarskit.BedwarsKit;
+import github.tsffish.bedwarskit.util.GetMaterial;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -27,8 +28,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
-import static github.tsffish.bedwarskit.util.player.PlayerSender.sendMessage;
-import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.*;
+import static github.tsffish.bedwarskit.util.player.PlayerUtil.setPlayerFlying;
 import static github.tsffish.bedwarskit.util.player.RelCurrentStat.addPlayerIsOut;
 import static github.tsffish.bedwarskit.util.player.RelCurrentStat.getPlayerisOut;
 import static github.tsffish.bedwarskit.util.player.RelPlayerIsRespawn.*;
@@ -42,7 +44,8 @@ import static github.tsffish.bedwarskit.util.player.SendActionBar.sendActionBar;
  * @author Tsffish
  */
 public class RelPlayerDeath implements Listener {
-    private static final Material bed_block = Material.BED_BLOCK;
+    private static final String className = RelPlayerDeath.class.getSimpleName();
+    private static final Material bed_block = GetMaterial.BED_BLOCK();
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final GameState waiting = GameState.WAITING;
     private static final PotionEffect invs = new PotionEffect(PotionEffectType.INVISIBILITY, 9999, 0);
@@ -55,6 +58,13 @@ public class RelPlayerDeath implements Listener {
     }
 
     public static void deathplayer(UUID uuid, long delay) {
+
+        if (bed_block == null) {
+            le(className, "bed_block mat is null");
+            return;
+        }
+
+
         Player player = Bukkit.getPlayer(uuid);
 
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
@@ -63,6 +73,9 @@ public class RelPlayerDeath implements Listener {
         Location spawnLocation = team.getSpawnLocation();
         Location lobbyLoc = game.getLobby();
 
+        if (game.getState() != GameState.RUNNING){
+            return;
+        }
 
         if (!deathGameMode_tpto.equalsIgnoreCase("none")) {
             if (deathGameMode_tpto.equalsIgnoreCase("team")) {
@@ -86,7 +99,8 @@ public class RelPlayerDeath implements Listener {
         PlayerInventory pi = player.getInventory();
 
         for (ItemStack item : pi.getContents()) {
-            if (item != null && item.getType() != killfb_oneHealthKill_itemType
+            if (item != null
+                    && item.getType() != killfb_oneHealthKill_itemType
             ) {
                 pi.remove(item);
             }
@@ -155,6 +169,7 @@ public class RelPlayerDeath implements Listener {
                         Location spawnLocationNew = spawnLocation.setDirection(playerDirection);
                         player.setFallDistance(0);
                         player.teleport(spawnLocationNew);
+                        player.setFallDistance(0);
                         removePlayerRespawn(uuid);
                         playerrespawn(uuid, 0L);
                     }
@@ -198,7 +213,7 @@ public class RelPlayerDeath implements Listener {
         }.runTaskTimer(plugin, delay, 20L);
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void on(final PlayerDeathEvent event) {
 
         Player player = event.getEntity().getPlayer();
@@ -206,6 +221,7 @@ public class RelPlayerDeath implements Listener {
         if (player == null || !player.isOnline()) {
             return;
         }
+        updatePlayerStatePreventDied(player);
         UUID playerUUID = player.getUniqueId();
 
         GameManager gameManager = BedwarsRel.getInstance().getGameManager();
@@ -235,16 +251,12 @@ public class RelPlayerDeath implements Listener {
             }
         }
 
-        // pd if can repsawn
         if (game.getPlayerTeam(player).getHeadTarget().getType() != bed_block) {
-            // cant start respawn
 
             player.addPotionEffect(invs);
             game.addProtection(player);
 
-            player.setAllowFlight(true);
-            player.setFlying(true);
-
+            setPlayerFlying(player);
 
             PlayerInventory pi = player.getInventory();
             pi.clear();
@@ -258,7 +270,6 @@ public class RelPlayerDeath implements Listener {
             addPlayerIsOut(playerUUID);
 
         } else {
-            // pd can repsawn
             game.addProtection(player);
             player.addPotionEffect(invs);
             player.setAllowFlight(true);

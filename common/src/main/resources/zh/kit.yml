@@ -16,7 +16,7 @@ kitMenuItemGive: true
 kitMenuItemType: "IRON_SWORD"
 kitMenuItemAmount: 1
 kitMenuItemName: "\u804c\u4e1a\u9009\u62e9"
-meanSelKitSucc: "&b\u8d77\u5e8a\u6218\u4e89 &7>> &a\u9009\u62e9\u804c\u4e1a\u6210\u529f\uff01"
+meanSelKitSucc: "&bBedwarsKit &7>> &a\u9009\u62e9\u804c\u4e1a\u6210\u529f\uff01"
 
 KitDefaultName: "\u9ed8\u8ba4"
 KitDefaultDescription: "\u9ed8\u8ba4\u804c\u4e1a"

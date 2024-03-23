@@ -1,12 +1,13 @@
 package github.tsffish.bedwarskit.util.misc;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
 import java.util.logging.Logger;
 
+import static github.tsffish.bedwarskit.util.PluginState.pluginNameConsole;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.PluginState.pluginNameConsole;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -26,11 +27,15 @@ public class MessSender {
         l.warning(t(pluginNameConsole() + " " + name + " " + casue));
     }
 
-    public static void le(String name, Exception casue) {
-        l.warning(t(pluginNameConsole() + " " + name + " " + casue));
+    public static void le(String className, Exception exception) {
+        exception.printStackTrace();
     }
 
     public static void consoleSendCommand(String command) {
         Bukkit.dispatchCommand(console, command);
+    }
+
+    public static void sendMessageSender(CommandSender sender, String mess) {
+        sender.sendMessage(t(mess));
     }
 }

@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
+import static github.tsffish.bedwarskit.util.PluginState.isBungeeMode;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel

@@ -1,10 +1,10 @@
 package github.tsffish.bedwarskit.util.teamshop;
 
-import github.tsffish.bedwarskit.config.main.MainConfigHandler;
-import github.tsffish.bedwarskit.util.teamshop.list.ListHaste;
-import github.tsffish.bedwarskit.util.teamshop.list.ListHeal;
-import github.tsffish.bedwarskit.util.teamshop.list.ListProt;
-import github.tsffish.bedwarskit.util.teamshop.list.ListSharp;
+import github.tsffish.bedwarskit.util.GetMaterial;
+import github.tsffish.bedwarskit.util.teamshop.haste.ListHaste;
+import github.tsffish.bedwarskit.util.teamshop.heal.ListHeal;
+import github.tsffish.bedwarskit.util.teamshop.prot.ListProt;
+import github.tsffish.bedwarskit.util.teamshop.sharp.ListSharp;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.Team;
 import org.bukkit.Bukkit;
@@ -20,6 +20,7 @@ import java.util.Set;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MessSender.le;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -28,8 +29,8 @@ import static github.tsffish.bedwarskit.util.misc.ColorString.t;
  * @author Tsffish
  */
 public class ShopMenu {
-    private static final String className = "ShopMenu";
-    private static final Material glassPane = Material.STAINED_GLASS_PANE;
+    private static final String className = ShopMenu.class.getName();
+    private static final Material glassPane = GetMaterial.STAINED_GLASS_PANE();
     private static ItemStack paneItem;
     private static ItemStack sharp12v2;
     private static ItemStack sharp22v2;
@@ -92,146 +93,165 @@ public class ShopMenu {
         List<String> lore = new ArrayList<>(6);
         lore.add("ERROR");
 
-        paneItem = new ItemStack(glassPane, 1, (short) 7);
-        ItemMeta paneItemReal = paneItem.getItemMeta();
-        paneItemReal.setDisplayName(t(MainConfigHandler.paneItemName));
-        lore.clear();
-        for (String list : paneItemLore) {
-            if (!list.isEmpty()) {
-                lore.add(t(list));
+        if (glassPane != null) {
+            try {
+                paneItem = new ItemStack(glassPane, 1, (short) 7);
+                ItemMeta paneItemReal = paneItem.getItemMeta();
+                paneItemReal.setDisplayName(t(paneItemName));
+                lore.clear();
+                for (String list : paneItemLore) {
+                    if (!list.isEmpty()) {
+                        lore.add(t(list));
+                    }
+                }
+                paneItemReal.setLore(lore);
+                paneItem.setItemMeta(paneItemReal);
+            } catch (Exception e) {
+                try {
+                    paneItem = new ItemStack(glassPane, 1);
+                    ItemMeta paneItemReal = paneItem.getItemMeta();
+                    paneItemReal.setDisplayName(t(paneItemName));
+                    lore.clear();
+                    for (String list : paneItemLore) {
+                        if (!list.isEmpty()) {
+                            lore.add(t(list));
+                        }
+                    }
+                    paneItemReal.setLore(lore);
+                    paneItem.setItemMeta(paneItemReal);
+                } catch (Exception ex) {
+                    le(className, ex);
+                }
             }
         }
-        paneItemReal.setLore(lore);
-        paneItem.setItemMeta(paneItemReal);
 
-
-        sharp12v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp12v2 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp1Real = sharp12v2.getItemMeta();
-        sharp1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp1));
+        sharp1Real.setDisplayName(t(teamEnchItemName_sharp1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp1Cost2v2 + " " + meanDiamond));
         sharp1Real.setLore(lore);
         sharp12v2.setItemMeta(sharp1Real);
 
-        sharp22v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp22v2 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp2Real = sharp22v2.getItemMeta();
-        sharp2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp2));
+        sharp2Real.setDisplayName(t(teamEnchItemName_sharp2));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp2Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp2Cost2v2 + " " + meanDiamond));
         sharp2Real.setLore(lore);
         sharp22v2.setItemMeta(sharp2Real);
 
 
-        sharp32v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp32v2 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp3Real = sharp32v2.getItemMeta();
-        sharp3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp3));
+        sharp3Real.setDisplayName(t(teamEnchItemName_sharp3));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp3Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp3Cost2v2 + " " + meanDiamond));
         sharp3Real.setLore(lore);
         sharp32v2.setItemMeta(sharp3Real);
 
-        sharp42v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp42v2 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp4Real = sharp42v2.getItemMeta();
-        sharp4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp4));
+        sharp4Real.setDisplayName(t(teamEnchItemName_sharp4));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp4Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp4Cost2v2 + " " + meanDiamond));
         sharp4Real.setLore(lore);
         sharp42v2.setItemMeta(sharp4Real);
 
-        sharpMax2v2 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharpMax2v2 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharpMaxReal = sharpMax2v2.getItemMeta();
-        sharpMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharpMax));
+        sharpMaxReal.setDisplayName(t(teamEnchItemName_sharpMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         sharpMaxReal.setLore(lore);
         sharpMax2v2.setItemMeta(sharpMaxReal);
 
-        prot12v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot12v2 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot1Real = prot12v2.getItemMeta();
-        prot1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot1));
+        prot1Real.setDisplayName(t(teamEnchItemName_prot1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot1Cost2v2 + " " + meanDiamond));
         prot1Real.setLore(lore);
         prot12v2.setItemMeta(prot1Real);
 
-        prot22v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot22v2 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot2Real = prot22v2.getItemMeta();
-        prot2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot2));
+        prot2Real.setDisplayName(t(teamEnchItemName_prot2));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot2Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot2Cost2v2 + " " + meanDiamond));
         prot2Real.setLore(lore);
         prot22v2.setItemMeta(prot2Real);
 
 
-        prot32v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot32v2 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot3Real = prot32v2.getItemMeta();
-        prot3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot3));
+        prot3Real.setDisplayName(t(teamEnchItemName_prot3));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot3Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot3Cost2v2 + " " + meanDiamond));
         prot3Real.setLore(lore);
         prot32v2.setItemMeta(prot3Real);
 
-        prot42v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot42v2 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot4Real = prot42v2.getItemMeta();
-        prot4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot4));
+        prot4Real.setDisplayName(t(teamEnchItemName_prot4));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot4Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot4Cost2v2 + " " + meanDiamond));
         prot4Real.setLore(lore);
         prot42v2.setItemMeta(prot4Real);
 
-        protMax2v2 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        protMax2v2 = new ItemStack(levelupprotItemType, 1);
         ItemMeta protMaxReal = protMax2v2.getItemMeta();
-        protMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_protMax));
+        protMaxReal.setDisplayName(t(teamEnchItemName_protMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         protMaxReal.setLore(lore);
         protMax2v2.setItemMeta(protMaxReal);
 
-        haste12v2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        haste12v2 = new ItemStack(leveluphasteItemType, 1);
         ItemMeta haste1Real = haste12v2.getItemMeta();
-        haste1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste1));
+        haste1Real.setDisplayName(t(teamEffItemName_haste1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.haste1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + haste1Cost2v2 + " " + meanDiamond));
         haste1Real.setLore(lore);
         haste12v2.setItemMeta(haste1Real);
 
-        haste22v2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        haste22v2 = new ItemStack(leveluphasteItemType, 1);
         ItemMeta haste2Real = haste22v2.getItemMeta();
-        haste2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste2));
+        haste2Real.setDisplayName(t(teamEffItemName_haste2));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.haste2Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + haste2Cost2v2 + " " + meanDiamond));
         haste2Real.setLore(lore);
         haste22v2.setItemMeta(haste2Real);
 
-        hasteMax2v2 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        hasteMax2v2 = new ItemStack(leveluphasteItemType, 1);
         ItemMeta hasteMaxReal = hasteMax2v2.getItemMeta();
-        hasteMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_hasteMax));
+        hasteMaxReal.setDisplayName(t(teamEffItemName_hasteMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         hasteMaxReal.setLore(lore);
         hasteMax2v2.setItemMeta(hasteMaxReal);
 
-        heal12v2 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        heal12v2 = new ItemStack(leveluphealItemType, 1);
         ItemMeta heal1Real = heal12v2.getItemMeta();
-        heal1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_heal1));
+        heal1Real.setDisplayName(t(teamEffItemName_heal1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + heal1Cost2v2 + " " + meanDiamond));
         heal1Real.setLore(lore);
         heal12v2.setItemMeta(heal1Real);
 
-        healMax2v2 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        healMax2v2 = new ItemStack(leveluphealItemType, 1);
         ItemMeta healMaxReal = healMax2v2.getItemMeta();
-        healMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_healMax));
+        healMaxReal.setDisplayName(t(teamEffItemName_healMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         healMaxReal.setLore(lore);
         healMax2v2.setItemMeta(healMaxReal);
 
-        res12v2 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
+        res12v2 = new ItemStack(levelupresItemType, 1);
         ItemMeta res12v2Real = res12v2.getItemMeta();
         res12v2Real.setDisplayName(t(levelupresItemName));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + heal1Cost2v2 + " " + meanDiamond));
         res12v2Real.setLore(lore);
         res12v2.setItemMeta(res12v2Real);
 
@@ -260,143 +280,165 @@ public class ShopMenu {
         lore.add("ERROR");
 
 
-        paneItem = new ItemStack(glassPane, 1, (short) 7);
-        ItemMeta paneItemReal = sharp12v2.getItemMeta();
-        paneItemReal.setDisplayName(t(MainConfigHandler.paneItemName));
-        lore.clear();
-        for (String list : paneItemLore) {
-            lore.add(t(list));
+        if (glassPane != null) {
+            try {
+                paneItem = new ItemStack(glassPane, 1, (short) 7);
+                ItemMeta paneItemReal = paneItem.getItemMeta();
+                paneItemReal.setDisplayName(t(paneItemName));
+                lore.clear();
+                for (String list : paneItemLore) {
+                    if (!list.isEmpty()) {
+                        lore.add(t(list));
+                    }
+                }
+                paneItemReal.setLore(lore);
+                paneItem.setItemMeta(paneItemReal);
+            } catch (Exception e) {
+                try {
+                    paneItem = new ItemStack(glassPane, 1);
+                    ItemMeta paneItemReal = paneItem.getItemMeta();
+                    paneItemReal.setDisplayName(t(paneItemName));
+                    lore.clear();
+                    for (String list : paneItemLore) {
+                        if (!list.isEmpty()) {
+                            lore.add(t(list));
+                        }
+                    }
+                    paneItemReal.setLore(lore);
+                    paneItem.setItemMeta(paneItemReal);
+                } catch (Exception ex) {
+                    le(className, ex);
+                }
+            }
         }
-        paneItemReal.setLore(lore);
-        paneItem.setItemMeta(paneItemReal);
 
-        sharp14v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp14v4 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp1Real = sharp14v4.getItemMeta();
-        sharp1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp1));
+        sharp1Real.setDisplayName(t(teamEnchItemName_sharp1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp1Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp1Cost4v4 + " " + meanDiamond));
         sharp1Real.setLore(lore);
         sharp14v4.setItemMeta(sharp1Real);
 
-        sharp24v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp24v4 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp2Real = sharp24v4.getItemMeta();
-        sharp2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp2));
+        sharp2Real.setDisplayName(t(teamEnchItemName_sharp2));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp2Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp2Cost4v4 + " " + meanDiamond));
         sharp2Real.setLore(lore);
         sharp24v4.setItemMeta(sharp2Real);
 
 
-        sharp34v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp34v4 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp3Real = sharp34v4.getItemMeta();
-        sharp3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp3));
+        sharp3Real.setDisplayName(t(teamEnchItemName_sharp3));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp3Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp3Cost4v4 + " " + meanDiamond));
         sharp3Real.setLore(lore);
         sharp34v4.setItemMeta(sharp3Real);
 
-        sharp44v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharp44v4 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharp4Real = sharp44v4.getItemMeta();
-        sharp4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharp4));
+        sharp4Real.setDisplayName(t(teamEnchItemName_sharp4));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.sharp4Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + sharp4Cost4v4 + " " + meanDiamond));
         sharp4Real.setLore(lore);
         sharp44v4.setItemMeta(sharp4Real);
 
-        sharpMax4v4 = new ItemStack(MainConfigHandler.levelupsharpItemType, 1);
+        sharpMax4v4 = new ItemStack(levelupsharpItemType, 1);
         ItemMeta sharpMaxReal = sharpMax4v4.getItemMeta();
-        sharpMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_sharpMax));
+        sharpMaxReal.setDisplayName(t(teamEnchItemName_sharpMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         sharpMaxReal.setLore(lore);
         sharpMax4v4.setItemMeta(sharpMaxReal);
 
-        prot14v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot14v4 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot1Real = prot14v4.getItemMeta();
-        prot1Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot1));
+        prot1Real.setDisplayName(t(teamEnchItemName_prot1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot1Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot1Cost4v4 + " " + meanDiamond));
         prot1Real.setLore(lore);
         prot14v4.setItemMeta(prot1Real);
 
-        prot24v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot24v4 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot2Real = prot24v4.getItemMeta();
-        prot2Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot2));
+        prot2Real.setDisplayName(t(teamEnchItemName_prot2));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot2Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot2Cost4v4 + " " + meanDiamond));
         prot2Real.setLore(lore);
         prot24v4.setItemMeta(prot2Real);
 
 
-        prot34v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot34v4 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot3Real = prot34v4.getItemMeta();
-        prot3Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot3));
+        prot3Real.setDisplayName(t(teamEnchItemName_prot3));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot3Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot3Cost4v4 + " " + meanDiamond));
         prot3Real.setLore(lore);
         prot34v4.setItemMeta(prot3Real);
 
-        prot44v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        prot44v4 = new ItemStack(levelupprotItemType, 1);
         ItemMeta prot4Real = prot44v4.getItemMeta();
-        prot4Real.setDisplayName(t(MainConfigHandler.teamEnchItemName_prot4));
+        prot4Real.setDisplayName(t(teamEnchItemName_prot4));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.prot4Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + prot4Cost4v4 + " " + meanDiamond));
         prot4Real.setLore(lore);
         prot44v4.setItemMeta(prot4Real);
 
-        protMax4v4 = new ItemStack(MainConfigHandler.levelupprotItemType, 1);
+        protMax4v4 = new ItemStack(levelupprotItemType, 1);
         ItemMeta protMaxReal = protMax4v4.getItemMeta();
-        protMaxReal.setDisplayName(t(MainConfigHandler.teamEnchItemName_protMax));
+        protMaxReal.setDisplayName(t(teamEnchItemName_protMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         protMaxReal.setLore(lore);
         protMax4v4.setItemMeta(protMaxReal);
 
-        haste14v4 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        haste14v4 = new ItemStack(leveluphasteItemType, 1);
         ItemMeta haste1Real = haste14v4.getItemMeta();
-        haste1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste1));
+        haste1Real.setDisplayName(t(teamEffItemName_haste1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.haste1Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + haste1Cost4v4 + " " + meanDiamond));
         haste1Real.setLore(lore);
         haste14v4.setItemMeta(haste1Real);
 
-        haste24v4 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        haste24v4 = new ItemStack(leveluphasteItemType, 1);
         ItemMeta haste2Real = haste24v4.getItemMeta();
-        haste2Real.setDisplayName(t(MainConfigHandler.teamEffItemName_haste2));
+        haste2Real.setDisplayName(t(teamEffItemName_haste2));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.haste2Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + haste2Cost4v4 + " " + meanDiamond));
         haste2Real.setLore(lore);
         haste24v4.setItemMeta(haste2Real);
 
-        hasteMax4v4 = new ItemStack(MainConfigHandler.leveluphasteItemType, 1);
+        hasteMax4v4 = new ItemStack(leveluphasteItemType, 1);
         ItemMeta hasteMaxReal = hasteMax4v4.getItemMeta();
-        hasteMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_hasteMax));
+        hasteMaxReal.setDisplayName(t(teamEffItemName_hasteMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         hasteMaxReal.setLore(lore);
         hasteMax4v4.setItemMeta(hasteMaxReal);
 
-        heal14v4 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        heal14v4 = new ItemStack(leveluphealItemType, 1);
         ItemMeta heal1Real = heal14v4.getItemMeta();
-        heal1Real.setDisplayName(t(MainConfigHandler.teamEffItemName_heal1));
+        heal1Real.setDisplayName(t(teamEffItemName_heal1));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.heal1Cost4v4 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + heal1Cost4v4 + " " + meanDiamond));
         heal1Real.setLore(lore);
         heal14v4.setItemMeta(heal1Real);
 
-        healMax4v4 = new ItemStack(MainConfigHandler.leveluphealItemType, 1);
+        healMax4v4 = new ItemStack(leveluphealItemType, 1);
         ItemMeta healMaxReal = healMax4v4.getItemMeta();
-        healMaxReal.setDisplayName(t(MainConfigHandler.teamEffItemName_healMax));
+        healMaxReal.setDisplayName(t(teamEffItemName_healMax));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.TeamEnchantMaxCost));
+        lore.add(t("&f" + TeamEnchantMaxCost));
         healMaxReal.setLore(lore);
         healMax4v4.setItemMeta(healMaxReal);
 
-        res14v4 = new ItemStack(MainConfigHandler.levelupresItemType, 1);
+        res14v4 = new ItemStack(levelupresItemType, 1);
         ItemMeta res14v4Real = res14v4.getItemMeta();
         res14v4Real.setDisplayName(t(levelupresItemName));
         lore.clear();
-        lore.add(t("&f" + MainConfigHandler.heal1Cost2v2 + " " + MainConfigHandler.meanDiamond));
+        lore.add(t("&f" + heal1Cost2v2 + " " + meanDiamond));
         res14v4Real.setLore(lore);
         res14v4.setItemMeta(res14v4Real);
     }

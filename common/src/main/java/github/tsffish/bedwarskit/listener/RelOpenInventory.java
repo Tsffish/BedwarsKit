@@ -1,8 +1,11 @@
 package github.tsffish.bedwarskit.listener;
 
+import github.tsffish.bedwarskit.util.GetInventory;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
+import io.github.bedwarsrel.game.GameState;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,6 +15,7 @@ import org.bukkit.event.inventory.InventoryType;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noOpenInventory;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noOpenInventoryTypeList;
+import static github.tsffish.bedwarskit.util.GetInventory.getInvType;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -20,14 +24,14 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noOpenInve
  * @author Tsffish
  */
 public class RelOpenInventory implements Listener {
-    @EventHandler(priority = EventPriority.HIGH)
-    public void on(InventoryOpenEvent event) {
+    private static final GameState running = GameState.RUNNING;
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void on(final InventoryOpenEvent event) {
         if (!noOpenInventory) {
             return;
         }
-        if (event.getPlayer() instanceof Player) {
-            Player player = (Player) event.getPlayer();
-            if (BedwarsRel.getInstance() == null) {
+        if (BedwarsRel.getInstance() == null) {
                 return;
             }
             BedwarsRel bedwarsRel = BedwarsRel.getInstance();
@@ -35,17 +39,31 @@ public class RelOpenInventory implements Listener {
                 return;
             }
             GameManager gameManager = bedwarsRel.getGameManager();
+
+        HumanEntity entity = event.getPlayer();
+
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
+
             if (gameManager.getGameOfPlayer(player) == null) {
                 return;
             }
 
             Game game = gameManager.getGameOfPlayer(player);
 
+            if (       game.getState() != running
+                    || player.isSleeping()
+                    || !player.isOnline()
+                    || player.isDead()) {
+                return;
+            }
+
             if (game.isSpectator(player) || game.getRespawnProtections().containsKey(player)) {
                 event.setCancelled(true);
                 return;
             }
-            InventoryType currentType = event.getInventory().getType();
+
+            InventoryType currentType = getInvType(event.getInventory());
             if (currentType != null) {
                 for (InventoryType blockType : noOpenInventoryTypeList) {
                     if (currentType == blockType) {

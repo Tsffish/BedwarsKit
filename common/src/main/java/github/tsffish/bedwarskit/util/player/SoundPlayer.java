@@ -1,11 +1,16 @@
 package github.tsffish.bedwarskit.util.player;
 
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Locale;
+
+import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.cantFoundSupport;
+import static github.tsffish.bedwarskit.util.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -14,285 +19,393 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
  * @author Tsffish
  */
 public class SoundPlayer {
-    private static final String className = "SoundPlayer";
+    private static final String className = SoundPlayer.class.getSimpleName();
+    private static final String className1_8 = "github.tsffish.bedwarskit.com.v1_8_8." + className;
+    private static final String className1_12 = "github.tsffish.bedwarskit.com.v1_12_2." + className;
+    private static final String className1_16 = "github.tsffish.bedwarskit.com.v1_16_5." + className;
 
     public static void CLICK(Player player, int pitch) {
         if (serverVersion().contains("1.8")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.CLICK
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Field field = aClass.getField("CLICK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.CLICK
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.CLICK
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Field field = aClass.getField("CLICK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("CLICK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
+
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("CLICK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         }
-
     }
 
     public static void LEVEL_UP(Player player, int pitch) {
         if (serverVersion().contains("1.8")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.LEVEL_UP
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Field field = aClass.getField("LEVEL_UP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.LEVEL_UP
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.LEVEL_UP
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Field field = aClass.getField("LEVEL_UP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("LEVEL_UP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
+
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("LEVEL_UP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         }
-
     }
 
     public static void ITEM_PICKUP(Player player, int pitch) {
         if (serverVersion().contains("1.8")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.ITEM_PICKUP
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Field field = aClass.getField("ITEM_PICKUP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ITEM_PICKUP
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ITEM_PICKUP
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Field field = aClass.getField("ITEM_PICKUP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("ITEM_PICKUP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
+
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("ITEM_PICKUP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         }
-
     }
 
     public static void ITEM_BREAK(Player player, int pitch) {
         if (serverVersion().contains("1.8")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.ITEM_BREAK
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Field field = aClass.getField("ITEM_BREAK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ITEM_BREAK
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ITEM_BREAK
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Field field = aClass.getField("ITEM_BREAK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("ITEM_BREAK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
+
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("ITEM_BREAK");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         }
-
     }
 
     public static void CHICKEN_EGG_POP(Player player, int pitch) {
         if (serverVersion().contains("1.8")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.CHICKEN_EGG_POP
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Field field = aClass.getField("CHICKEN_EGG_POP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.CHICKEN_EGG_POP
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.CHICKEN_EGG_POP
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Field field = aClass.getField("CHICKEN_EGG_POP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("CHICKEN_EGG_POP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
 
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("CHICKEN_EGG_POP");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         }
-
     }
-
 
     public static void ENDERMAN_TELEPORT(Player player, int pitch) {
         if (serverVersion().contains("1.8")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.ENDERMAN_TELEPORT
-                        , 1, 1);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Field field = aClass.getField("ENDERMAN_TELEPORT");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ENDERMAN_TELEPORT
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ENDERMAN_TELEPORT
-                        , 1, pitch);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Field field = aClass.getField("ENDERMAN_TELEPORT");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("ENDERMAN_TELEPORT");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
+
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Field field = aClass.getField("ENDERMAN_TELEPORT");
+
+                Sound sound = (Sound)field.get(null);
+
+                Location location = player.getLocation();
+                player.playSound(location,sound,1,pitch);
+            } catch (Exception e) {
+                le(className, e);
             }
         }
-
     }
-
-
-    public static void ORB_PICKUP(Player player, int pitch) {
-        if (serverVersion().contains("1.8")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_8_r8.SoundPlayer.ORB_PICKUP
-                        , 1, pitch);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                player.playSound(player.getLocation(),
-                        github.tsffish.bedwarskit.com.v1_12_r2.SoundPlayer.ORB_PICKUP
-                        , 1, 1);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
-            }
-        }
-
-    }
-
 
 }

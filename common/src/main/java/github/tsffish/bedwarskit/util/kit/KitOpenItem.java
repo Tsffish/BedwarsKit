@@ -1,7 +1,11 @@
 package github.tsffish.bedwarskit.util.kit;
 
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.util.kit.KitMenu.loadKitMenu;
@@ -22,7 +26,6 @@ public class KitOpenItem {
         ItemMeta kitMenuItemMeta = kitMenuItem.getItemMeta();
         kitMenuItemMeta.setDisplayName(t(kitMenuItemName));
         kitMenuItem.setItemMeta(kitMenuItemMeta);
-
         loadKitMenu();
     }
 }

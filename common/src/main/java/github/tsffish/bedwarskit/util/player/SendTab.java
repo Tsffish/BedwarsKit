@@ -1,18 +1,18 @@
 package github.tsffish.bedwarskit.util.player;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import github.tsffish.bedwarskit.config.main.MainConfigHandler;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
-import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -21,96 +21,52 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
  * @author Tsffish
  */
 public class SendTab {
-    private static final String className = "SendTab";
+    private static final String className = SendTab.class.getSimpleName();
+private static void sendTabData(Player player, List<String> header, List<String> footer) {
+    try {
+        PacketContainer packet = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
 
-    public static void sendTabData(Player player, List<String> headerList, List<String> footerList) {
-        ListIterator<String> headerIterator = headerList.listIterator();
-        while (headerIterator.hasNext()) {
-            headerIterator.set(t(headerIterator.next()));
+        StringBuilder headerBuilder = new StringBuilder();
+        for (int i = 0; i < header.size(); i++) {
+            headerBuilder.append(header.get(i));
+            if (i < header.size() - 1) {
+                headerBuilder.append("\n");
+            }
         }
 
-        ListIterator<String> footerIterator = footerList.listIterator();
-        while (footerIterator.hasNext()) {
-            footerIterator.set(t(footerIterator.next()));
+        StringBuilder footerBuilder = new StringBuilder();
+        for (int i = 0; i < footer.size(); i++) {
+            footerBuilder.append(footer.get(i));
+            if (i < footer.size() - 1) {
+                footerBuilder.append("\n");
+            }
         }
 
-        if (serverVersion().contains("1.8")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_8_r8.SendTab.class.getMethod("sendTab", Player.class, List.class, List.class);
-                method.invoke(null, player, headerList, footerList);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_12_r2.SendTab.class.getMethod("sendTab", Player.class, List.class, List.class);
-                method.invoke(null, player, headerList, footerList);
+        packet.getChatComponents().write(0, WrappedChatComponent.fromText(headerBuilder.toString()));
+        packet.getChatComponents().write(1, WrappedChatComponent.fromText(footerBuilder.toString()));
 
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
-                || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_12_r2.SendTab.class.getMethod("sendTab", Player.class, List.class, List.class);
-                method.invoke(null, player, headerList, footerList);
-
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-
-        } else {
-            if (!pluginIsDisabling) {
-                le(className, cantFoundSupport + serverVersion());
-            }
+        ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+    }   catch (Exception e){
+        if (isDebug()) {
+            le(className, e);
         }
     }
+}
 
-    public static void sendTabData(Player player, String header, String footer) {
-        if (serverVersion().contains("1.8")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_8_r8.SendTab.class.getMethod("sendTab", Player.class, String.class, String.class);
-                method.invoke(null, player, t(header), t(footer));
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_12_r2.SendTab.class.getMethod("sendTab", Player.class, String.class, String.class);
-                method.invoke(null, player, t(header), t(footer));
+private static void sendTabData(Player player, String header, String footer) {
+    try {
+        PacketContainer packet = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.PLAYER_LIST_HEADER_FOOTER);
 
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else if (serverVersion().contains("1.9")
-                || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_12_r2.SendTab.class.getMethod("sendTab", Player.class, String.class, String.class);
-                method.invoke(null, player, t(header), t(footer));
+        packet.getChatComponents().write(0, WrappedChatComponent.fromText(header));
+        packet.getChatComponents().write(1, WrappedChatComponent.fromText(footer));
 
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                }
-            }
-        } else {
-            if (!pluginIsDisabling) {
-                le("SendTab", "can found support for this version: " + serverVersion());
-            }
+        ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+    }   catch (Exception e){
+        if (isDebug()) {
+            le(className, e);
         }
     }
+}
 
     public static void sendTab(Player player) {
         List<String> headerList = new ArrayList<>(20);
@@ -119,12 +75,16 @@ public class SendTab {
         String head;
         String foot;
         if (MainConfigHandler.tab_is_multiLine) {
-            headerList.addAll(MainConfigHandler.tab_headList);
-            footerList.addAll(MainConfigHandler.tab_footList);
+            for (String string : MainConfigHandler.tab_headList){
+                headerList.add(t(string));
+            }
+           for (String string : MainConfigHandler.tab_footList){
+                footerList.add(t(string));
+            }
             sendTabData(player, headerList, footerList);
         } else {
-            head = MainConfigHandler.tab_head;
-            foot = MainConfigHandler.tab_foot;
+            head = t(MainConfigHandler.tab_head);
+            foot = t(MainConfigHandler.tab_foot);
             sendTabData(player, head, foot);
         }
 

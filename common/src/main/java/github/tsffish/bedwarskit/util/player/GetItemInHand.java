@@ -5,10 +5,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Method;
 
-import static github.tsffish.bedwarskit.listener.PluginDisable.pluginIsDisabling;
+import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.cantFoundSupport;
+import static github.tsffish.bedwarskit.util.PluginState.serverVersion;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.PluginState.serverVersion;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -17,45 +16,58 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.cantFoundSupport;
  * @author Tsffish
  */
 public class GetItemInHand {
-    private static final String className = "GetItemInHand";
+    private static final String className = GetItemInHand.class.getSimpleName();
+    private static final String className1_8 = "github.tsffish.bedwarskit.com.v1_8_8." + className;
+    private static final String className1_12 = "github.tsffish.bedwarskit.com.v1_12_2." + className;
+    private static final String className1_16 = "github.tsffish.bedwarskit.com.v1_16_5." + className;
 
     public static ItemStack getItemInHand(Player player) {
         if (serverVersion().contains("1.8")) {
             try {
-                Method method = github.tsffish.bedwarskit.com.v1_8_r8.GetItemInHand.class.getMethod("getItemInHand", Player.class);
+                Class<?> aClass = Class.forName(className1_8);
+
+                Method method = aClass.getMethod("getItemInHand", Player.class);
+
                 return (ItemStack) method.invoke(null, player);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                    return null;
-                }
+                le(className, e);
             }
-        } else if (serverVersion().contains("1.12")) {
-            try {
-                Method method = github.tsffish.bedwarskit.com.v1_12_r2.GetItemInHand.class.getMethod("getItemInHand", Player.class);
-                return (ItemStack) method.invoke(null, player);
-            } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                    return null;
-                }
-            }
-        } else if (serverVersion().contains("1.9")
+        } else if (serverVersion().contains("1.12")
+                || serverVersion().contains("1.11")
                 || serverVersion().contains("1.10")
-                || serverVersion().contains("1.11")) {
+                || serverVersion().contains("1.9")) {
             try {
-                Method method = github.tsffish.bedwarskit.com.v1_12_r2.GetItemInHand.class.getMethod("getItemInHand", Player.class);
+                Class<?> aClass = Class.forName(className1_12);
+
+                Method method = aClass.getMethod("getItemInHand", Player.class);
+
                 return (ItemStack) method.invoke(null, player);
             } catch (Exception e) {
-                if (!pluginIsDisabling) {
-                    le(className, e);
-                    return null;
-                }
+                le(className, e);
+            }
+        } else if (serverVersion().contains("1.16")
+                || serverVersion().contains("1.15")
+                || serverVersion().contains("1.14")
+                || serverVersion().contains("1.13")) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Method method = aClass.getMethod("getItemInHand", Player.class);
+
+                return (ItemStack) method.invoke(null, player);
+            } catch (Exception e) {
+                le(className, e);
             }
         } else {
-            if (!pluginIsDisabling) {
+            try {
+                Class<?> aClass = Class.forName(className1_16);
+
+                Method method = aClass.getMethod("getItemInHand", Player.class);
+
+                return (ItemStack) method.invoke(null, player);
+            } catch (Exception e) {
+                le(className, e);
                 le(className, cantFoundSupport + serverVersion());
-                return null;
             }
         }
         return null;

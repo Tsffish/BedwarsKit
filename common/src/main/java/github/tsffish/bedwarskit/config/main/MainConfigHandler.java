@@ -13,6 +13,23 @@ import java.util.Set;
  * @author Tsffish
  */
 public class MainConfigHandler {
+    private static final class Basic{
+    }
+    public static String gameWorld;
+    public static String gameWorld2v2;
+    public static String gameWorld4v4;
+    public static String lobbyWorld;
+    public static String bungeeMode;
+    public static String relTeamName_Red;
+    public static String relTeamName_Blue;
+    public static String relTeamName_Green;
+    public static String relTeamName_Yellow;
+    public static String relTeamName_Aqua;
+    public static String relTeamName_White;
+    public static String relTeamName_Gray;
+    public static String relTeamName_Pink;
+    public static String relTeamName_Orange;
+    public static boolean resSp;
     public static boolean breakTitle;
     public static boolean noHunger;
     public static boolean noPearlDamage;
@@ -33,6 +50,9 @@ public class MainConfigHandler {
     public static int chainPrice;
     public static int ironPrice;
     public static int diamondPrice;
+
+
+
     public static int sharp1Cost2v2;
     public static int sharp2Cost2v2;
     public static int sharp3Cost2v2;
@@ -62,10 +82,7 @@ public class MainConfigHandler {
     public static String breakTitleBreakTeam;
     public static String breakSubTitleBreakTeam;
 
-    public static String gameWorld;
-    public static String gameWorld2v2;
-    public static String gameWorld4v4;
-    public static String lobbyWorld;
+
     public static String respawnTitle;
     public static String respawnSubTitle;
     public static String respawnChat;
@@ -75,14 +92,6 @@ public class MainConfigHandler {
     public static String respawnSuccSubTitle;
     public static String respawnSuccChat;
     public static String respawnSuccActionBar;
-    public static String relTeamName_Red;
-    public static String relTeamName_Blue;
-    public static String relTeamName_Green;
-    public static String relTeamName_Yellow;
-    public static String relTeamName_Aqua;
-    public static String relTeamName_White;
-    public static String relTeamName_Gray;
-    public static String relTeamName_Pink;
     public static String teamEnchItemName_sharp1;
     public static String teamEnchItemName_prot1;
     public static String teamEnchItemName_prot2;
@@ -157,18 +166,14 @@ public class MainConfigHandler {
     public static String killfb_sendmess_title;
     public static String killfb_sendmess_subtitle;
     public static String killfb_sendmess_actionbar;
-
-    public static boolean placeCorrect_notInGame;
-
-    public static boolean breakCorrect_notInGame;
-
     public static boolean cleanHostileOnStart;
-
-
     public static String kill_res_chat;
-
+    public static boolean placeCorrect_notInGame;
+    public static boolean breakCorrect_notInGame;
     public static boolean placeCorrect_notInGame_OpBypass;
     public static boolean breakCorrect_notInGame_OpBypass;
+
+
     public static String meanSecond;
 
 
@@ -178,15 +183,12 @@ public class MainConfigHandler {
     public static String lobbyjoinTeamMess_actionbar;
 
     public static int teamEnchInvRow;
-
     public static boolean tab;
-
     public static boolean tab_is_multiLine;
     public static String tab_head;
     public static List<String> tab_headList;
     public static String tab_foot;
     public static List<String> tab_footList;
-
 
     public static Material levelupsharpItemType;
     public static int levelupsharpItemSlot;
@@ -240,7 +242,6 @@ public class MainConfigHandler {
     public static String deathGameMode_tpto;
     public static int placeCorrect_ResSpawner_dis;
     public static int placeCorrect_PlayerSpawnLoc_dis;
-    public static String bungeeMode;
     public static String paneItemName;
     public static List<String> paneItemLore;
     public static int dieOutGameItem_playAgain_ItemSlot;
@@ -248,7 +249,16 @@ public class MainConfigHandler {
     public static Material levelupresItemType;
     public static int levelupresItemSlot;
     public static String levelupresItemName;
+
+    public static class MobGriefingC{
+    }
     public static boolean noEndermanGriefing;
+
+
     public static boolean noOpenInventory;
     public static Set<InventoryType> noOpenInventoryTypeList;
+
+    public static boolean noWoodSwordDropWhenNothaveSword;
+    public static boolean noWoodAxeDropWhenNothaveAxe;
+    public static boolean noWoodPickaxeDropWhenNothavePickaxe;
 }

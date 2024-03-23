@@ -51,7 +51,7 @@ ScoreBoard2v2Line13: "&e{ip}"
 ScoreBoard2v2Line14: ""
 ScoreBoard2v2Line15: ""
 ScoreBoard2v2Line16: ""
-# variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+# variable supported team names Orange Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
 # note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
 # variable:
 # ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
@@ -68,7 +68,7 @@ ScoreBoard2v2Line16: ""
 # {timeleft-d}: Game remaining time in days
 # {timeline mo}: Game remaining time in months
 # {timeleft y}: Game remaining time in years
-# {date}: Today's date format is YYYY/M/D, such as 2080/3/27
+# {date}: Today's date format is YYYY/M/D, such as 2080/3/32
 # {ip}: The value of serverIp in the configuration file
 # {bw}: The value of meanBedwards in the configuration file
 # {mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode
@@ -99,7 +99,7 @@ ScoreBoard4v4Line13: "&e{ip}"
 ScoreBoard4v4Line14: ""
 ScoreBoard4v4Line15: ""
 ScoreBoard4v4Line16: ""
-# variable supported team names Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
+# variable supported team names Orange Red, Blue, Green, Yellow, Pink, White, Gray, Aqua
 # note: The same content will be folded into the same line. For example, if you want two empty lines, the first line needs to be a space, and the second line needs to be two spaces
 # variable:
 # ...TeamName: The name of the team, please refer to relTeamName_ for details The value of the team color name must start with lowercase letters, such as redTeamName, grayTeamName
@@ -116,7 +116,7 @@ ScoreBoard4v4Line16: ""
 # {timeleft-d}: Game remaining time in days
 # {timeline mo}: Game remaining time in months
 # {timeleft y}: Game remaining time in years
-# {date}: Today's date format is YYYY/M/D, such as 2080/3/27
+# {date}: Today's date format is YYYY/M/D, such as 2080/3/32
 # {ip}: The value of serverIp in the configuration file
 # {bw}: The value of meanBedwards in the configuration file
 # {mode}: In the configuration file, mean If the value of Mode is 2v2, it is the value of mean2v2Mode; if it is 4v4, it is the value of mean4v4Mode

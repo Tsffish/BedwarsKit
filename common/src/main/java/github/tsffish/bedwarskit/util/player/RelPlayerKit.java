@@ -7,8 +7,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.kitenable;
+import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.vauleIsWrong;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsWrong;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -20,8 +20,12 @@ public class RelPlayerKit {
     public static final String kitNameDefault = "default";
     public static final String kitNameNone = "none";
     public static final String kitNameDefaultLess = "defaultless";
-    private static final String className = "RelPlayerKit";
-    private static ConcurrentHashMap<UUID, String> playerKitList = new ConcurrentHashMap<>(101);
+    private static final String className = RelPlayerKit.class.getSimpleName();
+    private static ConcurrentHashMap<UUID, String> playerKitList;
+
+    static {
+        playerKitList = new ConcurrentHashMap<>(101);
+    }
 
     public static void applykit(UUID uuid) {
         if (kitenable) {

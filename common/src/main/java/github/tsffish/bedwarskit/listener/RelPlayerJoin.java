@@ -1,11 +1,13 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
+import github.tsffish.bedwarskit.config.kit.KitConfigHandler;
+import github.tsffish.bedwarskit.util.GetMaterial;
 import github.tsffish.bedwarskit.util.player.SoundPlayer;
-import github.tsffish.bedwarskit.util.teamshop.check.EffectHaste;
-import github.tsffish.bedwarskit.util.teamshop.check.EffectHeal;
-import github.tsffish.bedwarskit.util.teamshop.check.EnchatProt;
-import github.tsffish.bedwarskit.util.teamshop.check.EnchatSharp;
+import github.tsffish.bedwarskit.util.teamshop.haste.EffectHaste;
+import github.tsffish.bedwarskit.util.teamshop.heal.EffectHeal;
+import github.tsffish.bedwarskit.util.teamshop.prot.EnchatProt;
+import github.tsffish.bedwarskit.util.teamshop.sharp.EnchatSharp;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.events.BedwarsPlayerJoinTeamEvent;
 import io.github.bedwarsrel.events.BedwarsPlayerJoinedEvent;
@@ -28,22 +30,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Objects;
 import java.util.UUID;
 
-import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.update_tip;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.config.scb.ScbConfigHandler.customScoreboard;
-import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.isInCheckList;
-import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.joinCheckList;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
+import static github.tsffish.bedwarskit.util.PluginState.isLastestVersion;
+import static github.tsffish.bedwarskit.util.WorldCheckList.isInCheckList;
+import static github.tsffish.bedwarskit.util.WorldCheckList.joinCheckList;
 import static github.tsffish.bedwarskit.util.kit.KitOpenItem.kitMenuItem;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
-import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isLastestVersion;
 import static github.tsffish.bedwarskit.util.player.PlayerSender.sendMessage;
 import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.player.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.player.RelCurrentStat.*;
-import static github.tsffish.bedwarskit.util.player.RelEditGame.isEditGamePlayer;
 import static github.tsffish.bedwarskit.util.player.RelPlayerKit.getPlayerKit;
 import static github.tsffish.bedwarskit.util.player.RelPlayerKit.setPlayerKit;
 import static github.tsffish.bedwarskit.util.player.SendActionBar.sendActionBar;
@@ -60,8 +59,6 @@ import static github.tsffish.bedwarskit.util.task.TaskLeaveCheck.leaveList;
 public class RelPlayerJoin implements Listener {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final ItemStack bot = new ItemStack(Material.GLASS_BOTTLE);
-    private static final ItemStack bed = new ItemStack(Material.BED);
-    private static final Material bedType = Material.BED;
     private static final ItemStack chain1 = new ItemStack(Material.CHAINMAIL_LEGGINGS);
     private static final ItemStack chain2 = new ItemStack(Material.CHAINMAIL_BOOTS);
     private static final ItemStack iron1 = new ItemStack(Material.IRON_LEGGINGS);
@@ -69,13 +66,13 @@ public class RelPlayerJoin implements Listener {
     private static final ItemStack dm1 = new ItemStack(Material.DIAMOND_LEGGINGS);
     private static final ItemStack dm2 = new ItemStack(Material.DIAMOND_BOOTS);
     private static final GameMode spectator = GameMode.SPECTATOR;
-    private static final GameMode survival = GameMode.SURVIVAL;
     private static final GameState running = GameState.RUNNING;
     private static final GameState waiting = GameState.WAITING;
     private static final PotionEffectType invsType = PotionEffectType.INVISIBILITY;
     private static final PotionEffect invs = new PotionEffect(invsType, 9999, 0);
     private static ItemStack playAgainItem;
-
+    private static Material bed_blockType = GetMaterial.BED_BLOCK();
+    private static ItemStack bed_item = new ItemStack(GetMaterial.BED_ITEM());
     void check(Game game) {
         EffectHaste.check(game);
         EffectHeal.check(game);
@@ -119,7 +116,7 @@ public class RelPlayerJoin implements Listener {
             return;
         }
         if (getPlayerKit(playerUUID) == null) {
-            setPlayerKit(playerUUID, kitDefault);
+            setPlayerKit(playerUUID, KitConfigHandler.kitDefault);
         }
 
         playAgainItem = new ItemStack(dieOutGameItem_playAgain_ItemType, 1);
@@ -129,16 +126,17 @@ public class RelPlayerJoin implements Listener {
 
         setDefaultPlayerStat(playerUUID);
 
-        if (
-                game.getState() == running
-                        && game.getPlayerTeam(player) != null
-                        && game.getPlayerTeam(player).getHeadTarget() != null
-                        && game.getPlayerTeam(player).getHeadTarget().getType() != bedType
-        ) {
-            addPlayerIsOut(playerUUID);
-            game.addProtection(player);
+        if (bed_blockType != null) {
+            if (
+                    game.getState() == running
+                            && game.getPlayerTeam(player) != null
+                            && game.getPlayerTeam(player).getHeadTarget() != null
+                            && game.getPlayerTeam(player).getHeadTarget().getType() != bed_blockType
+            ) {
+                addPlayerIsOut(playerUUID);
+                game.addProtection(player);
+            }
         }
-
         game.getPlayers().forEach(players -> {
             SoundPlayer.CHICKEN_EGG_POP(players, 2);
         });
@@ -148,9 +146,6 @@ public class RelPlayerJoin implements Listener {
 
         if (!isInCheckList(worldName)) {
             joinCheckList(worldName);
-            if (isDebug()) {
-                l(worldName + " joinCheckList");
-            }
             new BukkitRunnable() {
                 public void run() {
 
@@ -172,9 +167,9 @@ public class RelPlayerJoin implements Listener {
                     }
                     if (game.getState() == waiting) {
 
-                        if (kitenable) {
+                        if (KitConfigHandler.kitenable) {
 
-                            if (kitMenuItemGive) {
+                            if (KitConfigHandler.kitMenuItemGive) {
 
                                 for (Player player : game.getPlayers()) {
                                     PlayerInventory pi = player.getInventory();
@@ -196,8 +191,8 @@ public class RelPlayerJoin implements Listener {
                             if (player != null && player.isOnline()) {
 
                                 if (isDebug()) {
-                                    String youHaveProt = "youHaveProt[ERROR]";
-                                    String YouAreSpe = "YouAreSpe[ERROR]";
+                                    String youHaveProt;
+                                    String YouAreSpe;
                                     String gameMode = player.getGameMode().toString();
                                     if (game.getRespawnProtections().containsKey(player)) {
                                         youHaveProt = "You has prot";
@@ -210,7 +205,7 @@ public class RelPlayerJoin implements Listener {
                                         YouAreSpe = "You are not Spe";
                                     }
 
-                                    sendActionBar(player, youHaveProt + " | " + YouAreSpe + " | " + gameMode + " | " + isEditGamePlayer(player.getUniqueId()));
+                                    sendActionBar(player, youHaveProt + " | " + YouAreSpe + " | " + gameMode);
                                 }
                                 PlayerInventory pi = player.getInventory();
 
@@ -232,8 +227,8 @@ public class RelPlayerJoin implements Listener {
                                         if (cleanBottle && pi.contains(bot)) {
                                             pi.remove(bot);
                                         }
-                                        if (cleanBed && pi.contains(bed)) {
-                                            pi.remove(bed);
+                                        if (cleanBed && pi.contains(bed_item)) {
+                                            pi.remove(bed_item);
                                         }
 
 

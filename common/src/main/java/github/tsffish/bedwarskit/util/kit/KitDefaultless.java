@@ -1,5 +1,6 @@
 package github.tsffish.bedwarskit.util.kit;
 
+import github.tsffish.bedwarskit.util.GetMaterial;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -15,13 +16,14 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.killfb_oneHealthKill_itemType;
-import static github.tsffish.bedwarskit.util.RelArmorColor.*;
-import static github.tsffish.bedwarskit.util.RelTeamColorName.*;
+import static github.tsffish.bedwarskit.util.RelTeamColor.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.RelArmorColor.*;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -45,20 +47,25 @@ public class KitDefaultless {
     private static ItemStack chestItem;
 
     public static void loadKit(boolean Colored) {
-
-
-        wood_sword = new ItemStack(Material.WOOD_SWORD, 1);
-        wood_pickaxe = new ItemStack(Material.WOOD_PICKAXE, 1);
-        wood_axe = new ItemStack(Material.WOOD_AXE, 1);
-
+        if (GetMaterial.WOOD_SWORD() != null) {
+            wood_sword = new ItemStack(Objects.requireNonNull(GetMaterial.WOOD_SWORD()), 1);
+        }
+        if (GetMaterial.WOOD_PICKAXE() != null) {
+            wood_pickaxe = new ItemStack(Objects.requireNonNull(GetMaterial.WOOD_PICKAXE()), 1);
+        }
+        if (GetMaterial.WOOD_AXE() != null) {
+            wood_axe = new ItemStack(Objects.requireNonNull(GetMaterial.WOOD_AXE()), 1);
+        }
 
         kitItemInMenu = new ItemStack(KitDefaultlessItemType, KitDefaultlessItemAmount);
         ItemMeta kitItemMeta = kitItemInMenu.getItemMeta();
 
         List<String> lore = new ArrayList<>(8);
 
-        for (String s : KitDefaultlessItemLore) {
-            lore.add(t(s));
+        if (KitDefaultlessItemLore != null) {
+            for (String s : KitDefaultlessItemLore) {
+                lore.add(t(s));
+            }
         }
 
         kitItemMeta.setLore(lore);

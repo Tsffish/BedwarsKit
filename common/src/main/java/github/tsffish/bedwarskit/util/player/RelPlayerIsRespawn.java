@@ -12,7 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Tsffish
  */
 public class RelPlayerIsRespawn {
-    private static Set<UUID> playerRespawn = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static Set<UUID> playerRespawn;
+
+    static {
+        playerRespawn = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    }
 
     public static boolean getPlayerRespawn(UUID uuid) {
         return playerRespawn.contains(uuid);

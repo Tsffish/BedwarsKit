@@ -12,7 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Tsffish
  */
 public class RelEditGame {
-    private static Set<UUID> editGamePlayer = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static Set<UUID> editGamePlayer;
+
+    static {
+        editGamePlayer = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    }
 
     public static void addEditGamePlayer(UUID uuid) {
         editGamePlayer.add(uuid);

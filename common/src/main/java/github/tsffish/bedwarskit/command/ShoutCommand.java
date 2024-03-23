@@ -8,9 +8,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.meanCommandIsPlayerOnly;
 import static github.tsffish.bedwarskit.config.rel.RelConfigHandler.shoutPrefix;
 import static github.tsffish.bedwarskit.util.misc.ChatColor.red;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.meanCommandIsPlayerOnly;
+import static github.tsffish.bedwarskit.util.misc.MessSender.sendMessageSender;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -45,7 +46,7 @@ public class ShoutCommand implements CommandExecutor {
                 return true;
             }
         } else {
-            sender.sendMessage(red + meanCommandIsPlayerOnly);
+            sendMessageSender(sender, red + meanCommandIsPlayerOnly);
         }
         return true;
     }

@@ -9,5 +9,4 @@ package github.tsffish.bedwarskit.config.rel;
 public class RelConfigHandler {
     public static String shoutPrefix;
     public static String currentLocale;
-    public static String itemShopInvTitle;
 }

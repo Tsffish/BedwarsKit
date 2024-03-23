@@ -21,7 +21,7 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.creativeGa
 public class RelPlayerToggleFly implements Listener {
     private static final GameMode creative = GameMode.CREATIVE;
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void on(final PlayerToggleFlightEvent event) {
         Player player = event.getPlayer();
         if (BedwarsRel.getInstance() == null) {
@@ -35,6 +35,7 @@ public class RelPlayerToggleFly implements Listener {
         if (gameManager.getGameOfPlayer(player) == null) {
             return;
         }
+
 
         Game game = gameManager.getGameOfPlayer(player);
 

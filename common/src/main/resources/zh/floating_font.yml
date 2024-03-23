@@ -9,7 +9,6 @@ resBlock_Emerald_isSmall: false
 resBlock_Emerald_y: -1.75
 resBlock_Emerald_spinSpeed: 1
 resBlock_Emerald_yawPerTick: 18
-resBlock_Emerald_pitchPerTick: 18
 resText1_Emerald: ""
 resText2_Emerald: "&a&l\u7eff\u5b9d\u77f3"
 resText3_Emerald: "&b&l{s} &f\u79d2\u540e\u751f\u6210"
@@ -22,7 +21,6 @@ resBlock_Diamond_isSmall: false
 resBlock_Diamond_y: -1.75
 resBlock_Diamond_spinSpeed: 1
 resBlock_Diamond_yawPerTick: 18
-resBlock_Diamond_pitchPerTick: 18
 resText1_Diamond: ""
 resText2_Diamond: "&b&l\u94bb\u77f3"
 resText3_Diamond: "&b&l{s} &f\u79d2\u540e\u751f\u6210"
@@ -35,7 +33,6 @@ resBlock_Gold_isSmall: false
 resBlock_Gold_y: -1.75
 resBlock_Gold_spinSpeed: 1
 resBlock_Gold_yawPerTick: 18
-resBlock_Gold_pitchPerTick: 18
 resText1_Gold: ""
 resText2_Gold: ""
 resText3_Gold: ""
@@ -48,7 +45,6 @@ resBlock_Iron_isSmall: false
 resBlock_Iron_y: -1.75
 resBlock_Iron_spinSpeed: 1
 resBlock_Iron_yawPerTick: 18
-resBlock_Iron_pitchPerTick: 18
 resText1_Iron: ""
 resText2_Iron: ""
 resText3_Iron: ""

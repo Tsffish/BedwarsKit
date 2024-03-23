@@ -33,19 +33,19 @@ gametask_finalbattle_boundaries_time: 60
 gametask_finalbattle_boundaries_warnidis: 0
 gametask_finalbattle_boundaries_damagebuffer: 0
 gametask_finalbattle_boundaries_damage: 6
-gametask_healthset_1: 24.0
-gametask_healthset_2: 28.0
-gametask_healthset_3: 34.0
-gametask_healthset_4: 40.0
+gametask_healthset_1: 28.0
+gametask_healthset_2: 36.0
+gametask_healthset_3: 44.0
+gametask_healthset_4: 60.0
 # 游戏任务：是否启用倒计时任务功能
 # gametask_splaytime：启用资源点速度控制任务
 # gametask_spaytime__此资源1/2/3/4的速度控制级别的速度，以毫秒为单位
 # gametask_finaldbattle：是否启用杀戮模式任务
 # gametask_finaltraft_boundaries_size：击杀模式下世界边界的大小
-# gametask_finalbattle'边界_time：在击杀模式下缩小世界边界的时间
+# gametask_finalbattle_boundaries_time：在击杀模式下缩小世界边界的时间
 # gametask_finaltracl_boundaries_warnings：杀戮模式下世界边界的边缘警告
 # gametask_finaltracl_boundaries_magebuffer:杀戮模式下世界边界的伤害缓冲
-# gametask_finalbattle'边界_图像：杀戮模式下的世界边界伤害
+# gametask_finalbattle_boundaries_damage：杀戮模式下的世界边界伤害
 
 
 gametask_spawntime_tasks_iron1: 400

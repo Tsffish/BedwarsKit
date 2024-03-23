@@ -15,10 +15,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
+import static github.tsffish.bedwarskit.util.PluginState.isBungeeMode;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
 import static github.tsffish.bedwarskit.util.misc.MessSender.le;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isBungeeMode;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.player.RelEditGame.isEditGamePlayer;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer2v2;
 import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer4v4;
@@ -30,12 +30,12 @@ import static github.tsffish.bedwarskit.util.teamshop.ShopMenu.openForPlayer4v4;
  * @author Tsffish
  */
 public class RelOpenShop implements Listener {
-    private static final String className = "RelOpenShop";
+    private static final String className = RelOpenShop.class.getSimpleName();
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
     private static final String clickOnEntityName = "click on entity";
 
     public static void openShop(Player player, long delay) {
-        if (player == null || !player.isOnline()) {
+        if (player == null || !player.isOnline() || player.isDead() || player.isSleeping()) {
             return;
         }
 
@@ -105,18 +105,18 @@ public class RelOpenShop implements Listener {
                 }
             }
 
-            if (openShopOnCustomEntityName){
+            if (openShopOnCustomEntityName) {
                 if (event.getEntity().getCustomName() != null) {
                     if (event.getEntity().getCustomName().equals(t(shopItemEntityName))) {
                         game.openNewItemShop(player);
-                    }else {
+                    } else {
                         event.setCancelled(true);
                     }
-                }else {
+                } else {
                     event.setCancelled(true);
                 }
             }
         }
-        }
+    }
 
 }

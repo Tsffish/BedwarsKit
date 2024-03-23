@@ -1,7 +1,6 @@
 package github.tsffish.bedwarskit.listener;
 
 import github.tsffish.bedwarskit.BedwarsKit;
-import github.tsffish.bedwarskit.util.misc.MathUtil;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -22,6 +21,7 @@ import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 import static github.tsffish.bedwarskit.util.misc.ColorString.t;
+import static github.tsffish.bedwarskit.util.misc.MathUtil.roundToOneDecimalPlace;
 import static github.tsffish.bedwarskit.util.player.PlayerSender.sendTitle;
 import static github.tsffish.bedwarskit.util.player.RelPlayerIsRespawn.getPlayerRespawn;
 import static github.tsffish.bedwarskit.util.player.SendActionBar.sendActionBar;
@@ -38,11 +38,10 @@ public class RelPlayerDamage implements Listener {
     private static final String bloodModePlayer = "player";
     private static final String bloodModeBox = "box";
     private static final GameState running = GameState.RUNNING;
-    private static final GameState waiting = GameState.WAITING;
     private static final Effect step = Effect.STEP_SOUND;
     private static final EntityDamageEvent.DamageCause damageCauseVoid = EntityDamageEvent.DamageCause.VOID;
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void on(final EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             if (BedwarsRel.getInstance().getGameManager() == null) {
@@ -79,14 +78,16 @@ public class RelPlayerDamage implements Listener {
                             int partType = damagefb_attackBloodType;
                             Location damagedPlayerLocation = damagedPlayer.getLocation();
                             switch (damagefb_attackBloodMode.toLowerCase()) {
-                                case bloodModeSingle:
+                                case bloodModeSingle: {
                                     attackingPlayer.playEffect(damagedPlayerLocation, step, partType);
                                     break;
-                                case bloodModePlayer:
+                                }
+                                case bloodModePlayer: {
                                     attackingPlayer.playEffect(damagedPlayerLocation, step, partType);
                                     attackingPlayer.playEffect(damagedPlayerLocation.add(1, 0, 0), step, partType);
                                     break;
-                                case bloodModeBox:
+                                }
+                                case bloodModeBox: {
                                     for (int x = -1; x <= 1; x++) {
                                         for (int y = -1; y <= 1; y++) {
                                             for (int z = -1; z <= 1; z++) {
@@ -96,8 +97,10 @@ public class RelPlayerDamage implements Listener {
                                         }
                                     }
                                     break;
-                                default:
+                                }
+                                default: {
                                     break;
+                                }
                             }
                         }
                     }.runTaskLater(plugin, 1L);
@@ -106,7 +109,7 @@ public class RelPlayerDamage implements Listener {
             if (damagefb_attackmess) {
 
                 double damageOrg = event.getFinalDamage();
-                double damage = MathUtil.roundToOneDecimalPlace(damageOrg);
+                double damage = roundToOneDecimalPlace(damageOrg);
 
                 new BukkitRunnable() {
                     public void run() {

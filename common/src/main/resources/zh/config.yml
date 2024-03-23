@@ -1,10 +1,8 @@
 # ================ #
 # BedwarsKit 主配置 #
 # ================ #
-config-version: "1.9.57"
+config-version: "1.9.6"
 # 不要修改: 配置文件版本，如果不符合当前插件使用的版本，该文件会自动重命名
-
-# 配置文件可能需要重新加载两次才能生效
 
 # ====================== #
 # 基本设置 (必须正确配置)#
@@ -32,6 +30,7 @@ relTeamName_Aqua: "\u9752\u4e4b\u961f"
 relTeamName_White: "\u767d\u4e4b\u961f"
 relTeamName_Gray: "\u7070\u4e4b\u961f"
 relTeamName_Pink: "\u7c89\u4e4b\u961f"
+relTeamName_Orange: "\u6a59\u4e4b\u961f"
 # 游戏中最基本的队名配置
 # 填写队伍的显示名称，而不是颜色名
 # 提示：在正常情况下，团队名称不应该有空格
@@ -83,6 +82,7 @@ preventloadworld: true
 # ActionBar: 工具栏信息
 # 变量：｛timeleft｝：剩余复活倒计时时间（秒）
 # preventloadworld：是否要启用阻止在之后重新加载世界(即无死亡界面)
+# 此功能在1.9+中有概率会使客户端显示不正确的玩家状态
 # 需要同时禁用BedwarsRel配置文件中的die-on-void选项
 
 noHunger: true
@@ -402,8 +402,13 @@ lobbyjoinTeamMess_title: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}"
 lobbyjoinTeamMess_subtitle: "&e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
 lobbyjoinTeamMess_actionbar: "&a\u4f60\u52a0\u5165\u4e86 {teamColor}{teamName}, &e\u624b\u6301\u961f\u4f0d\u8863\u670d\u5e76\u53f3\u952e\u6765\u79bb\u5f00"
 
+noWoodSwordDropWhenNothaveSword: true
+noWoodAxeDropWhenNothaveAxe: true
+noWoodPickaxeDropWhenNothavePickaxe: true
+resSp: true
+
 # ======== #
-# 更新设置 #
+# 更新设置   #
 # ======== #
 update_checker: true
 update_reportOp: true

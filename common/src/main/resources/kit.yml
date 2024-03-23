@@ -17,7 +17,7 @@ kitMenuItemGive: true
 kitMenuItemType: "IRON_SWORD"
 kitMenuItemAmount: 1
 kitMenuItemName: "Selet Kit"
-meanSelKitSucc: "&bBedwars &7>> &aSuccessfully selected kit!"
+meanSelKitSucc: "&bBedwarsKit &7>> &aSuccessfully selected kit!"
 
 KitDefaultName: "Default"
 KitDefaultDescription: "default kit."

@@ -50,7 +50,7 @@ ScoreBoard2v2Line13: "&e{ip}"
 ScoreBoard2v2Line14: ""
 ScoreBoard2v2Line15: ""
 ScoreBoard2v2Line16: ""
-# 支持的可变团队名称红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
+# 支持的可变团队名称橙色(orange),红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
 # 注意：相同的内容将被折叠到同一行中。例如，如果需要两个空行，则第一行需要是一个空格，第二行需要是两个空格
 # 变量:
 # ...TeamName：团队名称，请参阅config.yml的relTeamName_了解详细信息。团队颜色名称的值必须以小写字母开头，如redTeamName、grayTeamName
@@ -66,7 +66,7 @@ ScoreBoard2v2Line16: ""
 # {timeleft-d}：游戏剩余时间（天）
 # {timeline mo}：游戏剩余时间（以月为单位）
 # {timeleft y}：游戏剩余时间（以年为单位）
-# {date}：今天的日期格式为YYYY/M/D，如2080/3/27
+# {date}：今天的日期格式为YYYY/M/D，如2080/3/32
 # {ip}：配置文件中serverIp的值
 # {bw}：配置文件中meanBedwards的值
 # {mode}：配置文件中mean...mode的值。如果是2v2，则为mean2v2Mode的值；如果是4v4，则为mean4v4Mode的值
@@ -97,7 +97,7 @@ ScoreBoard4v4Line13: "&e{ip}"
 ScoreBoard4v4Line14: ""
 ScoreBoard4v4Line15: ""
 ScoreBoard4v4Line16: ""
-# 支持的可变团队名称红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
+# 支持的可变团队名称橙色(orange), 红色(red)、蓝色(blue)、绿色(green)、黄色(yellow)、粉色(pink)、白色(white)、灰色(gray)、青色(aqua)
 # 注意：相同的内容将被折叠到同一行中。例如，如果需要两个空行，则第一行需要是一个空格，第二行需要是两个空格
 # 变量:
 # ...TeamName：团队名称，请参阅relTeamName_了解详细信息。团队颜色名称的值必须以小写字母开头，如redTeamName、grayTeamName
@@ -111,7 +111,7 @@ ScoreBoard4v4Line16: ""
 # {timeleft-d}：游戏剩余时间（天）
 # {timeline mo}：游戏剩余时间（以月为单位）
 # {timeleft y}：游戏剩余时间（以年为单位）
-# {date}：今天的日期格式为YYYY/M/D，如2080/3/27
+# {date}：今天的日期格式为YYYY/M/D，如2080/3/32
 # {ip}：配置文件中serverIp的值
 # {bw}：配置文件中meanBedwards的值
 # {mode}：配置文件中mean...mode的值。如果是2v2，则为mean2v2Mode的值；如果是4v4，则为mean4v4Mode的值

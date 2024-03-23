@@ -161,13 +161,6 @@ class TaskConfigPath {
     static final String path_gametask_name_healthset4 = "gametask_name_healthset4";
 
 
-
-
-
-
-
-
-
     static final String path_gametask_mess_healthset1_chat = "gametask_mess_healthset1_chat";
     static final String path_gametask_mess_healthset1_title = "gametask_mess_healthset1_title";
     static final String path_gametask_mess_healthset1_subtitle = "gametask_mess_healthset1_subtitle";

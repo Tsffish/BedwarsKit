@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import static github.tsffish.bedwarskit.config.kit.KitConfigHandler.*;
 import static github.tsffish.bedwarskit.config.main.MainConfigHandler.startKitCompass;
+import static github.tsffish.bedwarskit.util.player.PlayerSender.updatePlayerStatePreventDied;
 import static github.tsffish.bedwarskit.util.player.RelArmorList.*;
 import static github.tsffish.bedwarskit.util.player.RelPlayerIsRespawn.removePlayerRespawn;
 import static github.tsffish.bedwarskit.util.player.RelPlayerKit.applykit;

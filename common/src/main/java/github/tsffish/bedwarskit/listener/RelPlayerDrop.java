@@ -1,5 +1,6 @@
 package github.tsffish.bedwarskit.listener;
 
+import github.tsffish.bedwarskit.util.GetMaterial;
 import io.github.bedwarsrel.BedwarsRel;
 import io.github.bedwarsrel.game.Game;
 import io.github.bedwarsrel.game.GameManager;
@@ -12,7 +13,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noMoveList;
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.*;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -21,10 +22,18 @@ import static github.tsffish.bedwarskit.config.main.MainConfigHandler.noMoveList
  * @author Tsffish
  */
 public class RelPlayerDrop implements Listener {
-    private static final Material woodSword = Material.WOOD_SWORD;
+    private static final Material woodSword = GetMaterial.WOOD_SWORD();
     private static final Material stoneSword = Material.STONE_SWORD;
     private static final Material ironSword = Material.IRON_SWORD;
     private static final Material diamondSword = Material.DIAMOND_SWORD;
+    private static final Material woodPickaxe = GetMaterial.WOOD_PICKAXE();
+    private static final Material stonePickaxe = Material.STONE_PICKAXE;
+    private static final Material ironPickaxe = Material.IRON_PICKAXE;
+    private static final Material diamondPickaxe = Material.DIAMOND_PICKAXE;
+    private static final Material woodAxe = GetMaterial.WOOD_AXE();
+    private static final Material stoneAxe = Material.STONE_AXE;
+    private static final Material ironAxe = Material.IRON_AXE;
+    private static final Material diamondAxe = Material.DIAMOND_AXE;
     private static final GameState running = GameState.RUNNING;
 
     @EventHandler
@@ -38,7 +47,7 @@ public class RelPlayerDrop implements Listener {
         for (String list : noMoveList) {
             if (itemTypeText.contains(list)) {
                 event.setCancelled(true);
-                break;
+                return;
             }
         }
 
@@ -71,13 +80,41 @@ public class RelPlayerDrop implements Listener {
             ItemStack droppedItem = event.getItemDrop().getItemStack();
             PlayerInventory pi = player.getInventory();
 
-            if (droppedItem.getType() == woodSword) {
-                event.setCancelled(
-                        !pi.contains(woodSword)
-                                && !pi.contains(stoneSword)
-                                && !pi.contains(ironSword)
-                                && !pi.contains(diamondSword)
-                );
+            if (noWoodSwordDropWhenNothaveSword) {
+                if (droppedItem.getType() == woodSword) {
+                    if (!pi.contains(woodSword)
+                            && !pi.contains(stoneSword)
+                            && !pi.contains(ironSword)
+                            && !pi.contains(diamondSword)
+                    ) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+            }
+            if (noWoodAxeDropWhenNothaveAxe) {
+                if (droppedItem.getType() == woodAxe) {
+                    if (!pi.contains(woodAxe)
+                            && !pi.contains(stoneAxe)
+                            && !pi.contains(ironAxe)
+                            && !pi.contains(diamondAxe)
+                    ) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+            }
+            if (noWoodPickaxeDropWhenNothavePickaxe) {
+                if (droppedItem.getType() == woodPickaxe) {
+                    if (!pi.contains(woodPickaxe)
+                            && !pi.contains(stonePickaxe)
+                            && !pi.contains(ironPickaxe)
+                            && !pi.contains(diamondPickaxe)
+                    ) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
             }
         }
     }

@@ -1,0 +1,57 @@
+shop:
+  blocks:
+    item:
+      type: STONE
+      amount: 1
+      slot: 1
+      meta:
+        name: "WOOL"
+        lore:
+          - "KKKK"
+    wool:
+      item:
+        type: WOOL
+        amount: 1
+        slot: 20
+        meta:
+          dyeColorByTeam: true
+          name: "WOOL"
+          lore:
+            - "KKKK"
+      price:
+        type: IRON_INGOT
+        amount: 10
+  swords:
+    item:
+      type: GOLD_SWORD
+      amount: 1
+      slot: 2
+      meta:
+        name: "WOOL"
+        lore:
+          - "KKKK"
+    woodSword:
+      item:
+        type: WOOD_SWORD
+        amount: 1
+        slot: 20
+        meta:
+          unBreakable: true
+          name: "WOOD SWORD"
+          lore:
+            - "KKKK"
+      price:
+        type: IRON_INGOT
+        amount: 10
+    stoneSword:
+      item:
+        type: STONE_SWORD
+        amount: 1
+        slot: 21
+        meta:
+          name: "STONE SWORD"
+          lore:
+            - "KKKK"
+      price:
+        type: IRON_INGOT
+        amount: 20

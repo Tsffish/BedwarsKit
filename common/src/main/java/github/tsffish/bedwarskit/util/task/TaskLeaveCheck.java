@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static github.tsffish.bedwarskit.util.RelIsCheckingPlayer.leaveCheckList;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
+import static github.tsffish.bedwarskit.util.WorldCheckList.leaveCheckList;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -21,7 +21,11 @@ import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
  */
 public class TaskLeaveCheck {
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
-    private static Set<String> leavingList = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private static Set<String> leavingList;
+
+    static {
+        leavingList = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    }
 
     public static void leaveList(String worldName) {
         if (!leavingList.contains(worldName)) {

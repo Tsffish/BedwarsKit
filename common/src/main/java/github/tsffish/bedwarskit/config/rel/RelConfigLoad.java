@@ -11,11 +11,10 @@ import java.util.Objects;
 
 import static github.tsffish.bedwarskit.config.lang.LangConfigHandler.*;
 import static github.tsffish.bedwarskit.config.misc.ErrorConfigHandler.er;
-import static github.tsffish.bedwarskit.config.rel.RelConfigHandler.*;
+import static github.tsffish.bedwarskit.config.rel.RelConfigHandler.currentLocale;
+import static github.tsffish.bedwarskit.config.rel.RelConfigHandler.shoutPrefix;
+import static github.tsffish.bedwarskit.util.PluginState.isDebug;
 import static github.tsffish.bedwarskit.util.misc.MessSender.l;
-import static github.tsffish.bedwarskit.util.misc.PluginState.isDebug;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.finishLoadConfig;
-import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
 
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
@@ -24,16 +23,13 @@ import static github.tsffish.bedwarskit.util.misc.StringMgr.vauleIsNull;
  * @author Tsffish
  */
 public class RelConfigLoad {
-    private static final String name = "RelConfigLoad";
+    private static final String className = RelConfigLoad.class.getSimpleName();
     private static final String reason = vauleIsNull;
     private static final BedwarsKit plugin = BedwarsKit.getInstance();
 
-    public static void loadRelConfig() {
-
-        FileConfiguration c = BedwarsRel.getInstance().getConfig();
-
+    private static void extracted(FileConfiguration c) {
         boolean isChangeRelCfg = false;
-        if (c.getString(RelConfigPath.path_currentLocale) != null) {
+        if (c.get(RelConfigPath.path_currentLocale) != null) {
             currentLocale = c.getString(RelConfigPath.path_currentLocale);
         } else {
             currentLocale = BedwarsRel.getInstance().getFallbackLocale();
@@ -44,12 +40,8 @@ public class RelConfigLoad {
 
         if (file.exists()) {
             FileConfiguration langC = YamlConfiguration.loadConfiguration(file);
+            BedwarsRel._l("");
 
-            if (langC.getString(RelConfigPath.path_itemShopInvTitle) != null) {
-                itemShopInvTitle = langC.getString(RelConfigPath.path_itemShopInvTitle);
-            } else {
-                sendError(RelConfigPath.path_itemShopInvTitle);
-            }
         }
 
         if (c.getStringList(RelConfigPath.path_shoutPrefix).get(0) != null) {
@@ -72,6 +64,19 @@ public class RelConfigLoad {
                 }
             } else {
                 sendError(RelConfigPath.path_die_on_void);
+            }
+
+            if (c.get(RelConfigPath.path_spectation_enabled) != null) {
+                if (c.getBoolean(RelConfigPath.path_spectation_enabled) == false) {
+                    c.set(RelConfigPath.path_spectation_enabled, true);
+                    if (!Objects.equals(needIsWrong_preventLoadWorld, "")) {
+
+                        String willSend = needIsWrong_preventLoadWorld.
+                                replace("{path}", RelConfigPath.path_spectation_enabled);
+                        l(willSend);
+                    }
+                    isChangeRelCfg = true;
+                }
             }
         }
 
@@ -102,13 +107,21 @@ public class RelConfigLoad {
                 l(relConfigIsChange_Saved);
             }
         }
-        if (isDebug()) {
-            l("<" + name + "> " + finishLoadConfig);
-        }
-
     }
 
     private static void sendError(String path) {
-        er(name, path, reason);
+        er(className, path, reason);
+    }
+
+    public static void loadRelConfig() {
+
+        FileConfiguration c = BedwarsRel.getInstance().getConfig();
+
+        extracted(c);
+
+        if (isDebug()) {
+            l("<" + className + "> " + finishLoadConfig);
+        }
+
     }
 }

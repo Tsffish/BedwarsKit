@@ -16,6 +16,8 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import static github.tsffish.bedwarskit.config.main.MainConfigHandler.resSp;
+
 /**
  * A Addon for BedwarsRel, Added some features to BedwarsRel
  * github.com/Tsffish/BedwarsKit
@@ -25,6 +27,10 @@ import org.bukkit.inventory.PlayerInventory;
 public class RelPickupItem implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void on(PlayerPickupItemEvent event) {
+        if (!resSp){
+            return;
+        }
+
         Player player = event.getPlayer();
         if (BedwarsRel.getInstance() == null) {
             return;
@@ -47,20 +53,31 @@ public class RelPickupItem implements Listener {
 
         ItemStack item = event.getItem().getItemStack();
         Material itemType = item.getType();
-        if (itemType == Material.IRON_INGOT
-                || itemType == Material.GOLD_INGOT) {
+
+        if (
+                           itemType == Material.IRON_INGOT
+                        || itemType == Material.GOLD_INGOT
+        ) {
             Location current = event.getItem().getLocation();
             if (game.getPlayerTeam(player) != null) {
                 Team playerTeam = game.getPlayerTeam(player);
+
                 for (Player list : game.getPlayers()) {
+
                     Location listLoc = list.getLocation();
+
                     if (listLoc.distance(current) < 2.9) {
-                        if (game.getPlayerTeam(list) == playerTeam && list != player) {
+                        if (
+                                game.getPlayerTeam(list) == playerTeam
+                                        && list != player
+                        ) {
                             PlayerInventory lpi = list.getInventory();
-                            playPickUpSound(list);
                             lpi.addItem(item);
+                            playPickUpSound(list);
+
                         }
                     }
+
                 }
             }
         }
